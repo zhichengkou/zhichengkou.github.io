@@ -21,8 +21,8 @@ highlight_theme: default # "default" (default), "tomorrow", "tomorrow-night", "t
 url     : http://zhichengkou.github.io # the base hostname & protocol for your site e.g. https://www.someone.com
 baseurl : # does not include hostname
 title   : Zhicheng Kou
-description: > welcome
-  Your Site Description
+description: > 
+  welcome to my blog!
 
 
 ## => Language and Timezone
