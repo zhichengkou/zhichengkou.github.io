@@ -34,14 +34,31 @@ key: page-about
 - 2017-2021：河南工业大学，自动化专业，工学学士
 
 
+
 ## 技能
 
 -外国语言：CET6 459分
 
-### Highlight Theme
+## 曾获奖励
 
-TeXt use [Tomorrow](https://github.com/chriskempson/tomorrow-theme) as the highlight theme.
+# 荣誉类
+- （2018年9月）河南工业大学三好学生
+- （2018年6月）河南工业大学优秀学生干部
+- （2019年6月）河南工业大学五星级社长（5/80）
+- （2019年9月）河南工业大学三好学生
 
-| `tomorrow` | `tomorrow-night` | `tomorrow-night-eighties` | `tomorrow-night-blue` | `tomorrow-night-bright` |
-| --- |  --- | --- | --- |  --- |
-| ![Tomorrow](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/highlight_tomorrow.png) | ![Tomorrow Night](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/highlight_tomorrow-night.png) | ![Tomorrow Night Eighties](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/highlight_tomorrow-night-eighties.png) | ![Tomorrow Night Blue](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/highlight_tomorrow-night-blue.png) | ![Tomorrow Night Bright](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/highlight_tomorrow-night-bright.png) |
+# 比赛类
+- （2018年11月）河南工业大学“辩响工大”校级辩论赛季军
+
+## 科研经历
+- （2021年8月-2021年10月）设计基于粒子群算法与模糊控制的锅炉负荷压力控制器，最终作为基金项目申请的部分内容
+- （2021年9月-至今）对迭代学习控制的无模型算法，迭代过程的鲁棒性问题等进行研究
+
+## 服务经历
+# 学生组织
+- （2018年6月-2019年6月）河南工业大学第演讲辩论协会第十五届会长
+- （2018年6月-2019年6月）河南工业大学电气工程学院学习部部长
+- （2017年9月-2018年6月）河南工业大学第演讲辩论协会宣传部干事
+- （2017年9月-2018年6月）河南工业大学电气工程学院学习部干事
+
+
