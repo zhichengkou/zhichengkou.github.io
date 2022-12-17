@@ -24,7 +24,24 @@ header:
       tr      : &TR       Arşivdekiler
       # @end locale config
     url: /archive.html
-
+    
+  - titles:
+      # @start locale config
+      en      : &EN       Photos
+      en-GB   : *EN
+      en-US   : *EN
+      en-CA   : *EN
+      en-AU   : *EN
+      zh-Hans : &ZH_HANS  照片
+      zh      : *ZH_HANS
+      zh-CN   : *ZH_HANS
+      zh-SG   : *ZH_HANS
+      zh-Hant : &ZH_HANT  照片
+      zh-TW   : *ZH_HANT
+      zh-HK   : *ZH_HANT
+      # @end locale config
+    url: /photos.html
+    
   - titles:
       # @start locale config
       en      : &EN       About
