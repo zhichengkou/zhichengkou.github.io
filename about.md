@@ -25,8 +25,10 @@ titles:寇志诚（Zhicheng Kou）
   # @end locale config
 key: page-about
 ---
-
+# 寇志诚
 - Email: zckou@outlook.com
+
+
 
 ## 教育经历
 
