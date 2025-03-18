@@ -511,70 +511,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/03/11/robotics%20library%E7%9A%84%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/cheng.gif">
-      <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zhicheng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/03/11/robotics%20library%E7%9A%84%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-03-11 18:27:16" itemprop="dateCreated datePublished" datetime="2025-03-11T18:27:16+08:00">2025-03-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-01-04 21:58:10" itemprop="dateModified" datetime="2025-01-04T21:58:10+08:00">2025-01-04</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/03/11/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -675,10 +611,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2025-01-19 20:23:35 / 修改时间：20:24:26" itemprop="dateCreated datePublished" datetime="2025-01-19T20:23:35+08:00">2025-01-19</time>
+              <time title="创建时间：2025-01-19 20:23:35" itemprop="dateCreated datePublished" datetime="2025-01-19T20:23:35+08:00">2025-01-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-03-18 21:05:20" itemprop="dateModified" datetime="2025-03-18T21:05:20+08:00">2025-03-18</time>
+              </span>
 
           
 
@@ -693,7 +635,20 @@
       
           <h2 id="迭代学习控制研究总结"><a href="#迭代学习控制研究总结" class="headerlink" title="迭代学习控制研究总结"></a>迭代学习控制研究总结</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>在生活中，每个场景中都离不开对于一件事物的反复学习。一个典型的例子是篮球初学者学习投篮时，需要通过之前投篮的篮球运行轨迹来调整下次的肌肉发力与动作从而使得篮球沿着更加完美的曲线运行从而正确命中篮筐。与人们学习投篮的这个过程相似，迭代学习控制正是基于这种学习的思想，通过一次又一次的在有限步长的运行后，通过之前迭代次数的运行数据来对下次的输入量进行学习从而使得实际输出能够沿着期望的轨迹运行。</p>
 <p><img src="/1737288872123.png" alt="1737288872123"></p>
-<h3 id="国内外研究情况"><a href="#国内外研究情况" class="headerlink" title="国内外研究情况"></a>国内外研究情况</h3><p>国内：理论方向有沈栋教授，侯忠生教授，</p>
+<h3 id="国内外研究情况"><a href="#国内外研究情况" class="headerlink" title="国内外研究情况"></a>国内外研究情况</h3><p>常看的课题组文章：</p>
+<ul>
+<li>国内：理论方向有沈栋教授（理论），侯忠生教授（以无模型自适应MFAC和ILC结合）；</li>
+<li>国外：荷兰Toomen教授课题组在与ASML合作的光刻机控制中相关的研究；</li>
+</ul>
+<p>前沿方向：</p>
+<ul>
+<li>应用方面主要集中在以半导体制造为代表的精密可重复的运动控制问题应用中，主要对ILC相关的模型估计、模型解耦、算法设计等方面进行结合研究；</li>
+<li>理论方面集中在算法融合（ILC与ADRC,MFAC等时间轴的算法），ILC在迭代轴上的改进（如增益设计，鲁棒性设计等）；ILC在不同环境（如存在干扰、数据丢失等）下的研究；</li>
+</ul>
+<h3 id="学习资源与相关网站"><a href="#学习资源与相关网站" class="headerlink" title="学习资源与相关网站"></a>学习资源与相关网站</h3><ul>
+<li><a target="_blank" rel="noopener" href="http://shendong.tech/DataBase/DataBase.html">http://shendong.tech/DataBase/DataBase.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://toomen.eu/publications.html#theses">https://toomen.eu/publications.html#theses</a></li>
+</ul>
 <h3 id="前沿方向"><a href="#前沿方向" class="headerlink" title="前沿方向"></a>前沿方向</h3><h4 id="理论方向"><a href="#理论方向" class="headerlink" title="理论方向"></a>理论方向</h4><p>迭代学习控制的理论研究</p>
 <h4 id="应用研究"><a href="#应用研究" class="headerlink" title="应用研究"></a>应用研究</h4><ul>
 <li>迭代学习控制在机械臂方向中的应用</li>
@@ -711,7 +666,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="迭代学习控制未来展望"><a href="#迭代学习控制未来展望" class="headerlink" title="迭代学习控制未来展望"></a>迭代学习控制未来展望</h3><p>随着光刻机、3D打印机、高精度机械手、列车控制系统等高精度应用的发展，越来越多的场景中需要使用迭代学习控制方法来完成高精度的操作。而模型估计类迭代学习控制算法能够通过以往的数据对系统模型信息进行学习，从而使得能够在更少的迭代次数实现更高精度的误差收敛。由于其独特的优势，模型估计类算法也会越来越多地应用到实际场景当中。对于本文针对于模型估计类算法所提出的改进方法，有以下几个角度能够继续进一步进行拓展与研究：</p>
+<p>随着光刻机、3D打印机、高精度机械手、列车控制系统等高精度应用的发展，越来越多的场景中需要使用迭代学习控制方法来完成高精度的操作。而模型估计类迭代学习控制算法能够通过以往的数据对系统模型信息进行学习，从而使得能够在更少的迭代次数实现更高精度的误差收敛。由于其独特的优势，模型估计类算法也会越来越多地应用到实际场景当中。对于针对于模型估计类算法所提出的改进方法，有以下几个角度能够继续进一步进行拓展与研究：</p>
 <p>（1）沿着迭代轴进一步对控制算法进行设计与优化</p>
 <p>沿着迭代轴进行算法设计是符合迭代学习控制特性的一种方法。首先，可以考虑沿着迭代轴设计更优的增益同时深入考虑参数的设置问题，来使得每次迭代都能达到最优。其次，将时间轴的增益设计与迭代轴的增益设计进行结合设计也是一个有吸引力的方向。最后，迭代轴不仅仅可以设置一种算法，我们需要根据迭代过程的变化来对将迭代轴划分为不同的阶段，并分别设置不同的控制器。</p>
 <p>（2）从数据鲁棒性的角度对算法的设计进行研究</p>
@@ -1072,7 +1027,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1083,7 +1038,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
