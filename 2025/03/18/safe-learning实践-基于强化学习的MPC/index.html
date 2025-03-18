@@ -20,28 +20,33 @@
     var CONFIG = {"hostname":"zhichengkou.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Zhicheng">
-<meta property="og:url" content="http://zhichengkou.github.io/index.html">
+  <meta name="description" content="论文《Learning Safety in Model-Based Reinforcement Learning using MPC and Gaussian Processes》提出了一种结合模型预测控制 (MPC) 和高斯过程 (GP) 回归的安全强化学习 (RL) 方法。以下是论文的核心内容分析：  背景与动机: 现代机器学习结合MPC已成为提高控制系统性能和安全性的重要方向。然而，大多数R">
+<meta property="og:type" content="article">
+<meta property="og:title" content="safe learning实践 - 基于强化学习的MPC">
+<meta property="og:url" content="http://zhichengkou.github.io/2025/03/18/safe-learning%E5%AE%9E%E8%B7%B5-%E5%9F%BA%E4%BA%8E%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%9A%84MPC/index.html">
 <meta property="og:site_name" content="Zhicheng">
+<meta property="og:description" content="论文《Learning Safety in Model-Based Reinforcement Learning using MPC and Gaussian Processes》提出了一种结合模型预测控制 (MPC) 和高斯过程 (GP) 回归的安全强化学习 (RL) 方法。以下是论文的核心内容分析：  背景与动机: 现代机器学习结合MPC已成为提高控制系统性能和安全性的重要方向。然而，大多数R">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-03-18T12:50:59.000Z">
+<meta property="article:modified_time" content="2025-03-18T12:52:52.894Z">
 <meta property="article:author" content="Zhicheng">
+<meta property="article:tag" content="safe_learning 控制 强化学习 MPC">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://zhichengkou.github.io/">
+<link rel="canonical" href="http://zhichengkou.github.io/2025/03/18/safe-learning%E5%AE%9E%E8%B7%B5-%E5%9F%BA%E4%BA%8E%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%9A%84MPC/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>Zhicheng</title>
+  <title>safe learning实践 - 基于强化学习的MPC | Zhicheng</title>
   
 
 
@@ -154,9 +159,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -172,10 +178,9 @@
       <meta itemprop="name" content="Zhicheng">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/03/18/safe-learning%E5%AE%9E%E8%B7%B5-%E5%9F%BA%E4%BA%8E%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%9A%84MPC/" class="post-title-link" itemprop="url">safe learning实践 - 基于强化学习的MPC</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          safe learning实践 - 基于强化学习的MPC
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -199,7 +204,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>论文《Learning Safety in Model-Based Reinforcement Learning using MPC and Gaussian Processes》提出了一种结合模型预测控制 (MPC) 和高斯过程 (GP) 回归的安全强化学习 (RL) 方法。以下是论文的核心内容分析：</p>
+        <p>论文《Learning Safety in Model-Based Reinforcement Learning using MPC and Gaussian Processes》提出了一种结合模型预测控制 (MPC) 和高斯过程 (GP) 回归的安全强化学习 (RL) 方法。以下是论文的核心内容分析：</p>
 <ol>
 <li><strong>背景与动机</strong>:<ul>
 <li>现代机器学习结合MPC已成为提高控制系统性能和安全性的重要方向。然而，大多数RL算法是基于模型无关的方法，缺乏对系统动态的充分了解，容易导致不安全的决策。</li>
@@ -493,518 +498,33 @@
 </tr>
 </tbody></table>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/safe-learning-%E6%8E%A7%E5%88%B6-%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-MPC/" rel="tag"># safe_learning 控制 强化学习 MPC</a>
+          </div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/03/11/robotics%20library%E7%9A%84%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/">
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/cheng.gif">
-      <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zhicheng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/03/11/robotics%20library%E7%9A%84%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-03-11 18:27:16" itemprop="dateCreated datePublished" datetime="2025-03-11T18:27:16+08:00">2025-03-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-01-04 21:58:10" itemprop="dateModified" datetime="2025-01-04T21:58:10+08:00">2025-01-04</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/03/11/robotics%20library%E7%9A%84%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/03/11/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/cheng.gif">
-      <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zhicheng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/03/11/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-03-11 18:27:16" itemprop="dateCreated datePublished" datetime="2025-03-11T18:27:16+08:00">2025-03-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-23 11:42:24" itemprop="dateModified" datetime="2024-04-23T11:42:24+08:00">2024-04-23</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/01/19/%E8%BF%AD%E4%BB%A3%E5%AD%A6%E4%B9%A0%E6%8E%A7%E5%88%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/cheng.gif">
-      <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zhicheng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/01/19/%E8%BF%AD%E4%BB%A3%E5%AD%A6%E4%B9%A0%E6%8E%A7%E5%88%B6/" class="post-title-link" itemprop="url">迭代学习控制</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2025-01-19 20:23:35 / 修改时间：20:24:26" itemprop="dateCreated datePublished" datetime="2025-01-19T20:23:35+08:00">2025-01-19</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="迭代学习控制研究总结"><a href="#迭代学习控制研究总结" class="headerlink" title="迭代学习控制研究总结"></a>迭代学习控制研究总结</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>在生活中，每个场景中都离不开对于一件事物的反复学习。一个典型的例子是篮球初学者学习投篮时，需要通过之前投篮的篮球运行轨迹来调整下次的肌肉发力与动作从而使得篮球沿着更加完美的曲线运行从而正确命中篮筐。与人们学习投篮的这个过程相似，迭代学习控制正是基于这种学习的思想，通过一次又一次的在有限步长的运行后，通过之前迭代次数的运行数据来对下次的输入量进行学习从而使得实际输出能够沿着期望的轨迹运行。</p>
-<p><img src="/1737288872123.png" alt="1737288872123"></p>
-<h3 id="国内外研究情况"><a href="#国内外研究情况" class="headerlink" title="国内外研究情况"></a>国内外研究情况</h3><p>国内：理论方向有沈栋教授，侯忠生教授，</p>
-<h3 id="前沿方向"><a href="#前沿方向" class="headerlink" title="前沿方向"></a>前沿方向</h3><h4 id="理论方向"><a href="#理论方向" class="headerlink" title="理论方向"></a>理论方向</h4><p>迭代学习控制的理论研究</p>
-<h4 id="应用研究"><a href="#应用研究" class="headerlink" title="应用研究"></a>应用研究</h4><ul>
-<li>迭代学习控制在机械臂方向中的应用</li>
-<li>迭代学习控制在光刻机中的应用</li>
-</ul>
-<h3 id="一些个人观点"><a href="#一些个人观点" class="headerlink" title="一些个人观点"></a>一些个人观点</h3><p>迭代学习控制因为是面向有限时间步长设计的控制算法，因此主要应用在可重复的过程当中；</p>
-<ul>
-<li>理论方向<ul>
-<li>从数据的角度出发</li>
-<li>从迭代轴的角度出发</li>
-</ul>
-</li>
-<li>应用方向<ul>
-<li>可重复过程</li>
-</ul>
-</li>
-</ul>
-<h3 id="迭代学习控制未来展望"><a href="#迭代学习控制未来展望" class="headerlink" title="迭代学习控制未来展望"></a>迭代学习控制未来展望</h3><p>随着光刻机、3D打印机、高精度机械手、列车控制系统等高精度应用的发展，越来越多的场景中需要使用迭代学习控制方法来完成高精度的操作。而模型估计类迭代学习控制算法能够通过以往的数据对系统模型信息进行学习，从而使得能够在更少的迭代次数实现更高精度的误差收敛。由于其独特的优势，模型估计类算法也会越来越多地应用到实际场景当中。对于本文针对于模型估计类算法所提出的改进方法，有以下几个角度能够继续进一步进行拓展与研究：</p>
-<p>（1）沿着迭代轴进一步对控制算法进行设计与优化</p>
-<p>沿着迭代轴进行算法设计是符合迭代学习控制特性的一种方法。首先，可以考虑沿着迭代轴设计更优的增益同时深入考虑参数的设置问题，来使得每次迭代都能达到最优。其次，将时间轴的增益设计与迭代轴的增益设计进行结合设计也是一个有吸引力的方向。最后，迭代轴不仅仅可以设置一种算法，我们需要根据迭代过程的变化来对将迭代轴划分为不同的阶段，并分别设置不同的控制器。</p>
-<p>（2）从数据鲁棒性的角度对算法的设计进行研究</p>
-<p>数据鲁棒性是一个新的概念与角度，这个概念的提出对数据驱动控制算法具有很强的意义，但是数据驱动控制算法的理论工作还并不成熟。一方面，需要从数据的角度针对于各种鲁棒性问题进行进一步的探索，并对其理论性进行分析。因此数据鲁棒性的理论性分析工作还有很大的空间可以探索。另一方面，也需要对数据鲁棒性角度的设计方法进行工程应用以验证其在实际场景下的可行性。</p>
-<p>对于本文所做的工作，所提出的从增强数据鲁棒性角度来提升控制效果的策略还可以考虑其他会对数据产生影响的干扰情况。因此，在更多的环境问题下来考虑数据鲁棒性的提升从而保证控制效果是一个可以继续探索的方向。同时，从数据鲁棒性角度去设计策略这一方法并非只对干扰起作用，对于一些本身误差有波动或者收敛速度慢的算法也有改进作用，这也是未来可以探索的一个方向。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/01/08/%E6%9C%80%E8%BF%91%E5%87%A0%E4%B8%AA%E6%9C%88%E5%81%9A%E6%9C%BA%E6%A2%B0%E8%87%82%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E5%8F%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/cheng.gif">
-      <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zhicheng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/01/08/%E6%9C%80%E8%BF%91%E5%87%A0%E4%B8%AA%E6%9C%88%E5%81%9A%E6%9C%BA%E6%A2%B0%E8%87%82%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E5%8F%97/" class="post-title-link" itemprop="url">工作几个月后的感受</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-01-08 08:22:44" itemprop="dateCreated datePublished" datetime="2025-01-08T08:22:44+08:00">2025-01-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-01-09 21:24:09" itemprop="dateModified" datetime="2025-01-09T21:24:09+08:00">2025-01-09</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="关于调库的感受"><a href="#关于调库的感受" class="headerlink" title="关于调库的感受"></a>关于调库的感受</h3><h3 id="关于工作后的感受"><a href="#关于工作后的感受" class="headerlink" title="关于工作后的感受"></a>关于工作后的感受</h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2024/10/08/GPD%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/cheng.gif">
-      <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zhicheng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/10/08/GPD%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">机械臂抓取点筛选算法GPD算法使用总结</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-10-08 08:22:44" itemprop="dateCreated datePublished" datetime="2024-10-08T08:22:44+08:00">2024-10-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-03-18 20:52:48" itemprop="dateModified" datetime="2025-03-18T20:52:48+08:00">2025-03-18</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2024/10/08/2024%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/cheng.gif">
-      <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zhicheng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/10/08/2024%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">2024年总结</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-10-08 08:22:44" itemprop="dateCreated datePublished" datetime="2024-10-08T08:22:44+08:00">2024-10-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-01-19 20:27:16" itemprop="dateModified" datetime="2025-01-19T20:27:16+08:00">2025-01-19</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="年度照片"><a href="#年度照片" class="headerlink" title="年度照片"></a>年度照片</h2><p><img src="/2024%E6%80%BB%E7%BB%93/DSC_5063.jpg" alt="alt text"></p>
-<h2 id="大事记"><a href="#大事记" class="headerlink" title="大事记"></a>大事记</h2><h2 id="走一走"><a href="#走一走" class="headerlink" title="走一走"></a>走一走</h2><ul>
-<li>乌镇</li>
-<li>云南<ul>
-<li>大理</li>
-<li>丽江</li>
-<li>昆明</li>
-<li>香格里拉</li>
-</ul>
-</li>
-<li>黄山</li>
-<li>上海市内与苏州市内</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2024/04/29/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/cheng.gif">
-      <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zhicheng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/04/29/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">第一篇博客</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-04-29 20:50:59 / 修改时间：20:52:32" itemprop="dateCreated datePublished" datetime="2024-04-29T20:50:59+08:00">2024-04-29</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
@@ -1057,6 +577,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87"><span class="nav-number">1.</span> <span class="nav-text">1. 强化学习目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%A6%82%E4%BD%95%E6%9B%B4%E6%96%B0MPC%E5%8F%82%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">2. 强化学习如何更新MPC参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E7%BB%93%E5%90%88MPC%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">3. 结合MPC的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%AE%89%E5%85%A8%E6%80%A7%E7%BA%A6%E6%9D%9F"><span class="nav-number">4.</span> <span class="nav-text">4. 安全性约束</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-%E5%AE%89%E5%85%A8%E6%9C%BA%E5%88%B6%E7%9A%84%E5%BE%AA%E7%8E%AF%E8%BF%87%E7%A8%8B"><span class="nav-number">5.</span> <span class="nav-text">5. 强化学习-安全机制的循环过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%BE%AA%E7%8E%AF%EF%BC%9A"><span class="nav-number">5.1.</span> <span class="nav-text">强化学习循环：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BC%95%E5%85%A5%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">6. 为什么引入强化学习？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9C%85-%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-number">7.</span> <span class="nav-text">✅ 总结：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%A7%92%E8%89%B2%EF%BC%9A"><span class="nav-number">7.1.</span> <span class="nav-text">强化学习的角色：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9C%85-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8-LSTD-Q-Learning%EF%BC%9F"><span class="nav-number">8.</span> <span class="nav-text">✅ 为什么使用 LSTD Q-Learning？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%8E%AF-%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87"><span class="nav-number">9.</span> <span class="nav-text">🎯 强化学习目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%9A%80-LSTD-Q-Learning-%E7%9A%84%E6%9B%B4%E6%96%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">10.</span> <span class="nav-text">🚀 LSTD Q-Learning 的更新方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A1-1-%E7%9B%AE%E6%A0%87%EF%BC%9A%E4%BC%B0%E8%AE%A1Q%E5%80%BC%E5%87%BD%E6%95%B0"><span class="nav-number">10.1.</span> <span class="nav-text">💡 (1) 目标：估计Q值函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A1-2-TD%E8%AF%AF%E5%B7%AE-Temporal-Difference-Error"><span class="nav-number">10.2.</span> <span class="nav-text">💡 (2) TD误差 (Temporal Difference Error)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A1-3-%E6%9B%B4%E6%96%B0%E6%A2%AF%E5%BA%A6%E5%92%8CHessian%E7%9F%A9%E9%98%B5"><span class="nav-number">10.3.</span> <span class="nav-text">💡 (3) 更新梯度和Hessian矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A1-4-%E5%8F%82%E6%95%B0%E6%9B%B4%E6%96%B0"><span class="nav-number">10.4.</span> <span class="nav-text">💡 (4) 参数更新</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A5-%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-MPC-GP%E7%9A%84%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B"><span class="nav-number">11.</span> <span class="nav-text">🔥 强化学习-MPC-GP的完整流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9C%85-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E7%94%A8-LSTD-Q-Learning%EF%BC%9F"><span class="nav-number">12.</span> <span class="nav-text">✅ 为什么选用 LSTD Q-Learning？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%8C%9F-%E6%80%BB%E7%BB%93"><span class="nav-number">13.</span> <span class="nav-text">🌟 总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%8C%9F-%E7%94%A8%E4%B8%80%E4%B8%AA%E5%85%B7%E4%BD%93%E7%9A%84%E4%BE%8B%E5%AD%90%E6%9D%A5%E8%A7%A3%E9%87%8A-LSTD-Q-Learning-%E7%9A%84%E5%8E%9F%E7%90%86%EF%BC%9A"><span class="nav-number">13.1.</span> <span class="nav-text">🌟 用一个具体的例子来解释 LSTD Q-Learning 的原理：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%8E%AF-%E9%97%AE%E9%A2%98%E8%83%8C%E6%99%AF%EF%BC%9A"><span class="nav-number">14.</span> <span class="nav-text">🎯 问题背景：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9C%85-%E4%BC%A0%E7%BB%9FQ-Learning%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="nav-number">15.</span> <span class="nav-text">✅ 传统Q-Learning的问题：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%9A%80-LSTD-Q-Learning%E7%9A%84%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="nav-number">16.</span> <span class="nav-text">🚀 LSTD Q-Learning的核心思路：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E7%94%A8%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95-Least-Squares-%E4%BC%B0%E8%AE%A1Q%E5%80%BC%E5%87%BD%E6%95%B0%EF%BC%9A"><span class="nav-number">16.1.</span> <span class="nav-text">直接用最小二乘法 (Least Squares) 估计Q值函数：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9C%85-%E5%85%B7%E4%BD%93%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="nav-number">17.</span> <span class="nav-text">✅ 具体步骤：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%8E%AF-%E7%AC%AC1%E6%AD%A5%EF%BC%9A%E6%94%B6%E9%9B%86%E4%BA%A4%E4%BA%92%E6%95%B0%E6%8D%AE%EF%BC%9A"><span class="nav-number">18.</span> <span class="nav-text">🎯 第1步：收集交互数据：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%8E%AF-%E7%AC%AC2%E6%AD%A5%EF%BC%9A%E8%AE%A1%E7%AE%97TD%E8%AF%AF%E5%B7%AE-Temporal-Difference-Error-%EF%BC%9A"><span class="nav-number">19.</span> <span class="nav-text">🎯 **第2步：计算TD误差 (Temporal Difference Error)**：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%8E%AF-%E7%AC%AC3%E6%AD%A5%EF%BC%9ALSTD%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%9B%B4%E6%96%B0"><span class="nav-number">20.</span> <span class="nav-text">🎯 第3步：LSTD最小二乘更新</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%A5-%E6%A0%B8%E5%BF%83%E5%85%AC%E5%BC%8F%EF%BC%9A"><span class="nav-number">20.1.</span> <span class="nav-text">🔥 核心公式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%8C%88-%E7%9F%A9%E9%98%B5%E5%BD%A2%E5%BC%8F%EF%BC%9A"><span class="nav-number">20.2.</span> <span class="nav-text">🌈 矩阵形式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9C%85-%E8%A7%A3%E5%87%BA%E6%9C%80%E4%BC%98%E5%8F%82%E6%95%B0%EF%BC%9A"><span class="nav-number">20.3.</span> <span class="nav-text">✅ 解出最优参数：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%8E%AF-%E7%AC%AC4%E6%AD%A5%EF%BC%9AMPC%E5%8F%82%E6%95%B0%E6%9B%B4%E6%96%B0"><span class="nav-number">21.</span> <span class="nav-text">🎯 第4步：MPC参数更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%8E%AF-%E7%AC%AC5%E6%AD%A5%EF%BC%9A%E5%BC%95%E5%85%A5%E9%AB%98%E6%96%AF%E8%BF%87%E7%A8%8B-GP-%E8%BF%9B%E8%A1%8C%E5%AE%89%E5%85%A8%E7%BA%A6%E6%9D%9F"><span class="nav-number">22.</span> <span class="nav-text">🎯 第5步：引入高斯过程 (GP) 进行安全约束</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9C%85-%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C%EF%BC%9A"><span class="nav-number">23.</span> <span class="nav-text">✅ 最终效果：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%8E%81-%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B%E5%9B%BE%EF%BC%9A"><span class="nav-number">24.</span> <span class="nav-text">🎁 完整流程图：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9C%85-%E6%80%BB%E7%BB%93"><span class="nav-number">25.</span> <span class="nav-text">✅ 总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
