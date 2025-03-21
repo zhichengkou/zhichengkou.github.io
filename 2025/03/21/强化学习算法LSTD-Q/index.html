@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"zhichengkou.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="OMPL中规划算法的比较分析维度：核心策略、收敛速度、路径质量、适用场景、内存效率  一、基于树扩展的算法    RRT (Rapidly-exploring Random Tree)    核心思想：通过随机采样快速扩展搜索树，适合高维空间   特性：   优点：概率完备性，适合复杂障碍环境   缺点：路径曲折，需后优化（如Shortcut Smoothing）   典型应用：机械臂抓取路径规">
+  <meta name="description" content="🔍 LSTD-Q 中最小二乘法的体现LSTD-Q（Least-Squares Temporal Difference Q-learning） 之所以叫 “Least-Squares”，就是因为它通过最小二乘法（Least Squares） 来求解最优参数 θ，从而逼近 Q 函数。   在代码中，最小二乘法体现在： 1self.theta &#x3D; np.linalg.solve(self.A, sel">
 <meta property="og:type" content="article">
-<meta property="og:title" content="规划算法">
-<meta property="og:url" content="http://zhichengkou.github.io/2025/03/18/%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:title" content="强化学习算法LSTD-Q">
+<meta property="og:url" content="http://zhichengkou.github.io/2025/03/21/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95LSTD-Q/index.html">
 <meta property="og:site_name" content="Zhicheng">
-<meta property="og:description" content="OMPL中规划算法的比较分析维度：核心策略、收敛速度、路径质量、适用场景、内存效率  一、基于树扩展的算法    RRT (Rapidly-exploring Random Tree)    核心思想：通过随机采样快速扩展搜索树，适合高维空间   特性：   优点：概率完备性，适合复杂障碍环境   缺点：路径曲折，需后优化（如Shortcut Smoothing）   典型应用：机械臂抓取路径规">
+<meta property="og:description" content="🔍 LSTD-Q 中最小二乘法的体现LSTD-Q（Least-Squares Temporal Difference Q-learning） 之所以叫 “Least-Squares”，就是因为它通过最小二乘法（Least Squares） 来求解最优参数 θ，从而逼近 Q 函数。   在代码中，最小二乘法体现在： 1self.theta &#x3D; np.linalg.solve(self.A, sel">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-03-18T14:10:55.000Z">
-<meta property="article:modified_time" content="2025-03-19T08:13:53.223Z">
+<meta property="article:published_time" content="2025-03-21T11:18:35.000Z">
+<meta property="article:modified_time" content="2025-03-21T11:20:52.230Z">
 <meta property="article:author" content="Zhicheng">
-<meta property="article:tag" content="规划算法， movelt">
+<meta property="article:tag" content="强化学习 LSTD-Q 最小二乘法">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://zhichengkou.github.io/2025/03/18/%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/">
+<link rel="canonical" href="http://zhichengkou.github.io/2025/03/21/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95LSTD-Q/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>规划算法 | Zhicheng</title>
+  <title>强化学习算法LSTD-Q | Zhicheng</title>
   
 
 
@@ -166,7 +166,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/03/18/%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/03/21/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95LSTD-Q/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/cheng.gif">
@@ -179,7 +179,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          规划算法
+          强化学习算法LSTD-Q
         </h1>
 
         <div class="post-meta">
@@ -188,16 +188,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2025-03-18 22:10:55" itemprop="dateCreated datePublished" datetime="2025-03-18T22:10:55+08:00">2025-03-18</time>
+              <time title="创建时间：2025-03-21 19:18:35 / 修改时间：19:20:52" itemprop="dateCreated datePublished" datetime="2025-03-21T19:18:35+08:00">2025-03-21</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-03-19 16:13:53" itemprop="dateModified" datetime="2025-03-19T16:13:53+08:00">2025-03-19</time>
-              </span>
 
           
 
@@ -210,155 +204,43 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <hr>
-<h1 id="OMPL中规划算法的比较"><a href="#OMPL中规划算法的比较" class="headerlink" title="OMPL中规划算法的比较"></a>OMPL中规划算法的比较</h1><h2 id="分析维度：核心策略、收敛速度、路径质量、适用场景、内存效率"><a href="#分析维度：核心策略、收敛速度、路径质量、适用场景、内存效率" class="headerlink" title="分析维度：核心策略、收敛速度、路径质量、适用场景、内存效率  "></a>分析维度：核心策略、收敛速度、路径质量、适用场景、内存效率  </h2><p>一、基于树扩展的算法  </p>
-<ol>
-<li><p>RRT (Rapidly-exploring Random Tree)  </p>
-<ul>
-<li>核心思想：通过随机采样快速扩展搜索树，适合高维空间  </li>
-<li>特性：  <ul>
-<li>优点：概率完备性，适合复杂障碍环境  </li>
-<li>缺点：路径曲折，需后优化（如Shortcut Smoothing）  </li>
-<li>典型应用：机械臂抓取路径规划</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>RRTConnect  </p>
-<ul>
-<li>改进点：双向树扩展（起点和终点同时生长）  </li>
-<li>性能：  <ul>
-<li>收敛速度比RRT快30-50%（OMPL基准测试数据）  </li>
-<li>在狭窄通道场景中成功率提升显著</li>
-</ul>
-</li>
-<li>局限：两树连接时可能产生不连续路径</li>
-</ul>
-</li>
-<li><p>EST (Expansive Space Trees)  </p>
-<ul>
-<li>策略：基于状态密度启发式扩展，优先探索低密度区域  </li>
-<li>优势场景：非完整约束系统（如差速驱动机器人）  </li>
-<li>缺陷：高维空间扩展效率骤降</li>
-</ul>
-</li>
-</ol>
-<p>二、基于离散化分解的算法  </p>
-<ol>
-<li><p>KPIECE系列  </p>
-<table>
-<thead>
-<tr>
-<th>算法</th>
-<th>核心机制</th>
-<th>适用性</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>KPIECE1</td>
-<td>基于投影的网格分解，动态调整分辨率</td>
-<td>中等维度（3-6自由度）</td>
-</tr>
-<tr>
-<td>BKPIECE1</td>
-<td>双向树扩展+KPIECE网格引导</td>
-<td>狭窄通道&#x2F;复杂几何约束</td>
-</tr>
-<tr>
-<td>LBKPIECE1</td>
-<td>轻量化版本，牺牲路径质量换取内存效率</td>
-<td>嵌入式系统&#x2F;实时规划需求</td>
-</tr>
-</tbody></table>
-<p>数据对比：在7自由度机械臂场景中，BKPIECE1规划速度比RRT快2.1倍，但路径长度增加15%  </p>
-</li>
-<li><p>SBL (Single-Query Bidirectional Lazy)  </p>
-<ul>
-<li>创新点：延迟碰撞检测（Lazy Evaluation）+ 双向搜索  </li>
-<li>优势：  <ul>
-<li>减少70%以上的碰撞检测计算量（IEEE T-RO 2024研究）  </li>
-<li>支持动态障碍物更新</li>
-</ul>
-</li>
-<li>局限：路径可能存在安全风险，需后验验证</li>
-</ul>
-</li>
-</ol>
-<p>三、概率路图算法  </p>
-<ol>
-<li>PRM (Probabilistic Roadmap)  <ul>
-<li>阶段划分：  <ol>
-<li>学习阶段：构建随机采样节点与无碰撞边  </li>
-<li>查询阶段：A*搜索最优路径</li>
-</ol>
-</li>
-<li>优势：  <ul>
-<li>多查询场景效率极高（预处理后路径规划时间降低90%）  </li>
-<li>支持并行化建图（2025版OMPL新增GPU加速接口）</li>
-</ul>
-</li>
-<li>缺陷：动态环境适应性差，需定期更新路图</li>
-</ul>
-</li>
-</ol>
-<p>四、算法性能综合对比  </p>
-<table>
-<thead>
-<tr>
-<th>指标</th>
-<th>RRT</th>
-<th>RRTConnect</th>
-<th>KPIECE1</th>
-<th>PRM</th>
-<th>SBL</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>收敛时间（s）</td>
-<td>2.8</td>
-<td>1.9</td>
-<td>1.2</td>
-<td>5.1*</td>
-<td>0.8</td>
-</tr>
-<tr>
-<td>路径长度（m）</td>
-<td>12.4</td>
-<td>11.7</td>
-<td>14.2</td>
-<td>10.9</td>
-<td>13.5</td>
-</tr>
-<tr>
-<td>内存占用（MB）</td>
-<td>45</td>
-<td>62</td>
-<td>28</td>
-<td>210</td>
-<td>37</td>
-</tr>
-<tr>
-<td>狭窄通道成功率</td>
-<td>68%</td>
-<td>83%</td>
-<td>91%</td>
-<td>42%</td>
-<td>79%</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>*注：PRM时间含预处理阶段，测试环境为MoveIt!的7-DOF Panda机械臂仿真场景  </p>
-</blockquote>
-<p>五、选型决策指南  </p>
-<ol>
-<li>实时性要求高 → 选择SBL或LBKPIECE1（牺牲路径质量换取速度）  </li>
-<li>路径最优化需求 → 使用PRM+优化器（如CHOMP或STOMP）  </li>
-<li>动态环境 → RRT变种（如RRT*或Anytime RRT）  </li>
-<li>嵌入式部署 → KPIECE1（内存占用可控）  </li>
-<li>学术研究 → 结合OMPL的Benchmark工具进行定量分析</li>
-</ol>
+        <h3 id="🔍-LSTD-Q-中最小二乘法的体现"><a href="#🔍-LSTD-Q-中最小二乘法的体现" class="headerlink" title="🔍 LSTD-Q 中最小二乘法的体现"></a><strong>🔍 LSTD-Q 中最小二乘法的体现</strong></h3><p><strong>LSTD-Q（Least-Squares Temporal Difference Q-learning）</strong> 之所以叫 “Least-Squares”，就是因为它通过<strong>最小二乘法（Least Squares）</strong> 来求解最优参数 <code>θ</code>，从而逼近 Q 函数。  </p>
+<p>在代码中，最小二乘法体现在：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">self</span>.theta = np.linalg.solve(<span class="variable language_">self</span>.A, <span class="variable language_">self</span>.b)</span><br></pre></td></tr></table></figure>
+<p>这实际上是<strong>解最小二乘问题</strong>的核心步骤，类似于线性回归的求解方式。</p>
 <hr>
-<p>ref: <a target="_blank" rel="noopener" href="https://ompl.kavrakilab.org/planners.html">https://ompl.kavrakilab.org/planners.html</a></p>
+<h2 id="📌-数学推导：最小二乘法在-LSTD-Q-中的应用"><a href="#📌-数学推导：最小二乘法在-LSTD-Q-中的应用" class="headerlink" title="📌 数学推导：最小二乘法在 LSTD-Q 中的应用"></a><strong>📌 数学推导：最小二乘法在 LSTD-Q 中的应用</strong></h2><p>LSTD-Q 的目标是找到一个 <strong>近似 Q 值函数</strong>：<br>[<br>Q(s, a) &#x3D; \phi(s, a)^T \theta<br>]<br>其中：</p>
+<ul>
+<li>( Q(s, a) ) 是 Q 值，我们用<strong>特征向量</strong> ( \phi(s, a) ) 的线性组合来逼近它。</li>
+<li>( \theta ) 是待求解的参数。</li>
+</ul>
+<hr>
+<h3 id="1️⃣-目标：找到最优-θ-使得-LSTD-误差最小"><a href="#1️⃣-目标：找到最优-θ-使得-LSTD-误差最小" class="headerlink" title="1️⃣ 目标：找到最优 θ 使得 LSTD 误差最小"></a><strong>1️⃣ 目标：找到最优 <code>θ</code> 使得 LSTD 误差最小</strong></h3><p>基于 <strong>贝尔曼方程</strong>：<br>[<br>Q(s, a) &#x3D; r + \gamma Q(s’, a’)<br>]<br>我们用<strong>最小二乘法</strong>逼近 Q 值，最优 <code>θ</code> 需要满足：<br>[<br>\min_{\theta} \sum \left( Q(s, a) - (r + \gamma Q(s’, a’)) \right)^2<br>]<br>展开后可以写成：<br>[<br>\min_{\theta} \sum \left( \phi(s, a)^T \theta - (r + \gamma \phi(s’, a’)^T \theta) \right)^2<br>]</p>
+<hr>
+<h3 id="2️⃣-线性方程组的构造"><a href="#2️⃣-线性方程组的构造" class="headerlink" title="2️⃣ 线性方程组的构造"></a><strong>2️⃣ 线性方程组的构造</strong></h3><p>如果我们有 <strong>N 组数据</strong> ( (s_i, a_i, r_i, s’_i, a’_i) )，记：</p>
+<ul>
+<li><p>( \Phi ) 是所有 ( \phi(s, a) ) 组成的矩阵：<br>[<br>\Phi &#x3D;<br>\begin{bmatrix}<br>\phi(s_1, a_1)^T \<br>\phi(s_2, a_2)^T \<br>\vdots \<br>\phi(s_N, a_N)^T<br>\end{bmatrix}<br>]<br>形状是 ( (N, d) )，其中 ( d ) 是特征维度。</p>
+</li>
+<li><p>( R ) 是奖励向量：<br>[<br>R &#x3D;<br>\begin{bmatrix}<br>r_1 \<br>r_2 \<br>\vdots \<br>r_N<br>\end{bmatrix}<br>]<br>形状是 ( (N, 1) )。</p>
+</li>
+<li><p>( \Phi’ ) 是所有 ( \phi(s’, a’) ) 组成的矩阵：<br>[<br>\Phi’ &#x3D;<br>\begin{bmatrix}<br>\phi(s’_1, a’_1)^T \<br>\phi(s’_2, a’_2)^T \<br>\vdots \<br>\phi(s’_N, a’_N)^T<br>\end{bmatrix}<br>]<br>形状也是 ( (N, d) )。</p>
+</li>
+</ul>
+<p>将 Q 值近似公式代入，我们得到线性方程：<br>[<br>\Phi \theta &#x3D; R + \gamma \Phi’ \theta<br>]<br>整理得到：<br>[<br>(\Phi^T \Phi - \gamma \Phi^T \Phi’) \theta &#x3D; \Phi^T R<br>]</p>
+<hr>
+<h3 id="3️⃣-代码如何实现最小二乘法"><a href="#3️⃣-代码如何实现最小二乘法" class="headerlink" title="3️⃣ 代码如何实现最小二乘法"></a><strong>3️⃣ 代码如何实现最小二乘法</strong></h3><p>在代码中，这个方程被表示为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">self</span>.A += np.outer(phi, (phi - <span class="variable language_">self</span>.gamma * next_phi))  <span class="comment"># 更新 A</span></span><br><span class="line"><span class="variable language_">self</span>.b += reward * phi  <span class="comment"># 更新 b</span></span><br><span class="line"><span class="variable language_">self</span>.theta = np.linalg.solve(<span class="variable language_">self</span>.A, <span class="variable language_">self</span>.b)  <span class="comment"># 计算 theta</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>self.A</code> 对应 ( (\Phi^T \Phi - \gamma \Phi^T \Phi’) )</li>
+<li><code>self.b</code> 对应 ( \Phi^T R )</li>
+<li><code>np.linalg.solve(self.A, self.b)</code> <strong>解线性方程组，求解最优 <code>θ</code></strong></li>
+</ul>
+<p>这就是 <strong>LSTD-Q 里最小二乘法的核心！</strong> 🎯</p>
+<hr>
+<h2 id="🚀-直观理解"><a href="#🚀-直观理解" class="headerlink" title="🚀 直观理解"></a><strong>🚀 直观理解</strong></h2><ul>
+<li><strong>普通 Q-learning</strong> 是直接用 TD 误差来<strong>逐步更新</strong> Q 值，但它可能收敛慢，而且受学习率影响大。</li>
+<li><strong>LSTD-Q</strong> 是<strong>直接求解一个线性方程组</strong>，用最小二乘法**一次性计算出最优 <code>θ</code>**，收敛快，精度高，适用于高维状态空间。</li>
+</ul>
 
     </div>
 
@@ -368,7 +250,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95%EF%BC%8C-movelt/" rel="tag"># 规划算法， movelt</a>
+              <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-LSTD-Q-%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95/" rel="tag"># 强化学习 LSTD-Q 最小二乘法</a>
           </div>
 
         
@@ -377,13 +259,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/03/18/safe-learning%E5%AE%9E%E8%B7%B5-%E5%9F%BA%E4%BA%8E%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%9A%84MPC/" rel="prev" title="safe learning实践 - 基于强化学习的MPC">
-      <i class="fa fa-chevron-left"></i> safe learning实践 - 基于强化学习的MPC
+    <a href="/2025/03/21/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B8%ADQ%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%E7%9A%84%E6%80%BB%E7%BB%93/" rel="prev" title="强化学习中Q矩阵计算方法的总结">
+      <i class="fa fa-chevron-left"></i> 强化学习中Q矩阵计算方法的总结
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/03/21/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B8%ADQ%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%E7%9A%84%E6%80%BB%E7%BB%93/" rel="next" title="强化学习中Q矩阵计算方法的总结">
-      强化学习中Q矩阵计算方法的总结 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -442,7 +321,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OMPL%E4%B8%AD%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-number">1.</span> <span class="nav-text">OMPL中规划算法的比较</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E7%BB%B4%E5%BA%A6%EF%BC%9A%E6%A0%B8%E5%BF%83%E7%AD%96%E7%95%A5%E3%80%81%E6%94%B6%E6%95%9B%E9%80%9F%E5%BA%A6%E3%80%81%E8%B7%AF%E5%BE%84%E8%B4%A8%E9%87%8F%E3%80%81%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF%E3%80%81%E5%86%85%E5%AD%98%E6%95%88%E7%8E%87"><span class="nav-number">1.1.</span> <span class="nav-text">分析维度：核心策略、收敛速度、路径质量、适用场景、内存效率  </span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8D-LSTD-Q-%E4%B8%AD%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E7%9A%84%E4%BD%93%E7%8E%B0"><span class="nav-number">1.</span> <span class="nav-text">🔍 LSTD-Q 中最小二乘法的体现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%8C-%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC%EF%BC%9A%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E5%9C%A8-LSTD-Q-%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number"></span> <span class="nav-text">📌 数学推导：最小二乘法在 LSTD-Q 中的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%EF%B8%8F%E2%83%A3-%E7%9B%AE%E6%A0%87%EF%BC%9A%E6%89%BE%E5%88%B0%E6%9C%80%E4%BC%98-%CE%B8-%E4%BD%BF%E5%BE%97-LSTD-%E8%AF%AF%E5%B7%AE%E6%9C%80%E5%B0%8F"><span class="nav-number">1.</span> <span class="nav-text">1️⃣ 目标：找到最优 θ 使得 LSTD 误差最小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%EF%B8%8F%E2%83%A3-%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E7%9A%84%E6%9E%84%E9%80%A0"><span class="nav-number">2.</span> <span class="nav-text">2️⃣ 线性方程组的构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%EF%B8%8F%E2%83%A3-%E4%BB%A3%E7%A0%81%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">3️⃣ 代码如何实现最小二乘法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%9A%80-%E7%9B%B4%E8%A7%82%E7%90%86%E8%A7%A3"><span class="nav-number"></span> <span class="nav-text">🚀 直观理解</span></a></div>
       </div>
       <!--/noindex-->
 
