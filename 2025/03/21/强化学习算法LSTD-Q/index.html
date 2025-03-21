@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"zhichengkou.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="🔍 LSTD-Q 中最小二乘法的体现LSTD-Q（Least-Squares Temporal Difference Q-learning） 之所以叫 “Least-Squares”，就是因为它通过最小二乘法（Least Squares） 来求解最优参数 θ，从而逼近 Q 函数。   在代码中，最小二乘法体现在： 1self.theta &#x3D; np.linalg.solve(self.A, sel">
+  <meta name="description" content="🔍 LSTD-Q 中最小二乘法的体现 LSTD-Q（Least-Squares Temporal Difference Q-learning） 之所以叫 “Least-Squares”，就是因为它通过最小二乘法（Least Squares） 来求解最优参数 θ，从而逼近 Q 函数。 在代码中，最小二乘法体现在： 1self.theta &#x3D; np.linalg.solve(self.A">
 <meta property="og:type" content="article">
 <meta property="og:title" content="强化学习算法LSTD-Q">
 <meta property="og:url" content="http://zhichengkou.github.io/2025/03/21/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95LSTD-Q/index.html">
 <meta property="og:site_name" content="Zhicheng">
-<meta property="og:description" content="🔍 LSTD-Q 中最小二乘法的体现LSTD-Q（Least-Squares Temporal Difference Q-learning） 之所以叫 “Least-Squares”，就是因为它通过最小二乘法（Least Squares） 来求解最优参数 θ，从而逼近 Q 函数。   在代码中，最小二乘法体现在： 1self.theta &#x3D; np.linalg.solve(self.A, sel">
+<meta property="og:description" content="🔍 LSTD-Q 中最小二乘法的体现 LSTD-Q（Least-Squares Temporal Difference Q-learning） 之所以叫 “Least-Squares”，就是因为它通过最小二乘法（Least Squares） 来求解最优参数 θ，从而逼近 Q 函数。 在代码中，最小二乘法体现在： 1self.theta &#x3D; np.linalg.solve(self.A">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-21T11:18:35.000Z">
 <meta property="article:modified_time" content="2025-03-21T11:20:52.230Z">
@@ -204,42 +204,75 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="🔍-LSTD-Q-中最小二乘法的体现"><a href="#🔍-LSTD-Q-中最小二乘法的体现" class="headerlink" title="🔍 LSTD-Q 中最小二乘法的体现"></a><strong>🔍 LSTD-Q 中最小二乘法的体现</strong></h3><p><strong>LSTD-Q（Least-Squares Temporal Difference Q-learning）</strong> 之所以叫 “Least-Squares”，就是因为它通过<strong>最小二乘法（Least Squares）</strong> 来求解最优参数 <code>θ</code>，从而逼近 Q 函数。  </p>
-<p>在代码中，最小二乘法体现在：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">self</span>.theta = np.linalg.solve(<span class="variable language_">self</span>.A, <span class="variable language_">self</span>.b)</span><br></pre></td></tr></table></figure>
-<p>这实际上是<strong>解最小二乘问题</strong>的核心步骤，类似于线性回归的求解方式。</p>
-<hr>
-<h2 id="📌-数学推导：最小二乘法在-LSTD-Q-中的应用"><a href="#📌-数学推导：最小二乘法在-LSTD-Q-中的应用" class="headerlink" title="📌 数学推导：最小二乘法在 LSTD-Q 中的应用"></a><strong>📌 数学推导：最小二乘法在 LSTD-Q 中的应用</strong></h2><p>LSTD-Q 的目标是找到一个 <strong>近似 Q 值函数</strong>：<br>[<br>Q(s, a) &#x3D; \phi(s, a)^T \theta<br>]<br>其中：</p>
+        <h3 id="lstd-q-中最小二乘法的体现"><strong>🔍 LSTD-Q
+中最小二乘法的体现</strong></h3>
+<p><strong>LSTD-Q（Least-Squares Temporal Difference
+Q-learning）</strong> 之所以叫
+“Least-Squares”，就是因为它通过<strong>最小二乘法（Least
+Squares）</strong> 来求解最优参数 <code>θ</code>，从而逼近 Q 函数。</p>
+<p>在代码中，最小二乘法体现在： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">self</span>.theta = np.linalg.solve(<span class="variable language_">self</span>.A, <span class="variable language_">self</span>.b)</span><br></pre></td></tr></table></figure>
+这实际上是<strong>解最小二乘问题</strong>的核心步骤，类似于线性回归的求解方式。</p>
+<hr />
+<h2 id="数学推导最小二乘法在-lstd-q-中的应用"><strong>📌
+数学推导：最小二乘法在 LSTD-Q 中的应用</strong></h2>
+<p>LSTD-Q 的目标是找到一个 <strong>近似 Q 值函数</strong>： [ Q(s, a) =
+(s, a)^T ] 其中： - ( Q(s, a) ) 是 Q 值，我们用<strong>特征向量</strong>
+( (s, a) ) 的线性组合来逼近它。 - ( ) 是待求解的参数。</p>
+<hr />
+<h3 id="目标找到最优-θ-使得-lstd-误差最小"><strong>1️⃣ 目标：找到最优
+<code>θ</code> 使得 LSTD 误差最小</strong></h3>
+<p>基于 <strong>贝尔曼方程</strong>： [ Q(s, a) = r + Q(s', a') ]
+我们用<strong>最小二乘法</strong>逼近 Q 值，最优 <code>θ</code>
+需要满足： [ <em>{} ( Q(s, a) - (r + Q(s', a')) )^2 ] 展开后可以写成： [
+</em>{} ( (s, a)^T - (r + (s', a')^T ) )^2 ]</p>
+<hr />
+<h3 id="线性方程组的构造"><strong>2️⃣ 线性方程组的构造</strong></h3>
+如果我们有 <strong>N 组数据</strong> ( (s_i, a_i, r_i, s'_i, a'_i)
+)，记： - ( ) 是所有 ( (s, a) ) 组成的矩阵： [ =
+<span class="math display">\[\begin{bmatrix}
+  \phi(s_1, a_1)^T \\
+  \phi(s_2, a_2)^T \\
+  \vdots \\
+  \phi(s_N, a_N)^T
+  \end{bmatrix}\]</span>
+<p>] 形状是 ( (N, d) )，其中 ( d ) 是特征维度。</p>
 <ul>
-<li>( Q(s, a) ) 是 Q 值，我们用<strong>特征向量</strong> ( \phi(s, a) ) 的线性组合来逼近它。</li>
-<li>( \theta ) 是待求解的参数。</li>
+<li><p>( R ) 是奖励向量： [ R =</p>
+<span class="math display">\[\begin{bmatrix}
+r_1 \\
+r_2 \\
+\vdots \\
+r_N
+\end{bmatrix}\]</span>
+<p>] 形状是 ( (N, 1) )。</p></li>
+<li><p>( ' ) 是所有 ( (s', a') ) 组成的矩阵： [ ' =</p>
+<span class="math display">\[\begin{bmatrix}
+\phi(s&#39;_1, a&#39;_1)^T \\
+\phi(s&#39;_2, a&#39;_2)^T \\
+\vdots \\
+\phi(s&#39;_N, a&#39;_N)^T
+\end{bmatrix}\]</span>
+<p>] 形状也是 ( (N, d) )。</p></li>
 </ul>
-<hr>
-<h3 id="1️⃣-目标：找到最优-θ-使得-LSTD-误差最小"><a href="#1️⃣-目标：找到最优-θ-使得-LSTD-误差最小" class="headerlink" title="1️⃣ 目标：找到最优 θ 使得 LSTD 误差最小"></a><strong>1️⃣ 目标：找到最优 <code>θ</code> 使得 LSTD 误差最小</strong></h3><p>基于 <strong>贝尔曼方程</strong>：<br>[<br>Q(s, a) &#x3D; r + \gamma Q(s’, a’)<br>]<br>我们用<strong>最小二乘法</strong>逼近 Q 值，最优 <code>θ</code> 需要满足：<br>[<br>\min_{\theta} \sum \left( Q(s, a) - (r + \gamma Q(s’, a’)) \right)^2<br>]<br>展开后可以写成：<br>[<br>\min_{\theta} \sum \left( \phi(s, a)^T \theta - (r + \gamma \phi(s’, a’)^T \theta) \right)^2<br>]</p>
-<hr>
-<h3 id="2️⃣-线性方程组的构造"><a href="#2️⃣-线性方程组的构造" class="headerlink" title="2️⃣ 线性方程组的构造"></a><strong>2️⃣ 线性方程组的构造</strong></h3><p>如果我们有 <strong>N 组数据</strong> ( (s_i, a_i, r_i, s’_i, a’_i) )，记：</p>
-<ul>
-<li><p>( \Phi ) 是所有 ( \phi(s, a) ) 组成的矩阵：<br>[<br>\Phi &#x3D;<br>\begin{bmatrix}<br>\phi(s_1, a_1)^T \<br>\phi(s_2, a_2)^T \<br>\vdots \<br>\phi(s_N, a_N)^T<br>\end{bmatrix}<br>]<br>形状是 ( (N, d) )，其中 ( d ) 是特征维度。</p>
-</li>
-<li><p>( R ) 是奖励向量：<br>[<br>R &#x3D;<br>\begin{bmatrix}<br>r_1 \<br>r_2 \<br>\vdots \<br>r_N<br>\end{bmatrix}<br>]<br>形状是 ( (N, 1) )。</p>
-</li>
-<li><p>( \Phi’ ) 是所有 ( \phi(s’, a’) ) 组成的矩阵：<br>[<br>\Phi’ &#x3D;<br>\begin{bmatrix}<br>\phi(s’_1, a’_1)^T \<br>\phi(s’_2, a’_2)^T \<br>\vdots \<br>\phi(s’_N, a’_N)^T<br>\end{bmatrix}<br>]<br>形状也是 ( (N, d) )。</p>
-</li>
-</ul>
-<p>将 Q 值近似公式代入，我们得到线性方程：<br>[<br>\Phi \theta &#x3D; R + \gamma \Phi’ \theta<br>]<br>整理得到：<br>[<br>(\Phi^T \Phi - \gamma \Phi^T \Phi’) \theta &#x3D; \Phi^T R<br>]</p>
-<hr>
-<h3 id="3️⃣-代码如何实现最小二乘法"><a href="#3️⃣-代码如何实现最小二乘法" class="headerlink" title="3️⃣ 代码如何实现最小二乘法"></a><strong>3️⃣ 代码如何实现最小二乘法</strong></h3><p>在代码中，这个方程被表示为：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">self</span>.A += np.outer(phi, (phi - <span class="variable language_">self</span>.gamma * next_phi))  <span class="comment"># 更新 A</span></span><br><span class="line"><span class="variable language_">self</span>.b += reward * phi  <span class="comment"># 更新 b</span></span><br><span class="line"><span class="variable language_">self</span>.theta = np.linalg.solve(<span class="variable language_">self</span>.A, <span class="variable language_">self</span>.b)  <span class="comment"># 计算 theta</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>self.A</code> 对应 ( (\Phi^T \Phi - \gamma \Phi^T \Phi’) )</li>
-<li><code>self.b</code> 对应 ( \Phi^T R )</li>
-<li><code>np.linalg.solve(self.A, self.b)</code> <strong>解线性方程组，求解最优 <code>θ</code></strong></li>
-</ul>
+<p>将 Q 值近似公式代入，我们得到线性方程： [ = R + ' ] 整理得到： [ (^T
+- ^T ') = ^T R ]</p>
+<hr />
+<h3 id="代码如何实现最小二乘法"><strong>3️⃣
+代码如何实现最小二乘法</strong></h3>
+<p>在代码中，这个方程被表示为： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">self</span>.A += np.outer(phi, (phi - <span class="variable language_">self</span>.gamma * next_phi))  <span class="comment"># 更新 A</span></span><br><span class="line"><span class="variable language_">self</span>.b += reward * phi  <span class="comment"># 更新 b</span></span><br><span class="line"><span class="variable language_">self</span>.theta = np.linalg.solve(<span class="variable language_">self</span>.A, <span class="variable language_">self</span>.b)  <span class="comment"># 计算 theta</span></span><br></pre></td></tr></table></figure> - <code>self.A</code> 对应
+( (^T - ^T ') ) - <code>self.b</code> 对应 ( ^T R ) -
+<code>np.linalg.solve(self.A, self.b)</code>
+<strong>解线性方程组，求解最优 <code>θ</code></strong></p>
 <p>这就是 <strong>LSTD-Q 里最小二乘法的核心！</strong> 🎯</p>
-<hr>
-<h2 id="🚀-直观理解"><a href="#🚀-直观理解" class="headerlink" title="🚀 直观理解"></a><strong>🚀 直观理解</strong></h2><ul>
-<li><strong>普通 Q-learning</strong> 是直接用 TD 误差来<strong>逐步更新</strong> Q 值，但它可能收敛慢，而且受学习率影响大。</li>
-<li><strong>LSTD-Q</strong> 是<strong>直接求解一个线性方程组</strong>，用最小二乘法**一次性计算出最优 <code>θ</code>**，收敛快，精度高，适用于高维状态空间。</li>
+<hr />
+<h2 id="直观理解"><strong>🚀 直观理解</strong></h2>
+<ul>
+<li><strong>普通 Q-learning</strong> 是直接用 TD
+误差来<strong>逐步更新</strong> Q
+值，但它可能收敛慢，而且受学习率影响大。</li>
+<li><strong>LSTD-Q</strong>
+是<strong>直接求解一个线性方程组</strong>，用最小二乘法<strong>一次性计算出最优
+<code>θ</code></strong>，收敛快，精度高，适用于高维状态空间。</li>
 </ul>
 
     </div>
@@ -321,7 +354,11 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8D-LSTD-Q-%E4%B8%AD%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E7%9A%84%E4%BD%93%E7%8E%B0"><span class="nav-number">1.</span> <span class="nav-text">🔍 LSTD-Q 中最小二乘法的体现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%8C-%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC%EF%BC%9A%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E5%9C%A8-LSTD-Q-%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number"></span> <span class="nav-text">📌 数学推导：最小二乘法在 LSTD-Q 中的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%EF%B8%8F%E2%83%A3-%E7%9B%AE%E6%A0%87%EF%BC%9A%E6%89%BE%E5%88%B0%E6%9C%80%E4%BC%98-%CE%B8-%E4%BD%BF%E5%BE%97-LSTD-%E8%AF%AF%E5%B7%AE%E6%9C%80%E5%B0%8F"><span class="nav-number">1.</span> <span class="nav-text">1️⃣ 目标：找到最优 θ 使得 LSTD 误差最小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%EF%B8%8F%E2%83%A3-%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E7%9A%84%E6%9E%84%E9%80%A0"><span class="nav-number">2.</span> <span class="nav-text">2️⃣ 线性方程组的构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%EF%B8%8F%E2%83%A3-%E4%BB%A3%E7%A0%81%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">3️⃣ 代码如何实现最小二乘法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%9A%80-%E7%9B%B4%E8%A7%82%E7%90%86%E8%A7%A3"><span class="nav-number"></span> <span class="nav-text">🚀 直观理解</span></a></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#lstd-q-%E4%B8%AD%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E7%9A%84%E4%BD%93%E7%8E%B0"><span class="nav-number">1.</span> <span class="nav-text">🔍 LSTD-Q
+中最小二乘法的体现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E5%9C%A8-lstd-q-%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number"></span> <span class="nav-text">📌
+数学推导：最小二乘法在 LSTD-Q 中的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E6%89%BE%E5%88%B0%E6%9C%80%E4%BC%98-%CE%B8-%E4%BD%BF%E5%BE%97-lstd-%E8%AF%AF%E5%B7%AE%E6%9C%80%E5%B0%8F"><span class="nav-number">1.</span> <span class="nav-text">1️⃣ 目标：找到最优
+θ 使得 LSTD 误差最小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E7%9A%84%E6%9E%84%E9%80%A0"><span class="nav-number">2.</span> <span class="nav-text">2️⃣ 线性方程组的构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">3️⃣
+代码如何实现最小二乘法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B4%E8%A7%82%E7%90%86%E8%A7%A3"><span class="nav-number"></span> <span class="nav-text">🚀 直观理解</span></a></div>
       </div>
       <!--/noindex-->
 
