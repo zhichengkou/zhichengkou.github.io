@@ -29,7 +29,7 @@
 <meta property="og:description" content="On-policy 和 Off-policy 的区别         特征 On-policy (SARSA) Off-policy (Q-learning)     行为策略与目标策略的关系 行为策略与目标策略相同 行为策略和目标策略不同   策略选择依据 代理在每个状态下根据当前策略选择动作 代理根据探索性策略选择动作，但更新时使用目标策略（贪婪">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-04-07T11:48:01.000Z">
-<meta property="article:modified_time" content="2025-04-07T11:48:54.790Z">
+<meta property="article:modified_time" content="2025-04-09T02:16:00.198Z">
 <meta property="article:author" content="Zhicheng">
 <meta property="article:tag" content="强化学习">
 <meta property="article:tag" content="笔记总结">
@@ -216,10 +216,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2025-04-07 19:48:01 / 修改时间：19:48:54" itemprop="dateCreated datePublished" datetime="2025-04-07T19:48:01+08:00">2025-04-07</time>
+              <time title="创建时间：2025-04-07 19:48:01" itemprop="dateCreated datePublished" datetime="2025-04-07T19:48:01+08:00">2025-04-07</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-04-09 10:16:00" itemprop="dateModified" datetime="2025-04-09T10:16:00+08:00">2025-04-09</time>
+              </span>
 
           
             <span id="/2025/04/07/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="强化学习笔记" title="阅读次数">
@@ -917,6 +923,157 @@ Approximation）</strong>：</h3>
 <li><strong>LSTD</strong>：适合批量数据分析、预测任务，或者需要快速稳定收敛的场景，但计算复杂度高，适合线性逼近小维度问题。</li>
 </ul>
 <hr />
+<h1
+id="第九章基于函数逼近的同轨策略预测">第九章：基于函数逼近的同轨策略预测</h1>
+<h2 id="核心背景为什么要函数逼近">核心背景：为什么要函数逼近？</h2>
+<blockquote>
+<p>如果希望强化学习系统能够应用于人工智能和大型工程应用中，则系统必须有能力进行<strong>泛化</strong>。</p>
+</blockquote>
+<p>强化学习传统方法（比如表格型
+Q-learning）依赖于将每个状态或状态-动作对显式地存储在表格中。当状态空间很大或是连续的时候（比如自动驾驶、围棋、股票市场），这种方法就无法胜任了。</p>
+<p>因此我们需要<strong>函数逼近器（function
+approximator）</strong>，来对价值函数进行泛化，比如： - 线性模型 -
+多项式函数 - 神经网络（即深度学习） - RBF（径向基函数） - 瓦片编码（tile
+coding）</p>
+<hr />
+<h2
+id="核心思想用监督学习方法逼近值函数">核心思想：用监督学习方法逼近值函数</h2>
+<blockquote>
+<p>只要将每次更新时涉及的二元组 <code>(s → g)</code>
+作为训练样本就可以了。</p>
+</blockquote>
+<p>在强化学习中，我们在每一步都可以得到一个样本： <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">state s → 目标值 g</span><br></pre></td></tr></table></figure>
+其中目标值 g 可能是： -
+蒙特卡洛返回：<code>G = r1 + r2 + ... + rn</code> - TD
+返回：<code>r + γ * V(s')</code></p>
+<p>这些“输入→目标值”本质上和<strong>监督学习</strong>里的训练对没什么不同。</p>
+<p>所以我们可以借用监督学习的工具（比如神经网络训练）来拟合这个过程。</p>
+<hr />
+<h2 id="什么是同轨策略on-policy">💡 什么是同轨策略（on-policy）？</h2>
+<blockquote>
+<p>我们定义均方价值误差 VE(w) 为对使用权值向量 w 的近似价值函数
+<code>v̂_w(s)</code> 的加权误差。</p>
+</blockquote>
+<p>在强化学习中，<strong>同轨策略</strong>是指： - 使用的策略 π
+既用于<strong>生成数据</strong>（交互环境），又用于<strong>评估/学习</strong>。</p>
+<p>相比之下，<strong>异轨策略 off-policy</strong>（比如
+Q-learning）是指用一个行为策略采样，但学习的是另一个目标策略。</p>
+<p><code>VE(w)</code> 衡量的是：近似函数 <code>v̂_w(s)</code>
+相对于真实状态值 <code>v_π(s)</code> 的误差，通常定义为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VE(w) = ∑ μ(s) * (v̂_w(s) - v_π(s))²</span><br></pre></td></tr></table></figure>
+<p>其中 μ(s) 是状态的访问概率（stationary distribution）。</p>
+<hr />
+<h2 id="如何优化这个误差">📉 如何优化这个误差？</h2>
+<blockquote>
+<p>最常见的方法是随机梯度下降（SGD）及其变种</p>
+</blockquote>
+<p>我们希望通过调整参数 <code>w</code> 来让 <code>VE(w)</code>
+尽可能小：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w ← w - α * ∇VE(w)</span><br></pre></td></tr></table></figure>
+<p>但问题是，我们<strong>不知道</strong> <code>v_π(s)</code>
+的真实值，所以不能直接计算 ∇VE(w)。</p>
+<p>于是我们使用<strong>TD目标或蒙特卡洛目标来估计</strong>误差，从而构造所谓的<strong>半梯度算法（semi-gradient
+methods）</strong>。</p>
+<hr />
+<h2 id="什么是半梯度方法为什么叫这个名">🧮
+什么是“半梯度方法”？为什么叫这个名？</h2>
+<blockquote>
+<p>在这种自举法（如DP）中，权值向量在更新目标中出现，但计算梯度时不考虑它</p>
+</blockquote>
+<p>“半梯度”意思是：你在 TD 学习中更新的目标 <code>r + γ * v̂_w(s')</code>
+是带有 <code>w</code>
+的，但你却<strong>不对这个目标求梯度</strong>。你只对
+<code>v̂_w(s)</code> 这一部分求梯度。</p>
+<h3 id="示例">示例：</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">delta = r + γ * v̂_w(s<span class="string">&#x27;) - v̂_w(s)   # TD误差</span></span><br><span class="line"><span class="string">w ← w + α * delta * ∇v̂_w(s)</span></span><br></pre></td></tr></table></figure>
+<p>注意：目标中有
+<code>v̂_w(s')</code>，但我们更新时<strong>不对它求导</strong>，所以叫“半梯度”。</p>
+<hr />
+<h2 id="线性函数逼近最重要的一个基类">🔢
+线性函数逼近（最重要的一个基类）</h2>
+<blockquote>
+<p>线性函数逼近中，值估计是特征加权求和：<code>v̂(s) = φ(s)^T w</code></p>
+</blockquote>
+<p>这是强化学习中最容易分析和收敛性最好的逼近方式。</p>
+<ul>
+<li><code>φ(s)</code> 是状态的特征向量（比如 one-hot
+编码、瓦片编码、RBF等）</li>
+<li><code>w</code> 是权值向量（参数）</li>
+<li>优点：分析简单，收敛性好，计算快</li>
+</ul>
+<hr />
+<h2 id="特征选择的策略">🎨 特征选择的策略？</h2>
+<blockquote>
+<p>选择好的特征是加先验知识的一种重要方式</p>
+</blockquote>
+<p>特征越好，泛化效果越好。 - <strong>多项式特征</strong>（如
+<code>1, x, x²</code>）通常不太适合RL -
+<strong>傅立叶基</strong>：适合周期性问题（比如控制摆动） -
+<strong>瓦片编码（Tile
+coding）</strong>：非常适合离散近似连续空间，计算快 -
+<strong>径向基函数（RBF）</strong>：适用于平滑响应的低维问题</p>
+<hr />
+<h2 id="不同方法对比">📚 不同方法对比</h2>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+<th>数据效率</th>
+<th>计算复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>半梯度 TD(0)</strong></td>
+<td>单步更新，自举</td>
+<td>中等</td>
+<td>O(d)</td>
+</tr>
+<tr>
+<td><strong>n步TD</strong></td>
+<td>使用 n 步回报</td>
+<td>高</td>
+<td>O(d)</td>
+</tr>
+<tr>
+<td><strong>蒙特卡洛（MC）</strong></td>
+<td>用整幕回报更新</td>
+<td>高</td>
+<td>O(d)</td>
+</tr>
+<tr>
+<td><strong>LSTD</strong></td>
+<td>最数据高效，最精确</td>
+<td>高</td>
+<td>O(d²)</td>
+</tr>
+<tr>
+<td><strong>非线性逼近（NN）</strong></td>
+<td>深度RL，适合复杂任务</td>
+<td>取决于模型</td>
+<td>高</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>d：权值数量（特征维度）</p>
+</blockquote>
+<hr />
+<h2 id="深度强化学习非线性逼近">🚀 深度强化学习：非线性逼近</h2>
+<blockquote>
+<p>用神经网络表示价值函数或策略，常见于 DQN、Actor-Critic 等方法。</p>
+</blockquote>
+<p>训练方法： - 使用反向传播算法 - 通常使用经验回放 + 目标网络等机制</p>
+<hr />
+<h2 id="总结核心点">✅ 总结核心点</h2>
+<ol type="1">
+<li>大状态空间 → 必须使用函数逼近</li>
+<li>同轨策略 → 策略评估任务中，常用半梯度方法</li>
+<li>线性函数逼近 → 理论最清晰、收敛性最强</li>
+<li>特征选择 → 是模型性能的核心关键</li>
+<li>深度强化学习 → 实现非线性逼近，适用于复杂任务</li>
+</ol>
 
     </div>
 
@@ -940,7 +1097,10 @@ Approximation）</strong>：</h3>
     <a href="/2025/03/29/KKT%E6%9D%A1%E4%BB%B6/" rel="prev" title="KKT条件">
       <i class="fa fa-chevron-left"></i> KKT条件
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2025/04/08/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" rel="next" title="强化学习">
+      强化学习 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -1008,7 +1168,9 @@ Approximation）：</span></a></li><li class="nav-item nav-level-3"><a class="na
 使用TD（时间差分）方法进行同轨策略预测：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91"><span class="nav-number">5.4.2.</span> <span class="nav-text">2. 线性函数逼近：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91%E4%BE%8B%E5%A6%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">5.4.3.</span> <span class="nav-text">3.
 非线性函数逼近（例如神经网络）：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AD%96%E7%95%A5%E8%AF%84%E4%BC%B0%E5%92%8C%E6%9B%B4%E6%96%B0"><span class="nav-number">5.4.4.</span> <span class="nav-text">4. 策略评估和更新：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%A2%AF%E5%BA%A6%E7%9A%84%E6%9B%B4%E6%96%B0"><span class="nav-number">5.4.5.</span> <span class="nav-text">5. 基于梯度的更新：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E8%BD%A8%E7%AD%96%E7%95%A5%E9%A2%84%E6%B5%8B%E7%9A%84%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95"><span class="nav-number">5.5.</span> <span class="nav-text">4.
 同轨策略预测的经典算法：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#sarsa%CE%BB"><span class="nav-number">5.5.1.</span> <span class="nav-text">(1) SARSA(λ)：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6q%E5%AD%A6%E4%B9%A0dqn"><span class="nav-number">5.5.2.</span> <span class="nav-text">(2) 深度Q学习（DQN）：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#a3c%E5%BC%82%E6%AD%A5%E4%BC%98%E5%8A%BF%E6%BC%94%E5%91%98-%E8%AF%84%E8%AE%BA%E5%AE%B6"><span class="nav-number">5.5.3.</span> <span class="nav-text">(3)
-A3C（异步优势演员-评论家）：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9%E5%88%86%E6%9E%90"><span class="nav-number">5.6.</span> <span class="nav-text">5. 优缺点分析：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%82%B9"><span class="nav-number">5.6.1.</span> <span class="nav-text">优点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9"><span class="nav-number">5.6.2.</span> <span class="nav-text">缺点：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-1"><span class="nav-number">5.7.</span> <span class="nav-text">总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E6%8E%A8%E8%8D%90"><span class="nav-number">5.8.</span> <span class="nav-text">总结推荐：</span></a></li></ol></li></ol></div>
+A3C（异步优势演员-评论家）：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9%E5%88%86%E6%9E%90"><span class="nav-number">5.6.</span> <span class="nav-text">5. 优缺点分析：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%82%B9"><span class="nav-number">5.6.1.</span> <span class="nav-text">优点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9"><span class="nav-number">5.6.2.</span> <span class="nav-text">缺点：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-1"><span class="nav-number">5.7.</span> <span class="nav-text">总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E6%8E%A8%E8%8D%90"><span class="nav-number">5.8.</span> <span class="nav-text">总结推荐：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B9%9D%E7%AB%A0%E5%9F%BA%E4%BA%8E%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91%E7%9A%84%E5%90%8C%E8%BD%A8%E7%AD%96%E7%95%A5%E9%A2%84%E6%B5%8B"><span class="nav-number"></span> <span class="nav-text">第九章：基于函数逼近的同轨策略预测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E8%83%8C%E6%99%AF%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91"><span class="nav-number">1.</span> <span class="nav-text">核心背景：为什么要函数逼近？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3%E7%94%A8%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E9%80%BC%E8%BF%91%E5%80%BC%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">核心思想：用监督学习方法逼近值函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%90%8C%E8%BD%A8%E7%AD%96%E7%95%A5on-policy"><span class="nav-number">3.</span> <span class="nav-text">💡 什么是同轨策略（on-policy）？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%E8%BF%99%E4%B8%AA%E8%AF%AF%E5%B7%AE"><span class="nav-number">4.</span> <span class="nav-text">📉 如何优化这个误差？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%8A%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AB%E8%BF%99%E4%B8%AA%E5%90%8D"><span class="nav-number">5.</span> <span class="nav-text">🧮
+什么是“半梯度方法”？为什么叫这个名？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-number">5.1.</span> <span class="nav-text">示例：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E4%B8%80%E4%B8%AA%E5%9F%BA%E7%B1%BB"><span class="nav-number">6.</span> <span class="nav-text">🔢
+线性函数逼近（最重要的一个基类）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9%E7%9A%84%E7%AD%96%E7%95%A5"><span class="nav-number">7.</span> <span class="nav-text">🎨 特征选择的策略？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94"><span class="nav-number">8.</span> <span class="nav-text">📚 不同方法对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E9%9D%9E%E7%BA%BF%E6%80%A7%E9%80%BC%E8%BF%91"><span class="nav-number">9.</span> <span class="nav-text">🚀 深度强化学习：非线性逼近</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E6%A0%B8%E5%BF%83%E7%82%B9"><span class="nav-number">10.</span> <span class="nav-text">✅ 总结核心点</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -1024,14 +1186,14 @@ A3C（异步优势演员-评论家）：</span></a></li></ol></li><li class="nav
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
