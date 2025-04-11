@@ -21,23 +21,25 @@
     var CONFIG = {"hostname":"zhichengkou.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="年度照片  ## 大事记 走一走  乌镇 云南  大理 丽江 昆明 香格里拉   黄山 上海市内与苏州市内">
+  <meta name="description" content="本笔记来源于《Deep Reinforcement Learning》一书，作者：grokking    alt text    alt text    alt text  第二章 强化学习的数学基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2024年总结">
-<meta property="og:url" content="http://zhichengkou.github.io/2024/10/08/2024%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:title" content="深度强化学习笔记">
+<meta property="og:url" content="http://zhichengkou.github.io/2025/04/09/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Zhicheng">
-<meta property="og:description" content="年度照片  ## 大事记 走一走  乌镇 云南  大理 丽江 昆明 香格里拉   黄山 上海市内与苏州市内">
+<meta property="og:description" content="本笔记来源于《Deep Reinforcement Learning》一书，作者：grokking    alt text    alt text    alt text  第二章 强化学习的数学基础">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://zhichengkou.github.io/2024/10/08/2024%E6%80%BB%E7%BB%93/2024%E6%80%BB%E7%BB%93/DSC_5063.jpg">
-<meta property="article:published_time" content="2024-10-08T00:22:44.000Z">
-<meta property="article:modified_time" content="2025-04-07T11:51:55.210Z">
+<meta property="og:image" content="http://zhichengkou.github.io/2025/04/09/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-1.png">
+<meta property="og:image" content="http://zhichengkou.github.io/2025/04/09/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image.png">
+<meta property="og:image" content="http://zhichengkou.github.io/2025/04/09/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-3.png">
+<meta property="article:published_time" content="2025-04-09T15:23:46.000Z">
+<meta property="article:modified_time" content="2025-04-11T05:52:42.978Z">
 <meta property="article:author" content="Zhicheng">
-<meta property="article:tag" content="生活">
-<meta property="article:tag" content="年度总结">
+<meta property="article:tag" content="书本笔记">
+<meta property="article:tag" content="深度强化学习">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://zhichengkou.github.io/2024/10/08/2024%E6%80%BB%E7%BB%93/2024%E6%80%BB%E7%BB%93/DSC_5063.jpg">
+<meta name="twitter:image" content="http://zhichengkou.github.io/2025/04/09/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-1.png">
 
-<link rel="canonical" href="http://zhichengkou.github.io/2024/10/08/2024%E6%80%BB%E7%BB%93/">
+<link rel="canonical" href="http://zhichengkou.github.io/2025/04/09/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
 
 <script id="page-configurations">
@@ -50,7 +52,7 @@
   };
 </script>
 
-  <title>2024年总结 | Zhicheng</title>
+  <title>深度强化学习笔记 | Zhicheng</title>
   
 
 
@@ -195,7 +197,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2024/10/08/2024%E6%80%BB%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/04/09/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/cheng.gif">
@@ -208,7 +210,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          2024年总结
+          深度强化学习笔记
         </h1>
 
         <div class="post-meta">
@@ -218,18 +220,18 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2024-10-08 08:22:44" itemprop="dateCreated datePublished" datetime="2024-10-08T08:22:44+08:00">2024-10-08</time>
+              <time title="创建时间：2025-04-09 23:23:46" itemprop="dateCreated datePublished" datetime="2025-04-09T23:23:46+08:00">2025-04-09</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-04-07 19:51:55" itemprop="dateModified" datetime="2025-04-07T19:51:55+08:00">2025-04-07</time>
+                <time title="修改时间：2025-04-11 13:52:42" itemprop="dateModified" datetime="2025-04-11T13:52:42+08:00">2025-04-11</time>
               </span>
 
           
-            <span id="/2024/10/08/2024%E6%80%BB%E7%BB%93/" class="post-meta-item leancloud_visitors" data-flag-title="2024年总结" title="阅读次数">
+            <span id="/2025/04/09/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="深度强化学习笔记" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -253,22 +255,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="年度照片">年度照片</h2>
-<p><img data-src="2024总结/DSC_5063.jpg" alt="alt text" /> ## 大事记</p>
-<h2 id="走一走">走一走</h2>
-<ul>
-<li>乌镇</li>
-<li>云南
-<ul>
-<li>大理</li>
-<li>丽江</li>
-<li>昆明</li>
-<li>香格里拉<br />
-</li>
-</ul></li>
-<li>黄山</li>
-<li>上海市内与苏州市内</li>
-</ul>
+        <p><strong>本笔记来源于《Deep Reinforcement
+Learning》一书，作者：grokking</strong></p>
+<hr />
+<figure>
+<img data-src="深度强化学习笔记\image-1.png" alt="alt text" />
+<figcaption aria-hidden="true">alt text</figcaption>
+</figure>
+<figure>
+<img data-src="深度强化学习笔记\image.png" alt="alt text" />
+<figcaption aria-hidden="true">alt text</figcaption>
+</figure>
+<figure>
+<img data-src="深度强化学习笔记\image-3.png" alt="alt text" />
+<figcaption aria-hidden="true">alt text</figcaption>
+</figure>
+<h3 id="第二章-强化学习的数学基础">第二章 强化学习的数学基础</h3>
 
     </div>
 
@@ -278,8 +280,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag"># 生活</a>
-              <a href="/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" rel="tag"># 年度总结</a>
+              <a href="/tags/%E4%B9%A6%E6%9C%AC%E7%AC%94%E8%AE%B0/" rel="tag"># 书本笔记</a>
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" rel="tag"># 深度强化学习</a>
           </div>
 
         
@@ -288,12 +290,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2024/10/08/GPD%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/" rel="prev" title="机械臂抓取点筛选算法GPD算法使用总结">
-      <i class="fa fa-chevron-left"></i> 机械臂抓取点筛选算法GPD算法使用总结
+    <a href="/2025/04/09/%E4%BB%BF%E4%BA%BA%E6%9C%BA%E5%99%A8%E4%BA%BA/" rel="prev" title="仿人机器人">
+      <i class="fa fa-chevron-left"></i> 仿人机器人
     </a></div>
       <div class="post-nav-item">
-    <a href="/2025/01/08/%E6%9C%80%E8%BF%91%E5%87%A0%E4%B8%AA%E6%9C%88%E5%81%9A%E6%9C%BA%E6%A2%B0%E8%87%82%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E5%8F%97/" rel="next" title="工作几个月后的感受">
-      工作几个月后的感受 <i class="fa fa-chevron-right"></i>
+    <a href="/2025/04/11/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-%E7%8E%8B%E6%A0%91%E6%A3%AE/" rel="next" title="深度强化学习-王树森">
+      深度强化学习-王树森 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -353,7 +355,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B4%E5%BA%A6%E7%85%A7%E7%89%87"><span class="nav-number">1.</span> <span class="nav-text">年度照片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%B0%E4%B8%80%E8%B5%B0"><span class="nav-number">2.</span> <span class="nav-text">走一走</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">第二章 强化学习的数学基础</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -662,7 +664,7 @@ window.addEventListener('pjax:success', () => {
       quicklink({
         timeout : 3000,
         priority: true,
-        ignores : [uri => uri.includes('#'),uri => uri === 'http://zhichengkou.github.io/2024/10/08/2024%E6%80%BB%E7%BB%93/',]
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://zhichengkou.github.io/2025/04/09/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/',]
       });
       });
   </script>
