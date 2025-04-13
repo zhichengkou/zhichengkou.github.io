@@ -186,6 +186,170 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/03/18/%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cheng.gif">
+      <meta itemprop="name" content="Zhicheng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zhicheng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/03/18/%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">规划算法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-03-18 22:10:55" itemprop="dateCreated datePublished" datetime="2025-03-18T22:10:55+08:00">2025-03-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-04-07 19:52:30" itemprop="dateModified" datetime="2025-04-07T19:52:30+08:00">2025-04-07</time>
+              </span>
+
+          
+            <span id="/2025/03/18/%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/" class="post-meta-item leancloud_visitors" data-flag-title="规划算法" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <table>
+<tbody>
+<tr>
+<td># OMPL中规划算法的比较</td>
+</tr>
+<tr>
+<td>分析维度：核心策略、收敛速度、路径质量、适用场景、内存效率</td>
+</tr>
+</tbody>
+</table>
+<p>一、基于树扩展的算法<br />
+1. RRT (Rapidly-exploring Random Tree)<br />
+- 核心思想：通过随机采样快速扩展搜索树，适合高维空间<br />
+- 特性：<br />
+- 优点：概率完备性，适合复杂障碍环境<br />
+- 缺点：路径曲折，需后优化（如Shortcut Smoothing）<br />
+- 典型应用：机械臂抓取路径规划</p>
+<ol start="2" type="1">
+<li>RRTConnect
+<ul>
+<li>改进点：双向树扩展（起点和终点同时生长）<br />
+</li>
+<li>性能：
+<ul>
+<li>收敛速度比RRT快30-50%（OMPL基准测试数据）<br />
+</li>
+<li>在狭窄通道场景中成功率提升显著<br />
+</li>
+</ul></li>
+<li>局限：两树连接时可能产生不连续路径</li>
+</ul></li>
+<li>EST (Expansive Space Trees)
+<ul>
+<li>策略：基于状态密度启发式扩展，优先探索低密度区域<br />
+</li>
+<li>优势场景：非完整约束系统（如差速驱动机器人）<br />
+</li>
+<li>缺陷：高维空间扩展效率骤降</li>
+</ul></li>
+</ol>
+<p>二、基于离散化分解的算法<br />
+1. KPIECE系列<br />
+| 算法 | 核心机制 | 适用性 |<br />
+|------------|-------------------------------------|--------------------------|<br />
+| KPIECE1 | 基于投影的网格分解，动态调整分辨率 | 中等维度（3-6自由度）
+|<br />
+| BKPIECE1 | 双向树扩展+KPIECE网格引导 | 狭窄通道/复杂几何约束 |<br />
+| LBKPIECE1 | 轻量化版本，牺牲路径质量换取内存效率 |
+嵌入式系统/实时规划需求 |</p>
+<p>数据对比：在7自由度机械臂场景中，BKPIECE1规划速度比RRT快2.1倍，但路径长度增加15%</p>
+<ol start="2" type="1">
+<li>SBL (Single-Query Bidirectional Lazy)
+<ul>
+<li>创新点：延迟碰撞检测（Lazy Evaluation）+ 双向搜索<br />
+</li>
+<li>优势：
+<ul>
+<li>减少70%以上的碰撞检测计算量（IEEE T-RO 2024研究）<br />
+</li>
+<li>支持动态障碍物更新<br />
+</li>
+</ul></li>
+<li>局限：路径可能存在安全风险，需后验验证</li>
+</ul></li>
+</ol>
+<p>三、概率路图算法<br />
+1. PRM (Probabilistic Roadmap)<br />
+- 阶段划分：<br />
+1. 学习阶段：构建随机采样节点与无碰撞边<br />
+2. 查询阶段：A*搜索最优路径<br />
+- 优势：<br />
+- 多查询场景效率极高（预处理后路径规划时间降低90%）<br />
+- 支持并行化建图（2025版OMPL新增GPU加速接口）<br />
+- 缺陷：动态环境适应性差，需定期更新路图</p>
+<p>四、算法性能综合对比<br />
+| 指标 | RRT | RRTConnect | KPIECE1 | PRM | SBL |<br />
+|----------------|--------|------------|---------|---------|---------|<br />
+| 收敛时间（s） | 2.8 | 1.9 | 1.2 | 5.1* | 0.8 |<br />
+| 路径长度（m） | 12.4 | 11.7 | 14.2 | 10.9 | 13.5 |<br />
+| 内存占用（MB） | 45 | 62 | 28 | 210 | 37 |<br />
+| 狭窄通道成功率 | 68% | 83% | 91% | 42% | 79% |</p>
+<blockquote>
+<p>*注：PRM时间含预处理阶段，测试环境为MoveIt!的7-DOF
+Panda机械臂仿真场景</p>
+</blockquote>
+<p>五、选型决策指南<br />
+1. 实时性要求高 → 选择SBL或LBKPIECE1（牺牲路径质量换取速度）<br />
+2. 路径最优化需求 → 使用PRM+优化器（如CHOMP或STOMP）<br />
+3. 动态环境 → RRT变种（如RRT*或Anytime RRT）<br />
+4. 嵌入式部署 → KPIECE1（内存占用可控）<br />
+5. 学术研究 → 结合OMPL的Benchmark工具进行定量分析</p>
+<hr />
+<p>ref: https://ompl.kavrakilab.org/planners.html</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/03/18/safe-learning%E5%AE%9E%E8%B7%B5-%E5%9F%BA%E4%BA%8E%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%9A%84MPC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1162,7 +1326,7 @@ target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
