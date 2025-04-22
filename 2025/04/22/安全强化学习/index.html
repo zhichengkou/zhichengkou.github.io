@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"zhichengkou.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="王雪松, 王荣荣, 程玉虎. 安全强化学习综述. 自动化学报, 2023, 49(9): 1813−1835   alt text    alt text   《Safe Reinforcement Learning Using Robust Control Barrier Functions》（Emam et al., 2022）（本质上是一种策略约束方法） 提出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安全强化学习">
+<meta property="og:url" content="http://zhichengkou.github.io/2025/04/22/%E5%AE%89%E5%85%A8%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Zhicheng">
+<meta property="og:description" content="王雪松, 王荣荣, 程玉虎. 安全强化学习综述. 自动化学报, 2023, 49(9): 1813−1835   alt text    alt text   《Safe Reinforcement Learning Using Robust Control Barrier Functions》（Emam et al., 2022）（本质上是一种策略约束方法） 提出">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zhichengkou.github.io/2025/04/22/%E5%AE%89%E5%85%A8%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/%E5%AE%89%E5%85%A8%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/image.png">
+<meta property="og:image" content="http://zhichengkou.github.io/2025/04/22/%E5%AE%89%E5%85%A8%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/%E5%AE%89%E5%85%A8%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/image1.png">
+<meta property="article:published_time" content="2025-04-22T02:52:47.000Z">
+<meta property="article:modified_time" content="2025-04-22T04:02:07.811Z">
+<meta property="article:author" content="Zhicheng">
+<meta property="article:tag" content="强化学习">
+<meta property="article:tag" content="论文总结">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhichengkou.github.io/2025/04/22/%E5%AE%89%E5%85%A8%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/%E5%AE%89%E5%85%A8%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/image.png">
+
+<link rel="canonical" href="http://zhichengkou.github.io/2025/04/22/%E5%AE%89%E5%85%A8%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>安全强化学习 | Zhicheng</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Zhicheng</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/04/22/%E5%AE%89%E5%85%A8%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cheng.gif">
+      <meta itemprop="name" content="Zhicheng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zhicheng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          安全强化学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-04-22 10:52:47 / 修改时间：12:02:07" itemprop="dateCreated datePublished" datetime="2025-04-22T10:52:47+08:00">2025-04-22</time>
+            </span>
+
+          
+            <span id="/2025/04/22/%E5%AE%89%E5%85%A8%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="post-meta-item leancloud_visitors" data-flag-title="安全强化学习" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1
+id="王雪松-王荣荣-程玉虎.-安全强化学习综述.-自动化学报-2023-499-18131835">王雪松,
+王荣荣, 程玉虎. 安全强化学习综述. 自动化学报, 2023, 49(9):
+1813−1835</h1>
+<figure>
+<img data-src="安全强化学习\image.png" alt="alt text" />
+<figcaption aria-hidden="true">alt text</figcaption>
+</figure>
+<figure>
+<img data-src="安全强化学习\image1.png" alt="alt text" />
+<figcaption aria-hidden="true">alt text</figcaption>
+</figure>
+<hr />
+<h1
+id="safe-reinforcement-learning-using-robust-control-barrier-functionsemam-et-al.-2022本质上是一种策略约束方法">《<strong>Safe
+Reinforcement Learning Using Robust Control Barrier
+Functions</strong>》（Emam et al.,
+2022）（本质上是一种策略约束方法）</h1>
+<p>提出了一种结合<strong>鲁棒控制屏障函数（RCBF）</strong>和强化学习的安全强化学习框架，并以<strong>Soft
+Actor-Critic
+(SAC)</strong>为基底，解决训练过程中可能进入不安全状态的问题。</p>
+<h2 id="论文核心结构与思路">论文核心结构与思路</h2>
+<h3 id="问题背景">1. 问题背景</h3>
+<ul>
+<li>强化学习需要大量探索，但这可能会引发<strong>安全问题</strong>（如机器人撞墙、无人机坠落）。</li>
+<li>安全强化学习目标：在训练中就<strong>保持系统不进入不安全状态</strong>，而不是仅最终收敛到安全策略。</li>
+</ul>
+<h3 id="方法结构sac-rcbf">2. 方法结构（SAC-RCBF）</h3>
+<h4 id="系统建模">📎 系统建模：</h4>
+<p>考虑扰动控制仿射系统：</p>
+<p>[ (t) = f(x(t)) + g(x(t))u(x(t)) + d(x(t)) ]</p>
+<ul>
+<li>(d(x))：未知扰动，用<strong>高斯过程（GP）</strong>建模。</li>
+<li>控制目标是：用 RL 找最优策略 ( )，在执行前通过 <strong>RCBF
+层</strong>进行修正，确保安全。</li>
+</ul>
+<h4 id="安全模块rcbf-qp-层">📎 安全模块：RCBF-QP 层</h4>
+<ul>
+<li>用<strong>鲁棒控制屏障函数（RCBF）</strong>构造约束： [ h(x)^T(f(x)
++ g(x)u(x)) -(h(x)) - h(x)^T d(x) ]</li>
+<li>通过<strong>二次规划（QP）</strong>调整策略输出，最小化修改幅度，确保满足约束。</li>
+</ul>
+<h4 id="强化学习部分soft-actor-critic-sac">📎 强化学习部分：Soft
+Actor-Critic (SAC)</h4>
+<ul>
+<li>引入<strong>可微分安全层</strong>，可以反向传播梯度，增强策略学习能力。</li>
+<li>提出两个优化：
+<ol type="1">
+<li><strong>Differentiable RCBF
+Layer</strong>：允许梯度传播：使得策略能够进行自动修正。可微分安全层让“安全修正”变成了策略可以感知和优化的目标，因此是实实在在的“加速
++ 提升性能”的方法。</li>
+<li><strong>Model-based
+rollout</strong>：用学习到的模型生成合成数据，加速学习</li>
+</ol></li>
+<li><strong>没有可微分安全层：</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>策略网络不知道“自己动作被改了”</td>
+<td>无法学习“避开”那些不安全动作</td>
+</tr>
+<tr>
+<td>CBF 修正是黑箱、不可导</td>
+<td>策略只能“撞墙后被拉回来”，而不是“提前不撞”</td>
+</tr>
+<tr>
+<td>SAC 更新方向可能乱了</td>
+<td>有效梯度方向被掩盖，学习效率低</td>
+</tr>
+<tr>
+<td>高维控制系统尤其严重</td>
+<td>RL 很难靠试错探索到“刚刚好不触碰屏障”的策略</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>有安全层：</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>优点</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>策略能“感知到”安全边界的位置</td>
+<td>不再只是靠碰撞惩罚、随机试错</td>
+</tr>
+<tr>
+<td>CBF 修正能“教会”网络如何避开风险</td>
+<td>把 CBF 的结构性知识反传给策略</td>
+</tr>
+<tr>
+<td>策略更快收敛、学到更优行为</td>
+<td>不容易陷入安全/性能折中困境</td>
+</tr>
+</tbody>
+</table>
+<h4 id="模块化任务学习modular-learning">📎 模块化任务学习（Modular
+Learning）</h4>
+<ul>
+<li><strong>任务 reward 与安全 constraint
+解耦</strong>，使得训练出的策略具有更强的<strong>迁移能力（zero-shot
+transfer）</strong>。</li>
+</ul>
+<h2 id="创新点总结">创新点总结</h2>
+<table>
+<thead>
+<tr>
+<th>创新点类别</th>
+<th>内容说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✅ 融合方法创新</td>
+<td>将 RCBF 融入 SAC 中，确保训练过程安全</td>
+</tr>
+<tr>
+<td>✅ 可微分安全层</td>
+<td>提出 differentiable RCBF-QP，允许梯度传播</td>
+</tr>
+<tr>
+<td>✅ 模块化训练思想</td>
+<td>reward 与 safety 解耦，提升策略迁移性</td>
+</tr>
+<tr>
+<td>✅ 数据效率优化</td>
+<td>使用部分已学模型做合成 rollout，提升样本效率</td>
+</tr>
+</tbody>
+</table>
+<h2 id="可改进方向-研究机会">可改进方向 / 研究机会</h2>
+<ol type="1">
+<li><strong>更多维度扰动建模方法</strong>：GP 对高维 d(x)
+效率有限，可考虑使用贝叶斯神经网络或 ensemble 模型。</li>
+<li><strong>更通用的 CBF 设计工具</strong>：当前构造 CBF
+需先验经验，可引入自动构造或学习 CBF 的方法。</li>
+<li><strong>现实部署实验验证缺失</strong>：目前只在模拟环境中测试，若能在真实机器人上测试更具说服力。</li>
+<li><strong>与 MPC 的融合探索</strong>：框架可拓展为 hybrid
+RL-MPC，进一步提升实时安全性。</li>
+</ol>
+<hr />
+<h2 id="sac算法">SAC算法：</h2>
+<blockquote>
+<p><strong>SAC 是一种最大化奖励 + 最大化动作多样性（熵）的 off-policy
+深度强化学习算法，具有高效、稳定、探索性强的特点。</strong></p>
+</blockquote>
+<h3 id="一sac-的基本思想">一、SAC 的基本思想</h3>
+<p>传统强化学习只最大化期望回报：</p>
+<p>[ <em></em>{} ]</p>
+<blockquote>
+<p>不仅希望获得高奖励，还希望策略<strong>有足够的“随机性”</strong>，保持探索能力。</p>
+</blockquote>
+<p>引入<strong>最大熵强化学习目标</strong>：</p>
+<p>[ <em></em>{} ]</p>
+<ul>
+<li>( () = -(a|s) ) 是策略的<strong>熵</strong></li>
+<li>( )：探索与奖励之间的平衡因子</li>
+</ul>
+<h3 id="二sac-的结构组成">🔍 二、SAC 的结构组成</h3>
+<p>SAC 有四个主要模块（四个网络）：</p>
+<table>
+<colgroup>
+<col style="width: 72%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr>
+<th>模块</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Actor</strong>（策略网络）</td>
+<td>输出当前状态下的概率分布 ( (a</td>
+</tr>
+<tr>
+<td><strong>Q1, Q2 网络</strong>（Critic）</td>
+<td>近似动作值函数 ( Q(s, a) )，使用双 Q 避免过高估计</td>
+</tr>
+<tr>
+<td><strong>Value 网络（可选）</strong></td>
+<td>估计当前状态下的“soft value” ( V(s) )（新版可省略）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>训练使用目标网络（target Q）、经验池（replay buffer）等稳定手段。</p>
+</blockquote>
+<h3 id="四sac-的优点">四、SAC 的优点</h3>
+<table>
+<thead>
+<tr>
+<th>特点</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✅ off-policy</td>
+<td>能重复使用旧数据，训练效率高</td>
+</tr>
+<tr>
+<td>✅ 连续动作空间</td>
+<td>可用于机器人控制等场景</td>
+</tr>
+<tr>
+<td>✅ 探索性强</td>
+<td>保留策略熵，鼓励更多尝试</td>
+</tr>
+<tr>
+<td>✅ 收敛稳定</td>
+<td>双 Q + target network 提升稳定性</td>
+</tr>
+<tr>
+<td>✅ 可扩展</td>
+<td>可结合可微分安全层（如前文 RCBF）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="关于-在线-离线强化学习-与-on-policy-off-policy">关于 “在线 /
+离线”强化学习 与 “on-policy / off-policy”</h2>
+<table>
+<colgroup>
+<col style="width: 52%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr>
+<th>比较点</th>
+<th>在线 / 离线</th>
+<th>On-policy / Off-policy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>关注的是？</td>
+<td>数据是否来自当前环境？</td>
+<td>样本是否由当前策略生成？</td>
+</tr>
+<tr>
+<td>数据是否更新？</td>
+<td>在线更新 / 离线固定</td>
+<td>都可以实时或离线训练</td>
+</tr>
+<tr>
+<td>能否与环境交互？</td>
+<td>离线不能，在线可以</td>
+<td>无限制，on/off-policy 都可在线训练</td>
+</tr>
+<tr>
+<td>是否用 replay buffer？</td>
+<td>不一定（视方法而定）</td>
+<td>Off-policy 用，On-policy 通常不用</td>
+</tr>
+<tr>
+<td>安全应用偏好？</td>
+<td>离线更安全</td>
+<td>与安全性无直接关系</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1
+id="learning-safety-in-model-based-reinforcement-learning-using-mpc-and-gaussian-processes"><strong>《Learning
+Safety in Model-Based Reinforcement Learning using MPC and Gaussian
+Processes》</strong></h1>
+<blockquote>
+<p>提出了一种结合 <strong>高斯过程（GP）与模型预测控制（MPC）</strong>
+的 <strong>安全强化学习（Safe
+RL）方法</strong>。它的研究目标是<strong>在不牺牲性能的前提下，提高策略的安全性</strong>。</p>
+</blockquote>
+<p>我将从三个层面来解析：</p>
+<h2 id="一文章的核心创新点分析">一、文章的核心创新点分析</h2>
+<h3 id="使用-gp-回归学习-mpc-参数空间中的安全集"><strong>1. 使用 GP
+回归学习 MPC 参数空间中的安全集</strong></h3>
+<ul>
+<li>提出了一个 <strong>用高斯过程回归建模安全约束</strong>
+的方法，不直接建模系统动力学，而是建模“哪个 MPC 参数组合是安全的”。</li>
+<li>安全性不再是手工设定的硬约束，而是通过历史数据学习的<strong>概率安全区域</strong>
+SD_D。</li>
+</ul>
+<p>👉 <strong>创新点</strong>：这是将黑箱约束建模方法用于 MPC-RL
+中安全约束建模的首个系统性应用。</p>
+<h3 id="将-mpc-作为-rl-的函数近似器"><strong>2. 将 MPC 作为 RL
+的函数近似器</strong></h3>
+<ul>
+<li>与传统 RL 使用神经网络不同，该文使用 <strong>参数化的 MPC
+控制器作为策略表示器</strong>。</li>
+<li>学习的不是控制策略本身，而是 MPC
+的参数（如模型参数、约束backoff等）。</li>
+</ul>
+<p>👉 <strong>创新点</strong>：相比 DNN 更可解释，且 MPC
+本身具有对约束的原生支持。</p>
+<h3 id="提出基于-gp-的安全约束嵌入到策略更新优化问题中"><strong>3.
+提出基于 GP 的安全约束嵌入到策略更新优化问题中</strong></h3>
+<ul>
+<li>在 RL 参数更新时，加入 GP 学习的安全约束 z(θ)≤0z()
+，确保新参数落在安全区域。</li>
+<li>若更新不可行，则逐步 <strong>backtrack 安全概率
+β</strong>，提升可行性。</li>
+</ul>
+<p>👉 <strong>创新点</strong>：结合了 <strong>概率安全约束 + 二阶
+Q-learning + backtracking β</strong>，实现数据驱动的安全探索。</p>
+<h2 id="总结">总结</h2>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>核心创新</td>
+<td>基于 GP 的安全参数集建模，嵌入 MPC-RL 训练过程</td>
+</tr>
+<tr>
+<td>关键技术点</td>
+<td>安全约束函数建模、LSTD Q-learning、贝叶斯优化启发式</td>
+</tr>
+<tr>
+<td>可改进之处</td>
+<td>GP 初期性能差、高维扩展难、参数空间学习有限</td>
+</tr>
+<tr>
+<td>潜在创新方向</td>
+<td>多模型融合、迁移学习、安全 BO 比对、真实机器人部署</td>
+</tr>
+</tbody>
+</table>
+<hr />
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" rel="tag"># 强化学习</a>
+              <a href="/tags/%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%93/" rel="tag"># 论文总结</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/04/20/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%A3%AB/" rel="prev" title="关于博士">
+      <i class="fa fa-chevron-left"></i> 关于博士
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%8B%E9%9B%AA%E6%9D%BE-%E7%8E%8B%E8%8D%A3%E8%8D%A3-%E7%A8%8B%E7%8E%89%E8%99%8E.-%E5%AE%89%E5%85%A8%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%BB%BC%E8%BF%B0.-%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AD%A6%E6%8A%A5-2023-499-18131835"><span class="nav-number">1.</span> <span class="nav-text">王雪松,
+王荣荣, 程玉虎. 安全强化学习综述. 自动化学报, 2023, 49(9):
+1813−1835</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#safe-reinforcement-learning-using-robust-control-barrier-functionsemam-et-al.-2022%E6%9C%AC%E8%B4%A8%E4%B8%8A%E6%98%AF%E4%B8%80%E7%A7%8D%E7%AD%96%E7%95%A5%E7%BA%A6%E6%9D%9F%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">《Safe
+Reinforcement Learning Using Robust Control Barrier
+Functions》（Emam et al.,
+2022）（本质上是一种策略约束方法）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BA%E6%96%87%E6%A0%B8%E5%BF%83%E7%BB%93%E6%9E%84%E4%B8%8E%E6%80%9D%E8%B7%AF"><span class="nav-number">2.1.</span> <span class="nav-text">论文核心结构与思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E8%83%8C%E6%99%AF"><span class="nav-number">2.1.1.</span> <span class="nav-text">1. 问题背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E7%BB%93%E6%9E%84sac-rcbf"><span class="nav-number">2.1.2.</span> <span class="nav-text">2. 方法结构（SAC-RCBF）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E5%BB%BA%E6%A8%A1"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">📎 系统建模：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9D%97rcbf-qp-%E5%B1%82"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">📎 安全模块：RCBF-QP 层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E9%83%A8%E5%88%86soft-actor-critic-sac"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">📎 强化学习部分：Soft
+Actor-Critic (SAC)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E4%BB%BB%E5%8A%A1%E5%AD%A6%E4%B9%A0modular-learning"><span class="nav-number">2.1.2.4.</span> <span class="nav-text">📎 模块化任务学习（Modular
+Learning）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E6%96%B0%E7%82%B9%E6%80%BB%E7%BB%93"><span class="nav-number">2.2.</span> <span class="nav-text">创新点总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E6%94%B9%E8%BF%9B%E6%96%B9%E5%90%91-%E7%A0%94%E7%A9%B6%E6%9C%BA%E4%BC%9A"><span class="nav-number">2.3.</span> <span class="nav-text">可改进方向 &#x2F; 研究机会</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sac%E7%AE%97%E6%B3%95"><span class="nav-number">2.4.</span> <span class="nav-text">SAC算法：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80sac-%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3"><span class="nav-number">2.4.1.</span> <span class="nav-text">一、SAC 的基本思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8Csac-%E7%9A%84%E7%BB%93%E6%9E%84%E7%BB%84%E6%88%90"><span class="nav-number">2.4.2.</span> <span class="nav-text">🔍 二、SAC 的结构组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9Bsac-%E7%9A%84%E4%BC%98%E7%82%B9"><span class="nav-number">2.4.3.</span> <span class="nav-text">四、SAC 的优点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E-%E5%9C%A8%E7%BA%BF-%E7%A6%BB%E7%BA%BF%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-%E4%B8%8E-on-policy-off-policy"><span class="nav-number">2.5.</span> <span class="nav-text">关于 “在线 &#x2F;
+离线”强化学习 与 “on-policy &#x2F; off-policy”</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#learning-safety-in-model-based-reinforcement-learning-using-mpc-and-gaussian-processes"><span class="nav-number">3.</span> <span class="nav-text">《Learning
+Safety in Model-Based Reinforcement Learning using MPC and Gaussian
+Processes》</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E6%96%87%E7%AB%A0%E7%9A%84%E6%A0%B8%E5%BF%83%E5%88%9B%E6%96%B0%E7%82%B9%E5%88%86%E6%9E%90"><span class="nav-number">3.1.</span> <span class="nav-text">一、文章的核心创新点分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-gp-%E5%9B%9E%E5%BD%92%E5%AD%A6%E4%B9%A0-mpc-%E5%8F%82%E6%95%B0%E7%A9%BA%E9%97%B4%E4%B8%AD%E7%9A%84%E5%AE%89%E5%85%A8%E9%9B%86"><span class="nav-number">3.1.1.</span> <span class="nav-text">1. 使用 GP
+回归学习 MPC 参数空间中的安全集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86-mpc-%E4%BD%9C%E4%B8%BA-rl-%E7%9A%84%E5%87%BD%E6%95%B0%E8%BF%91%E4%BC%BC%E5%99%A8"><span class="nav-number">3.1.2.</span> <span class="nav-text">2. 将 MPC 作为 RL
+的函数近似器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E5%87%BA%E5%9F%BA%E4%BA%8E-gp-%E7%9A%84%E5%AE%89%E5%85%A8%E7%BA%A6%E6%9D%9F%E5%B5%8C%E5%85%A5%E5%88%B0%E7%AD%96%E7%95%A5%E6%9B%B4%E6%96%B0%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98%E4%B8%AD"><span class="nav-number">3.1.3.</span> <span class="nav-text">3.
+提出基于 GP 的安全约束嵌入到策略更新优化问题中</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.2.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zhicheng"
+      src="/images/cheng.gif">
+  <p class="site-author-name" itemprop="name">Zhicheng</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhichengkou" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhichengkou" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/weixin_46473460?type=blog" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_46473460?type&#x3D;blog" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://scholar.google.com/citations?user=gMknN-8AAAAJ&hl=zh-CN&oi=ao" title="Google Scholar → https:&#x2F;&#x2F;scholar.google.com&#x2F;citations?user&#x3D;gMknN-8AAAAJ&amp;hl&#x3D;zh-CN&amp;oi&#x3D;ao" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>Google Scholar</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://500px.com.cn/cheng1917" title="500px → https:&#x2F;&#x2F;500px.com.cn&#x2F;cheng1917" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>500px</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhicheng</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+<script data-pjax>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":null,"app_key":null,"server_url":null,"security":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://zhichengkou.github.io/2025/04/22/%E5%AE%89%E5%85%A8%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/',]
+      });
+      });
+  </script>
+
+    </div>
+</body>
+</html>
