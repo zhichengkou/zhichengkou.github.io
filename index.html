@@ -186,6 +186,927 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/04/23/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cheng.gif">
+      <meta itemprop="name" content="Zhicheng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zhicheng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/04/23/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">深度学习</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-04-23 15:35:03 / 修改时间：21:09:44" itemprop="dateCreated datePublished" datetime="2025-04-23T15:35:03+08:00">2025-04-23</time>
+            </span>
+
+          
+            <span id="/2025/04/23/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-meta-item leancloud_visitors" data-flag-title="深度学习" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="注意力机制与mlp">注意力机制与MLP</h1>
+<h2 id="自注意力self-attention">自注意力（Self-Attention）</h2>
+<blockquote>
+<p>自注意力的核心思想是：<strong>每个输入向量（比如一个词、一个状态）都对其它所有输入进行“注意力加权”，从而自己更新自己。</strong></p>
+</blockquote>
+<p>这和传统神经网络不同，它不只是“看自己”，而是“看大家，然后决定自己该变成啥样”。</p>
+<h2
+id="举个机器人控制的例子强化学习场景">举个机器人控制的例子（强化学习场景）</h2>
+<p>机器人过去 5 步状态： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ s₁, s₂, s₃, s₄, s₅ ]</span><br></pre></td></tr></table></figure></p>
+<p>你想让当前状态 <code>s₅</code>
+能<strong>综合考虑历史轨迹、预测未来动作</strong>。</p>
+<ul>
+<li>用自注意力，每个 <code>sᵢ</code> 都看一眼其它状态；</li>
+<li>输出的是一个“上下文增强后的状态向量”，更适合拿来做策略决策。</li>
+</ul>
+<hr />
+<h2
+id="pytorch-示例代码使用-nn.multiheadattention-实现-self-attention">🔧
+PyTorch 示例代码（使用 <code>nn.MultiheadAttention</code> 实现
+Self-Attention）</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模拟一个状态序列输入（比如 5 步状态，每步是64维向量）</span></span><br><span class="line">batch_size = <span class="number">1</span></span><br><span class="line">seq_len = <span class="number">5</span></span><br><span class="line">embed_dim = <span class="number">64</span></span><br><span class="line">x = torch.rand(batch_size, seq_len, embed_dim)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 多头自注意力：embed_dim必须能被num_heads整除</span></span><br><span class="line">self_attn = nn.MultiheadAttention(embed_dim=embed_dim, num_heads=<span class="number">4</span>, batch_first=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自注意力：Q=K=V=x</span></span><br><span class="line">output, attn_weights = self_attn(x, x, x)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(output.shape)       <span class="comment"># [1, 5, 64]</span></span><br><span class="line"><span class="built_in">print</span>(attn_weights.shape) <span class="comment"># [1, 4, 5, 5]  → 4个头的注意力图</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="自注意力原理图简略">自注意力原理图（简略）</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入序列：  [ x₁, x₂, x₃, ..., xₙ ]</span><br><span class="line">                   ↓</span><br><span class="line">        每个位置都对其他位置做注意力加权</span><br><span class="line">                   ↓</span><br><span class="line">输出序列：  [ x₁&#x27;, x₂&#x27;, x₃&#x27;, ..., xₙ&#x27; ]</span><br></pre></td></tr></table></figure>
+<p>每个输出向量 ( x_i’ )
+是所有输入向量的加权和（权重由注意力计算得出）。</p>
+<hr />
+<h2 id="优点总结">优点总结</h2>
+<table>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 70%" />
+</colgroup>
+<thead>
+<tr>
+<th>优点</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>融合上下文</td>
+<td>每个位置都能看全局信息，不像 RNN 只看前面</td>
+</tr>
+<tr>
+<td>并行计算</td>
+<td>相比 RNN 快得多，可以全部一起算</td>
+</tr>
+<tr>
+<td>可解释性强</td>
+<td>注意力权重告诉你“谁对谁重要”</td>
+</tr>
+<tr>
+<td>万能积木</td>
+<td>Transformer、ViT、Decision Transformer、GPT 都在用</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="总结一句话">总结一句话：</h2>
+<blockquote>
+<p>自注意力是一种让每个元素都“看别人来强化自己”的机制，能捕捉长距离依赖、适配时序数据，是现代
+AI 模型的核心模块。</p>
+</blockquote>
+<hr />
+<p>从<strong>物理意义</strong>上深入理解
+Q（Query）、K（Key）、V（Value）</p>
+<hr />
+<h2 id="自注意力中-q-k-v-的物理含义">自注意力中 Q / K / V
+的物理含义</h2>
+<table>
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 13%" />
+<col style="width: 80%" />
+</colgroup>
+<thead>
+<tr>
+<th>符号</th>
+<th>全称</th>
+<th>物理含义（直觉）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q</td>
+<td>Query（查询）</td>
+<td>表示「我要找什么信息」 → 当前这个元素在寻找它最关心的内容</td>
+</tr>
+<tr>
+<td>K</td>
+<td>Key（键）</td>
+<td>表示「我是谁，别人要不要关注我」 →
+每个元素给自己贴了一个描述标签</td>
+</tr>
+<tr>
+<td>V</td>
+<td>Value（值）</td>
+<td>表示「我真正携带的内容信息」 →
+如果别人注意到我，要把这部分信息传递出去给对方</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="类比现实世界的例子">类比（现实世界的例子）</h3>
+<p>假设你在读论文中一句话：</p>
+<blockquote>
+<p>“The robot must be able to generalize to new terrains.”</p>
+</blockquote>
+<p>你看到“generalize”这个词（Query）时，你大脑会：</p>
+<ul>
+<li>去看看别的词（Key），比如“robot”、“terrains”；</li>
+<li>哪个词跟“generalize”最相关？（点积匹配度）；</li>
+<li>最后从那个词的上下文（Value）中提取信息，帮助你理解“generalize”的含义。</li>
+</ul>
+<hr />
+<h2 id="举个数值例子3个词向量简单化">🧪
+举个数值例子：3个词向量（简单化）</h2>
+<p>假设我们有 3 个词向量，每个是 2 维：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">X = [</span><br><span class="line">  [1, 0],   # 词A</span><br><span class="line">  [0, 1],   # 词B</span><br><span class="line">  [1, 1]    # 词C</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>我们通过 Linear
+变换得到：（**这里线性映射（变换）的作用在于通过虬的视角进行学习。做了线性映射之后可以学习不同的关注角度）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">W_Q = [[<span class="number">1</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">1</span>]]   <span class="comment"># 单位矩阵，Q = X</span></span><br><span class="line">W_K = [[<span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">1</span>]]   <span class="comment"># K = X @ W_K → 每个向量求和</span></span><br><span class="line">W_V = [[<span class="number">1</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">1</span>]]   <span class="comment"># 保持原始结构</span></span><br></pre></td></tr></table></figure>
+<h3 id="step-1计算-qkv">➤ Step 1：计算 Q、K、V</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Q = X            = [[1, 0], [0, 1], [1, 1]]</span><br><span class="line">K = X @ W_K      = [[1, 1], [1, 1], [2, 2]]</span><br><span class="line">V = X            = [[1, 0], [0, 1], [1, 1]]</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="step-2计算相似度点积-q-kᵗ">➤ Step 2：计算相似度（点积 Q ×
+Kᵗ）</h3>
+<p>[ _{ij} = d_k = 2, ) ]</p>
+<p>以 ( q_1 = [1, 0] )，计算：</p>
+<ul>
+<li>与 ( k_1 = [1, 1] ) 的相似度：( 1×1 + 0×1 = 1 )</li>
+<li>与 ( k_2 = [1, 1] )：也是 1</li>
+<li>与 ( k_3 = [2, 2] )：( 1×2 + 0×2 = 2 )</li>
+</ul>
+<p>[ = ]</p>
+<hr />
+<h3 id="step-3softmax-得权重越相关权重越大">➤ Step 3：softmax
+得权重（越相关权重越大）</h3>
+<p>对 <code>[0.71, 0.71, 1.41]</code> 做 softmax：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">scores = torch.tensor([<span class="number">0.71</span>, <span class="number">0.71</span>, <span class="number">1.41</span>])</span><br><span class="line">weights = torch.softmax(scores, dim=<span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(weights)  <span class="comment"># tensor([0.2584, 0.2584, 0.4832])</span></span><br></pre></td></tr></table></figure>
+<p>→ 说明这个 Query（词A）最关注词C，其次是A、B。</p>
+<hr />
+<h3 id="step-4权重-v-得到输出">➤ Step 4：权重 × V → 得到输出</h3>
+<p>最终输出为：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">output = 0.26 × V1 + 0.26 × V2 + 0.48 × V3</span><br><span class="line">       = 0.26 × [1, 0] + 0.26 × [0, 1] + 0.48 × [1, 1]</span><br><span class="line">       = [0.74, 0.74]</span><br></pre></td></tr></table></figure>
+<p>这个就是“词A”的更新表示，它融合了“自己”和其它词的信息，重点借鉴了“词C”的内容。</p>
+<hr />
+<h2 id="mlp">MLP</h2>
+<p>MLP（<strong>多层感知机</strong>，Multi-Layer
+Perceptron）是一种最基础但又非常强大的<strong>前馈神经网络</strong>，是几乎所有深度学习模型的“基本构件”。</p>
+<p>它本质上就是由多个<strong>线性变换（Linear）+
+激活函数（非线性）</strong>层堆叠组成的网络。</p>
+<table style="width:6%;">
+<colgroup>
+<col style="width: 5%" />
+</colgroup>
+<tbody>
+<tr>
+<td>## MLP 原理</td>
+</tr>
+<tr>
+<td>### 结构图： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入 x → [Linear → 激活] → ... → Linear → 输出 y</span><br></pre></td></tr></table></figure></td>
+</tr>
+<tr>
+<td>每一层做的事是： [ h_i = (xW_i + b_i) ] 其中： - ( W_i, b_i
+)：这一层的权重和偏置（可训练） - ( )：激活函数，如 ReLU, Tanh</td>
+</tr>
+</tbody>
+</table>
+<h2 id="举个手算的例子">举个手算的例子：</h2>
+<h2 id="section"><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入 x = [2.0, 1.0, 0.5, -1.0]</span><br><span class="line">W1（4×8）随机初始化 → 得到隐藏层向量 h</span><br><span class="line">ReLU(h) → 截断负数</span><br><span class="line">W2（8×3）继续计算 → 得到 y（未归一化的分类分数）</span><br><span class="line"></span><br><span class="line">最终：用 softmax(y) 得到概率分布</span><br></pre></td></tr></table></figure></h2>
+<h2 id="总结一句话-1">总结一句话：</h2>
+<blockquote>
+<p><strong>MLP 就是一串“线性 →
+非线性”的堆叠结构，能拟合从输入到输出的复杂关系，适合各种
+tabular、连续向量任务，是强化学习中最常见的网络结构。</strong></p>
+</blockquote>
+<h1
+id="网络训练中的优化方法和正则化方法">网络训练中的优化方法和正则化方法</h1>
+<p>网络训练想要做到
+<strong>既收敛快、又泛化强、不过拟合</strong>，核心依赖两大类技术：</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>优化方法</strong></td>
+<td>提高训练效率 &amp; 收敛速度</td>
+</tr>
+<tr>
+<td><strong>正则化方法</strong></td>
+<td>提高泛化能力 &amp; 防止过拟合</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="一优化方法让网络快准稳">一、优化方法（让网络“快准稳”）</h2>
+<table>
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 76%" />
+</colgroup>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明/原理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SGD</strong></td>
+<td>最基本优化器：小批量 + 梯度更新</td>
+</tr>
+<tr>
+<td><strong>Momentum</strong></td>
+<td>类似“物理动量” → 缓解震荡、加快方向收敛</td>
+</tr>
+<tr>
+<td><strong>Adam</strong></td>
+<td>学习率自适应：结合 RMSProp + Momentum，最常用优化器</td>
+</tr>
+<tr>
+<td><strong>RMSProp</strong></td>
+<td>适合非平稳目标，自动调整不同参数的学习率</td>
+</tr>
+<tr>
+<td><strong>AdaGrad/AdaDelta</strong></td>
+<td>调整学习率，适合稀疏特征</td>
+</tr>
+<tr>
+<td><strong>Learning Rate Scheduler</strong></td>
+<td>训练中动态调整学习率（如逐步降低、Warm-up 等）</td>
+</tr>
+<tr>
+<td><strong>Gradient Clipping</strong></td>
+<td>限制梯度最大值，防止爆炸（特别是 RNN）</td>
+</tr>
+<tr>
+<td><strong>Weight Decay</strong></td>
+<td>权重衰减 = L2 正则，兼顾正则化效果</td>
+</tr>
+<tr>
+<td><strong>Mixed Precision</strong></td>
+<td>使用 FP16 加速训练同时减少显存</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2
+id="二正则化方法让网络不过拟合">二、正则化方法（让网络“不过拟合”）</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 75%" />
+</colgroup>
+<thead>
+<tr>
+<th>方法名</th>
+<th>原理 / 效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>L1/L2 正则化</strong></td>
+<td>在损失函数中加入参数大小惩罚（L1 使权重稀疏，L2 平滑）</td>
+</tr>
+<tr>
+<td><strong>Dropout</strong></td>
+<td>训练时随机“丢弃”部分神经元（防止 co-adaptation）</td>
+</tr>
+<tr>
+<td><strong>Early Stopping</strong></td>
+<td>验证集性能不再提升就停止训练，防止训练过头</td>
+</tr>
+<tr>
+<td><strong>数据增强（DA）</strong></td>
+<td>图像/文本/状态等做扰动 → 提升数据多样性</td>
+</tr>
+<tr>
+<td><strong>BatchNorm / LayerNorm</strong></td>
+<td>归一化中间层 → 缓解梯度问题，提升稳定性</td>
+</tr>
+<tr>
+<td><strong>Label Smoothing</strong></td>
+<td>防止网络过于确信，常用于分类（输出目标不是one-hot，而是更平滑）</td>
+</tr>
+<tr>
+<td><strong>随机噪声 / 缺失输入</strong></td>
+<td>输入扰动 → 提升鲁棒性，如 Cutout、随机遮挡、状态 Dropout</td>
+</tr>
+<tr>
+<td><strong>对抗训练</strong></td>
+<td>添加小的扰动（FGSM等）对抗性训练，提高泛化</td>
+</tr>
+<tr>
+<td><strong>正则化损失项（KL、MSE、对比损失）</strong></td>
+<td>用额外 loss 限制网络行为（如蒸馏、模仿学习中）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="总结一句话-2">总结一句话：</h2>
+<blockquote>
+<p><strong>优化方法</strong> 让模型训练得更快、更稳定；<br />
+<strong>正则化方法</strong>
+则是让模型不要只记住训练集，而要能泛化到新数据。</p>
+</blockquote>
+<hr />
+<p>在<strong>深度强化学习（Deep Reinforcement Learning,
+DRL）</strong>中，优化与正则化方法同样非常关键，它们被用于：</p>
+<ul>
+<li><strong>优化策略训练过程的效率和稳定性</strong>；</li>
+<li><strong>提升策略的泛化能力、鲁棒性和安全性</strong>。</li>
+</ul>
+<hr />
+<h2 id="一深度强化学习中的优化方法">一、深度强化学习中的优化方法</h2>
+<table>
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 73%" />
+</colgroup>
+<thead>
+<tr>
+<th>方法名</th>
+<th>应用 / 原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Adam / RMSProp</strong></td>
+<td>最常用优化器，适应性强，适合非平稳、稀疏的 RL 梯度</td>
+</tr>
+<tr>
+<td><strong>学习率调度器（Scheduler）</strong></td>
+<td>动态调整学习率（如 warm-up, decay）提高收敛性能</td>
+</tr>
+<tr>
+<td><strong>梯度裁剪（Gradient Clipping）</strong></td>
+<td>防止梯度爆炸，尤其适用于 RNN 策略、Actor-Critic 结构</td>
+</tr>
+<tr>
+<td><strong>奖励缩放（Reward Scaling）</strong></td>
+<td>统一 reward 的分布，便于策略梯度更新（如 DDPG、SAC）</td>
+</tr>
+<tr>
+<td><strong>归一化状态/输入</strong></td>
+<td>增强训练稳定性，常用于连续控制任务</td>
+</tr>
+<tr>
+<td><strong>并行采样（A3C / PPO）</strong></td>
+<td>提升样本采样效率、增加训练多样性</td>
+</tr>
+<tr>
+<td><strong>目标网络（Target Network）</strong></td>
+<td>TD 学习中缓解不稳定性（用于 Q 学习：DQN, DDPG, TD3 等）</td>
+</tr>
+<tr>
+<td><strong>熵奖励（Entropy Bonus）</strong></td>
+<td>在策略更新中鼓励随机性，避免策略早期陷入局部最优（PPO、SAC 等）</td>
+</tr>
+<tr>
+<td><strong>优势函数归一化（Advantage Norm）</strong></td>
+<td>加速收敛，缓解梯度抖动（PPO）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2
+id="二深度强化学习中的正则化方法">二、深度强化学习中的正则化方法</h2>
+<table>
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 72%" />
+</colgroup>
+<thead>
+<tr>
+<th>方法名</th>
+<th>应用场景 / 原理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Entropy Regularization</strong></td>
+<td>在策略中鼓励随机性，防止过拟合、提高探索能力</td>
+</tr>
+<tr>
+<td><strong>Dropout（在策略网络中）</strong></td>
+<td>控制网络复杂度，提高策略泛化能力</td>
+</tr>
+<tr>
+<td><strong>Early Stopping（验证环境）</strong></td>
+<td>根据验证性能判断是否终止训练，尤其适用于 offline-RL</td>
+</tr>
+<tr>
+<td><strong>L2 权重惩罚（Weight Decay）</strong></td>
+<td>防止过拟合，约束策略网络参数</td>
+</tr>
+<tr>
+<td><strong>对抗扰动训练（Adversarial RL）</strong></td>
+<td>增加输入扰动，如状态扰动、环境扰动，提高策略鲁棒性</td>
+</tr>
+<tr>
+<td><strong>输入扰动/遮蔽（State Dropout）</strong></td>
+<td>模仿 Dropout，但针对状态维度，增强策略泛化</td>
+</tr>
+<tr>
+<td><strong>模仿学习中的 KL 正则项</strong></td>
+<td>例如 GAIL、RLPD，约束策略不偏离专家行为</td>
+</tr>
+<tr>
+<td><strong>Value Clipping（PPO）</strong></td>
+<td>避免 critic 网络估值不稳定或过大</td>
+</tr>
+<tr>
+<td><strong>Policy Clipping（PPO）</strong></td>
+<td>避免策略过快变化，保证收敛性和性能</td>
+</tr>
+<tr>
+<td><strong>经验重用正则（Replay Filtering）</strong></td>
+<td>选取更有代表性的经验进行训练，过滤无效 /
+假轨迹（DDPG/TD3/Replay）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="强化学习中优化-正则化的协同使用示例">强化学习中优化 &amp;
+正则化的协同使用示例</h2>
+<table>
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 39%" />
+<col style="width: 48%" />
+</colgroup>
+<thead>
+<tr>
+<th>算法</th>
+<th>典型优化策略</th>
+<th>典型正则化策略</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DQN</strong></td>
+<td>目标网络、经验回放、RMSProp</td>
+<td>Reward Clip、Value Norm</td>
+</tr>
+<tr>
+<td><strong>DDPG</strong></td>
+<td>Target network、Adam</td>
+<td>Noise injection、L2 正则</td>
+</tr>
+<tr>
+<td><strong>PPO</strong></td>
+<td>Advantage norm、Clip ratio</td>
+<td>Policy clipping、Entropy 正则</td>
+</tr>
+<tr>
+<td><strong>SAC</strong></td>
+<td>自动调整熵目标、双 Q 网络</td>
+<td>熵正则、reward scale、Q 均衡更新</td>
+</tr>
+<tr>
+<td><strong>A3C</strong></td>
+<td>多线程优化、shared 网络结构</td>
+<td>Entropy、gradient clip</td>
+</tr>
+<tr>
+<td><strong>GAIL</strong></td>
+<td>分离优化器：策略 vs 判别器</td>
+<td>KL divergence + imitation penalty</td>
+</tr>
+</tbody>
+</table>
+<table style="width:6%;">
+<colgroup>
+<col style="width: 5%" />
+</colgroup>
+<tbody>
+<tr>
+<td># 三种神经网络对比</td>
+</tr>
+<tr>
+<td>特性 | 前馈神经网络 | CNN | RNN |——————|——|——|——| 输入结构 | 向量 |
+网格/图像/多维矩阵 | 序列（时序数据） 参数共享 | ❌ | ✅（卷积核共享） |
+✅（时间共享） 局部感知 | ❌ | ✅ | ✅（时间上） 捕捉顺序依赖 | ❌ | ❌
+| ✅ 并行能力 | ✅ | ✅ | ❌（LSTM需逐步迭代） 应用场景 | 分类、预测 |
+图像处理、目标识别 | NLP、语音、时间预测</td>
+</tr>
+</tbody>
+</table>
+<h2 id="非凸优化问题non-convex-optimization">1. 非凸优化问题（Non-Convex
+Optimization）</h2>
+<ul>
+<li>优化目标不是一个“碗”形函数，而是“山谷+山峰+凹坑”组合；</li>
+<li>损失函数存在多个局部最小值、鞍点，甚至“平坦区”；</li>
+<li>最优化不再能用凸优化的“全局最优”性质。</li>
+</ul>
+<h3 id="在-mlp-中的原因">在 MLP 中的原因</h3>
+<ul>
+<li>网络结构是多层复合非线性函数（比如 ReLU、Sigmoid）；</li>
+<li>每层的权重矩阵 ( W_i ) 和激活函数组合使得整个 loss function
+非凸；</li>
+<li>存在大量局部极小点 &amp; 鞍点（尤其在高维空间中更常见）。</li>
+</ul>
+<h3 id="应对方法">应对方法</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr>
+<th>方法</th>
+<th>原理说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>多次初始化（种子）</td>
+<td>从多个点开始训练，选最好一个</td>
+</tr>
+<tr>
+<td>使用优化器（如 Adam）</td>
+<td>自适应步长跳出鞍点或平坦区</td>
+</tr>
+<tr>
+<td>批归一化（BatchNorm）</td>
+<td>缓解梯度分布不均，提高可训练性</td>
+</tr>
+<tr>
+<td>残差结构（ResNet）</td>
+<td>保持信息通路、减少极小点陷阱（用于更深网络）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="梯度消失问题vanishing-gradient">2. 梯度消失问题（Vanishing
+Gradient）</h2>
+<h3 id="现象">现象</h3>
+<ul>
+<li>训练过程中，靠近输入层的权重梯度变得非常小；</li>
+<li>导致前面层几乎不更新；</li>
+<li>网络“记不住长距离依赖”，或者训练非常慢。</li>
+</ul>
+<h3 id="原因">原因</h3>
+<ul>
+<li>多层链式求导 ( = )</li>
+<li>如果激活函数梯度 &lt; 1（如 Sigmoid 的最大梯度 0.25），多层乘起来 →
+趋近 0</li>
+<li>对于深层 MLP（&gt;5 层），非常严重！</li>
+</ul>
+<h3 id="解决方案">解决方案</h3>
+<table>
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 72%" />
+</colgroup>
+<thead>
+<tr>
+<th>方法</th>
+<th>原理 / 效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✅ 使用 ReLU 激活</td>
+<td>导数恒为 1（或 0），不会收缩梯度</td>
+</tr>
+<tr>
+<td>✅ 批归一化（BN）</td>
+<td>标准化输入输出，稳定激活值分布</td>
+</tr>
+<tr>
+<td>✅ 初始化技巧</td>
+<td>Xavier、He 初始化 → 保持梯度和激活值方差一致</td>
+</tr>
+<tr>
+<td>✅ 残差连接</td>
+<td>在深网络中加入 skip-connection，保留梯度通路</td>
+</tr>
+<tr>
+<td>✅ 使用浅层网络</td>
+<td>对于简单任务，少用不必要的深层结构</td>
+</tr>
+</tbody>
+</table>
+<h3 id="梯度消失-vs-非凸优化的区别对比">梯度消失 vs
+非凸优化的区别对比</h3>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 34%" />
+</colgroup>
+<thead>
+<tr>
+<th>问题类型</th>
+<th>本质</th>
+<th>出现位置</th>
+<th>后果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>非凸优化</td>
+<td>损失面是复杂地形</td>
+<td>整体损失空间</td>
+<td>易陷局部极小、鞍点</td>
+</tr>
+<tr>
+<td>梯度消失</td>
+<td>链式导数趋近于 0</td>
+<td>深层靠前的层</td>
+<td>权重更新很小，训练停滞</td>
+</tr>
+</tbody>
+</table>
+<hr />
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/04/23/%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cheng.gif">
+      <meta itemprop="name" content="Zhicheng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zhicheng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/04/23/%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">四足机器人论文学习总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-04-23 09:18:51 / 修改时间：10:15:17" itemprop="dateCreated datePublished" datetime="2025-04-23T09:18:51+08:00">2025-04-23</time>
+            </span>
+
+          
+            <span id="/2025/04/23/%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" class="post-meta-item leancloud_visitors" data-flag-title="四足机器人论文学习总结" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1
+id="hilma-res-a-general-hierarchical-framework-via-residual-rl-for-combining-quadrupedal-locomotion-and-manipulation">HiLMa-Res:
+A General Hierarchical Framework via Residual RL for Combining
+Quadrupedal Locomotion and Manipulation</h1>
+<h3 id="提出了一个可泛化的-loco-manipulation-分层强化学习框架">✅ 1.
+<strong>提出了一个可泛化的 loco-manipulation
+分层强化学习框架</strong></h3>
+<h4 id="原理">📌 原理：</h4>
+<ul>
+<li>Loco-manipulation 是 locomotion（行走）+
+manipulation（操作）的组合问题，控制空间极大，策略难以学习。</li>
+<li>将整体任务<strong>分层</strong>：
+<ul>
+<li><strong>低层：Locomotion Controller</strong> →
+学习行走并追踪任意足端轨迹；
+<ul>
+<li>用神经网络实现 PPO 策略
+输入：包含机器人当前的运动状态、历史状态、外部扰动、目标轨迹（轨迹隐含在相位变量和周期中）；
+输出：每只脚的期望接触力 / 足端位置（用于力控或位置控）； 训练方法：PPO
+强化学习算法； 在 Isaac Gym 中高效并行训练； 加了 domain
+randomization（随机地形、噪声）以增强泛化性；
+特征：一旦训练完成，可以直接部署到真实机器人，无需再训练。</li>
+</ul></li>
+<li><strong>高层：Manipulation Planner</strong> →
+规划残差轨迹，实现操纵任务。
+<ul>
+<li>用神经网络实现轨迹规划策略
+输入：状态输入：机器人自身状态、目标信息（如目标位置、速度方向）；
+或图像输入：深度图、摄像头画面（需加 CNN）； 输出：每条腿一条 3 阶
+Bezier 曲线的控制点（一般是 3~4 个点）； CPG
+的周期/相位调节参数（例如走路节奏）； 训练方法：
+同样使用强化学习算法（PPO/DroQ）；
+奖励函数任务相关，比如推球的方向、推箱位置、避障是否成功；
+可接入现实数据再训练（RLPD），提升现实表现； 特点：通用框架 +
+不同任务换不同 reward 即可复用。</li>
+</ul></li>
+<li>用低层网络学“怎么走”；用高层网络学“走向哪里、怎么推、怎么跨”。 ####
+✅ 好处：</li>
+</ul></li>
+<li>解耦复杂任务 → 降低学习难度；</li>
+<li>低层可重用多个任务，高层策略任务特定，<strong>实现模块化和迁移能力</strong>。</li>
+</ul>
+<h3 id="采用任务无关的运动控制器和任务相关的操作规划器">✅ 2.
+<strong>采用任务无关的运动控制器和任务相关的操作规划器</strong></h3>
+<h4 id="原理-1">📌 原理：</h4>
+<ul>
+<li>低层运动控制器（Locomotion
+Controller）专注于<strong>足端轨迹跟踪</strong>，不关心上层任务内容。</li>
+<li>高层操作规划器只需要设计<strong>足端轨迹（residual）</strong>，来完成具体任务目标。</li>
+</ul>
+<h4 id="实现方式">✅ 实现方式：</h4>
+<ul>
+<li>低层训练时，只用模拟中<strong>随机生成的轨迹</strong>训练它追踪；</li>
+<li>高层策略负责设计这些轨迹的“形状”（比如球要往左推 →
+左脚向外伸）；</li>
+<li>二者通过轨迹接口（Bezier +
+CPG）连接，高层给轨迹，低层负责执行。</li>
+<li>实现方式：
+<ul>
+<li>低层训练时，只用模拟中随机生成的轨迹训练它追踪；</li>
+<li>高层策略负责设计这些轨迹的“形状”（比如球要往左推 →
+左脚向外伸）；</li>
+<li>二者通过轨迹接口（Bezier +
+CPG）连接，高层给轨迹，低层负责执行。</li>
+</ul></li>
+</ul>
+<h3 id="利用了残差学习bezier-曲线-cpg中央模式发生器来灵活生成轨迹">✅ 3.
+<strong>利用了残差学习（Bezier 曲线）+
+CPG（中央模式发生器）来灵活生成轨迹</strong></h3>
+<h4 id="原理-2">📌 原理：</h4>
+<ul>
+<li><strong>CPG</strong>（Central Pattern
+Generator）：用于生成周期性足端轨迹，如走路、跳跃；</li>
+<li><strong>Bezier
+曲线</strong>：高层策略学习残差，用平滑的曲线微调轨迹，实现操作动作（如推、踢、跨越）。</li>
+</ul>
+<h4 id="实现方式-1">✅ 实现方式：</h4>
+<ul>
+<li>控制器最终执行的轨迹 = <strong>CPG生成的默认轨迹 +
+Bezier残差轨迹</strong>；</li>
+<li>Bezier 的控制点由高层网络输出，调节轨迹形状；</li>
+<li>可用较少参数，<strong>生成复杂、多样的足端轨迹</strong>。</li>
+</ul>
+<h3 id="在多个现实任务上验证了方法的通用性与优越性">✅ 4.
+<strong>在多个现实任务上验证了方法的通用性与优越性</strong></h3>
+<h4 id="实验设计原理">📌 实验设计原理：</h4>
+<ul>
+<li>将高层策略迁移到多个任务上，如：
+<ol type="1">
+<li>带球（dribble）</li>
+<li>踩点避障（stepostone）</li>
+<li>推箱（navload）</li>
+</ol></li>
+<li>低层控制器不变，仅更换高层策略 →
+验证了框架的<strong>模块化和通用性</strong>。</li>
+</ul>
+<h4 id="成果">✅ 成果：</h4>
+<ul>
+<li>所有任务均能<strong>从仿真零样本直接迁移到现实机器人</strong>，性能优于多个对比基线（Reward
+shaping、Motion tracking、AMP 等）。</li>
+</ul>
+<h3 id="支持视觉状态多模态输入适配多种-rl-算法">✅ 5.
+<strong>支持视觉、状态、多模态输入，适配多种 RL 算法</strong></h3>
+<h4 id="原理-3">📌 原理：</h4>
+<ul>
+<li>高层策略输入是任务相关的信息，具有很强的扩展性；
+<ul>
+<li>可接受：
+<ul>
+<li>状态向量（如物体位置、机器人速度等）；</li>
+<li>视觉输入（如深度图）；</li>
+<li>多模态（状态 + 视觉）；</li>
+</ul></li>
+</ul></li>
+<li>可适配不同类型的 RL 算法，如
+PPO、DroQ、RLPD（现实数据驱动）等。</li>
+</ul>
+<h4 id="实现方式-2">✅ 实现方式：</h4>
+<ul>
+<li>高层策略结构灵活：可以是 MLP（状态输入）或
+CNN+MLP（图像输入）；</li>
+<li>训练框架可无缝切换不同策略优化器；</li>
+<li>利用现实 fine-tuning（如
+RLPD）<strong>提升现实成功率和样本效率</strong>。</li>
+</ul>
+<h2 id="小结它是如何做成的">🧩 小结：它是如何“做成”的？</h2>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 40%" />
+<col style="width: 39%" />
+</colgroup>
+<thead>
+<tr>
+<th>功能点</th>
+<th>背后原理</th>
+<th>实现机制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分层控制</td>
+<td>解耦 loco &amp; manipulation</td>
+<td>高层规划轨迹、低层执行轨迹</td>
+</tr>
+<tr>
+<td>可复用性</td>
+<td>低层不关心任务内容</td>
+<td>通用轨迹跟踪器（足端控制）</td>
+</tr>
+<tr>
+<td>灵活轨迹生成</td>
+<td>曲线 + 振荡器组合</td>
+<td>Bezier（残差） + CPG（基准周期轨迹）</td>
+</tr>
+<tr>
+<td>多任务适应</td>
+<td>高层策略切换</td>
+<td>各任务独立设计 reward，高层重新训练</td>
+</tr>
+<tr>
+<td>多模态输入 &amp; 多RL支持</td>
+<td>高层接收任务信息，使用 RL 优化轨迹</td>
+<td>支持 PPO、DroQ、RLPD，多模态策略输入结构灵活</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/04/22/%E5%AE%89%E5%85%A8%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -667,7 +1588,7 @@ Variational Policy Optimization for Safe Reinforcement Learning》</h1>
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2025-04-22 00:00:00 / 修改时间：18:38:50" itemprop="dateCreated datePublished" datetime="2025-04-22T00:00:00+08:00">2025-04-22</time>
+              <time title="创建时间：2025-04-22 00:00:00 / 修改时间：22:39:45" itemprop="dateCreated datePublished" datetime="2025-04-22T00:00:00+08:00">2025-04-22</time>
             </span>
 
           
@@ -690,9 +1611,7 @@ Variational Policy Optimization for Safe Reinforcement Learning》</h1>
       
           <p>行内公式：$a^2 + b^2 = c^2$</p>
 <p>块级公式：</p>
-<p>[<br>
-\dot{x}(t) = f(x(t)) + g(x(t))u(x(t)) + d(x(t))<br>
-]</p>
+<p>[<br>\dot{x}(t) = f(x(t)) + g(x(t))u(x(t)) + d(x(t))<br>]</p>
 
       
     </div>
@@ -2042,204 +2961,10 @@ Learning》一书，作者：grokking</strong></p>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/04/09/%E4%BB%BF%E4%BA%BA%E6%9C%BA%E5%99%A8%E4%BA%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/cheng.gif">
-      <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zhicheng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/09/%E4%BB%BF%E4%BA%BA%E6%9C%BA%E5%99%A8%E4%BA%BA/" class="post-title-link" itemprop="url">仿人机器人</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2025-04-09 11:39:01 / 修改时间：11:39:21" itemprop="dateCreated datePublished" datetime="2025-04-09T11:39:01+08:00">2025-04-09</time>
-            </span>
-
-          
-            <span id="/2025/04/09/%E4%BB%BF%E4%BA%BA%E6%9C%BA%E5%99%A8%E4%BA%BA/" class="post-meta-item leancloud_visitors" data-flag-title="仿人机器人" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/04/08/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/cheng.gif">
-      <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zhicheng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/08/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">强化学习</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2025-04-08 19:17:22 / 修改时间：19:22:25" itemprop="dateCreated datePublished" datetime="2025-04-08T19:17:22+08:00">2025-04-08</time>
-            </span>
-
-          
-            <span id="/2025/04/08/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="post-meta-item leancloud_visitors" data-flag-title="强化学习" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="rl研究方向">RL研究方向</h2>
-<table>
-<colgroup>
-<col style="width: 21%" />
-<col style="width: 40%" />
-<col style="width: 37%" />
-</colgroup>
-<thead>
-<tr>
-<th>研究方向</th>
-<th>原理关键词</th>
-<th>典型应用场景</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>深度强化学习</td>
-<td>深度网络 + Q/V/策略逼近</td>
-<td>游戏 AI、自动驾驶、机器人</td>
-</tr>
-<tr>
-<td>模型预测 RL</td>
-<td>学习环境模型 + 规划</td>
-<td>控制系统、医疗、能源优化</td>
-</tr>
-<tr>
-<td>多智能体 RL</td>
-<td>协同/博弈学习</td>
-<td>群体机器人、博弈系统</td>
-</tr>
-<tr>
-<td>离线 RL</td>
-<td>静态数据训练 + 分布偏差处理</td>
-<td>医疗、金融、推荐系统</td>
-</tr>
-<tr>
-<td>元强化学习</td>
-<td>快速适应新任务</td>
-<td>跨任务机器人、个性化推荐</td>
-</tr>
-<tr>
-<td>模仿/逆强化学习</td>
-<td>专家示范学习 / 奖励反推</td>
-<td>自动驾驶、人类行为建模</td>
-</tr>
-<tr>
-<td>安全强化学习</td>
-<td>加入风险或硬约束优化目标</td>
-<td>自动驾驶、电力安全、飞行器</td>
-</tr>
-<tr>
-<td>RL + 控制</td>
-<td>稳定性分析 + 策略优化</td>
-<td>动态系统控制、智能制造</td>
-</tr>
-<tr>
-<td>RLHF</td>
-<td>人类反馈建模 + 策略微调</td>
-<td>对话系统、生成式 AI 优化</td>
-</tr>
-</tbody>
-</table>
-<hr />
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2307,14 +3032,14 @@ Learning》一书，作者：grokking</strong></p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
