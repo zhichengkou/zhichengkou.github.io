@@ -21,20 +21,20 @@
     var CONFIG = {"hostname":"zhichengkou.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="关于Q 函数的逼近  1. 线性逼近方法（Least Squares 类） 这些方法假设 Q 函数可以由状态-动作特征的线性组合表示： \[ Q(s, a) &#x3D; \phi(s, a)^T \theta \] 其中： - \(\phi(s, a)\) 是状态-动作的特征向量 - \(\theta\) 是权重参数 🔹 1.1 LSTD-Q（Least-Squares TD-Q">
+  <meta name="description" content="1. 自我认知与人生思考类  《被讨厌的勇气》岸见一郎 —— 帮助你思考自己的人生课题。 《活出生命的意义》维克多·弗兰克 —— 从逆境中找到意义。 《少有人走的路》M·斯科特·派克 —— 成长、爱与精神修炼。 《沉思录》马可·奥勒留 —— 斯多葛哲学入门。  2. 未来职业与技能提升类  《原则》Ray Dalio —— 工作与生活决策的逻辑。 《刻意练习》Anders Er">
 <meta property="og:type" content="article">
-<meta property="og:title" content="强化学习中Q矩阵计算方法的总结">
-<meta property="og:url" content="http://zhichengkou.github.io/2025/03/21/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B8%ADQ%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%E7%9A%84%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:title" content="书籍笔记">
+<meta property="og:url" content="http://zhichengkou.github.io/2025/04/28/%E4%B9%A6%E7%B1%8D%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Zhicheng">
-<meta property="og:description" content="关于Q 函数的逼近  1. 线性逼近方法（Least Squares 类） 这些方法假设 Q 函数可以由状态-动作特征的线性组合表示： \[ Q(s, a) &#x3D; \phi(s, a)^T \theta \] 其中： - \(\phi(s, a)\) 是状态-动作的特征向量 - \(\theta\) 是权重参数 🔹 1.1 LSTD-Q（Least-Squares TD-Q">
+<meta property="og:description" content="1. 自我认知与人生思考类  《被讨厌的勇气》岸见一郎 —— 帮助你思考自己的人生课题。 《活出生命的意义》维克多·弗兰克 —— 从逆境中找到意义。 《少有人走的路》M·斯科特·派克 —— 成长、爱与精神修炼。 《沉思录》马可·奥勒留 —— 斯多葛哲学入门。  2. 未来职业与技能提升类  《原则》Ray Dalio —— 工作与生活决策的逻辑。 《刻意练习》Anders Er">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-03-21T09:41:26.000Z">
-<meta property="article:modified_time" content="2025-04-07T11:52:39.533Z">
+<meta property="article:published_time" content="2025-04-28T02:39:23.000Z">
+<meta property="article:modified_time" content="2025-04-28T02:44:49.534Z">
 <meta property="article:author" content="Zhicheng">
-<meta property="article:tag" content="强化学习">
+<meta property="article:tag" content="书籍笔记">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://zhichengkou.github.io/2025/03/21/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B8%ADQ%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%E7%9A%84%E6%80%BB%E7%BB%93/">
+<link rel="canonical" href="http://zhichengkou.github.io/2025/04/28/%E4%B9%A6%E7%B1%8D%E7%AC%94%E8%AE%B0/">
 
 
 <script id="page-configurations">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title>强化学习中Q矩阵计算方法的总结 | Zhicheng</title>
+  <title>书籍笔记 | Zhicheng</title>
   
 
 
@@ -192,7 +192,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/03/21/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B8%ADQ%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%E7%9A%84%E6%80%BB%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/04/28/%E4%B9%A6%E7%B1%8D%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/cheng.gif">
@@ -205,7 +205,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          强化学习中Q矩阵计算方法的总结
+          书籍笔记
         </h1>
 
         <div class="post-meta">
@@ -214,19 +214,13 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2025-03-21 17:41:26" itemprop="dateCreated datePublished" datetime="2025-03-21T17:41:26+08:00">2025-03-21</time>
+              <time title="创建时间：2025-04-28 10:39:23 / 修改时间：10:44:49" itemprop="dateCreated datePublished" datetime="2025-04-28T10:39:23+08:00">2025-04-28</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-04-07 19:52:39" itemprop="dateModified" datetime="2025-04-07T19:52:39+08:00">2025-04-07</time>
-              </span>
 
           
-            <span id="/2025/03/21/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B8%ADQ%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%E7%9A%84%E6%80%BB%E7%BB%93/" class="post-meta-item leancloud_visitors" data-flag-title="强化学习中Q矩阵计算方法的总结" title="阅读次数">
+            <span id="/2025/04/28/%E4%B9%A6%E7%B1%8D%E7%AC%94%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="书籍笔记" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -250,135 +244,100 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="关于q-函数的逼近"><strong>关于Q 函数的逼近</strong></h1>
-<hr />
-<h2 id="线性逼近方法least-squares-类">1. 线性逼近方法（Least Squares
-类）</h2>
-<p>这些方法假设 <strong>Q
-函数可以由状态-动作特征的线性组合表示</strong>： <span
-class="math display">\[
-Q(s, a) = \phi(s, a)^T \theta
-\]</span> 其中： - <span class="math inline">\(\phi(s, a)\)</span>
-是状态-动作的特征向量 - <span class="math inline">\(\theta\)</span>
-是权重参数</p>
-<h3 id="lstd-qleast-squares-td-q-learning"><strong>🔹 1.1
-LSTD-Q（Least-Squares TD-Q Learning）</strong></h3>
-<p><strong>方法：</strong> 通过<strong>最小二乘法</strong>解线性方程： $
-(A - A') = b $ - 适用于<strong>小规模问题</strong>，计算成本较低。 -
-<strong>缺点：</strong> 计算 <span class="math inline">\((
-A^{-1})\)</span> 可能不稳定（需要正则化）。</p>
-<h3 id="lspileast-squares-policy-iteration"><strong>🔹 1.2
-LSPI（Least-Squares Policy Iteration）</strong></h3>
-<p><strong>方法：</strong> 结合 <strong>LSTD-Q
-和策略迭代</strong>，不断更新策略： 1. <strong>用 LSTD-Q 逼近 Q
-函数</strong> 2. <strong>用贪心策略更新动作选择</strong> 3.
-<strong>循环迭代，直到收敛</strong></p>
-<p><strong>特点：</strong> - <strong>比 LSTD-Q 更稳定</strong> -
-<strong>适用于策略迭代（Policy Iteration）类问题</strong> -
-<strong>不适用于连续控制问题</strong></p>
-<hr />
-<h3 id="fitted-q-iterationfqi"><strong>🔹 1.3 Fitted-Q
-Iteration（FQI）</strong></h3>
-<p><strong>方法：</strong> 用监督学习的方法<strong>拟合 Q
-函数</strong>： 1. 采集大量 <span class="math inline">\((s, a, r,
-s&#39;)\)</span> 经验数据 2. 用回归方法学习 <span
-class="math inline">\(Q(s, a) \approx r + \gamma \max_{a&#39;} Q(s&#39;,
-a&#39;)\)</span> 3. 迭代更新，直到 Q 值收敛</p>
-<p><strong>特点：</strong> - 适用于<strong>高维状态空间</strong> - 可用
-<strong>决策树、随机森林、神经网络等</strong> 逼近 Q 函数 - <strong>比
-LSTD-Q 更灵活</strong></p>
-<hr />
-<h2 id="非线性逼近方法深度学习">2. 非线性逼近方法（深度学习）</h2>
-<p>当状态空间维度很高（如图像、文本），线性方法效果较差，我们通常采用
-<strong>非线性方法</strong> 来逼近 Q 函数。</p>
-<h3 id="dqndeep-q-network"><strong>🔹 2.1 DQN（Deep
-Q-Network）</strong></h3>
-<p><strong>方法：</strong> 用 <strong>深度神经网络（DNN）</strong> 近似
-Q 函数： $ Q(s, a) f_{}(s, a) $ - 使用 <strong>神经网络</strong> 作为 Q
-函数近似器 - 通过 <strong>均方误差（MSE）最小化</strong> 损失： $ L() =
-$ - 使用 <strong>目标网络（Target Network）</strong> 解决不稳定问题 -
-<strong>优点：</strong> 适用于<strong>高维离散动作空间</strong> -
-<strong>缺点：</strong> 计算量大，训练难度高</p>
-<h3 id="ddpgdeep-deterministic-policy-gradient"><strong>🔹 2.2
-DDPG（Deep Deterministic Policy Gradient）</strong></h3>
+        <p><strong>1. 自我认知与人生思考类</strong></p>
 <ul>
-<li>适用于<strong>连续控制任务</strong>（不像 DQN
-只能用于离散动作）</li>
-<li>结合 <strong>策略梯度（Policy Gradient）</strong> 和
-<strong>Q-learning</strong></li>
-<li>主要用于<strong>机器人控制、自主驾驶</strong>等任务</li>
+<li>《被讨厌的勇气》岸见一郎 —— 帮助你思考自己的人生课题。</li>
+<li>《活出生命的意义》维克多·弗兰克 —— 从逆境中找到意义。</li>
+<li>《少有人走的路》M·斯科特·派克 —— 成长、爱与精神修炼。</li>
+<li>《沉思录》马可·奥勒留 —— 斯多葛哲学入门。</li>
 </ul>
-<h3 id="sacsoft-actor-critic"><strong>🔹 2.3 SAC（Soft
-Actor-Critic）</strong></h3>
+<p><strong>2. 未来职业与技能提升类</strong></p>
 <ul>
-<li><strong>在 DDPG 基础上加入熵（Entropy）</strong>，增加探索性</li>
-<li>适用于 <strong>高维、复杂任务</strong></li>
-<li>比 DDPG <strong>收敛更稳定</strong></li>
+<li>《原则》Ray Dalio —— 工作与生活决策的逻辑。</li>
+<li>《刻意练习》Anders Ericsson —— 如何高效学习和成长。</li>
+<li>《底层逻辑》刘润 —— 认知升级和商业思维训练。</li>
+<li>《如何阅读一本书》莫提默·J·艾德勒 —— 教你真正学会自学。</li>
+</ul>
+<p><strong>3. 文学与文化修养类</strong></p>
+<ul>
+<li>《百年孤独》加西亚·马尔克斯 —— 拉美魔幻现实主义巅峰。</li>
+<li>《月亮与六便士》毛姆 —— 追梦与现实的冲突。</li>
+<li>《挪威的森林》村上春树 —— 关于孤独与成长。</li>
+<li>《追风筝的人》卡勒德·胡赛尼 —— 成长与救赎。</li>
+</ul>
+<p><strong>4. 世界观与视野拓展类</strong></p>
+<ul>
+<li>《枪炮、病菌与钢铁》贾雷德·戴蒙德 —— 人类文明的演化逻辑。</li>
+<li>《未来简史》尤瓦尔·赫拉利 —— 未来几十年的大趋势。</li>
+<li>《全球通史》斯塔夫里阿诺斯 —— 用长镜头理解世界。</li>
+</ul>
+<p><strong>5. 兴趣探索与灵感启发类</strong></p>
+<ul>
+<li>《流浪地球》刘慈欣 —— 科幻世界里的想象与现实。</li>
+<li>《小王子》圣·埃克苏佩里 —— 重新认识纯真与爱。</li>
+<li>《旅行的艺术》阿兰·德波顿 —— 关于旅途中发现自我。</li>
 </ul>
 <hr />
-<h2 id="方法对比">方法对比</h2>
-<table style="width:100%;">
-<colgroup>
-<col style="width: 14%" />
-<col style="width: 21%" />
-<col style="width: 29%" />
-<col style="width: 19%" />
-<col style="width: 14%" />
-</colgroup>
-<thead>
-<tr>
-<th>方法</th>
-<th>适用范围</th>
-<th>是否非线性</th>
-<th>优势</th>
-<th>缺点</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>LSTD-Q</td>
-<td>小规模问题</td>
-<td>❌ 线性</td>
-<td>计算快，收敛快</td>
-<td>不能处理高维数据</td>
-</tr>
-<tr>
-<td>LSPI</td>
-<td>小规模问题</td>
-<td>❌ 线性</td>
-<td>结合策略迭代，稳定</td>
-<td>需要大量样本</td>
-</tr>
-<tr>
-<td>FQI</td>
-<td>中等规模问题</td>
-<td>✅ 可用回归</td>
-<td>适用于高维特征</td>
-<td>训练慢</td>
-</tr>
-<tr>
-<td>DQN</td>
-<td>高维状态、离散动作</td>
-<td>✅ 神经网络</td>
-<td>适用于复杂任务</td>
-<td>训练不稳定，难以调参</td>
-</tr>
-<tr>
-<td>DDPG</td>
-<td>高维状态、连续动作</td>
-<td>✅ 神经网络</td>
-<td>适用于机器人控制</td>
-<td>训练不稳定</td>
-</tr>
-<tr>
-<td>SAC</td>
-<td>高维状态、连续动作</td>
-<td>✅ 神经网络</td>
-<td>比 DDPG 更稳定</td>
-<td>计算量大</td>
-</tr>
-</tbody>
-</table>
+<h2 id="未来简史">《未来简史》</h2>
+<h3 id="人类将成为数据生物">1.
+<strong>人类将成为“数据生物”</strong></h3>
+<ul>
+<li><strong>生物学的革命</strong>：赫拉利认为，随着基因编辑、人工智能和大数据的进步，生物学将成为未来的主流学科，个人的生命、健康、心理等都会被转化为“数据”来处理。</li>
+<li><strong>人类与机器的融合</strong>：未来，生物与科技将不再是两个独立的领域。人工智能和基因工程可能让人类的能力、寿命甚至思想发生翻天覆地的变化，人与机器的界限会逐渐模糊。</li>
+</ul>
+<h3 id="人工智能将取代大部分工作">2.
+<strong>人工智能将取代大部分工作</strong></h3>
+<ul>
+<li><strong>技术革命的冲击</strong>：赫拉利指出，人工智能的发展将使许多传统的职业和任务被机器取代，导致大规模失业。大部分的工作可能会由高度智能化的机器完成，尤其是那些重复性强、需要大量数据处理的工作。</li>
+<li><strong>人类的角色转变</strong>：未来人类可能需要从“工作机器”转变为更有创造性和社会功能的角色，而这要求人类具备更高的情感智能、创造力和社交能力。</li>
+</ul>
+<h3 id="人类的目标不再是生存而是意义">3.
+<strong>人类的目标不再是“生存”，而是“意义”</strong></h3>
+<ul>
+<li><strong>生存问题解决后，新的焦虑出现</strong>：随着生命延续的技术发展，生存不再是最大的问题，问题将转向“为什么活着”。赫拉利提到，未来人类将面临“存在的意义”这一更深层次的哲学问题，如何为自己的生命找到意义和价值，将成为人类的新挑战。</li>
+<li><strong>无聊与虚无感</strong>：随着AI和自动化的普及，人们将不再为了生存而工作，这种自由也可能带来焦虑、无聊和失落，社会如何管理人们的心理健康和情感需求，将变得更加重要。</li>
+</ul>
+<h3 id="智人将变成超人">4. <strong>“智人”将变成“超人”</strong></h3>
+<ul>
+<li><strong>超级人类的诞生</strong>：赫拉利预测，未来会有一些人通过基因编辑、神经科学或智能增强等技术，超越现有的人类能力，变成“超人类”。这些“超人”将具备超常的智慧、健康或能力，从而在社会上拥有巨大的优势，甚至可能重新定义“人类”的定义。</li>
+</ul>
+<h3 id="全球化与科技进步带来新的社会不平等">5.
+<strong>全球化与科技进步带来新的社会不平等</strong></h3>
+<ul>
+<li><strong>财富和权力的集中</strong>：随着技术的不断进步，赫拉利警告，科技和财富的集中可能会加剧社会不平等。未来，少数拥有控制技术和资源的人可能将拥有巨大的社会权力，而普通人可能面临更多的困境。</li>
+<li><strong>社会结构的变化</strong>：全球化和技术进步将使国家边界变得不那么重要，但全球不平等、社会阶层的固化仍将是世界面临的一大挑战。</li>
+</ul>
+<hr />
+<h2 id="底层逻辑">《底层逻辑》</h2>
+<p><strong>1. 看到事物背后的规律，而不仅是表面现象</strong> -
+真正聪明的人，不是看见了表象，而是能洞察背后的本质、模式和因果关系。</p>
+<p><strong>2. 世界是复杂的，但可以通过“底层逻辑”来简化认知</strong> -
+底层逻辑包括：第一性原理、系统思考、长期主义、概率思维等。 -
+不是简单套模板，而是建立自己的思考体系，灵活应对变化。</p>
+<p><strong>3. 理解底层逻辑，让你在不确定的世界里找到确定性</strong> -
+比如，财富积累的底层逻辑是：延迟满足 + 复利思维； -
+个人成长的底层逻辑是：不断积累稀缺能力 + 构建个人护城河。</p>
+<p><strong>4. 认知升级比努力更重要</strong> -
+单纯的努力可能是无效的，只有基于正确认知和方法的努力，才能真正拉开人与人之间的差距。</p>
+<p><strong>5. 真正有智慧的人，都是做“长期正确”的事</strong> -
+不是追求短期的成功和满足，而是能在时间中不断积累优势。</p>
+<hr />
+<h2 id="被讨厌的勇气">《被讨厌的勇气》</h2>
+<p><strong>1. 所有烦恼都来源于“人际关系”</strong> -
+无论是自卑、愤怒、焦虑，还是不安，本质上都是因为“我在意别人怎么看我”。</p>
+<p><strong>2. 课题分离：做好自己的事，不干涉别人的事</strong> -
+只专注于自己能控制的部分。别人的评价、感受，是他们自己的课题，不是你的责任。
+- 不要为了取悦别人而活，也不要干预别人的选择。</p>
+<p><strong>3. 生活不是追求认可，而是“勇敢地被讨厌”</strong> -
+真正的自由，是接受即使被讨厌也无所谓，仍坚持做自己认为对的事。</p>
+<p><strong>4. 一切问题都源自“目的论”而非“原因论”</strong> -
+不是过去的经历决定了我们，而是我们自己为当前的行为设定了目的（比如：为了不受伤害，所以选择逃避）。</p>
+<p><strong>5. 活在当下，不为过去或未来所困</strong> -
+人生的价值在于此时此刻，而不是对过去的悔恨或对未来的恐惧。 -
+幸福就是“感受到自己在有价值地活着”。</p>
+<p><strong>6. 贡献感是幸福的来源</strong> -
+当你觉得自己对他人、社会有贡献时，就能感受到真正的幸福。</p>
+<hr />
 
     </div>
 
@@ -388,7 +347,7 @@ Actor-Critic）</strong></h3>
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" rel="tag"># 强化学习</a>
+              <a href="/tags/%E4%B9%A6%E7%B1%8D%E7%AC%94%E8%AE%B0/" rel="tag"># 书籍笔记</a>
           </div>
 
         
@@ -397,13 +356,10 @@ Actor-Critic）</strong></h3>
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/03/18/%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/" rel="prev" title="规划算法">
-      <i class="fa fa-chevron-left"></i> 规划算法
+    <a href="/2025/04/23/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/03/21/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95LSTD-Q/" rel="next" title="强化学习算法LSTD-Q">
-      强化学习算法LSTD-Q <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -462,14 +418,11 @@ Actor-Critic）</strong></h3>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8Eq-%E5%87%BD%E6%95%B0%E7%9A%84%E9%80%BC%E8%BF%91"><span class="nav-number">1.</span> <span class="nav-text">关于Q 函数的逼近</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E9%80%BC%E8%BF%91%E6%96%B9%E6%B3%95least-squares-%E7%B1%BB"><span class="nav-number">1.1.</span> <span class="nav-text">1. 线性逼近方法（Least Squares
-类）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lstd-qleast-squares-td-q-learning"><span class="nav-number">1.1.1.</span> <span class="nav-text">🔹 1.1
-LSTD-Q（Least-Squares TD-Q Learning）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lspileast-squares-policy-iteration"><span class="nav-number">1.1.2.</span> <span class="nav-text">🔹 1.2
-LSPI（Least-Squares Policy Iteration）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fitted-q-iterationfqi"><span class="nav-number">1.1.3.</span> <span class="nav-text">🔹 1.3 Fitted-Q
-Iteration（FQI）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E7%BA%BF%E6%80%A7%E9%80%BC%E8%BF%91%E6%96%B9%E6%B3%95%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.2.</span> <span class="nav-text">2. 非线性逼近方法（深度学习）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dqndeep-q-network"><span class="nav-number">1.2.1.</span> <span class="nav-text">🔹 2.1 DQN（Deep
-Q-Network）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ddpgdeep-deterministic-policy-gradient"><span class="nav-number">1.2.2.</span> <span class="nav-text">🔹 2.2
-DDPG（Deep Deterministic Policy Gradient）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sacsoft-actor-critic"><span class="nav-number">1.2.3.</span> <span class="nav-text">🔹 2.3 SAC（Soft
-Actor-Critic）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94"><span class="nav-number">1.3.</span> <span class="nav-text">方法对比</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AA%E6%9D%A5%E7%AE%80%E5%8F%B2"><span class="nav-number">1.</span> <span class="nav-text">《未来简史》</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%BA%E7%B1%BB%E5%B0%86%E6%88%90%E4%B8%BA%E6%95%B0%E6%8D%AE%E7%94%9F%E7%89%A9"><span class="nav-number">1.1.</span> <span class="nav-text">1.
+人类将成为“数据生物”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%B0%86%E5%8F%96%E4%BB%A3%E5%A4%A7%E9%83%A8%E5%88%86%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.2.</span> <span class="nav-text">2.
+人工智能将取代大部分工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%BA%E7%B1%BB%E7%9A%84%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%86%8D%E6%98%AF%E7%94%9F%E5%AD%98%E8%80%8C%E6%98%AF%E6%84%8F%E4%B9%89"><span class="nav-number">1.3.</span> <span class="nav-text">3.
+人类的目标不再是“生存”，而是“意义”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%BA%E4%BA%BA%E5%B0%86%E5%8F%98%E6%88%90%E8%B6%85%E4%BA%BA"><span class="nav-number">1.4.</span> <span class="nav-text">4. “智人”将变成“超人”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E7%90%83%E5%8C%96%E4%B8%8E%E7%A7%91%E6%8A%80%E8%BF%9B%E6%AD%A5%E5%B8%A6%E6%9D%A5%E6%96%B0%E7%9A%84%E7%A4%BE%E4%BC%9A%E4%B8%8D%E5%B9%B3%E7%AD%89"><span class="nav-number">1.5.</span> <span class="nav-text">5.
+全球化与科技进步带来新的社会不平等</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91"><span class="nav-number">2.</span> <span class="nav-text">《底层逻辑》</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A2%AB%E8%AE%A8%E5%8E%8C%E7%9A%84%E5%8B%87%E6%B0%94"><span class="nav-number">3.</span> <span class="nav-text">《被讨厌的勇气》</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -832,7 +785,7 @@ window.addEventListener('pjax:success', () => {
       quicklink({
         timeout : 3000,
         priority: true,
-        ignores : [uri => uri.includes('#'),uri => uri === 'http://zhichengkou.github.io/2025/03/21/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B8%ADQ%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%E7%9A%84%E6%80%BB%E7%BB%93/',]
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://zhichengkou.github.io/2025/04/28/%E4%B9%A6%E7%B1%8D%E7%AC%94%E8%AE%B0/',]
       });
       });
   </script>
