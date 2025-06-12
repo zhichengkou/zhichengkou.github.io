@@ -31,10 +31,10 @@
 <meta property="article:published_time" content="2025-03-18T12:50:59.000Z">
 <meta property="article:modified_time" content="2025-04-07T11:53:33.706Z">
 <meta property="article:author" content="Zhicheng">
+<meta property="article:tag" content="MPC">
 <meta property="article:tag" content="safe_learning">
 <meta property="article:tag" content="控制">
 <meta property="article:tag" content="强化学习">
-<meta property="article:tag" content="MPC">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://zhichengkou.github.io/2025/03/18/safe-learning%E5%AE%9E%E8%B7%B5-%E5%9F%BA%E4%BA%8E%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%9A%84MPC/">
@@ -303,15 +303,16 @@ Set)。</li>
 <h2 id="强化学习目标">1. 强化学习目标</h2>
 <p>强化学习的目标是通过不断交互和试探，<strong>找到最优的MPC参数
 θ</strong>，使得在保持安全性的同时，最大化性能指标（或最小化损失函数）。</p>
-<p>目标函数是： <span class="math display">\[
+<p>目标函数是： <span class="math display">$$
 J(πθ)=Eτπθ[∑k=0∞γkL(sk,ak)]J(π_{\theta}) =
 \mathbb{E}_{\tau_{\pi_{\theta}}} \left[ \sum_{k=0}^{\infty} \gamma^k
 L(s_k, a_k) \right]
-\]</span></p>
+$$</span></p>
 <ul>
-<li><span class="math inline">\(\theta\)</span>
+<li><span class="math inline"><em>θ</em></span>
 是MPC的参数（例如无人机的动力学参数）。</li>
-<li><span class="math inline">\(L(sk,ak)L(s_k, a_k)\)</span>
+<li><span
+class="math inline"><em>L</em>(<em>s</em><em>k</em>, <em>a</em><em>k</em>)<em>L</em>(<em>s</em><sub><em>k</em></sub>, <em>a</em><sub><em>k</em></sub>)</span>
 是每个时间步的损失（如偏离目标位置或违反安全约束）。</li>
 <li>γ是折扣因子。</li>
 <li>τπθ<em>{</em>{}} 是当前MPC策略下的轨迹。</li>
@@ -321,20 +322,20 @@ L(s_k, a_k) \right]
 <p>论文采用了一种<strong>基于梯度更新的强化学习方法</strong>，例如Q-Learning或Policy
 Gradient方法。</p>
 <p>参数更新公式：</p>
-<p><span class="math inline">\(θ←θ−α∇θ∑k=0mψ(sk,ak,sk+1,θ)\theta
+<p><span class="math inline">$θ←θ−α∇θ∑k=0mψ(sk,ak,sk+1,θ)\theta
 \leftarrow \theta - \alpha \nabla_{\theta} \sum_{k=0}^{m} \psi(s_k, a_k,
-s_{k+1}, \theta)\)</span></p>
+s_{k+1}, \theta)$</span></p>
 <ul>
-<li><span class="math inline">\(\alpha\)</span> 是学习率。</li>
-<li><span class="math inline">\(\psi\)</span>
+<li><span class="math inline"><em>α</em></span> 是学习率。</li>
+<li><span class="math inline"><em>ψ</em></span>
 是强化学习损失项（例如Q-learning损失或策略梯度）。</li>
 <li>mm 是观测批量（Batch size）。</li>
 </ul>
 <hr />
 <h2 id="结合mpc的作用">3. 结合MPC的作用</h2>
 <p>在本方法中，MPC不仅提供了控制信号，还作为<strong>强化学习的策略函数</strong>：</p>
-<p><span class="math inline">\(πθ(s)=arg⁡min⁡uQθ(s,u)\pi_{\theta}(s) =
-\arg \min_{u} Q_{\theta}(s, u)\)</span></p>
+<p><span
+class="math inline"><em>π</em><em>θ</em>(<em>s</em>) = <em>a</em><em>r</em><em>g</em>⁡<em>m</em><em>i</em><em>n</em>⁡<em>u</em><em>Q</em><em>θ</em>(<em>s</em>, <em>u</em>)<em>π</em><sub><em>θ</em></sub>(<em>s</em>) = arg min<sub><em>u</em></sub><em>Q</em><sub><em>θ</em></sub>(<em>s</em>, <em>u</em>)</span></p>
 <ul>
 <li>通过MPC的优化过程直接得到当前状态 ss 下的最优控制输入 uu。</li>
 <li>强化学习通过**调整MPC中的参数 θ*，间接实现了策略的改进。</li>
@@ -344,10 +345,10 @@ s_{k+1}, \theta)\)</span></p>
 <p>由于强化学习过程中的探索可能导致<strong>违反安全约束</strong>，论文使用<strong>高斯过程
 (GP) 回归</strong>来估计安全区域 SS，并限制强化学习的参数更新范围：</p>
 <p><span
-class="math inline">\(θ+=arg⁡min⁡θ12∥θ+−θ∥2+α∇θ∑k=0mψ(sk,ak,sk+1,θ)\theta^+
+class="math inline">$θ+=arg⁡min⁡θ12∥θ+−θ∥2+α∇θ∑k=0mψ(sk,ak,sk+1,θ)\theta^+
 = \arg \min_{\theta} \frac{1}{2} \| \theta^+ - \theta \|^2 + \alpha
 \nabla_{\theta} \sum_{k=0}^{m} \psi(s_k, a_k, s_{k+1},
-\theta)\)</span></p>
+\theta)$</span></p>
 <p>subject to: θ∈SD  S_D</p>
 <p>其中，安全集合 SDS_D
 是通过GP估计的“安全参数集合”，确保每次更新的MPC参数不会导致系统违反约束。</p>
@@ -404,10 +405,10 @@ Q-Learning)</strong>。</p>
 <hr />
 <h2 id="lstd-q-learning-的更新方式">🚀 LSTD Q-Learning 的更新方式</h2>
 <h3 id="目标估计q值函数">💡 (1) 目标：估计Q值函数</h3>
-<p>Qθ(s,a)=L(s,a)+γVθ(s′)Q_{}(s, a) = L(s, a) + V_{}(s')</p>
+<p>Qθ(s,a)=L(s,a)+γVθ(s′)Q_{}(s, a) = L(s, a) + V_{}(s’)</p>
 <h3 id="td误差-temporal-difference-error">💡 (2) TD误差 (Temporal
 Difference Error)</h3>
-<p>δ=L(s,a)+γVθ(s′)−Qθ(s,a)= L(s, a) + V_{}(s') - Q_{}(s, a)</p>
+<p>δ=L(s,a)+γVθ(s′)−Qθ(s,a)= L(s, a) + V_{}(s’) - Q_{}(s, a)</p>
 <h3 id="更新梯度和hessian矩阵">💡 (3) 更新梯度和Hessian矩阵</h3>
 <p>p=−∑i=1mδi∇θQθ(si,ai)p = - <em>{i=1}^{m} <em>i </em>{} Q</em>{}(s_i,
 a_i)</p>
@@ -656,10 +657,10 @@ Q_{}(s_t, a_t)</p>
 
       <footer class="post-footer">
           <div class="post-tags">
+              <a href="/tags/MPC/" rel="tag"># MPC</a>
               <a href="/tags/safe-learning/" rel="tag"># safe_learning</a>
               <a href="/tags/%E6%8E%A7%E5%88%B6/" rel="tag"># 控制</a>
               <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" rel="tag"># 强化学习</a>
-              <a href="/tags/MPC/" rel="tag"># MPC</a>
           </div>
 
         
@@ -758,14 +759,14 @@ Q-Learning的核心思路：</span></a><ol class="nav-child"><li class="nav-item
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

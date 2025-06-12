@@ -261,46 +261,28 @@ Squares）</strong> 来求解最优参数 <code>θ</code>，从而逼近 Q 函�
 <hr />
 <h3 id="目标找到最优-θ-使得-lstd-误差最小"><strong>1️⃣ 目标：找到最优
 <code>θ</code> 使得 LSTD 误差最小</strong></h3>
-<p>基于 <strong>贝尔曼方程</strong>： [ Q(s, a) = r + Q(s', a') ]
+<p>基于 <strong>贝尔曼方程</strong>： [ Q(s, a) = r + Q(s’, a’) ]
 我们用<strong>最小二乘法</strong>逼近 Q 值，最优 <code>θ</code>
-需要满足： [ <em>{} ( Q(s, a) - (r + Q(s', a')) )^2 ] 展开后可以写成： [
-</em>{} ( (s, a)^T - (r + (s', a')^T ) )^2 ]</p>
+需要满足： [ <em>{} ( Q(s, a) - (r + Q(s’, a’)) )^2 ] 展开后可以写成： [
+</em>{} ( (s, a)^T - (r + (s’, a’)^T ) )^2 ]</p>
 <hr />
 <h3 id="线性方程组的构造"><strong>2️⃣ 线性方程组的构造</strong></h3>
-如果我们有 <strong>N 组数据</strong> ( (s_i, a_i, r_i, s'_i, a'_i)
+如果我们有 <strong>N 组数据</strong> ( (s_i, a_i, r_i, s’_i, a’_i)
 )，记： - ( ) 是所有 ( (s, a) ) 组成的矩阵： [ =
-<span class="math display">\[\begin{bmatrix}
-  \phi(s_1, a_1)^T \\
-  \phi(s_2, a_2)^T \\
-  \vdots \\
-  \phi(s_N, a_N)^T
-  \end{bmatrix}\]</span>
 <p>] 形状是 ( (N, d) )，其中 ( d ) 是特征维度。</p>
 <ul>
 <li><p>( R ) 是奖励向量： [ R =</p>
-<span class="math display">\[\begin{bmatrix}
-r_1 \\
-r_2 \\
-\vdots \\
-r_N
-\end{bmatrix}\]</span>
 <p>] 形状是 ( (N, 1) )。</p></li>
-<li><p>( ' ) 是所有 ( (s', a') ) 组成的矩阵： [ ' =</p>
-<span class="math display">\[\begin{bmatrix}
-\phi(s&#39;_1, a&#39;_1)^T \\
-\phi(s&#39;_2, a&#39;_2)^T \\
-\vdots \\
-\phi(s&#39;_N, a&#39;_N)^T
-\end{bmatrix}\]</span>
+<li><p>( ’ ) 是所有 ( (s’, a’) ) 组成的矩阵： [ ’ =</p>
 <p>] 形状也是 ( (N, d) )。</p></li>
 </ul>
-<p>将 Q 值近似公式代入，我们得到线性方程： [ = R + ' ] 整理得到： [ (^T
-- ^T ') = ^T R ]</p>
+<p>将 Q 值近似公式代入，我们得到线性方程： [ = R + ’ ] 整理得到： [ (^T
+- ^T ’) = ^T R ]</p>
 <hr />
 <h3 id="代码如何实现最小二乘法"><strong>3️⃣
 代码如何实现最小二乘法</strong></h3>
 <p>在代码中，这个方程被表示为： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">self</span>.A += np.outer(phi, (phi - <span class="variable language_">self</span>.gamma * next_phi))  <span class="comment"># 更新 A</span></span><br><span class="line"><span class="variable language_">self</span>.b += reward * phi  <span class="comment"># 更新 b</span></span><br><span class="line"><span class="variable language_">self</span>.theta = np.linalg.solve(<span class="variable language_">self</span>.A, <span class="variable language_">self</span>.b)  <span class="comment"># 计算 theta</span></span><br></pre></td></tr></table></figure> - <code>self.A</code> 对应
-( (^T - ^T ') ) - <code>self.b</code> 对应 ( ^T R ) -
+( (^T - ^T ’) ) - <code>self.b</code> 对应 ( ^T R ) -
 <code>np.linalg.solve(self.A, self.b)</code>
 <strong>解线性方程组，求解最优 <code>θ</code></strong></p>
 <p>这就是 <strong>LSTD-Q 里最小二乘法的核心！</strong> 🎯</p>
@@ -417,14 +399,14 @@ r_N
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -31,8 +31,8 @@
 <meta property="article:published_time" content="2025-04-11T02:59:24.000Z">
 <meta property="article:modified_time" content="2025-04-22T04:17:15.535Z">
 <meta property="article:author" content="Zhicheng">
-<meta property="article:tag" content="深度强化学习">
 <meta property="article:tag" content="书本学习笔记">
+<meta property="article:tag" content="深度强化学习">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://zhichengkou.github.io/2025/04/11/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-%E7%8E%8B%E6%A0%91%E6%A3%AE/">
@@ -262,19 +262,19 @@ operator）在引入噪声时的偏差</strong>。这种现象通常称为
 <p>[ Q(s, a) Q(s, a) + ]</p>
 <p>其中：</p>
 <ul>
-<li>(_{a'} Q(s',
-a'))：从下一个状态中选择估计值最大的动作作为更新目标。</li>
+<li>(_{a’} Q(s’,
+a’))：从下一个状态中选择估计值最大的动作作为更新目标。</li>
 </ul>
 <p>⚠️ 问题在于：<br />
 如果 Q 值本身带有估计误差（例如由于采样、函数逼近、探索策略等），<br />
 那么取最大值操作会<strong>偏向选择被高估的值</strong>，从而使得目标值系统性偏高。</p>
 <hr />
 <h3 id="举个例子简化">举个例子（简化）</h3>
-<p>假设在状态 (s') 下，我们有三个动作，真实 Q 值如下：</p>
+<p>假设在状态 (s’) 下，我们有三个动作，真实 Q 值如下：</p>
 <table>
 <thead>
 <tr>
-<th>动作 (a')</th>
+<th>动作 (a’)</th>
 <th>真正的 Q 值</th>
 <th>网络估计值（含误差）</th>
 </tr>
@@ -299,7 +299,7 @@ a'))：从下一个状态中选择估计值最大的动作作为更新目标。<
 </table>
 <ul>
 <li>虽然 (a_1) 是最优动作（真实 Q 值最大），</li>
-<li>但由于随机估计误差，(Q(s', a') = 1.1)，这个值偏高了。</li>
+<li>但由于随机估计误差，(Q(s’, a’) = 1.1)，这个值偏高了。</li>
 </ul>
 <p>这会导致我们在训练时错误地使用偏高的目标值去更新当前状态的 Q 值，从而
 <strong>累计越来越大的高估偏差</strong>。</p>
@@ -317,7 +317,7 @@ a'))：从下一个状态中选择估计值最大的动作作为更新目标。<
 <li><strong>Double Q-Learning</strong>：
 <ul>
 <li>采用两个 Q 网络，分别用于选择和评估动作。</li>
-<li>更新目标变为： [ Q(s, a) r + Q_2(s', _{a'} Q_1(s', a')) ]</li>
+<li>更新目标变为： [ Q(s, a) r + Q_2(s’, _{a’} Q_1(s’, a’)) ]</li>
 <li>显著降低高估。</li>
 </ul></li>
 <li><strong>Averaged DQN / Ensemble 方法</strong>：
@@ -373,10 +373,10 @@ Gradient，TD3</strong>）解决强化学习中 <strong>自举 + 最大化引起
 <h2 id="问题背景自举-最大化-导致的高估偏差">🔥 1. 问题背景：<strong>自举
 + 最大化</strong> 导致的高估偏差</h2>
 <p>在像 DDPG、Q-learning 这类算法中，我们更新 Q 值时用的是这个形式：</p>
-<p>[ y = r + _{a'} Q(s', a') ]</p>
+<p>[ y = r + _{a’} Q(s’, a’) ]</p>
 <p>但注意！</p>
 <ul>
-<li>( Q(s', a') ) 是网络的<strong>估计值</strong></li>
+<li>( Q(s’, a’) ) 是网络的<strong>估计值</strong></li>
 <li>“最大化”这个估计值（选最大 Q）会放大噪声和误差！</li>
 </ul>
 <p>🔍
@@ -390,7 +390,7 @@ Gradient，TD3</strong>）解决强化学习中 <strong>自举 + 最大化引起
 Q-networks</strong>）</h3>
 <p>用两个独立的 Q 网络： ( Q_1(s, a) )、( Q_2(s, a) )</p>
 <p>更新 TD目标时，不再用 max，而是：</p>
-<p>[ y = r + (Q_1(s', a'), Q_2(s', a')) ]</p>
+<p>[ y = r + (Q_1(s’, a’), Q_2(s’, a’)) ]</p>
 <p>✅ 取<strong>较小值</strong>，就能抵消高估误差（保守估计）<br />
 ✅
 这不是自举去最大，而是<strong>自举去最小</strong>，避免因误差叠加而爆炸</p>
@@ -408,7 +408,7 @@ Smoothing</strong>）</h3>
 <li>为了防止 Q 网络过于依赖某一个精确动作值</li>
 <li>在 TD目标里加入一个小的随机噪声：</li>
 </ul>
-<p>[ a' = _{}(s') + ,((0, ), -c, c) ]</p>
+<p>[ a’ = _{}(s’) + ,((0, ), -c, c) ]</p>
 <p>✅ 这样做可以使目标 Q 更平滑，缓解尖峰高估</p>
 <hr />
 
@@ -420,8 +420,8 @@ Smoothing</strong>）</h3>
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" rel="tag"># 深度强化学习</a>
               <a href="/tags/%E4%B9%A6%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 书本学习笔记</a>
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" rel="tag"># 深度强化学习</a>
           </div>
 
         
@@ -516,14 +516,14 @@ Smoothing）</span></a></li></ol></div>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

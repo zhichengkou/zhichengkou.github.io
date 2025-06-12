@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"zhichengkou.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="算法模块        文件名 功能简要     Eul_w_filter.cpp &#x2F; Eul_w_filter.h 用于欧拉角速度滤波（姿态估计的角速度平滑）   foot_placement.cpp &#x2F; foot_placement.h 足端位置规划（多用于步态规划、平衡控制）   gait_scheduler.cpp &#x2F; gait_schedule">
+<meta property="og:type" content="article">
+<meta property="og:title" content="青龙代码解析">
+<meta property="og:url" content="http://zhichengkou.github.io/2025/06/06/%E9%9D%92%E9%BE%99%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:site_name" content="Zhicheng">
+<meta property="og:description" content="算法模块        文件名 功能简要     Eul_w_filter.cpp &#x2F; Eul_w_filter.h 用于欧拉角速度滤波（姿态估计的角速度平滑）   foot_placement.cpp &#x2F; foot_placement.h 足端位置规划（多用于步态规划、平衡控制）   gait_scheduler.cpp &#x2F; gait_schedule">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-06-06T11:14:18.000Z">
+<meta property="article:modified_time" content="2025-06-08T09:07:37.908Z">
+<meta property="article:author" content="Zhicheng">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://zhichengkou.github.io/2025/06/06/%E9%9D%92%E9%BE%99%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>青龙代码解析 | Zhicheng</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Zhicheng</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/06/06/%E9%9D%92%E9%BE%99%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cheng.gif">
+      <meta itemprop="name" content="Zhicheng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zhicheng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          青龙代码解析
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-06-06 19:14:18" itemprop="dateCreated datePublished" datetime="2025-06-06T19:14:18+08:00">2025-06-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-06-08 17:07:37" itemprop="dateModified" datetime="2025-06-08T17:07:37+08:00">2025-06-08</time>
+              </span>
+
+          
+            <span id="/2025/06/06/%E9%9D%92%E9%BE%99%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90/" class="post-meta-item leancloud_visitors" data-flag-title="青龙代码解析" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="算法模块">算法模块</h3>
+<table>
+<colgroup>
+<col style="width: 59%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr>
+<th>文件名</th>
+<th>功能简要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Eul_w_filter.cpp / Eul_w_filter.h</strong></td>
+<td>用于欧拉角速度滤波（姿态估计的角速度平滑）</td>
+</tr>
+<tr>
+<td><strong>foot_placement.cpp / foot_placement.h</strong></td>
+<td>足端位置规划（多用于步态规划、平衡控制）</td>
+</tr>
+<tr>
+<td><strong>gait_scheduler.cpp / gait_scheduler.h</strong></td>
+<td>步态调度器（步态状态机、步态切换、步态周期控制）</td>
+</tr>
+<tr>
+<td><strong>joystick_interpreter.cpp /
+joystick_interpreter.h</strong></td>
+<td>摇杆解释器（人机交互或远程控制的速度指令解析）</td>
+</tr>
+<tr>
+<td><strong>mpc.cpp / mpc.h</strong></td>
+<td>模型预测控制（用于轨迹规划、步态控制或平衡控制）</td>
+</tr>
+<tr>
+<td><strong>pino_kin_dyn.cpp / pino_kin_dyn.h</strong></td>
+<td>Pinocchio动力学/运动学接口（封装好的运动学求解器）</td>
+</tr>
+<tr>
+<td><strong>priority_tasks.cpp / priority_tasks.h</strong></td>
+<td>任务优先级模块（多任务控制，如Stack-of-Tasks等）</td>
+</tr>
+<tr>
+<td><strong>StateEst.cpp / StateEst.h</strong></td>
+<td>状态估计模块（卡尔曼滤波或其他方法估计机器人状态）</td>
+</tr>
+<tr>
+<td><strong>wbc_priority.cpp / wbc_priority.h</strong></td>
+<td>具有优先级的全身控制（Whole-Body Control）模块</td>
+</tr>
+</tbody>
+</table>
+<h3 id="jocabi矩阵的作用">jocabi矩阵的作用</h3>
+<h3 id="四元数的形式">四元数的形式</h3>
+<ul>
+<li><p>四元数通常表示为：q=w+xi+yj+zk
+w：实部（标量部分），表示旋转的角度信息。
+x,y,z：虚部（向量部分），表示旋转轴的方向。
+避免万向节锁：欧拉角在特定角度（如俯仰角±90°）时丢失自由度，而四元数无此问题。</p></li>
+<li><p>四元数的规范化： $ | | q | | = = 1$</p></li>
+<li><p>四元数到旋转矩阵：$ R =</p>
+<p>$</p></li>
+</ul>
+<h3 id="旋转矩阵的使用">旋转矩阵的使用</h3>
+<ul>
+<li><p>绕x轴旋转：<br />
+M &lt;&lt; 1, 0, 0, 0, cos(theta), -sin(theta), 0, sin(theta),
+cos(theta);</p></li>
+<li><p>绕y轴旋转：<br />
+M &lt;&lt; cos(theta), 0, sin(theta), 0, 1, 0, -sin(theta), 0,
+cos(theta);</p></li>
+<li><p>绕z轴旋转：<br />
+M &lt;&lt; cos(theta), -sin(theta), 0, sin(theta), cos(theta), 0, 0, 0,
+1;</p></li>
+</ul>
+<h3 id="贝塞尔曲线的使用">贝塞尔曲线的使用</h3>
+<ul>
+<li>$ B ( s ) = _ { i = 0 } ^ { n } C ( n , i ) ( 1 - s ) ^ { n - i } s
+^ { i } P _ { i }， 其中 s∈[0,1] $ 。</li>
+<li>上面的贝塞尔曲线本身就是连续没有拐点的，同时导数也是连续的。</li>
+<li>在一维（Bezier_1D）里，P 是一个向量，保存了 控制点的值。</li>
+</ul>
+<h3 id="卡尔曼滤波">卡尔曼滤波</h3>
+<p>卡尔曼滤波是一种递归状态估计算法，通过融合系统模型预测和传感器观测数据，在噪声干扰下得到最优状态估计。</p>
+<ul>
+<li>预测-更新循环：交替进行模型预测和测量校正。</li>
+<li>最小方差准则：通过协方差矩阵量化不确定性，追求估计误差最小。</li>
+</ul>
+<p>状态方程：$ x _ { k } = A _ { k } x _ { k - 1 } + B _ { k } u _ { k }
++ w _ { k }$ 观测方程： $z _ { k } = H _ { k } x _ { k } + v _ { k } $
+以下是卡尔曼滤波（Kalman
+Filter）的详细过程解析，结合数学推导和实际意义说明：</p>
+<ol type="1">
+<li>卡尔曼滤波五大公式及解释 假设线性系统模型如下：</li>
+</ol>
+<ul>
+<li>状态方程：( _k = <em>k </em>{k-1} + _k _k + _k )<br />
+</li>
+<li>观测方程：( _k = _k _k + )<br />
+其中：</li>
+<li>( _k )：系统状态（如位置、速度）。</li>
+<li>( _k )：控制输入。</li>
+<li>( _k (0, _k) )：过程噪声（建模误差）。</li>
+<li>( _k (0, _k) )：观测噪声。</li>
+<li>( _k, _k, _k )：状态转移、控制输入、观测矩阵。</li>
+</ul>
+<p>步骤1：状态预测（时间更新） 1. 先验状态估计：<br />
+[ _k^- = <em>k </em>{k-1} + _k <em>k ]<br />
+- 基于上一时刻最优估计 ( </em>{k-1} ) 和系统模型预测当前状态。</p>
+<ol start="2" type="1">
+<li>先验协方差预测：<br />
+[ _k^- = <em>k </em>{k-1} _k^T + _k ]
+<ul>
+<li>( _k^- ) 表示预测状态的不确定性（含过程噪声 ( _k )）。</li>
+</ul></li>
+</ol>
+<p>步骤2：卡尔曼增益计算 [ _k = _k^- _k^T (_k _k^- _k^T + _k)^{-1}
+]<br />
+- 物理意义：<br />
+- 分子 ( _k^- _k^T )：预测状态与观测的协方差。<br />
+- 分母 ( _k _k^- _k^T + _k )：预测观测的总不确定性（含传感器噪声 ( _k
+)）。<br />
+- 作用：权衡模型预测与观测的信任度。若传感器噪声大（( _k ) 大），增益 (
+_k ) 减小，更依赖模型预测。</p>
+<p>步骤3：状态更新（测量校正） [ _k = _k^- + _k (_k - _k _k^-) ]<br />
+- 残差项 ( _k - _k _k^- )：观测值与预测值的差异（即“新息”）。<br />
+- 更新逻辑：通过卡尔曼增益将残差加权修正预测值。</p>
+<p>步骤4：协方差更新 [ _k = ( - _k _k) _k^- ]<br />
+- 意义：修正后的状态不确定性降低（( _k _k^- )）。</p>
+<ol start="4" type="1">
+<li>扩展卡尔曼滤波（EKF） 针对非线性系统（如机器人SLAM）：</li>
+<li>线性化：在当前估计点对非线性模型 ( f(), h() ) 进行一阶泰勒展开。
+<ul>
+<li>状态方程雅可比矩阵：( <em>k = . |</em>{_{k-1}} )。<br />
+</li>
+<li>观测方程雅可比矩阵：( <em>k = . |</em>{_k^-} )。<br />
+</li>
+</ul></li>
+<li>公式调整：
+<ul>
+<li>预测：( <em>k^- = f(</em>{k-1}) )。<br />
+</li>
+<li>协方差：( _k^- = <em>k </em>{k-1} _k^T + _k )。<br />
+</li>
+<li>增益：( _k = _k^- _k^T (_k _k^- _k^T + _k)^{-1} )。</li>
+</ul></li>
+</ol>
+<h3 id="mpc的控制过程">MPC的控制过程</h3>
+<ul>
+<li>线性化动力学（Ac, Bc）
+<ul>
+<li>当前机器人站在世界系某个角度（base_rot），所以要将惯性矩阵和其他力项转换到世界系。</li>
+</ul></li>
+<li>离散变换，把连续时间Ac, Bc乘上dt得到离散时间矩阵A, B。</li>
+<li>累积状态转移矩阵（Aqp, Aqp1）</li>
+<li>累积输入矩阵（Bqp1, Bqp11, Bqp）</li>
+<li>构建QP问题</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/04/28/%E4%B9%A6%E7%B1%8D%E7%AC%94%E8%AE%B0/" rel="prev" title="书籍笔记">
+      <i class="fa fa-chevron-left"></i> 书籍笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/06/12/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" rel="next" title="具身智能">
+      具身智能 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E6%A8%A1%E5%9D%97"><span class="nav-number">1.</span> <span class="nav-text">算法模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jocabi%E7%9F%A9%E9%98%B5%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">jocabi矩阵的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E5%85%83%E6%95%B0%E7%9A%84%E5%BD%A2%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">四元数的形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">旋转矩阵的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">贝塞尔曲线的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2"><span class="nav-number">6.</span> <span class="nav-text">卡尔曼滤波</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mpc%E7%9A%84%E6%8E%A7%E5%88%B6%E8%BF%87%E7%A8%8B"><span class="nav-number">7.</span> <span class="nav-text">MPC的控制过程</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zhicheng"
+      src="/images/cheng.gif">
+  <p class="site-author-name" itemprop="name">Zhicheng</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhichengkou" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhichengkou" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/weixin_46473460?type=blog" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_46473460?type&#x3D;blog" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://scholar.google.com/citations?user=gMknN-8AAAAJ&hl=zh-CN&oi=ao" title="Google Scholar → https:&#x2F;&#x2F;scholar.google.com&#x2F;citations?user&#x3D;gMknN-8AAAAJ&amp;hl&#x3D;zh-CN&amp;oi&#x3D;ao" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>Google Scholar</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://500px.com.cn/cheng1917" title="500px → https:&#x2F;&#x2F;500px.com.cn&#x2F;cheng1917" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>500px</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhicheng</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+<script data-pjax>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":null,"app_key":null,"server_url":null,"security":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://zhichengkou.github.io/2025/06/06/%E9%9D%92%E9%BE%99%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90/',]
+      });
+      });
+  </script>
+
+    </div>
+</body>
+</html>

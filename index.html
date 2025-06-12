@@ -186,6 +186,895 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/06/12/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%9C%A8%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cheng.gif">
+      <meta itemprop="name" content="Zhicheng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zhicheng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/06/12/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%9C%A8%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" class="post-title-link" itemprop="url">强化学习在双足机器人中的应用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-06-12 20:04:43 / 修改时间：20:12:14" itemprop="dateCreated datePublished" datetime="2025-06-12T20:04:43+08:00">2025-06-12</time>
+            </span>
+
+          
+            <span id="/2025/06/12/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%9C%A8%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" class="post-meta-item leancloud_visitors" data-flag-title="强化学习在双足机器人中的应用" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <table>
+<thead>
+<tr>
+<th>应用方向</th>
+<th>是否适合用 RL</th>
+<th>推荐算法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自主步态生成</td>
+<td>✅</td>
+<td>PPO / SAC</td>
+</tr>
+<tr>
+<td>多地形适应</td>
+<td>✅</td>
+<td>PPO + Domain Rand</td>
+</tr>
+<tr>
+<td>扰动恢复</td>
+<td>✅</td>
+<td>TD3 / SAC</td>
+</tr>
+<tr>
+<td>动力学复杂、控制难</td>
+<td>✅</td>
+<td>RL + WBC / MPC</td>
+</tr>
+<tr>
+<td>纯平地、稳定任务</td>
+<td>❌（传统控制器足够）</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3
+id="强化学习在双足机器人中的问题和解决方案">强化学习在双足机器人中的问题和解决方案</h3>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 20%" />
+<col style="width: 38%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>问题类别</th>
+<th>具体问题描述</th>
+<th>典型解决方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sim-to-Real Gap</strong></td>
+<td>仿真与现实存在建模差异，策略迁移失败</td>
+<td><strong>Domain Randomization</strong></td>
+<td>训练时随机化仿真参数，提高泛化能力</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Domain Adaptation / Fine-tuning</strong></td>
+<td>用少量真实数据微调策略</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Residual Policy Learning</strong></td>
+<td>用小网络学习偏差残差，补偿仿真误差</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>System Identification</strong></td>
+<td>精准拟合物理参数，减小建模误差</td>
+</tr>
+<tr>
+<td><strong>样本效率低</strong></td>
+<td>学习步态需要大量交互，训练时间长</td>
+<td><strong>Imitation Learning + RL</strong></td>
+<td>先用专家演示加速策略初始化</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Offline RL（如 CQL）</strong></td>
+<td>用离线数据训练，减少实物交互</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Model-based RL / Dynamics model</strong></td>
+<td>引入动力学模型减少试错次数</td>
+</tr>
+<tr>
+<td><strong>安全性差</strong></td>
+<td>实机训练中容易跌倒、损伤硬件</td>
+<td><strong>Safe RL / Shielded RL</strong></td>
+<td>引入安全约束、屏蔽高风险动作</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Curriculum Learning</strong></td>
+<td>从简单任务逐步训练，降低跌倒风险</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>仿真预训练 + 小步实机测试</strong></td>
+<td>仿真先学好，在现实中逐步上线</td>
+</tr>
+<tr>
+<td><strong>不可解释性强</strong></td>
+<td>策略黑箱、调试难、难验证稳定性</td>
+<td><strong>Hybrid Control (RL + MPC/WBC)</strong></td>
+<td>RL 生成参考，稳定由经典控制器保障</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>可视化工具（t-SNE, Grad-CAM）</strong></td>
+<td>分析策略结构与决策依据</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>结构化策略设计</strong></td>
+<td>将任务拆解成可控子模块组合训练</td>
+</tr>
+</tbody>
+</table>
+<h3 id="扩散模型在其中的作用">扩散模型在其中的作用</h3>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 28%" />
+<col style="width: 61%" />
+</colgroup>
+<thead>
+<tr>
+<th>Sim2Real问题点</th>
+<th>扩散模型可能解决的问题</th>
+<th>原理与作用说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. 物理环境差异</td>
+<td><strong>生成更真实、丰富的环境扰动样本</strong></td>
+<td>扩散模型可以学习仿真环境和真实环境间的差异分布，生成多样化、接近真实环境的状态或扰动样本，丰富训练数据，使策略对真实环境有更好的鲁棒性。</td>
+</tr>
+<tr>
+<td>2. 样本效率低</td>
+<td><strong>辅助生成高质量模拟数据，提升样本多样性和有效性</strong></td>
+<td>通过扩散模型生成逼真且多样化的状态转移样本，减少真实环境数据需求，提高训练效率。</td>
+</tr>
+<tr>
+<td>3. 安全风险</td>
+<td><strong>辅助仿真中生成更接近真实的安全扰动数据，降低实机试错风险</strong></td>
+<td>利用扩散模型生成多种环境扰动场景，进行安全的仿真训练，避免实机危险。</td>
+</tr>
+<tr>
+<td>4. 策略泛化能力弱</td>
+<td><strong>通过生成多样化情景样本，增强策略对未见环境的泛化</strong></td>
+<td>多样化生成可以让RL策略在训练时接触更广泛的状态分布，减少策略过拟合，提升现实适应能力。</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/06/12/%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cheng.gif">
+      <meta itemprop="name" content="Zhicheng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zhicheng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/06/12/%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">双足机器人原理学习</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-06-12 17:38:33 / 修改时间：20:00:42" itemprop="dateCreated datePublished" datetime="2025-06-12T17:38:33+08:00">2025-06-12</time>
+            </span>
+
+          
+            <span id="/2025/06/12/%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0/" class="post-meta-item leancloud_visitors" data-flag-title="双足机器人原理学习" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="双足机器人的控制方法汇总">双足机器人的控制方法汇总</h3>
+<table>
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 20%" />
+<col style="width: 57%" />
+</colgroup>
+<thead>
+<tr>
+<th>层级</th>
+<th>控制范式</th>
+<th>代表方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1⃣ 底层控制</td>
+<td>位置/速度/力控制</td>
+<td>PID控制、阻抗控制、力控制</td>
+</tr>
+<tr>
+<td>2⃣ 运动学级</td>
+<td>逆运动学、任务空间控制</td>
+<td>IK伪逆、OSC、Stack-of-Tasks</td>
+</tr>
+<tr>
+<td>3⃣ 动力学级</td>
+<td>基于模型的控制</td>
+<td>WBC、Feedback Linearization、优化控制</td>
+</tr>
+<tr>
+<td>4⃣ 步态规划与预测控制</td>
+<td>步态生成、预测控制</td>
+<td>ZMP轨迹规划、MPC、Preview Control</td>
+</tr>
+<tr>
+<td>5⃣ 混合系统与学习</td>
+<td>稳定性优化与学习</td>
+<td>HZD、强化学习、RL-MPC、模仿学习</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 8%" />
+<col style="width: 19%" />
+<col style="width: 19%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr>
+<th>方法</th>
+<th>控制层级</th>
+<th>优点</th>
+<th>局限</th>
+<th>适合场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PID/阻抗</td>
+<td>底层</td>
+<td>简单鲁棒</td>
+<td>控制力弱</td>
+<td>力控制、人机交互</td>
+</tr>
+<tr>
+<td>SoT / OSC</td>
+<td>运动学</td>
+<td>多任务清晰</td>
+<td>不考虑动态</td>
+<td>多目标位置控制</td>
+</tr>
+<tr>
+<td>WBC</td>
+<td>动力学</td>
+<td>多任务 + 力控制</td>
+<td>实时性要求高</td>
+<td>全身控制、双足</td>
+</tr>
+<tr>
+<td>MPC / Preview</td>
+<td>预测</td>
+<td>稳定性强</td>
+<td>需模型、优化开销大</td>
+<td>CoM轨迹、ZMP稳定</td>
+</tr>
+<tr>
+<td>HZD</td>
+<td>杂交系统</td>
+<td>周期稳定性好</td>
+<td>难以适应非周期</td>
+<td>平地行走、理论研究</td>
+</tr>
+<tr>
+<td>强化学习</td>
+<td>数据驱动</td>
+<td>灵活自适应</td>
+<td>样本量大、转移难</td>
+<td>非结构环境</td>
+</tr>
+</tbody>
+</table>
+<p>杂交系统是指包含连续动态系统（例如由微分方程描述的运动）和离散事件系统（例如接触切换、碰撞、跳跃）的组合系统。</p>
+<p>双足机器人中的杂交结构 - 系统由两种部分构成：连续阶段（Continuous
+Dynamics：机器人在空中摆腿、质心运动</p>
+<p>例如：单腿支撑期、双腿支撑期的动力学模型</p>
+<p>离散事件（Discrete
+Transitions）：脚与地面接触或离地引起的状态突变</p>
+<p>一个杂交系统一般写作如下六元组：$ H = ( Q , X , f , D , R , G )$</p>
+<h3 id="控制流程总结图">控制流程总结图</h3>
+<p>目标行走任务（如向前走）<br />
+↓<br />
+[高层任务] 决定步长/频率<br />
+↓<br />
+[步态生成] 生成ZMP轨迹、抬脚时序<br />
+↓<br />
+[运动规划] 用ZMP规划CoM轨迹（如 Preview Control）<br />
+↓<br />
+[任务空间控制] 生成CoM和足端运动指令<br />
+↓<br />
+[关节控制] 逆解得到关节目标值（IK/ID）<br />
+↓<br />
+[底层控制] PID or 力矩控制跟踪<br />
+↓<br />
+[电机执行，机器人行走]</p>
+<h3 id="双足机器人中步行常用轨迹类型">双足机器人中步行常用轨迹类型</h3>
+<table>
+<colgroup>
+<col style="width: 48%" />
+<col style="width: 15%" />
+<col style="width: 35%" />
+</colgroup>
+<thead>
+<tr>
+<th>轨迹类型</th>
+<th>控制目标</th>
+<th>怎么求得的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ZMP轨迹</strong>（零力矩点）</td>
+<td>动态稳定性</td>
+<td>ZMP保持在支撑面内部</td>
+</tr>
+<tr>
+<td><strong>质心轨迹</strong>（CoM）</td>
+<td>平衡、重心移动</td>
+<td>CoM 按LIPM/MPC等控制</td>
+</tr>
+<tr>
+<td><strong>足端轨迹</strong>（swing foot）</td>
+<td>摆动腿落点精度</td>
+<td>Bézier曲线、多项式轨迹</td>
+</tr>
+<tr>
+<td><strong>关节轨迹</strong>（joint angles）</td>
+<td>驱动指令输入</td>
+<td>由逆运动学或优化求得</td>
+</tr>
+<tr>
+<td><strong>任务空间轨迹</strong>（如髋/躯干）</td>
+<td>姿态保持</td>
+<td>水平/垂直速度稳定</td>
+</tr>
+</tbody>
+</table>
+<h3 id="双足机器人中ompl的用途">双足机器人中OMPL的用途</h3>
+<ul>
+<li>环境中的路径规划（从A到B点）</li>
+<li>多步脚印序列规划： OMPL
+可用来在配置空间中搜索一条“步态合法序列”。</li>
+</ul>
+<h3 id="eso在双足机器人中的应用">ESO在双足机器人中的应用</h3>
+<p>双足机器人是高度非线性、耦合、强扰动的系统：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>对应解决目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>地面不确定性（软硬、摩擦）</td>
+<td>外部扰动估计</td>
+</tr>
+<tr>
+<td>建模误差（动力学不完整）</td>
+<td>结构性扰动估计</td>
+</tr>
+<tr>
+<td>控制信号延迟、误差</td>
+<td>观测状态误差补偿</td>
+</tr>
+<tr>
+<td>状态难以精确传感（如关节加速度）</td>
+<td>使用 ESO 估计不可测状态</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/06/12/%E5%8F%8C%E8%B6%B3%E6%8E%A7%E5%88%B6%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cheng.gif">
+      <meta itemprop="name" content="Zhicheng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zhicheng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/06/12/%E5%8F%8C%E8%B6%B3%E6%8E%A7%E5%88%B6%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">双足控制论文总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-06-12 17:11:47 / 修改时间：17:34:17" itemprop="dateCreated datePublished" datetime="2025-06-12T17:11:47+08:00">2025-06-12</time>
+            </span>
+
+          
+            <span id="/2025/06/12/%E5%8F%8C%E8%B6%B3%E6%8E%A7%E5%88%B6%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%93/" class="post-meta-item leancloud_visitors" data-flag-title="双足控制论文总结" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="mpc-for-humanoid-gait-generation-stability-and-feasibility">MPC
+for Humanoid Gait Generation: Stability and Feasibility</h3>
+<p>问题：传统的ZMP方法与质心（CoM）动力学存在内在不稳定性。
+创新方法：提出了一种本质稳定的模型预测控制，通过稳定性约束保证CoM轨迹相对于ZMP轨迹有界。</p>
+<p>整体框架： - 高层指令：接收外部驱动的参考速度（平移速度v_x,
+v_y和转向速度）; - 脚步生成模块：通过QP优化生成候选脚步位置和时序T_s； -
+IS-MPC模块：优化实时脚步和CoM轨迹，确定稳定性约束； -
+运动控制：跟踪生成的CoM和摆动脚的轨迹。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/06/12/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cheng.gif">
+      <meta itemprop="name" content="Zhicheng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zhicheng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/06/12/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" class="post-title-link" itemprop="url">具身智能</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-06-12 13:15:36 / 修改时间：14:01:08" itemprop="dateCreated datePublished" datetime="2025-06-12T13:15:36+08:00">2025-06-12</time>
+            </span>
+
+          
+            <span id="/2025/06/12/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" class="post-meta-item leancloud_visitors" data-flag-title="具身智能" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3
+id="dreampolicy-a-scalable-unified-policy-for-versatile-humanoid-locomotion">DreamPolicy:
+A Scalable Unified Policy for Versatile Humanoid Locomotion</h3>
+<p>任务的依赖性：传统的强化学习需要为每种地形设计特定的奖励函数，导致“一个任务一个策略”
+数据利用不足：即使数据量增长，但是传统的强化学习难以有效利用离线数据提升泛化能力。
+泛化性差：策略容易过拟合训练地形，在未见地形中表现不佳。</p>
+<p>现有解决方案的缺陷： -
+人类运动数据集需要复杂重定向到人形机器人，而且无法直接编码地形约束。 -
+策略蒸馏（将一个性能好但是计算开销高的策略压缩给一个较小较高效的策略网络）依赖在线仿真，计算成本较高。</p>
+<p>DreamPolicy的框架创新 地形感知的的专家技能收集： -
+在六种单一地形上训练专用的RL策略，生成巨大的离线数据集 -
+数据直接捕获人形机器人运动学，包含本地感知，地形高度图，历史状态等</p>
+<p>扩散驱动的混动合成 -
+使用生成模型框架（DDPM）来预测未来的状态轨迹，条件输入包含历史状态和地形嵌入。</p>
+<p>HMI条件化统一策略 -
+以扩散模型生成的轨迹为动态目标，优化RL策略。扩散模型和策略优化分离，支持通过数据扩展持续改进。
+-
+HMI隐式编码指的是一种通过扩散模型生成的未来运动轨迹来动态替代传统手工设计奖励函数的技术。核心思想是将地形物理约束，运动风格等复杂目标嵌入到扩散模型生成的轨迹中，从而指导策略学习。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/06/06/%E9%9D%92%E9%BE%99%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cheng.gif">
+      <meta itemprop="name" content="Zhicheng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zhicheng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/06/06/%E9%9D%92%E9%BE%99%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90/" class="post-title-link" itemprop="url">青龙代码解析</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-06-06 19:14:18" itemprop="dateCreated datePublished" datetime="2025-06-06T19:14:18+08:00">2025-06-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-06-08 17:07:37" itemprop="dateModified" datetime="2025-06-08T17:07:37+08:00">2025-06-08</time>
+              </span>
+
+          
+            <span id="/2025/06/06/%E9%9D%92%E9%BE%99%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90/" class="post-meta-item leancloud_visitors" data-flag-title="青龙代码解析" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="算法模块">算法模块</h3>
+<table>
+<colgroup>
+<col style="width: 59%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr>
+<th>文件名</th>
+<th>功能简要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Eul_w_filter.cpp / Eul_w_filter.h</strong></td>
+<td>用于欧拉角速度滤波（姿态估计的角速度平滑）</td>
+</tr>
+<tr>
+<td><strong>foot_placement.cpp / foot_placement.h</strong></td>
+<td>足端位置规划（多用于步态规划、平衡控制）</td>
+</tr>
+<tr>
+<td><strong>gait_scheduler.cpp / gait_scheduler.h</strong></td>
+<td>步态调度器（步态状态机、步态切换、步态周期控制）</td>
+</tr>
+<tr>
+<td><strong>joystick_interpreter.cpp /
+joystick_interpreter.h</strong></td>
+<td>摇杆解释器（人机交互或远程控制的速度指令解析）</td>
+</tr>
+<tr>
+<td><strong>mpc.cpp / mpc.h</strong></td>
+<td>模型预测控制（用于轨迹规划、步态控制或平衡控制）</td>
+</tr>
+<tr>
+<td><strong>pino_kin_dyn.cpp / pino_kin_dyn.h</strong></td>
+<td>Pinocchio动力学/运动学接口（封装好的运动学求解器）</td>
+</tr>
+<tr>
+<td><strong>priority_tasks.cpp / priority_tasks.h</strong></td>
+<td>任务优先级模块（多任务控制，如Stack-of-Tasks等）</td>
+</tr>
+<tr>
+<td><strong>StateEst.cpp / StateEst.h</strong></td>
+<td>状态估计模块（卡尔曼滤波或其他方法估计机器人状态）</td>
+</tr>
+<tr>
+<td><strong>wbc_priority.cpp / wbc_priority.h</strong></td>
+<td>具有优先级的全身控制（Whole-Body Control）模块</td>
+</tr>
+</tbody>
+</table>
+<h3 id="jocabi矩阵的作用">jocabi矩阵的作用</h3>
+<h3 id="四元数的形式">四元数的形式</h3>
+<ul>
+<li><p>四元数通常表示为：q=w+xi+yj+zk
+w：实部（标量部分），表示旋转的角度信息。
+x,y,z：虚部（向量部分），表示旋转轴的方向。
+避免万向节锁：欧拉角在特定角度（如俯仰角±90°）时丢失自由度，而四元数无此问题。</p></li>
+<li><p>四元数的规范化： $ | | q | | = = 1$</p></li>
+<li><p>四元数到旋转矩阵：$ R =</p>
+<p>$</p></li>
+</ul>
+<h3 id="旋转矩阵的使用">旋转矩阵的使用</h3>
+<ul>
+<li><p>绕x轴旋转：<br />
+M &lt;&lt; 1, 0, 0, 0, cos(theta), -sin(theta), 0, sin(theta),
+cos(theta);</p></li>
+<li><p>绕y轴旋转：<br />
+M &lt;&lt; cos(theta), 0, sin(theta), 0, 1, 0, -sin(theta), 0,
+cos(theta);</p></li>
+<li><p>绕z轴旋转：<br />
+M &lt;&lt; cos(theta), -sin(theta), 0, sin(theta), cos(theta), 0, 0, 0,
+1;</p></li>
+</ul>
+<h3 id="贝塞尔曲线的使用">贝塞尔曲线的使用</h3>
+<ul>
+<li>$ B ( s ) = _ { i = 0 } ^ { n } C ( n , i ) ( 1 - s ) ^ { n - i } s
+^ { i } P _ { i }， 其中 s∈[0,1] $ 。</li>
+<li>上面的贝塞尔曲线本身就是连续没有拐点的，同时导数也是连续的。</li>
+<li>在一维（Bezier_1D）里，P 是一个向量，保存了 控制点的值。</li>
+</ul>
+<h3 id="卡尔曼滤波">卡尔曼滤波</h3>
+<p>卡尔曼滤波是一种递归状态估计算法，通过融合系统模型预测和传感器观测数据，在噪声干扰下得到最优状态估计。</p>
+<ul>
+<li>预测-更新循环：交替进行模型预测和测量校正。</li>
+<li>最小方差准则：通过协方差矩阵量化不确定性，追求估计误差最小。</li>
+</ul>
+<p>状态方程：$ x _ { k } = A _ { k } x _ { k - 1 } + B _ { k } u _ { k }
++ w _ { k }$ 观测方程： $z _ { k } = H _ { k } x _ { k } + v _ { k } $
+以下是卡尔曼滤波（Kalman
+Filter）的详细过程解析，结合数学推导和实际意义说明：</p>
+<ol type="1">
+<li>卡尔曼滤波五大公式及解释 假设线性系统模型如下：</li>
+</ol>
+<ul>
+<li>状态方程：( _k = <em>k </em>{k-1} + _k _k + _k )<br />
+</li>
+<li>观测方程：( _k = _k _k + )<br />
+其中：</li>
+<li>( _k )：系统状态（如位置、速度）。</li>
+<li>( _k )：控制输入。</li>
+<li>( _k (0, _k) )：过程噪声（建模误差）。</li>
+<li>( _k (0, _k) )：观测噪声。</li>
+<li>( _k, _k, _k )：状态转移、控制输入、观测矩阵。</li>
+</ul>
+<p>步骤1：状态预测（时间更新） 1. 先验状态估计：<br />
+[ _k^- = <em>k </em>{k-1} + _k <em>k ]<br />
+- 基于上一时刻最优估计 ( </em>{k-1} ) 和系统模型预测当前状态。</p>
+<ol start="2" type="1">
+<li>先验协方差预测：<br />
+[ _k^- = <em>k </em>{k-1} _k^T + _k ]
+<ul>
+<li>( _k^- ) 表示预测状态的不确定性（含过程噪声 ( _k )）。</li>
+</ul></li>
+</ol>
+<p>步骤2：卡尔曼增益计算 [ _k = _k^- _k^T (_k _k^- _k^T + _k)^{-1}
+]<br />
+- 物理意义：<br />
+- 分子 ( _k^- _k^T )：预测状态与观测的协方差。<br />
+- 分母 ( _k _k^- _k^T + _k )：预测观测的总不确定性（含传感器噪声 ( _k
+)）。<br />
+- 作用：权衡模型预测与观测的信任度。若传感器噪声大（( _k ) 大），增益 (
+_k ) 减小，更依赖模型预测。</p>
+<p>步骤3：状态更新（测量校正） [ _k = _k^- + _k (_k - _k _k^-) ]<br />
+- 残差项 ( _k - _k _k^- )：观测值与预测值的差异（即“新息”）。<br />
+- 更新逻辑：通过卡尔曼增益将残差加权修正预测值。</p>
+<p>步骤4：协方差更新 [ _k = ( - _k _k) _k^- ]<br />
+- 意义：修正后的状态不确定性降低（( _k _k^- )）。</p>
+<ol start="4" type="1">
+<li>扩展卡尔曼滤波（EKF） 针对非线性系统（如机器人SLAM）：</li>
+<li>线性化：在当前估计点对非线性模型 ( f(), h() ) 进行一阶泰勒展开。
+<ul>
+<li>状态方程雅可比矩阵：( <em>k = . |</em>{_{k-1}} )。<br />
+</li>
+<li>观测方程雅可比矩阵：( <em>k = . |</em>{_k^-} )。<br />
+</li>
+</ul></li>
+<li>公式调整：
+<ul>
+<li>预测：( <em>k^- = f(</em>{k-1}) )。<br />
+</li>
+<li>协方差：( _k^- = <em>k </em>{k-1} _k^T + _k )。<br />
+</li>
+<li>增益：( _k = _k^- _k^T (_k _k^- _k^T + _k)^{-1} )。</li>
+</ul></li>
+</ol>
+<h3 id="mpc的控制过程">MPC的控制过程</h3>
+<ul>
+<li>线性化动力学（Ac, Bc）
+<ul>
+<li>当前机器人站在世界系某个角度（base_rot），所以要将惯性矩阵和其他力项转换到世界系。</li>
+</ul></li>
+<li>离散变换，把连续时间Ac, Bc乘上dt得到离散时间矩阵A, B。</li>
+<li>累积状态转移矩阵（Aqp, Aqp1）</li>
+<li>累积输入矩阵（Bqp1, Bqp11, Bqp）</li>
+<li>构建QP问题</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/04/28/%E4%B9%A6%E7%B1%8D%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -376,7 +1265,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-04-28 11:42:29" itemprop="dateModified" datetime="2025-04-28T11:42:29+08:00">2025-04-28</time>
+                <time title="修改时间：2025-06-12 20:14:45" itemprop="dateModified" datetime="2025-06-12T20:14:45+08:00">2025-06-12</time>
               </span>
 
           
@@ -1116,1256 +2005,10 @@ Variational Policy Optimization for Safe Reinforcement Learning》</h1>
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>行内公式：$a^2 + b^2 = c^2$</p>
+          <p>行内公式：<span
+class="math inline"><em>a</em><sup>2</sup> + <em>b</em><sup>2</sup> = <em>c</em><sup>2</sup></span></p>
 <p>块级公式：</p>
-<p>[<br>\dot{x}(t) = f(x(t)) + g(x(t))u(x(t)) + d(x(t))<br>]</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/04/20/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%A3%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/cheng.gif">
-      <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zhicheng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/20/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%A3%AB/" class="post-title-link" itemprop="url">关于博士</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2025-04-20 23:06:29 / 修改时间：23:08:55" itemprop="dateCreated datePublished" datetime="2025-04-20T23:06:29+08:00">2025-04-20</time>
-            </span>
-
-          
-            <span id="/2025/04/20/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%A3%AB/" class="post-meta-item leancloud_visitors" data-flag-title="关于博士" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>这个问题非常重要！博士≠多读几年书，博士更像是<strong>一个“高强度训练营”，塑造你成为能独立提出、解决、验证问题的人。</strong></p>
-<p>我们可以把博士期间应当掌握的能力分为以下五大核心模块：<br />
-<strong>认知能力、科研能力、工程/技术能力、表达与协作能力、元能力（心智层）</strong></p>
-<hr />
-<h2 id="一认知能力这是博士的思维底盘">🧠
-一、认知能力：这是博士的“思维底盘”</h2>
-<table>
-<colgroup>
-<col style="width: 37%" />
-<col style="width: 62%" />
-</colgroup>
-<thead>
-<tr>
-<th>能力</th>
-<th>具体表现</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>抽象能力</strong></td>
-<td>能从复杂现象中提取本质，比如将实验现象抽象为数学模型或控制系统</td>
-</tr>
-<tr>
-<td><strong>结构化思维</strong></td>
-<td>能将模糊任务拆解为清晰模块，有清晰的推理链</td>
-</tr>
-<tr>
-<td><strong>批判性思维</strong></td>
-<td>不盲信权威，敢于质疑前人方法，善于找出假设漏洞</td>
-</tr>
-<tr>
-<td><strong>判断研究价值的能力</strong></td>
-<td>能识别“哪些问题值得做”、“是否有学术贡献”</td>
-</tr>
-</tbody>
-</table>
-<p>📌
-<em>一个好的博士不是做得多，而是<strong>思考得深</strong>。</em></p>
-<hr />
-<h2 id="二科研能力这是博士的核心业务">📚
-二、科研能力：这是博士的“核心业务”</h2>
-<table>
-<thead>
-<tr>
-<th>能力</th>
-<th>具体表现</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>选题能力</strong></td>
-<td>能发现有意义、可行、有创新的问题</td>
-</tr>
-<tr>
-<td><strong>文献调研能力</strong></td>
-<td>能高效阅读、比较、归纳相关研究工作</td>
-</tr>
-<tr>
-<td><strong>设计实验能力</strong></td>
-<td>能构造有效的验证方式（仿真 / 实验 / 数据）</td>
-</tr>
-<tr>
-<td><strong>数学建模/算法推导能力</strong></td>
-<td>能写出合理的公式、证明关键结论</td>
-</tr>
-<tr>
-<td><strong>论文写作能力</strong></td>
-<td>能清楚表达问题、方法、实验、结论，让评审信服</td>
-</tr>
-</tbody>
-</table>
-<p>📌 <em>“做研究”不仅是做，更是不断地“想、写、讲、验证”。</em></p>
-<hr />
-<h2 id="三技术工程能力这是博士的落地抓手">🛠️
-三、技术/工程能力：这是博士的“落地抓手”</h2>
-<table>
-<colgroup>
-<col style="width: 37%" />
-<col style="width: 62%" />
-</colgroup>
-<thead>
-<tr>
-<th>能力</th>
-<th>具体表现</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>代码实现能力</strong></td>
-<td>不仅写得对，还能写得稳、写得快、写得清晰</td>
-</tr>
-<tr>
-<td><strong>系统调试能力</strong></td>
-<td>能快速定位问题并修复，软硬件都能应对</td>
-</tr>
-<tr>
-<td><strong>工具链掌握</strong></td>
-<td>熟练掌握领域主流工具，如 PyTorch、ROS、Isaac Gym、LaTeX、Git 等</td>
-</tr>
-<tr>
-<td><strong>大模型 / 控制 / 优化 / 数据等专项技能</strong></td>
-<td>针对研究方向具备较强技术深度</td>
-</tr>
-</tbody>
-</table>
-<p>📌 <em>再“学术”的工作，最后也要通过工程实现才能验证。</em></p>
-<hr />
-<h2 id="四表达与协作能力这是博士的输出通道">🗣️
-四、表达与协作能力：这是博士的“输出通道”</h2>
-<table>
-<colgroup>
-<col style="width: 37%" />
-<col style="width: 62%" />
-</colgroup>
-<thead>
-<tr>
-<th>能力</th>
-<th>具体表现</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>汇报和讲解能力</strong></td>
-<td>能讲清楚自己的研究问题、路线、结果，不绕圈子</td>
-</tr>
-<tr>
-<td><strong>跨领域沟通能力</strong></td>
-<td>和工程/算法/导师/评审有效协作，降低“学术闭塞”风险</td>
-</tr>
-<tr>
-<td><strong>写 Email / 项目申请 / Reviewer 回复</strong></td>
-<td>格式专业，语气得体，能解决实际问题</td>
-</tr>
-<tr>
-<td><strong>合作者管理与合作谈判</strong></td>
-<td>特别是博后阶段，需要带人、带项目、谈合作</td>
-</tr>
-</tbody>
-</table>
-<p>📌 <em>科研不是一个人的战斗，表达力决定你能否“被听见”。</em></p>
-<hr />
-<h2 id="五元能力心智层博士能否坚持下来的隐形力">🧭
-五、元能力（心智层）：博士能否坚持下来的“隐形力”</h2>
-<table>
-<thead>
-<tr>
-<th>能力</th>
-<th>具体表现</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>自我驱动能力</strong></td>
-<td>没人 push 你也能主动推进研究</td>
-</tr>
-<tr>
-<td><strong>时间管理能力</strong></td>
-<td>同时处理多个项目、任务，合理安排周/月/年计划</td>
-</tr>
-<tr>
-<td><strong>挫折恢复力</strong></td>
-<td>面对实验失败、论文被拒、导师施压也不崩溃</td>
-</tr>
-<tr>
-<td><strong>自我反思与成长循环</strong></td>
-<td>定期复盘自己：哪里做得好？哪里需要调整？</td>
-</tr>
-</tbody>
-</table>
-<p>📌 <em>博士拼到最后，不是智商，是系统性和韧性。</em></p>
-<hr />
-<h2 id="最终你应该变成一个怎样的人">✨ 最终你应该变成一个怎样的人？</h2>
-<blockquote>
-<p>🎓 “我可以独立从 0 到 1
-地完成一个有意义的问题研究，具备将复杂问题结构化、技术化、学术化地解决并表达出来的能力。”<br />
-这才是真正的博士能力画像。</p>
-</blockquote>
-<hr />
-<h2 id="补充读完博士后就业发展方向会非常依赖这些能力">💼
-补充：读完博士后，就业/发展方向会非常依赖这些能力</h2>
-<table>
-<thead>
-<tr>
-<th>职业方向</th>
-<th>对博士能力的需求侧重</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>高校教职</td>
-<td>科研能力 + 表达能力 + 项目组织能力</td>
-</tr>
-<tr>
-<td>科研所（中科院等）</td>
-<td>技术深度 + 系统能力</td>
-</tr>
-<tr>
-<td>AI/机器人大厂</td>
-<td>算法落地 + 工程能力 + 团队协作</td>
-</tr>
-<tr>
-<td>创业</td>
-<td>问题定义能力 + 心智强度 + 综合运营</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="小结博士五维能力图谱">✅ 小结：博士五维能力图谱</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">             元能力（自驱力、时间管理、情绪管理）</span><br><span class="line">                        ↑</span><br><span class="line">表达协作 ← 认知能力（思维框架） → 技术工程</span><br><span class="line">                        ↓</span><br><span class="line">                科研能力（核心任务）</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/04/20/%E5%85%B3%E4%BA%8E%E7%9B%AE%E6%A0%87%E8%AE%BE%E5%AE%9A%E7%9A%84%E5%86%85%E9%83%A8%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/cheng.gif">
-      <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zhicheng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/20/%E5%85%B3%E4%BA%8E%E7%9B%AE%E6%A0%87%E8%AE%BE%E5%AE%9A%E7%9A%84%E5%86%85%E9%83%A8%E5%8C%96/" class="post-title-link" itemprop="url">关于目标设定的内部化</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2025-04-20 22:25:58 / 修改时间：23:03:15" itemprop="dateCreated datePublished" datetime="2025-04-20T22:25:58+08:00">2025-04-20</time>
-            </span>
-
-          
-            <span id="/2025/04/20/%E5%85%B3%E4%BA%8E%E7%9B%AE%E6%A0%87%E8%AE%BE%E5%AE%9A%E7%9A%84%E5%86%85%E9%83%A8%E5%8C%96/" class="post-meta-item leancloud_visitors" data-flag-title="关于目标设定的内部化" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>为什么衡量标准<strong>不能太外部化</strong>？我们可以从
-<strong>心理机制 + 动力机制 + 行为后果</strong> 三个层面来剖析。</p>
-<hr />
-<h2 id="心理层面外部目标易引发焦虑迷失自我否定">🧠 1.
-心理层面：<strong>外部目标易引发焦虑、迷失、自我否定</strong></h2>
-<h3
-id="外部化目标的本质是我好不好别人说了算">外部化目标的本质是“我好不好，别人说了算”：</h3>
-<ul>
-<li>比如“年薪百万”是由公司评估你值不值；</li>
-<li>“拿称号”是评审专家说了算；</li>
-<li>“某大厂 offer”是 HR 和面试官决定。</li>
-</ul>
-<p>这意味着：<br />
-你把价值感
-<strong>交给了外部</strong>，一旦外界反馈不如预期，就会陷入：</p>
-<ul>
-<li>📉 <strong>自我否定</strong>（我是不是不够好）</li>
-<li>🤯 <strong>焦虑攀比</strong>（别人有了我还没有）</li>
-<li>🔁 <strong>情绪循环</strong>（得不到就痛苦，得到了也很空）</li>
-</ul>
-<p><strong>外部化的衡量标准，往往不指向你真正的成长，而是社会期望的“表演成绩单”。</strong></p>
-<hr />
-<h2 id="动力机制层面外部目标难以形成可持续的内驱力">🚀 2.
-动力机制层面：<strong>外部目标难以形成可持续的内驱力</strong></h2>
-<h3 id="外部目标的典型陷阱">❌ 外部目标的典型陷阱：</h3>
-<ul>
-<li>得到之后很快失去动力（比如升职后陷入空虚）</li>
-<li>没得到就陷入无意义感（比如努力失败时无法承受）</li>
-<li>做事的动力变成“逃避失败”而非“追求成长”</li>
-</ul>
-<h3 id="内部目标的底层驱动更稳定">✅ 内部目标的底层驱动更稳定：</h3>
-<p>比如：</p>
-<blockquote>
-<p>“我想掌握控制机器人上下楼梯的能力”<br />
-“我想做一件对这个领域有贡献的工作”<br />
-“我希望自己成为一个更有独立判断力的人”</p>
-</blockquote>
-<p>这些目标和<strong>自我认知、自我实现</strong>绑定，就算过程艰难，也更容易走得下去，因为你不是为别人“演”，你是为自己“活”。</p>
-<hr />
-<h2 id="行为后果层面外部目标容易导致手段扭曲路径偏离">🧩 3.
-行为后果层面：<strong>外部目标容易导致手段扭曲、路径偏离</strong></h2>
-<p>比如： - 为了“年薪百万”去做高压但无成长的岗位 -
-为了“某称号”把项目写得浮夸不实 - 为了“大厂
-offer”内卷刷题、却忽视基础能力建设</p>
-<p>这会让你陷入： - 短视行为（重结果轻过程） - 虚假反馈（只追 KPI） -
-自我价值错位（觉得自己“不配被喜欢”只因没达成某目标）</p>
-<hr />
-<h2 id="所以正确目标应该这样设定">✅ 所以，正确目标应该这样设定：</h2>
-<table>
-<colgroup>
-<col style="width: 36%" />
-<col style="width: 63%" />
-</colgroup>
-<thead>
-<tr>
-<th>外部化目标（错误）</th>
-<th>内部化目标（推荐）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>“我要进某公司”</td>
-<td>“我要成为能胜任该类岗位的工程师”</td>
-</tr>
-<tr>
-<td>“我要发 A 类顶刊”</td>
-<td>“我要建立起独立科研选题与推进能力”</td>
-</tr>
-<tr>
-<td>“我要月入 3 万”</td>
-<td>“我要能创造价值并掌控自由的生活方式”</td>
-</tr>
-<tr>
-<td>“我要被认可/表扬”</td>
-<td>“我要能稳定地输出高质量工作/内容”</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="总结金句">🎯 总结金句：</h2>
-<blockquote>
-<p><strong>外部目标只能当做“里程碑”，真正推动你走远的，是对内在成长的渴望。</strong></p>
-</blockquote>
-<ul>
-<li>外部化目标是<strong>可衡量的结果</strong></li>
-<li>内部化目标是<strong>可积累的能力与状态</strong></li>
-<li>真正“牛的人”，是<strong>结果有了，心态还是过程型的</strong></li>
-</ul>
-<hr />
-<p>我们都知道“外部目标不靠谱”“要内驱”，但现实中——<br />
-<strong>绝大多数人都在盯着钱、名、offer、称号、头衔……</strong></p>
-<p>那为什么会这样？<br />
-答案是：<strong>这很“合理”，但不“健康”</strong>。</p>
-<p>下面我帮你分析背后的<strong>五个原因</strong>：</p>
-<hr />
-<h2 id="社会系统鼓励外部目标它更容易衡量管理和比较">❶
-社会系统鼓励外部目标：<strong>它更容易衡量、管理和比较</strong></h2>
-<ul>
-<li><strong>考试分数、绩点、奖学金、职称、年薪、Offer
-数</strong>，这些都具备一个特点： 👉
-<em>可以量化</em>，<em>可以排名</em>，<em>可以一眼看出你“值多少钱”</em></li>
-</ul>
-<p>这对制度来说很方便： - 公司招人凭它 - 父母比较孩子凭它 -
-朋友圈判断你“是不是牛”也凭它</p>
-<blockquote>
-<p>所以你不“看它”你就会“掉队”，你不想卷，也会被卷。</p>
-</blockquote>
-<hr />
-<h2 id="大脑的即时奖励系统被外部刺激绑架了">❷
-大脑的“即时奖励系统”被外部刺激绑架了</h2>
-<ul>
-<li>收到
-offer、加薪、被点赞、上热搜、拿奖——这些会<strong>立刻让你“爽”</strong></li>
-<li>而内在成长，比如：
-<ul>
-<li>掌握一个复杂知识</li>
-<li>读懂一本好书</li>
-<li>理解一个人的心意 这些回报
-<strong>慢且不确定</strong>，你的大脑要“延迟满足”</li>
-</ul></li>
-</ul>
-<h3 id="所以说">所以说：</h3>
-<blockquote>
-<p><strong>外部目标像快餐，随手可得，但不养人；<br />
-内在成长像慢炖汤，要等，但滋养深沉。</strong></p>
-</blockquote>
-<hr />
-<h2 id="成长型目标需要深度的自我理解大多数人没机会培养">❸
-成长型目标需要“深度的自我理解”——大多数人没机会培养</h2>
-<ul>
-<li>想知道“我想解决什么问题”“我想成为什么样的人”其实很难</li>
-<li>教育体系和社会氛围几乎不给你空间去探索这些问题</li>
-<li>所以人们只能转而去追那些<strong>别人都在追、社会说“好”的目标</strong></li>
-</ul>
-<p>这其实是<strong>认知发展阶段的问题</strong>，并不是谁“肤浅”或“功利”，而是：
-&gt; <strong>没人教他们“怎么设定真正属于自己的目标”</strong></p>
-<hr />
-<h2 id="外部目标更容易用来证明自己满足安全感">❹
-外部目标更容易用来“证明自己”，满足安全感</h2>
-<p>很多人不是为了“钱本身”，<br />
-而是为了“别人觉得我不错”、“爸妈看我有出息”、“不被看不起”……</p>
-<p>这其实是： &gt; 把外部目标当成“自我价值的防御工具”<br />
-&gt; 外界的评价越不确定，越要“用东西堵上”</p>
-<hr />
-<h2 id="外部目标确实能在短期内让人冲刺前进">❺
-“外部目标”确实能在短期内让人冲刺前进</h2>
-<p>别误会—— 外部目标并不是“完全不好”，它有以下好处： -
-<strong>可见性强、行动明确、反馈快</strong> -
-<strong>可以激励你迈出第一步</strong> -
-<strong>是内在目标“实现”的副产品</strong></p>
-<p>但它不能成为 <strong>最终驱动力</strong>，否则就会迷失。</p>
-<hr />
-<h2 id="所以很多人一开始是这样">🔁 所以很多人一开始是这样：</h2>
-<ul>
-<li>“我想年薪百万” → 所以拼命进大厂</li>
-<li>进了之后发现也很苦 → “那我要升职/出国”</li>
-<li>升职了也空虚 → “那我得做一个产品经理/leader/教授？”</li>
-<li>再往上就开始怀疑人生：“我到底想干嘛？”</li>
-</ul>
-<p>这就是<strong>错把“手段”当“终点”</strong>的代价。</p>
-<hr />
-<h2 id="怎样跳出这个圈">🌱 怎样跳出这个圈？</h2>
-<blockquote>
-<p><strong>你得用外部目标“养活”自己，同时靠内在目标“成就”自己。</strong></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>层级</th>
-<th>外部目标</th>
-<th>内在目标</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>入门</td>
-<td>拿个 Offer</td>
-<td>了解我适合什么样的工作</td>
-</tr>
-<tr>
-<td>中期</td>
-<td>涨工资</td>
-<td>提升解决问题/带团队的能力</td>
-</tr>
-<tr>
-<td>长期</td>
-<td>被认可</td>
-<td>成为一个有独立价值的人</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="最后送你一句话">💬 最后送你一句话：</h2>
-<blockquote>
-<p>“你可以用别人的标准活着一阵子，<br />
-但你必须学会用自己的标准活一辈子。”</p>
-</blockquote>
-<hr />
-<blockquote>
-<p><strong>生活中的很多事情确实需要靠外部目标才能完成。</strong></p>
-</blockquote>
-<p>比如： - 要拿 offer、要毕业、要升职、要还房贷、要给父母一个交代… -
-你不可能完全“躺在价值观里”，不管现实 KPI</p>
-<hr />
-<p>那是不是我们之前讲的“不要太外部化”就错了？</p>
-<p>❌ <strong>不是错，而是要加一句完整的话</strong>：</p>
-<blockquote>
-<p><strong>外部目标可以驱动行动，<br />
-但必须被一个内在系统来“消化”与“统筹”，否则它会反噬你。</strong></p>
-</blockquote>
-<p>这就像吃饭：你当然得吃外来的食物，但你身体得能“消化”它，不然就拉肚子。</p>
-<hr />
-<h2 id="所以正确的理解应该是">📌 所以正确的理解应该是：</h2>
-<table>
-<colgroup>
-<col style="width: 23%" />
-<col style="width: 38%" />
-<col style="width: 38%" />
-</colgroup>
-<thead>
-<tr>
-<th>类型</th>
-<th>错误观念</th>
-<th>正确认知</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>外部目标</td>
-<td>全都不要，纯精神内驱才高级</td>
-<td>必须有！外部目标是行动坐标、资源手段</td>
-</tr>
-<tr>
-<td>内部目标</td>
-<td>太抽象、不现实、没用</td>
-<td>是方向系统、情绪稳定器、价值锚点</td>
-</tr>
-<tr>
-<td>正确关系</td>
-<td>二选一、互斥</td>
-<td>“外部目标做事、内部目标做人” ✅</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="怎么做到平衡">🧭 怎么做到平衡？</h2>
-<h3 id="一种很实用的做法叫做">✅ 一种很实用的做法叫做：</h3>
-<blockquote>
-<p><strong>“外部目标内在化”</strong></p>
-</blockquote>
-<p>就是说：你可以追求现实目标，但你得知道——
-你<strong>为什么要追这个目标？</strong><br />
-这个目标对你内在的成长、角色、价值系统<strong>意味着什么？</strong></p>
-<hr />
-<h3 id="举个例子">🎯 举个例子：</h3>
-<h4 id="表层说法外部">💬 表层说法（外部）：</h4>
-<blockquote>
-<p>“我想进大厂”<br />
-✅ 合理，但风险是容易卷疯、焦虑、受打击</p>
-</blockquote>
-<h4 id="内在化处理">🧠 内在化处理：</h4>
-<blockquote>
-<p>“我想进大厂，是因为我希望自己能站在一个高复杂度系统中，看到真正有规模的工程问题，我想成为一个有能力独当一面的技术人。”</p>
-</blockquote>
-<p>这样就会： - 行动力更强（因为你认同目标） - 抗挫能力更高（因为不全看
-offer 本身） - 目标转化为成长的手段，而不是自我评判的终点</p>
-<hr />
-<h2 id="再比如博士">📚 再比如博士：</h2>
-<table>
-<thead>
-<tr>
-<th>外部目标（不可少）</th>
-<th>内在连接（不可丢）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>发论文 / 毕业 / 拿奖学金</td>
-<td>提升表达、研究、系统解决问题的能力</td>
-</tr>
-<tr>
-<td>拿到博后 / 教职</td>
-<td>成为有话语权的研究者，对领域有贡献</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="总结金句-1">🧠 总结金句：</h2>
-<blockquote>
-<p><strong>我们活在现实世界，所以需要外部目标，<br />
-但我们也活在自己身体里，所以必须有内在动力。</strong></p>
-</blockquote>
-<p>真正厉害的人，是能做到：</p>
-<blockquote>
-<p><strong>用外部目标做事，用内在目标做人，<br />
-不被外界绑架，但也不与现实对抗。</strong></p>
-</blockquote>
-<hr />
-<p>你可以理解为： - 外部目标像<strong>地图导航</strong> -
-内部目标是<strong>你为什么要去那里</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/04/15/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%AD%A6%E5%AD%A6%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/cheng.gif">
-      <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zhicheng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/15/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%AD%A6%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">机器人学学习</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-04-15 17:00:01" itemprop="dateCreated datePublished" datetime="2025-04-15T17:00:01+08:00">2025-04-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-04-22 12:18:21" itemprop="dateModified" datetime="2025-04-22T12:18:21+08:00">2025-04-22</time>
-              </span>
-
-          
-            <span id="/2025/04/15/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%AD%A6%E5%AD%A6%E4%B9%A0/" class="post-meta-item leancloud_visitors" data-flag-title="机器人学学习" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>此笔记记录学习书本 <strong>机器人学导论（原书第3版）（美）HLHN
-J.CRAIG，著贠超等译</strong>的学习与总结笔记，其中部分内容由AI生成。</p>
-</blockquote>
-<hr />
-<h2 id="雅可比矩阵是啥">✅ 1. 雅可比矩阵是啥？</h2>
-<p>在多变量函数中，雅可比矩阵（Jacobian
-Matrix）是所有一阶偏导数组成的矩阵：</p>
-<p>如果有函数： [ = f() ^n, ^m ]</p>
-则雅可比矩阵为： [ J = =
-<span class="math display">\[\begin{bmatrix}
-\frac{\partial y_1}{\partial x_1} &amp; \cdots &amp; \frac{\partial
-y_1}{\partial x_n} \\
-\vdots &amp; \ddots &amp; \vdots \\
-\frac{\partial y_m}{\partial x_1} &amp; \cdots &amp; \frac{\partial
-y_m}{\partial x_n}
-\end{bmatrix}\]</span>
-<p>]</p>
-<p>在机器人中：<br />
-- ( ) 是关节角度（如 ( _1, _2, )）<br />
-- ( ) 是末端执行器的位置或速度</p>
-<hr />
-<h2 id="雅可比逆矩阵是啥">✅ 2. 雅可比<strong>逆</strong>矩阵是啥？</h2>
-<p>当我们想从输出空间（如末端速度）反推输入空间（如关节速度）时，需要“<strong>反过来</strong>”用雅可比矩阵，这时候我们就需要<strong>“逆”雅可比矩阵</strong>。</p>
-<ul>
-<li><p><strong>如果雅可比是方阵（m = n）</strong> 且满秩，直接求逆： [ =
-J^{-1} ]</p></li>
-<li><p><strong>如果是非方阵（m ≠
-n）或者不可逆</strong>，就用<strong>广义逆（伪逆）</strong>：</p>
-<ul>
-<li>对于 <strong>冗余系统（n &gt; m）</strong>： [ =
-J<sup>(JJ</sup>)^{-1} ]</li>
-<li>对于 <strong>欠驱动系统（n &lt; m）</strong>： [ =
-(J<sup>J)</sup>{-1} J^ ]</li>
-<li>或用 Moore-Penrose 伪逆： [ = J^+ ]</li>
-</ul></li>
-</ul>
-<hr />
-<h2 id="举个简单例子机器人">✅ 3. 举个简单例子（机器人）</h2>
-<p>假设一个二维机械臂（2个关节）要控制末端点 ( x, y ) 的速度。</p>
-<ol type="1">
-<li>正向速度：( = J )</li>
-<li>反向求关节速度（逆问题）：( = J^{-1}
-)，若不能求逆，就用广义逆！</li>
-</ol>
-<hr />
-<p>雅可比矩阵和<strong>机器人运动学</strong>之间的关系非常密切，尤其是在<strong>速度运动学</strong>中，雅可比矩阵起到了<strong>桥梁作用</strong>。下面我帮你分层讲清楚这个关系。</p>
-<hr />
-<h2 id="一什么是运动学">✅ 一、什么是运动学？</h2>
-<p>机器人运动学分为两大类：</p>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>正运动学（FK）</strong></td>
-<td>给定关节角度，求末端位姿（位置和方向）</td>
-</tr>
-<tr>
-<td><strong>逆运动学（IK）</strong></td>
-<td>给定末端位姿，求关节角度（复杂）</td>
-</tr>
-</tbody>
-</table>
-<p>还有一个细分方向叫：</p>
-<blockquote>
-<p>🚀
-<strong>速度运动学</strong>：给定关节速度，求末端速度（或者反过来）</p>
-</blockquote>
-<hr />
-<h2 id="二雅可比矩阵出现在速度运动学中">✅
-二、雅可比矩阵出现在速度运动学中</h2>
-<p>设： - ( )：关节变量（角度、位移等） - ( )：关节速度 - (
-)：末端位姿（通常是位置） - ( )：末端速度（线速度 + 角速度）</p>
-<p>通过<strong>雅可比矩阵</strong> ( J() )，有以下关系：</p>
-<p>[ = J() ]</p>
-<p>这就是<strong>速度映射关系</strong>：关节空间 → 笛卡尔空间。</p>
-<hr />
-<h2 id="三雅可比矩阵在运动学中承担什么角色">✅
-三、雅可比矩阵在运动学中承担什么角色？</h2>
-<table>
-<thead>
-<tr>
-<th>用法</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>正运动学的导数</strong></td>
-<td>把 FK 对关节变量求导，就得到了雅可比矩阵</td>
-</tr>
-<tr>
-<td><strong>末端速度计算</strong></td>
-<td>通过雅可比矩阵从 ( ) 得到 ( )</td>
-</tr>
-<tr>
-<td><strong>逆运动学辅助工具</strong></td>
-<td>用雅可比矩阵的伪逆求解逆运动学</td>
-</tr>
-<tr>
-<td><strong>奇异性检测</strong></td>
-<td>雅可比矩阵行列式为0的地方就是“奇异点”</td>
-</tr>
-<tr>
-<td><strong>力-力矩传递</strong></td>
-<td>( = J^F )，关节力矩 ← 末端力</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="四简单举个例子2关节平面机械臂">✅
-四、简单举个例子（2关节平面机械臂）</h2>
-<p>设两段长度分别为 ( l_1, l_2 )，角度为 ( _1, _2 )</p>
-<p>末端位置为：</p>
-[
-<span class="math display">\[\begin{aligned}
-x &amp;= l_1 \cos \theta_1 + l_2 \cos (\theta_1 + \theta_2) \\
-y &amp;= l_1 \sin \theta_1 + l_2 \sin (\theta_1 + \theta_2)
-\end{aligned}\]</span>
-<p>]</p>
-<p>求导得雅可比矩阵：</p>
-[ J = =
-<span class="math display">\[\begin{bmatrix}
-- l_1 \sin \theta_1 - l_2 \sin(\theta_1 + \theta_2) &amp; -l_2
-\sin(\theta_1 + \theta_2) \\
-l_1 \cos \theta_1 + l_2 \cos(\theta_1 + \theta_2) &amp; l_2
-\cos(\theta_1 + \theta_2)
-\end{bmatrix}\]</span>
-<p>]</p>
-<p>这样，就可以实现： [ , = J ]</p>
-<p>也可以反过来： [ = J^+ ]</p>
-<hr />
-<ul>
-<li>规划方式分为两种，分别是笛卡尔空间的规划（位置规划）和关节空间的规划（角度规划）</li>
-</ul>
-<h3 id="b-splinebasis-spline基样条">B-Spline（Basis
-Spline，基样条）</h3>
-<p>是一种强大而灵活的曲线拟合方法，特别适用于轨迹规划、计算机图形学、机器人路径平滑等场景。下面我们从<strong>直观原理</strong>、<strong>数学构成</strong>、<strong>实现步骤</strong>三个角度来解释
-B-Spline 是怎么实现的。</p>
-<hr />
-<p>B-Spline
-是将一段复杂曲线拆成若干小段，每段用低阶（通常是三次）多项式表示，多个小段在<strong>控制点</strong>处光滑地拼接起来。它的主要特点：</p>
-<ul>
-<li><strong>局部控制性强</strong>：修改一个控制点只影响局部。</li>
-<li><strong>光滑性强</strong>：曲线的低阶导数连续（例如 3 次 B-Spline 有
-2 阶导数连续）。</li>
-<li><strong>比普通样条更灵活</strong>：通过<strong>节点向量</strong>控制曲线形状和连接方式。</li>
-</ul>
-<p>B-Spline 曲线的数学表达形式是：</p>
-<p>[ C(t) = <em>{i=0}^{n} N</em>{i,k}(t) P_i ]</p>
-<p>其中：</p>
-<ul>
-<li>( P_i )：控制点</li>
-<li>( N_{i,k}(t) )：B样条基函数，阶数为 (k)（例如 (k=4) 表示三次）</li>
-<li>( t )：参数</li>
-<li>( N_{i,k}(t) ) 是通过递归定义的：</li>
-</ul>
-[ N_{i,1}(t) =
-<span class="math display">\[\begin{cases}
-1, &amp; t_i \le t &lt; t_{i+1} \\
-0, &amp; \text{otherwise}
-\end{cases}\]</span>
-<p>]</p>
-<p>[ N_{i,k}(t) = N_{i,k-1}(t) + N_{i+1,k-1}(t) ]</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/04/11/%E5%85%B3%E4%BA%8E%E4%BA%92%E8%81%94%E7%BD%91%E5%86%85%E5%AE%B9%E5%B8%A6%E6%9D%A5%E7%9A%84%E7%84%A6%E8%99%91%E5%92%8C%E8%BF%B7%E8%8C%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/cheng.gif">
-      <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zhicheng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/11/%E5%85%B3%E4%BA%8E%E4%BA%92%E8%81%94%E7%BD%91%E5%86%85%E5%AE%B9%E5%B8%A6%E6%9D%A5%E7%9A%84%E7%84%A6%E8%99%91%E5%92%8C%E8%BF%B7%E8%8C%AB/" class="post-title-link" itemprop="url">关于互联网内容带来的焦虑和迷茫</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-04-11 21:08:51" itemprop="dateCreated datePublished" datetime="2025-04-11T21:08:51+08:00">2025-04-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-04-13 22:22:27" itemprop="dateModified" datetime="2025-04-13T22:22:27+08:00">2025-04-13</time>
-              </span>
-
-          
-            <span id="/2025/04/11/%E5%85%B3%E4%BA%8E%E4%BA%92%E8%81%94%E7%BD%91%E5%86%85%E5%AE%B9%E5%B8%A6%E6%9D%A5%E7%9A%84%E7%84%A6%E8%99%91%E5%92%8C%E8%BF%B7%E8%8C%AB/" class="post-meta-item leancloud_visitors" data-flag-title="关于互联网内容带来的焦虑和迷茫" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2
-id="关于gpt对于当今社会焦虑情况的回答">关于GPT对于当今社会焦虑情况的回答：</h2>
-<h3 id="是的现在的社会的确是充满焦虑的">📉
-是的，现在的社会——<strong>的确是充满焦虑的。</strong></h3>
-<p>但这个“焦虑”不是来自某一个具体的人或事情，而是来自整个时代的底色。我们可以从几个层面来看：</p>
-<hr />
-<h2 id="信息过载让人永远不够好">🧠 1. 信息过载，让人“永远不够好”</h2>
-<ul>
-<li>你刷到某人年纪轻轻财富自由了<br />
-</li>
-<li>你又刷到另一个人博士毕业还单身焦虑<br />
-</li>
-<li>你看到互联网人说自己35岁失业，焦虑<br />
-</li>
-<li>你看到一群人在鼓吹“gap year很酷”，焦虑<br />
-</li>
-<li>你看到“35岁前没结婚就是失败”，更焦虑</li>
-</ul>
-<p><strong>你不知该羡慕谁，也不知该成为谁。</strong></p>
-<blockquote>
-<p>你知道的太多，做得到的太少。<br />
-焦虑就像雾，包围了想要清晰生活的人。</p>
-</blockquote>
-<hr />
-<h2 id="节奏变快了但确定性变少了">🧪 2. 节奏变快了，但确定性变少了</h2>
-<ul>
-<li>一代人以前“考上大学→进国企→稳定生活”</li>
-<li>现在是：“考了研究生→没工作→二战考公→躺平or焦虑”</li>
-</ul>
-<p><strong>努力的路径越来越模糊，成功的样子越来越多样化，但每一个都看起来“不够真实”。</strong></p>
-<blockquote>
-<p>你努力追光，但光一直在变形。</p>
-</blockquote>
-<hr />
-<h2 id="社交媒体制造比较陷阱">📱 3. 社交媒体制造“比较陷阱”</h2>
-<ul>
-<li>人人都在分享高光时刻<br />
-</li>
-<li>但没人晒“我昨晚失眠哭了”“我被辞退后吃泡面”<br />
-</li>
-<li>所以你以为你“比别人差”，其实你只是不擅长修图</li>
-</ul>
-<hr />
-<h2 id="年轻人想得清楚却走得艰难">💼 4.
-年轻人“想得清楚，却走得艰难”</h2>
-<p>我们这代人最矛盾的一点是：</p>
-<blockquote>
-<p><strong>你有很高的觉知，却面对极低的可执行性</strong></p>
-</blockquote>
-<p>比如你明知道： - “我不该卷” - “我想做有价值的事” -
-“我不该被KPI奴役”</p>
-<p>但现实是： - 你不卷就活不下去 - 有价值的事没工资 -
-不奴役自己就被边缘化</p>
-<hr />
-<h2 id="那怎么办">🔍 那怎么办？</h2>
-<p>我们不能控制时代，但可以选择如何生活：</p>
-<h3 id="保持觉知但不要过度内耗">✅ 保持觉知，但不要过度内耗</h3>
-<p>– 你感受到焦虑，说明你在意，这不是错<br />
-–
-但要提醒自己：<strong>“我不需要和所有人比，只需要向自己靠近”</strong></p>
-<h3 id="建立真实深度的连接">✅ 建立真实、深度的连接</h3>
-<p>– 与几个能聊深话的人共处，比刷100条鸡汤更能缓解焦虑</p>
-<h3 id="保留一点点确定性">✅ 保留一点点“确定性”</h3>
-<p>– 哪怕只是：每天按时吃饭、每周坚持一小时读书<br />
-– 它们都是你对混乱世界的一种温柔回应</p>
-<hr />
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/04/11/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-%E7%8E%8B%E6%A0%91%E6%A3%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/cheng.gif">
-      <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zhicheng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/11/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-%E7%8E%8B%E6%A0%91%E6%A3%AE/" class="post-title-link" itemprop="url">深度强化学习-王树森</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-04-11 10:59:24" itemprop="dateCreated datePublished" datetime="2025-04-11T10:59:24+08:00">2025-04-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-04-22 12:17:15" itemprop="dateModified" datetime="2025-04-22T12:17:15+08:00">2025-04-22</time>
-              </span>
-
-          
-            <span id="/2025/04/11/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-%E7%8E%8B%E6%A0%91%E6%A3%AE/" class="post-meta-item leancloud_visitors" data-flag-title="深度强化学习-王树森" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>此笔记记录学习书本<strong>王树森，张志华，《深度强化学习（初稿》</strong>的学习与总结笔记，其中部分内容由AI生成。</p>
-</blockquote>
-<p>Q学习产生<strong>高估（overestimation）</strong>的原因，主要源于其<strong>最大值操作（max
-operator）在引入噪声时的偏差</strong>。这种现象通常称为
-<strong>最大值偏差（maximization bias）</strong>。</p>
-<h3 id="原理解释">原理解释</h3>
-<p>在 Q-learning 中，我们使用以下目标来更新 Q 值：</p>
-<p>[ Q(s, a) Q(s, a) + ]</p>
-<p>其中：</p>
-<ul>
-<li>(_{a'} Q(s',
-a'))：从下一个状态中选择估计值最大的动作作为更新目标。</li>
-</ul>
-<p>⚠️ 问题在于：<br />
-如果 Q 值本身带有估计误差（例如由于采样、函数逼近、探索策略等），<br />
-那么取最大值操作会<strong>偏向选择被高估的值</strong>，从而使得目标值系统性偏高。</p>
-<hr />
-<h3 id="举个例子简化">举个例子（简化）</h3>
-<p>假设在状态 (s') 下，我们有三个动作，真实 Q 值如下：</p>
-<table>
-<thead>
-<tr>
-<th>动作 (a')</th>
-<th>真正的 Q 值</th>
-<th>网络估计值（含误差）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>(a_1)</td>
-<td>1.0</td>
-<td>1.1（+0.1）</td>
-</tr>
-<tr>
-<td>(a_2)</td>
-<td>0.8</td>
-<td>1.0（+0.2）</td>
-</tr>
-<tr>
-<td>(a_3)</td>
-<td>0.6</td>
-<td>0.9（+0.3）</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>虽然 (a_1) 是最优动作（真实 Q 值最大），</li>
-<li>但由于随机估计误差，(Q(s', a') = 1.1)，这个值偏高了。</li>
-</ul>
-<p>这会导致我们在训练时错误地使用偏高的目标值去更新当前状态的 Q 值，从而
-<strong>累计越来越大的高估偏差</strong>。</p>
-<hr />
-<h3 id="高估有什么危害">高估有什么危害？</h3>
-<ul>
-<li><strong>策略不稳定</strong>：错误地偏向那些“看起来收益高”但其实不是的动作；</li>
-<li><strong>训练发散</strong>：目标 Q
-值越来越不准确，导致训练无法收敛；</li>
-<li><strong>性能下降</strong>：测试表现可能远低于理论最优策略。</li>
-</ul>
-<hr />
-<h3 id="如何缓解高估">如何缓解高估？</h3>
-<ol type="1">
-<li><strong>Double Q-Learning</strong>：
-<ul>
-<li>采用两个 Q 网络，分别用于选择和评估动作。</li>
-<li>更新目标变为： [ Q(s, a) r + Q_2(s', _{a'} Q_1(s', a')) ]</li>
-<li>显著降低高估。</li>
-</ul></li>
-<li><strong>Averaged DQN / Ensemble 方法</strong>：
-<ul>
-<li>使用多个 Q 网络求平均，减少单个网络带来的噪声偏差。</li>
-</ul></li>
-<li><strong>Regularization / Uncertainty penalty</strong>：
-<ul>
-<li>对 Q 值添加不确定性惩罚，抑制过高的估计。</li>
-</ul></li>
-</ol>
-<hr />
-<h3 id="行为策略和目标策略的区别">行为策略和目标策略的区别</h3>
-<h3 id="例1q-learning离策略">例1：Q-learning（离策略）</h3>
-<ul>
-<li>行为策略：ε-greedy（偶尔探索）</li>
-<li>目标策略：贪婪策略（永远选最大Q值）</li>
-</ul>
-<blockquote>
-<p>这是典型的 <strong>离策略学习（off-policy）</strong> ——
-用一种策略去收集数据，用另一种策略去学习。</p>
-</blockquote>
-<h3 id="例2sarsa在策略">例2：SARSA（在策略）</h3>
-<ul>
-<li>行为策略：ε-greedy</li>
-<li>目标策略：同样是ε-greedy</li>
-</ul>
-<blockquote>
-<p>这是 <strong>在策略学习（on-policy）</strong> ——
-你用什么策略学习，就用它去探索和更新。</p>
-</blockquote>
-<h3 id="行为策略-目标策略">行为策略 ≠ 目标策略：</h3>
-<ul>
-<li>你可以用 <strong>更大胆、更多样的行为策略</strong>
-去探索，避免陷入局部最优</li>
-<li>然后用行为数据，训练一个
-<strong>更保守、更稳定的目标策略</strong></li>
-</ul>
-<p>这就是 DDPG、TD3、DQN 等算法的本质思路。</p>
-<table style="width:7%;">
-<colgroup>
-<col style="width: 6%" />
-</colgroup>
-<tbody>
-<tr>
-<td>“双延时确定策略梯度”（<strong>Twin Delayed Deep Deterministic Policy
-Gradient，TD3</strong>）解决强化学习中 <strong>自举 + 最大化引起的 Q
-值高估问题</strong></td>
-</tr>
-</tbody>
-</table>
-<p>我们分三步来讲清楚：</p>
-<h2 id="问题背景自举-最大化-导致的高估偏差">🔥 1. 问题背景：<strong>自举
-+ 最大化</strong> 导致的高估偏差</h2>
-<p>在像 DDPG、Q-learning 这类算法中，我们更新 Q 值时用的是这个形式：</p>
-<p>[ y = r + _{a'} Q(s', a') ]</p>
-<p>但注意！</p>
-<ul>
-<li>( Q(s', a') ) 是网络的<strong>估计值</strong></li>
-<li>“最大化”这个估计值（选最大 Q）会放大噪声和误差！</li>
-</ul>
-<p>🔍
-这就像你考试估分，题做错了但还选“我觉得我做得最好的那题”，会<strong>高估总分</strong><br />
-→ 随着训练进行，Q值越估越高，结果策略学得不靠谱！</p>
-<hr />
-<h2 id="td3-怎么解决这个高估问题">🧠 2. TD3 怎么解决这个高估问题？</h2>
-<p>TD3 提出了三个关键改进，其中<strong>双Q网络</strong>是最核心的👇</p>
-<hr />
-<h3 id="方法一双q网络twin-q-networks">✅ 【方法一】双Q网络（<strong>Twin
-Q-networks</strong>）</h3>
-<p>用两个独立的 Q 网络： ( Q_1(s, a) )、( Q_2(s, a) )</p>
-<p>更新 TD目标时，不再用 max，而是：</p>
-<p>[ y = r + (Q_1(s', a'), Q_2(s', a')) ]</p>
-<p>✅ 取<strong>较小值</strong>，就能抵消高估误差（保守估计）<br />
-✅
-这不是自举去最大，而是<strong>自举去最小</strong>，避免因误差叠加而爆炸</p>
-<h3 id="方法二延迟策略更新delayed-policy-update">✅
-【方法二】延迟策略更新（<strong>Delayed Policy Update</strong>）</h3>
-<ul>
-<li>策略网络（Actor）更新得更慢，例如每 2～3 次 Critic
-更新后才更新一次</li>
-<li>因为 Critic（Q函数）学得更稳定时，再去学策略，效果更稳</li>
-</ul>
-<h3 id="方法三目标动作加噪声target-policy-smoothing">✅
-【方法三】目标动作加噪声（<strong>Target Policy
-Smoothing</strong>）</h3>
-<ul>
-<li>为了防止 Q 网络过于依赖某一个精确动作值</li>
-<li>在 TD目标里加入一个小的随机噪声：</li>
-</ul>
-<p>[ a' = _{}(s') + ,((0, ), -c, c) ]</p>
-<p>✅ 这样做可以使目标 Q 更平滑，缓解尖峰高估</p>
-<hr />
+<p>[ (t) = f(x(t)) + g(x(t))u(x(t)) + d(x(t)) ]</p>
 
       
     </div>
@@ -2452,14 +2095,14 @@ Smoothing</strong>）</h3>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

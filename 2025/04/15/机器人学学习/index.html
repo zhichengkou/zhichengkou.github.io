@@ -21,12 +21,12 @@
     var CONFIG = {"hostname":"zhichengkou.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="此笔记记录学习书本 机器人学导论（原书第3版）（美）HLHN J.CRAIG，著贠超等译的学习与总结笔记，其中部分内容由AI生成。   ✅ 1. 雅可比矩阵是啥？ 在多变量函数中，雅可比矩阵（Jacobian Matrix）是所有一阶偏导数组成的矩阵： 如果有函数： [ &#x3D; f() ^n, ^m ] 则雅可比矩阵为： [ J &#x3D; &#x3D; \[\begin{bmatrix} \f">
+  <meta name="description" content="此笔记记录学习书本 机器人学导论（原书第3版）（美）HLHN J.CRAIG，著贠超等译的学习与总结笔记，其中部分内容由AI生成。   ✅ 1. 雅可比矩阵是啥？ 在多变量函数中，雅可比矩阵（Jacobian Matrix）是所有一阶偏导数组成的矩阵： 如果有函数： [ &#x3D; f() ^n, ^m ] 则雅可比矩阵为： [ J &#x3D; &#x3D; ] 在机器人中： - ( ) 是关节角">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器人学学习">
 <meta property="og:url" content="http://zhichengkou.github.io/2025/04/15/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%AD%A6%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="Zhicheng">
-<meta property="og:description" content="此笔记记录学习书本 机器人学导论（原书第3版）（美）HLHN J.CRAIG，著贠超等译的学习与总结笔记，其中部分内容由AI生成。   ✅ 1. 雅可比矩阵是啥？ 在多变量函数中，雅可比矩阵（Jacobian Matrix）是所有一阶偏导数组成的矩阵： 如果有函数： [ &#x3D; f() ^n, ^m ] 则雅可比矩阵为： [ J &#x3D; &#x3D; \[\begin{bmatrix} \f">
+<meta property="og:description" content="此笔记记录学习书本 机器人学导论（原书第3版）（美）HLHN J.CRAIG，著贠超等译的学习与总结笔记，其中部分内容由AI生成。   ✅ 1. 雅可比矩阵是啥？ 在多变量函数中，雅可比矩阵（Jacobian Matrix）是所有一阶偏导数组成的矩阵： 如果有函数： [ &#x3D; f() ^n, ^m ] 则雅可比矩阵为： [ J &#x3D; &#x3D; ] 在机器人中： - ( ) 是关节角">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-04-15T09:00:01.000Z">
 <meta property="article:modified_time" content="2025-04-22T04:18:21.712Z">
@@ -261,13 +261,6 @@ J.CRAIG，著贠超等译</strong>的学习与总结笔记，其中部分内容�
 Matrix）是所有一阶偏导数组成的矩阵：</p>
 <p>如果有函数： [ = f() ^n, ^m ]</p>
 则雅可比矩阵为： [ J = =
-<span class="math display">\[\begin{bmatrix}
-\frac{\partial y_1}{\partial x_1} &amp; \cdots &amp; \frac{\partial
-y_1}{\partial x_n} \\
-\vdots &amp; \ddots &amp; \vdots \\
-\frac{\partial y_m}{\partial x_1} &amp; \cdots &amp; \frac{\partial
-y_m}{\partial x_n}
-\end{bmatrix}\]</span>
 <p>]</p>
 <p>在机器人中：<br />
 - ( ) 是关节角度（如 ( _1, _2, )）<br />
@@ -371,19 +364,9 @@ J<sup>(JJ</sup>)^{-1} ]</li>
 <p>设两段长度分别为 ( l_1, l_2 )，角度为 ( _1, _2 )</p>
 <p>末端位置为：</p>
 [
-<span class="math display">\[\begin{aligned}
-x &amp;= l_1 \cos \theta_1 + l_2 \cos (\theta_1 + \theta_2) \\
-y &amp;= l_1 \sin \theta_1 + l_2 \sin (\theta_1 + \theta_2)
-\end{aligned}\]</span>
 <p>]</p>
 <p>求导得雅可比矩阵：</p>
 [ J = =
-<span class="math display">\[\begin{bmatrix}
-- l_1 \sin \theta_1 - l_2 \sin(\theta_1 + \theta_2) &amp; -l_2
-\sin(\theta_1 + \theta_2) \\
-l_1 \cos \theta_1 + l_2 \cos(\theta_1 + \theta_2) &amp; l_2
-\cos(\theta_1 + \theta_2)
-\end{bmatrix}\]</span>
 <p>]</p>
 <p>这样，就可以实现： [ , = J ]</p>
 <p>也可以反过来： [ = J^+ ]</p>
@@ -414,10 +397,6 @@ B-Spline 是怎么实现的。</p>
 <li>( N_{i,k}(t) ) 是通过递归定义的：</li>
 </ul>
 [ N_{i,1}(t) =
-<span class="math display">\[\begin{cases}
-1, &amp; t_i \le t &lt; t_{i+1} \\
-0, &amp; \text{otherwise}
-\end{cases}\]</span>
 <p>]</p>
 <p>[ N_{i,k}(t) = N_{i,k-1}(t) + N_{i+1,k-1}(t) ]</p>
 
@@ -524,14 +503,14 @@ Spline，基样条）</span></a></li></ol></li></ol></div>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

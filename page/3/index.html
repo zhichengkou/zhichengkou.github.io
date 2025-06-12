@@ -186,7 +186,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2024/10/08/2024%E6%80%BB%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/03/21/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95LSTD-Q/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/cheng.gif">
@@ -200,7 +200,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/10/08/2024%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">2024年总结</a>
+            <a href="/2025/03/21/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95LSTD-Q/" class="post-title-link" itemprop="url">强化学习算法LSTD-Q</a>
         </h2>
 
         <div class="post-meta">
@@ -209,19 +209,13 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2024-10-08 08:22:44" itemprop="dateCreated datePublished" datetime="2024-10-08T08:22:44+08:00">2024-10-08</time>
+              <time title="创建时间：2025-03-21 19:18:35 / 修改时间：19:20:52" itemprop="dateCreated datePublished" datetime="2025-03-21T19:18:35+08:00">2025-03-21</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-04-22 18:09:14" itemprop="dateModified" datetime="2025-04-22T18:09:14+08:00">2025-04-22</time>
-              </span>
 
           
-            <span id="/2024/10/08/2024%E6%80%BB%E7%BB%93/" class="post-meta-item leancloud_visitors" data-flag-title="2024年总结" title="阅读次数">
+            <span id="/2025/03/21/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95LSTD-Q/" class="post-meta-item leancloud_visitors" data-flag-title="强化学习算法LSTD-Q" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -238,22 +232,900 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="年度照片">年度照片</h2>
-<p><img src="DSC_5063.jpg" alt="alt text" /> ## 大事记</p>
-<h2 id="走一走">走一走</h2>
+          <h3 id="lstd-q-中最小二乘法的体现"><strong>🔍 LSTD-Q
+中最小二乘法的体现</strong></h3>
+<p><strong>LSTD-Q（Least-Squares Temporal Difference
+Q-learning）</strong> 之所以叫
+“Least-Squares”，就是因为它通过<strong>最小二乘法（Least
+Squares）</strong> 来求解最优参数 <code>θ</code>，从而逼近 Q 函数。</p>
+<p>在代码中，最小二乘法体现在： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">self</span>.theta = np.linalg.solve(<span class="variable language_">self</span>.A, <span class="variable language_">self</span>.b)</span><br></pre></td></tr></table></figure>
+这实际上是<strong>解最小二乘问题</strong>的核心步骤，类似于线性回归的求解方式。</p>
+<hr />
+<h2 id="数学推导最小二乘法在-lstd-q-中的应用"><strong>📌
+数学推导：最小二乘法在 LSTD-Q 中的应用</strong></h2>
+<p>LSTD-Q 的目标是找到一个 <strong>近似 Q 值函数</strong>： [ Q(s, a) =
+(s, a)^T ] 其中： - ( Q(s, a) ) 是 Q 值，我们用<strong>特征向量</strong>
+( (s, a) ) 的线性组合来逼近它。 - ( ) 是待求解的参数。</p>
+<hr />
+<h3 id="目标找到最优-θ-使得-lstd-误差最小"><strong>1️⃣ 目标：找到最优
+<code>θ</code> 使得 LSTD 误差最小</strong></h3>
+<p>基于 <strong>贝尔曼方程</strong>： [ Q(s, a) = r + Q(s’, a’) ]
+我们用<strong>最小二乘法</strong>逼近 Q 值，最优 <code>θ</code>
+需要满足： [ <em>{} ( Q(s, a) - (r + Q(s’, a’)) )^2 ] 展开后可以写成： [
+</em>{} ( (s, a)^T - (r + (s’, a’)^T ) )^2 ]</p>
+<hr />
+<h3 id="线性方程组的构造"><strong>2️⃣ 线性方程组的构造</strong></h3>
+如果我们有 <strong>N 组数据</strong> ( (s_i, a_i, r_i, s’_i, a’_i)
+)，记： - ( ) 是所有 ( (s, a) ) 组成的矩阵： [ =
+<p>] 形状是 ( (N, d) )，其中 ( d ) 是特征维度。</p>
 <ul>
-<li>乌镇</li>
-<li>云南
+<li><p>( R ) 是奖励向量： [ R =</p>
+<p>] 形状是 ( (N, 1) )。</p></li>
+<li><p>( ’ ) 是所有 ( (s’, a’) ) 组成的矩阵： [ ’ =</p>
+<p>] 形状也是 ( (N, d) )。</p></li>
+</ul>
+<p>将 Q 值近似公式代入，我们得到线性方程： [ = R + ’ ] 整理得到： [ (^T
+- ^T ’) = ^T R ]</p>
+<hr />
+<h3 id="代码如何实现最小二乘法"><strong>3️⃣
+代码如何实现最小二乘法</strong></h3>
+<p>在代码中，这个方程被表示为： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">self</span>.A += np.outer(phi, (phi - <span class="variable language_">self</span>.gamma * next_phi))  <span class="comment"># 更新 A</span></span><br><span class="line"><span class="variable language_">self</span>.b += reward * phi  <span class="comment"># 更新 b</span></span><br><span class="line"><span class="variable language_">self</span>.theta = np.linalg.solve(<span class="variable language_">self</span>.A, <span class="variable language_">self</span>.b)  <span class="comment"># 计算 theta</span></span><br></pre></td></tr></table></figure> - <code>self.A</code> 对应
+( (^T - ^T ’) ) - <code>self.b</code> 对应 ( ^T R ) -
+<code>np.linalg.solve(self.A, self.b)</code>
+<strong>解线性方程组，求解最优 <code>θ</code></strong></p>
+<p>这就是 <strong>LSTD-Q 里最小二乘法的核心！</strong> 🎯</p>
+<hr />
+<h2 id="直观理解"><strong>🚀 直观理解</strong></h2>
 <ul>
-<li>大理</li>
-<li>丽江</li>
-<li>昆明</li>
-<li>香格里拉<br />
+<li><strong>普通 Q-learning</strong> 是直接用 TD
+误差来<strong>逐步更新</strong> Q
+值，但它可能收敛慢，而且受学习率影响大。</li>
+<li><strong>LSTD-Q</strong>
+是<strong>直接求解一个线性方程组</strong>，用最小二乘法<strong>一次性计算出最优
+<code>θ</code></strong>，收敛快，精度高，适用于高维状态空间。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/03/18/%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cheng.gif">
+      <meta itemprop="name" content="Zhicheng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zhicheng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/03/18/%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">规划算法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-03-18 22:10:55" itemprop="dateCreated datePublished" datetime="2025-03-18T22:10:55+08:00">2025-03-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-04-07 19:52:30" itemprop="dateModified" datetime="2025-04-07T19:52:30+08:00">2025-04-07</time>
+              </span>
+
+          
+            <span id="/2025/03/18/%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/" class="post-meta-item leancloud_visitors" data-flag-title="规划算法" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <table>
+<tbody>
+<tr>
+<td># OMPL中规划算法的比较</td>
+</tr>
+<tr>
+<td>分析维度：核心策略、收敛速度、路径质量、适用场景、内存效率</td>
+</tr>
+</tbody>
+</table>
+<p>一、基于树扩展的算法<br />
+1. RRT (Rapidly-exploring Random Tree)<br />
+- 核心思想：通过随机采样快速扩展搜索树，适合高维空间<br />
+- 特性：<br />
+- 优点：概率完备性，适合复杂障碍环境<br />
+- 缺点：路径曲折，需后优化（如Shortcut Smoothing）<br />
+- 典型应用：机械臂抓取路径规划</p>
+<ol start="2" type="1">
+<li>RRTConnect
+<ul>
+<li>改进点：双向树扩展（起点和终点同时生长）<br />
+</li>
+<li>性能：
+<ul>
+<li>收敛速度比RRT快30-50%（OMPL基准测试数据）<br />
+</li>
+<li>在狭窄通道场景中成功率提升显著<br />
 </li>
 </ul></li>
-<li>黄山</li>
-<li>上海市内与苏州市内</li>
+<li>局限：两树连接时可能产生不连续路径</li>
+</ul></li>
+<li>EST (Expansive Space Trees)
+<ul>
+<li>策略：基于状态密度启发式扩展，优先探索低密度区域<br />
+</li>
+<li>优势场景：非完整约束系统（如差速驱动机器人）<br />
+</li>
+<li>缺陷：高维空间扩展效率骤降</li>
+</ul></li>
+</ol>
+<p>二、基于离散化分解的算法<br />
+1. KPIECE系列<br />
+| 算法 | 核心机制 | 适用性 |<br />
+|————|————————————-|————————–|<br />
+| KPIECE1 | 基于投影的网格分解，动态调整分辨率 | 中等维度（3-6自由度）
+|<br />
+| BKPIECE1 | 双向树扩展+KPIECE网格引导 | 狭窄通道/复杂几何约束 |<br />
+| LBKPIECE1 | 轻量化版本，牺牲路径质量换取内存效率 |
+嵌入式系统/实时规划需求 |</p>
+<p>数据对比：在7自由度机械臂场景中，BKPIECE1规划速度比RRT快2.1倍，但路径长度增加15%</p>
+<ol start="2" type="1">
+<li>SBL (Single-Query Bidirectional Lazy)
+<ul>
+<li>创新点：延迟碰撞检测（Lazy Evaluation）+ 双向搜索<br />
+</li>
+<li>优势：
+<ul>
+<li>减少70%以上的碰撞检测计算量（IEEE T-RO 2024研究）<br />
+</li>
+<li>支持动态障碍物更新<br />
+</li>
+</ul></li>
+<li>局限：路径可能存在安全风险，需后验验证</li>
+</ul></li>
+</ol>
+<p>三、概率路图算法<br />
+1. PRM (Probabilistic Roadmap)<br />
+- 阶段划分：<br />
+1. 学习阶段：构建随机采样节点与无碰撞边<br />
+2. 查询阶段：A*搜索最优路径<br />
+- 优势：<br />
+- 多查询场景效率极高（预处理后路径规划时间降低90%）<br />
+- 支持并行化建图（2025版OMPL新增GPU加速接口）<br />
+- 缺陷：动态环境适应性差，需定期更新路图</p>
+<p>四、算法性能综合对比<br />
+| 指标 | RRT | RRTConnect | KPIECE1 | PRM | SBL |<br />
+|—————-|——–|————|———|———|———|<br />
+| 收敛时间（s） | 2.8 | 1.9 | 1.2 | 5.1* | 0.8 |<br />
+| 路径长度（m） | 12.4 | 11.7 | 14.2 | 10.9 | 13.5 |<br />
+| 内存占用（MB） | 45 | 62 | 28 | 210 | 37 |<br />
+| 狭窄通道成功率 | 68% | 83% | 91% | 42% | 79% |</p>
+<blockquote>
+<p>*注：PRM时间含预处理阶段，测试环境为MoveIt!的7-DOF
+Panda机械臂仿真场景</p>
+</blockquote>
+<p>五、选型决策指南<br />
+1. 实时性要求高 → 选择SBL或LBKPIECE1（牺牲路径质量换取速度）<br />
+2. 路径最优化需求 → 使用PRM+优化器（如CHOMP或STOMP）<br />
+3. 动态环境 → RRT变种（如RRT*或Anytime RRT）<br />
+4. 嵌入式部署 → KPIECE1（内存占用可控）<br />
+5. 学术研究 → 结合OMPL的Benchmark工具进行定量分析</p>
+<hr />
+<p>ref: https://ompl.kavrakilab.org/planners.html</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/03/18/safe-learning%E5%AE%9E%E8%B7%B5-%E5%9F%BA%E4%BA%8E%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%9A%84MPC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cheng.gif">
+      <meta itemprop="name" content="Zhicheng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zhicheng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/03/18/safe-learning%E5%AE%9E%E8%B7%B5-%E5%9F%BA%E4%BA%8E%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%9A%84MPC/" class="post-title-link" itemprop="url">safe learning实践 - 基于强化学习的MPC</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-03-18 20:50:59" itemprop="dateCreated datePublished" datetime="2025-03-18T20:50:59+08:00">2025-03-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-04-07 19:53:33" itemprop="dateModified" datetime="2025-04-07T19:53:33+08:00">2025-04-07</time>
+              </span>
+
+          
+            <span id="/2025/03/18/safe-learning%E5%AE%9E%E8%B7%B5-%E5%9F%BA%E4%BA%8E%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%9A%84MPC/" class="post-meta-item leancloud_visitors" data-flag-title="safe learning实践 - 基于强化学习的MPC" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>论文《Learning Safety in Model-Based Reinforcement Learning using MPC
+and Gaussian Processes》提出了一种结合模型预测控制 (MPC) 和高斯过程 (GP)
+回归的安全强化学习 (RL) 方法。以下是论文的核心内容分析：</p>
+<ol type="1">
+<li><strong>背景与动机</strong>:
+<ul>
+<li>现代机器学习结合MPC已成为提高控制系统性能和安全性的重要方向。然而，大多数RL算法是基于模型无关的方法，缺乏对系统动态的充分了解，容易导致不安全的决策。</li>
+<li>论文提出了一种通过GP回归估计MPC参数的安全集合，以在RL更新过程中确保安全性。</li>
+</ul></li>
+<li><strong>方法论</strong>:
+<ul>
+<li><strong>MPC框架</strong>:
+作为控制器，通过近似系统动态进行预测和优化。</li>
+<li><strong>强化学习 (RL)</strong>: 调整MPC的参数以提高性能。</li>
+<li><strong>高斯过程 (GP) 回归</strong>:
+用于从数据中直接估计MPC参数的约束，预测某个参数是否会导致安全或不安全的策略。</li>
+</ul></li>
+<li><strong>关键贡献</strong>:
+<ul>
+<li>论文的创新点在于通过GP回归在RL过程中动态学习安全集合 (Safe
+Set)。</li>
+<li>通过概率约束的方式，确保学习过程中不会出现违反系统约束的情况。</li>
+<li>与其他安全强化学习方法相比，该方法不需要对预测模型做过多的假设，提升了计算效率。</li>
+</ul></li>
+<li><strong>实验验证</strong>:
+<ul>
+<li>通过一个无人机控制实验验证了该方法的有效性。</li>
+<li>结果显示，使用GP回归的安全强化学习方法在减少不安全的轨迹、加快收敛速度以及提高整体性能方面优于传统的RL方法。</li>
+</ul></li>
+<li><strong>优点与不足</strong>:
+<ul>
+<li><strong>优点</strong>:
+通过数据驱动的方法提高安全性，并且避免了模型误差导致的控制失效。</li>
+<li><strong>不足</strong>:
+需要在早期阶段通过数据不断更新GP模型，并且在安全概率 (β)
+的回退机制上存在一定的性能权衡。</li>
+</ul></li>
+<li><strong>未来工作</strong>:
+<ul>
+<li>解决因GP模型不准确导致的初期高不确定性问题。</li>
+<li>将该方法扩展到更复杂的非线性和随机MPC框架中。</li>
+</ul></li>
+</ol>
+<p>总结来说，这篇论文提出了一种创新性的基于GP的安全强化学习方法，通过对MPC参数的概率约束，实现了数据驱动的安全学习，大大减少了不安全行为的发生。</p>
+<p>论文中的强化学习 (Reinforcement Learning, RL)
+主要用于<strong>动态调整MPC控制器的参数</strong>，以<strong>提高系统性能</strong>，同时<strong>确保控制策略的安全性</strong>。具体过程如下：</p>
+<hr />
+<h2 id="强化学习目标">1. 强化学习目标</h2>
+<p>强化学习的目标是通过不断交互和试探，<strong>找到最优的MPC参数
+θ</strong>，使得在保持安全性的同时，最大化性能指标（或最小化损失函数）。</p>
+<p>目标函数是： <span class="math display">$$
+J(πθ)=Eτπθ[∑k=0∞γkL(sk,ak)]J(π_{\theta}) =
+\mathbb{E}_{\tau_{\pi_{\theta}}} \left[ \sum_{k=0}^{\infty} \gamma^k
+L(s_k, a_k) \right]
+$$</span></p>
+<ul>
+<li><span class="math inline"><em>θ</em></span>
+是MPC的参数（例如无人机的动力学参数）。</li>
+<li><span
+class="math inline"><em>L</em>(<em>s</em><em>k</em>, <em>a</em><em>k</em>)<em>L</em>(<em>s</em><sub><em>k</em></sub>, <em>a</em><sub><em>k</em></sub>)</span>
+是每个时间步的损失（如偏离目标位置或违反安全约束）。</li>
+<li>γ是折扣因子。</li>
+<li>τπθ<em>{</em>{}} 是当前MPC策略下的轨迹。</li>
 </ul>
+<hr />
+<h2 id="强化学习如何更新mpc参数">2. 强化学习如何更新MPC参数</h2>
+<p>论文采用了一种<strong>基于梯度更新的强化学习方法</strong>，例如Q-Learning或Policy
+Gradient方法。</p>
+<p>参数更新公式：</p>
+<p><span class="math inline">$θ←θ−α∇θ∑k=0mψ(sk,ak,sk+1,θ)\theta
+\leftarrow \theta - \alpha \nabla_{\theta} \sum_{k=0}^{m} \psi(s_k, a_k,
+s_{k+1}, \theta)$</span></p>
+<ul>
+<li><span class="math inline"><em>α</em></span> 是学习率。</li>
+<li><span class="math inline"><em>ψ</em></span>
+是强化学习损失项（例如Q-learning损失或策略梯度）。</li>
+<li>mm 是观测批量（Batch size）。</li>
+</ul>
+<hr />
+<h2 id="结合mpc的作用">3. 结合MPC的作用</h2>
+<p>在本方法中，MPC不仅提供了控制信号，还作为<strong>强化学习的策略函数</strong>：</p>
+<p><span
+class="math inline"><em>π</em><em>θ</em>(<em>s</em>) = <em>a</em><em>r</em><em>g</em>⁡<em>m</em><em>i</em><em>n</em>⁡<em>u</em><em>Q</em><em>θ</em>(<em>s</em>, <em>u</em>)<em>π</em><sub><em>θ</em></sub>(<em>s</em>) = arg min<sub><em>u</em></sub><em>Q</em><sub><em>θ</em></sub>(<em>s</em>, <em>u</em>)</span></p>
+<ul>
+<li>通过MPC的优化过程直接得到当前状态 ss 下的最优控制输入 uu。</li>
+<li>强化学习通过**调整MPC中的参数 θ*，间接实现了策略的改进。</li>
+</ul>
+<hr />
+<h2 id="安全性约束">4. 安全性约束</h2>
+<p>由于强化学习过程中的探索可能导致<strong>违反安全约束</strong>，论文使用<strong>高斯过程
+(GP) 回归</strong>来估计安全区域 SS，并限制强化学习的参数更新范围：</p>
+<p><span
+class="math inline">$θ+=arg⁡min⁡θ12∥θ+−θ∥2+α∇θ∑k=0mψ(sk,ak,sk+1,θ)\theta^+
+= \arg \min_{\theta} \frac{1}{2} \| \theta^+ - \theta \|^2 + \alpha
+\nabla_{\theta} \sum_{k=0}^{m} \psi(s_k, a_k, s_{k+1},
+\theta)$</span></p>
+<p>subject to: θ∈SD  S_D</p>
+<p>其中，安全集合 SDS_D
+是通过GP估计的“安全参数集合”，确保每次更新的MPC参数不会导致系统违反约束。</p>
+<hr />
+<h2 id="强化学习-安全机制的循环过程">5. 强化学习-安全机制的循环过程</h2>
+<h3 id="强化学习循环">强化学习循环：</h3>
+<ol type="1">
+<li><strong>MPC控制器执行一轮任务 (Trajectory
+Rollout)</strong>，收集状态-动作-奖励数据。</li>
+<li><strong>计算当前MPC参数的安全性</strong>（是否违反了状态或控制约束）。</li>
+<li><strong>GP回归模型更新安全区域</strong> SDS_D。</li>
+<li>**强化学习更新MPC参数 θ*，同时确保参数更新受安全区域 SDS_D
+限制。</li>
+<li>**下一次MPC控制器使用新的参数 θ*，并重复上述过程。</li>
+</ol>
+<hr />
+<h2 id="为什么引入强化学习">6. 为什么引入强化学习？</h2>
+<ul>
+<li><strong>MPC本身具有良好的控制性能</strong>，但在面对不确定性（如风扰动）和复杂环境时，需要不断<strong>在线调整参数</strong>。</li>
+<li>强化学习提供了一种<strong>数据驱动的方式</strong>，通过多轮交互不断改进MPC参数。</li>
+<li>传统RL算法容易出现探索导致安全性破坏的问题，而论文通过<strong>GP约束机制</strong>，确保在强化学习过程中不会发生安全约束的违反。</li>
+</ul>
+<hr />
+<h2 id="总结">✅ 总结：</h2>
+<h3 id="强化学习的角色">强化学习的角色：</h3>
+<ol type="1">
+<li>**通过调整MPC参数 θ*，不断提高控制性能；</li>
+<li><strong>利用GP回归评估安全性</strong>，确保在探索过程中不会违反安全约束；</li>
+<li><strong>数据驱动</strong> +
+<strong>模型预测控制</strong>，实现了<strong>安全性保证</strong> +
+<strong>性能优化</strong>的双重目标。</li>
+</ol>
+<hr />
+<p>如果需要详细的图示解释或算法流程图，我可以帮你画出来！ 😊</p>
+<p>论文中使用的强化学习方法是<strong>“基于最小二乘的Q学习 (LSTD
+Q-Learning)”</strong>，具体来说是<strong>二阶LSTD Q-Learning
+(Second-Order Least Squares Temporal Difference
+Q-Learning)</strong>。</p>
+<hr />
+<h2 id="为什么使用-lstd-q-learning">✅ 为什么使用 LSTD Q-Learning？</h2>
+<p>LSTD Q-Learning 是一种<strong>基于值函数 (Value-based)
+的强化学习方法</strong>，相较于传统的Q-Learning，LSTD方法通过<strong>最小二乘回归</strong>直接拟合Q值函数，从而<strong>加快了学习速度</strong>，并且<strong>提高了数据效率</strong>。</p>
+<hr />
+<h2 id="强化学习目标-1">🎯 强化学习目标</h2>
+<p>论文中的目标是通过调整MPC参数 θ，最小化以下目标函数：</p>
+<p>J(πθ)=Eτπθ[∑k=0∞γkL(sk,ak)]J(π_{}) = <em>{</em>{_{}}} </p>
+<ul>
+<li>J(πθ)J(π_{}) 是累积损失；</li>
+<li>L(sk,ak)L(s_k, a_k) 是每个时间步的损失
+(如偏离目标位置、违反约束等)；</li>
+<li>θ是MPC的可调参数；</li>
+<li>γ是折扣因子。</li>
+</ul>
+<hr />
+<h2 id="lstd-q-learning-的更新方式">🚀 LSTD Q-Learning 的更新方式</h2>
+<h3 id="目标估计q值函数">💡 (1) 目标：估计Q值函数</h3>
+<p>Qθ(s,a)=L(s,a)+γVθ(s′)Q_{}(s, a) = L(s, a) + V_{}(s’)</p>
+<h3 id="td误差-temporal-difference-error">💡 (2) TD误差 (Temporal
+Difference Error)</h3>
+<p>δ=L(s,a)+γVθ(s′)−Qθ(s,a)= L(s, a) + V_{}(s’) - Q_{}(s, a)</p>
+<h3 id="更新梯度和hessian矩阵">💡 (3) 更新梯度和Hessian矩阵</h3>
+<p>p=−∑i=1mδi∇θQθ(si,ai)p = - <em>{i=1}^{m} <em>i </em>{} Q</em>{}(s_i,
+a_i)</p>
+<p>H=∑i=1m∇θQθ(si,ai)∇θQθ(si,ai)T−δi∇θ2Qθ(si,ai)H = <em>{i=1}^{m}
+</em>{} Q_{}(s_i, a_i) <em>{} Q</em>{}(s_i, a_i)^T - <em>i ^2</em>{}
+Q_{}(s_i, a_i)</p>
+<ul>
+<li>pp 是梯度方向；</li>
+<li>HH 是近似Hessian矩阵；</li>
+<li>mm 是观测批量 (Batch size)。</li>
+</ul>
+<h3 id="参数更新">💡 (4) 参数更新</h3>
+<p>θ←θ+αH−1p+ H^{-1} p</p>
+<hr />
+<h2 id="强化学习-mpc-gp的完整流程">🔥 强化学习-MPC-GP的完整流程</h2>
+<table>
+<thead>
+<tr>
+<th>过程</th>
+<th>方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>策略 (Policy)</td>
+<td>MPC控制器 (通过解最优控制问题得到动作 uu)</td>
+</tr>
+<tr>
+<td>值函数 (Value)</td>
+<td>LSTD Q-Learning 拟合Q值函数</td>
+</tr>
+<tr>
+<td>安全性保证</td>
+<td>高斯过程 (GP) 建模MPC参数的安全约束</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="为什么选用-lstd-q-learning">✅ 为什么选用 LSTD Q-Learning？</h2>
+<table>
+<thead>
+<tr>
+<th>优点</th>
+<th>LSTD Q-Learning</th>
+<th>传统Q-Learning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>学习效率</td>
+<td>高 (通过最小二乘法直接拟合)</td>
+<td>低</td>
+</tr>
+<tr>
+<td>数据利用率</td>
+<td>高 (支持小批量学习)</td>
+<td>依赖大量采样</td>
+</tr>
+<tr>
+<td>收敛速度</td>
+<td>快</td>
+<td>慢</td>
+</tr>
+<tr>
+<td>与MPC兼容性</td>
+<td>强 (可以结合梯度更新MPC参数)</td>
+<td>较弱</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="总结-1">🌟 总结</h2>
+<p>论文选择 LSTD Q-Learning 是因为它：</p>
+<ul>
+<li>能够<strong>快速收敛</strong>；</li>
+<li>能**直接通过梯度更新MPC参数 θ*；</li>
+<li>能通过<strong>高斯过程 (GP) 回归确保安全性</strong>；</li>
+<li>有效解决了传统RL中“安全性”和“数据效率”之间的矛盾。</li>
+</ul>
+<hr />
+<p>我可以给你画一个完整的强化学习-MPC安全学习流程图，或者写一个Python实现的框架代码，你需要吗？
+😊</p>
+<h3 id="用一个具体的例子来解释-lstd-q-learning-的原理">🌟
+用一个具体的例子来解释 LSTD Q-Learning 的原理：</h3>
+<hr />
+<h2 id="问题背景">🎯 <strong>问题背景</strong>：</h2>
+<p>假设我们正在控制一架无人机
+(Quadrotor)，目标是让无人机从起点飞到目标点，同时避开障碍物，并保持飞行稳定。</p>
+<ul>
+<li><strong>状态 ss</strong>：无人机的位置和速度</li>
+<li><strong>动作 aa</strong>：无人机的推力和姿态角度</li>
+<li><strong>奖励
+rr</strong>：目标位置的接近程度，以及是否违反了安全约束</li>
+<li>**MPC控制器参数 θ*：无人机的动力学参数（如重力常数 gg 和推力系数
+KzK_z）</li>
+</ul>
+<hr />
+<h2 id="传统q-learning的问题">✅
+<strong>传统Q-Learning的问题</strong>：</h2>
+<p>传统的Q-Learning使用的是“表格型”或者“神经网络”来估计Q值函数
+Q(s,a)Q(s, a)，但：</p>
+<ul>
+<li><strong>收敛速度慢</strong></li>
+<li><strong>需要大量的训练数据</strong></li>
+<li><strong>无法处理连续状态和连续动作空间</strong></li>
+</ul>
+<hr />
+<h2 id="lstd-q-learning的核心思路">🚀 <strong>LSTD
+Q-Learning的核心思路</strong>：</h2>
+<h3
+id="直接用最小二乘法-least-squares-估计q值函数"><strong>直接用最小二乘法
+(Least Squares) 估计Q值函数</strong>：</h3>
+<p>目标：直接学习<strong>Q值函数的参数化表达</strong>：</p>
+<p>Qθ(s,a)=ϕ(s,a)TθQ_{}(s, a) = (s, a)^T </p>
+<ul>
+<li>ϕ(s,a)(s, a) 是特征向量 (Feature
+Vector)，比如无人机的位置、速度、姿态等；</li>
+<li>θ是我们希望学习的MPC参数 (例如重力常数 gg、推力系数 KzK_z)。</li>
+</ul>
+<hr />
+<h2 id="具体步骤">✅ <strong>具体步骤</strong>：</h2>
+<hr />
+<h2 id="第1步收集交互数据">🎯
+<strong>第1步：收集交互数据</strong>：</h2>
+<p>在第 tt 次飞行任务中，我们收集到了一条轨迹：</p>
+<p>(st,at,rt,st+1)(s_t, a_t, r_t, s_{t+1})</p>
+<ul>
+<li>sts_t：当前状态（当前位置和速度）</li>
+<li>ata_t：当前MPC控制器输出的推力</li>
+<li>rtr_t：即时奖励 (Reward)，如到目标点的距离和违反约束的惩罚</li>
+<li>st+1s_{t+1}：下一时刻的状态</li>
+</ul>
+<hr />
+<h2 id="第2步计算td误差-temporal-difference-error">🎯
+<strong>第2步：计算TD误差 (Temporal Difference Error)</strong>：</h2>
+<p>δ=rt+γQθ(st+1,at+1)−Qθ(st,at)= r_t + Q_{}(s_{t+1}, a_{t+1}) -
+Q_{}(s_t, a_t)</p>
+<ul>
+<li>γ是折扣因子 (Discount Factor)</li>
+<li>Qθ(st+1,at+1)Q_{}(s_{t+1}, a_{t+1}) 是下一状态的估计Q值</li>
+</ul>
+<hr />
+<h2 id="第3步lstd最小二乘更新">🎯
+<strong>第3步：LSTD最小二乘更新</strong></h2>
+<p>在传统Q-Learning中，我们使用的是：</p>
+<p>θ←θ+αδ∇θQθ(st,at)+ <em>{} Q</em>{}(s_t, a_t)</p>
+<p>但在LSTD Q-Learning中，我们不直接用梯度，而是<strong>用最小二乘法
+(Least Squares) 直接拟合Q值函数</strong>。</p>
+<hr />
+<h3 id="核心公式">🔥 <strong>核心公式</strong>：</h3>
+<p>Aθ=bA = b</p>
+<ul>
+<li>AA 是特征的协方差矩阵；</li>
+<li>bb 是Q值目标与特征的相关性；</li>
+</ul>
+<hr />
+<h3 id="矩阵形式">🌈 <strong>矩阵形式</strong>：</h3>
+<p>A=∑t=1mϕ(st,at)(ϕ(st,at)−γϕ(st+1,at+1))TA = <em>{t=1}^{m} (s_t, a_t)
+( (s_t, a_t) - (s</em>{t+1}, a_{t+1}) )^T</p>
+<p>b=∑t=1mϕ(st,at)rtb = _{t=1}^{m} (s_t, a_t) r_t</p>
+<hr />
+<h3 id="解出最优参数">✅ <strong>解出最优参数</strong>：</h3>
+<p>θ=A−1b= A^{-1} b</p>
+<hr />
+<h2 id="第4步mpc参数更新">🎯 <strong>第4步：MPC参数更新</strong></h2>
+<p>在每一轮飞行任务之后，使用LSTD-Q学习到的参数 θ来更新MPC控制器：</p>
+<p>θnew=θold−αH−1p<em>{new} = </em>{old} - H^{-1} p</p>
+<ul>
+<li>HH：近似Hessian矩阵</li>
+<li>pp：梯度方向</li>
+</ul>
+<hr />
+<h2 id="第5步引入高斯过程-gp-进行安全约束">🎯
+<strong>第5步：引入高斯过程 (GP) 进行安全约束</strong></h2>
+<p>通过高斯过程 (GP) 建模MPC参数 θ的安全区域：</p>
+<p>θ∈SD={θ∣P[z(θ)≤0]≥β}S_D = { | P[z() ] }</p>
+<hr />
+<h2 id="最终效果">✅ <strong>最终效果</strong>：</h2>
+<table>
+<thead>
+<tr>
+<th>强化学习方法</th>
+<th>学习速度</th>
+<th>安全性</th>
+<th>收敛速度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>传统Q-Learning</td>
+<td>慢</td>
+<td>无法保证</td>
+<td>慢</td>
+</tr>
+<tr>
+<td>LSTD Q-Learning + GP</td>
+<td>快</td>
+<td>高斯过程约束</td>
+<td>快</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="完整流程图">🎁 <strong>完整流程图</strong>：</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">+----------------------------+</span><br><span class="line">|     强化学习模块 (RL)       |</span><br><span class="line">|                            |</span><br><span class="line">|     LSTD Q-Learning        |</span><br><span class="line">|   更新MPC参数 θ            |</span><br><span class="line">+----------------------------+</span><br><span class="line">             ↓</span><br><span class="line">+----------------------------+</span><br><span class="line">|          MPC控制器            |</span><br><span class="line">|                            |</span><br><span class="line">|   min_u Q_θ(s, u)          |</span><br><span class="line">|   预测下一步控制动作 u      |</span><br><span class="line">+----------------------------+</span><br><span class="line">             ↓</span><br><span class="line">+----------------------------+</span><br><span class="line">|        系统环境                  |</span><br><span class="line">|                            |</span><br><span class="line">|   接收动作 u，反馈状态 s&#x27; |</span><br><span class="line">+----------------------------+</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="总结-2">✅ <strong>总结</strong></h2>
+<p>LSTD Q-Learning 的优点：</p>
+<table>
+<thead>
+<tr>
+<th>特点</th>
+<th>传统Q-Learning</th>
+<th>LSTD Q-Learning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>学习速度</td>
+<td>慢</td>
+<td>快 (最小二乘法)</td>
+</tr>
+<tr>
+<td>样本效率</td>
+<td>低</td>
+<td>高</td>
+</tr>
+<tr>
+<td>收敛速度</td>
+<td>慢</td>
+<td>快</td>
+</tr>
+<tr>
+<td>安全性保证</td>
+<td>无</td>
+<td>通过高斯过程 (GP)</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/03/11/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cheng.gif">
+      <meta itemprop="name" content="Zhicheng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zhicheng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/03/11/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-03-11 18:27:16" itemprop="dateCreated datePublished" datetime="2025-03-11T18:27:16+08:00">2025-03-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-23 11:42:24" itemprop="dateModified" datetime="2024-04-23T11:42:24+08:00">2024-04-23</time>
+              </span>
+
+          
+            <span id="/2025/03/11/hello-world/" class="post-meta-item leancloud_visitors" data-flag-title="Hello World" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very
+first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for
+more info. If you get any problems when using Hexo, you can find the
+answer in <a
+target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or
+you can ask me on <a
+target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="quick-start">Quick Start</h2>
+<h3 id="create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a
+target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a
+target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a
+target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2025/01/19/%E8%BF%AD%E4%BB%A3%E5%AD%A6%E4%B9%A0%E6%8E%A7%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cheng.gif">
+      <meta itemprop="name" content="Zhicheng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zhicheng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/01/19/%E8%BF%AD%E4%BB%A3%E5%AD%A6%E4%B9%A0%E6%8E%A7%E5%88%B6/" class="post-title-link" itemprop="url">迭代学习控制</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-01-19 20:23:35" itemprop="dateCreated datePublished" datetime="2025-01-19T20:23:35+08:00">2025-01-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-04-07 19:52:06" itemprop="dateModified" datetime="2025-04-07T19:52:06+08:00">2025-04-07</time>
+              </span>
+
+          
+            <span id="/2025/01/19/%E8%BF%AD%E4%BB%A3%E5%AD%A6%E4%B9%A0%E6%8E%A7%E5%88%B6/" class="post-meta-item leancloud_visitors" data-flag-title="迭代学习控制" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="迭代学习控制研究总结">迭代学习控制研究总结</h2>
+<h3 id="介绍">介绍</h3>
+<p>在生活中，每个场景中都离不开对于一件事物的反复学习。一个典型的例子是篮球初学者学习投篮时，需要通过之前投篮的篮球运行轨迹来调整下次的肌肉发力与动作从而使得篮球沿着更加完美的曲线运行从而正确命中篮筐。与人们学习投篮的这个过程相似，迭代学习控制正是基于这种学习的思想，通过一次又一次的在有限步长的运行后，通过之前迭代次数的运行数据来对下次的输入量进行学习从而使得实际输出能够沿着期望的轨迹运行。</p>
+<figure>
+<img src="1737288872123.png" alt="1737288872123" />
+<figcaption aria-hidden="true">1737288872123</figcaption>
+</figure>
+<h3 id="国内外研究情况">国内外研究情况</h3>
+<p>常看的课题组文章： -
+国内：理论方向有沈栋教授（理论），侯忠生教授（以无模型自适应MFAC和ILC结合）；
+- 国外：荷兰Toomen教授课题组在与ASML合作的光刻机控制中相关的研究；</p>
+<p>前沿方向： -
+应用方面主要集中在以半导体制造为代表的精密可重复的运动控制问题应用中，主要对ILC相关的模型估计、模型解耦、算法设计等方面进行结合研究；
+-
+理论方面集中在算法融合（ILC与ADRC,MFAC等时间轴的算法），ILC在迭代轴上的改进（如增益设计，鲁棒性设计等）；ILC在不同环境（如存在干扰、数据丢失等）下的研究；</p>
+<h3 id="学习资源与相关网站">学习资源与相关网站</h3>
+<ul>
+<li>http://shendong.tech/DataBase/DataBase.html</li>
+<li>https://toomen.eu/publications.html#theses</li>
+</ul>
+<h3 id="前沿方向">前沿方向</h3>
+<h4 id="理论方向">理论方向</h4>
+<p>迭代学习控制的理论研究</p>
+<h4 id="应用研究">应用研究</h4>
+<ul>
+<li>迭代学习控制在机械臂方向中的应用</li>
+<li>迭代学习控制在光刻机中的应用</li>
+</ul>
+<h3 id="一些个人观点">一些个人观点</h3>
+<p>迭代学习控制因为是面向有限时间步长设计的控制算法，因此主要应用在可重复的过程当中；</p>
+<ul>
+<li>理论方向
+<ul>
+<li>从数据的角度出发</li>
+<li>从迭代轴的角度出发</li>
+</ul></li>
+<li>应用方向
+<ul>
+<li>可重复过程</li>
+</ul></li>
+</ul>
+<p>随着光刻机、3D打印机、高精度机械手、列车控制系统等高精度应用的发展，越来越多的场景中需要使用迭代学习控制方法来完成高精度的操作。而模型估计类迭代学习控制算法能够通过以往的数据对系统模型信息进行学习，从而使得能够在更少的迭代次数实现更高精度的误差收敛。由于其独特的优势，模型估计类算法也会越来越多地应用到实际场景当中。对于针对于模型估计类算法所提出的改进方法，有以下几个角度能够继续进一步进行拓展与研究：</p>
+<p>（1）沿着迭代轴进一步对控制算法进行设计与优化</p>
+<p>沿着迭代轴进行算法设计是符合迭代学习控制特性的一种方法。首先，可以考虑沿着迭代轴设计更优的增益同时深入考虑参数的设置问题，来使得每次迭代都能达到最优。其次，将时间轴的增益设计与迭代轴的增益设计进行结合设计也是一个有吸引力的方向。最后，迭代轴不仅仅可以设置一种算法，我们需要根据迭代过程的变化来对将迭代轴划分为不同的阶段，并分别设置不同的控制器。</p>
+<p>（2）从数据鲁棒性的角度对算法的设计进行研究</p>
+<p>数据鲁棒性是一个新的概念与角度，这个概念的提出对数据驱动控制算法具有很强的意义，但是数据驱动控制算法的理论工作还并不成熟。一方面，需要从数据的角度针对于各种鲁棒性问题进行进一步的探索，并对其理论性进行分析。因此数据鲁棒性的理论性分析工作还有很大的空间可以探索。另一方面，也需要对数据鲁棒性角度的设计方法进行工程应用以验证其在实际场景下的可行性。</p>
+<p>对于本文所做的工作，所提出的从增强数据鲁棒性角度来提升控制效果的策略还可以考虑其他会对数据产生影响的干扰情况。因此，在更多的环境问题下来考虑数据鲁棒性的提升从而保证控制效果是一个可以继续探索的方向。同时，从数据鲁棒性角度去设计策略这一方法并非只对干扰起作用，对于一些本身误差有波动或者收敛速度慢的算法也有改进作用，这也是未来可以探索的一个方向。</p>
 
       
     </div>
@@ -341,6 +1213,93 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhichengkou.github.io/2024/10/08/2024%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cheng.gif">
+      <meta itemprop="name" content="Zhicheng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zhicheng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/10/08/2024%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">2024年总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-10-08 08:22:44" itemprop="dateCreated datePublished" datetime="2024-10-08T08:22:44+08:00">2024-10-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-04-22 18:09:14" itemprop="dateModified" datetime="2025-04-22T18:09:14+08:00">2025-04-22</time>
+              </span>
+
+          
+            <span id="/2024/10/08/2024%E6%80%BB%E7%BB%93/" class="post-meta-item leancloud_visitors" data-flag-title="2024年总结" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="年度照片">年度照片</h2>
+<p><img src="DSC_5063.jpg" alt="alt text" /> ## 大事记</p>
+<h2 id="走一走">走一走</h2>
+<ul>
+<li>乌镇</li>
+<li>云南
+<ul>
+<li>大理</li>
+<li>丽江</li>
+<li>昆明</li>
+<li>香格里拉<br />
+</li>
+</ul></li>
+<li>黄山</li>
+<li>上海市内与苏州市内</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -412,14 +1371,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
