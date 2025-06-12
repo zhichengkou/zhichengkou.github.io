@@ -29,7 +29,7 @@
 <meta property="og:description" content="双足机器人的控制方法汇总         层级 控制范式 代表方法     1⃣ 底层控制 位置&#x2F;速度&#x2F;力控制 PID控制、阻抗控制、力控制   2⃣ 运动学级 逆运动学、任务空间控制 IK伪逆、OSC、Stack-of-Tasks   3⃣ 动力学级 基于模型的控制 WBC、Feedback Linearization、优化控制">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-06-12T09:38:33.000Z">
-<meta property="article:modified_time" content="2025-06-12T12:00:42.799Z">
+<meta property="article:modified_time" content="2025-06-12T12:39:37.751Z">
 <meta property="article:author" content="Zhicheng">
 <meta property="article:tag" content="学习笔记">
 <meta name="twitter:card" content="summary">
@@ -216,7 +216,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2025-06-12 17:38:33 / 修改时间：20:00:42" itemprop="dateCreated datePublished" datetime="2025-06-12T17:38:33+08:00">2025-06-12</time>
+              <time title="创建时间：2025-06-12 17:38:33 / 修改时间：20:39:37" itemprop="dateCreated datePublished" datetime="2025-06-12T17:38:33+08:00">2025-06-12</time>
             </span>
 
           
@@ -447,6 +447,67 @@ Transitions）：脚与地面接触或离地引起的状态突变</p>
 </tr>
 </tbody>
 </table>
+<h3 id="双足中的欠驱动问题">双足中的欠驱动问题</h3>
+<p>欠驱动意味着控制输入的自由度少于系统的自由度，导致系统无法直接驱动所有运动变量。控制这类系统时，通常需要利用系统本身的动力学特性和非线性控制方法。</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>方法类别</th>
+<th>具体方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>反馈线性化控制</td>
+<td>利用系统的非线性动力学方程，通过反馈设计奖系统部分状态线性化，便于设计线性控制器</td>
+</tr>
+<tr>
+<td>滑膜控制</td>
+<td>设计滑膜面</td>
+</tr>
+<tr>
+<td>非线性控制（如反馈线性化结合非线性轨迹规划）</td>
+<td>-
+设计非线性控制器匹配系统非线性动力学，同时结合轨迹规划确保系统按预期运动</td>
+</tr>
+<tr>
+<td>阶段切换控制（Hybrid Control）</td>
+<td>-
+欠驱动系统多表现为混合动力学（如步态中不同相位），通过切换不同控制策略完成不同阶段的控制</td>
+</tr>
+<tr>
+<td>反步法（Backstepping）</td>
+<td>-
+递归设计控制律，将复杂系统分解为层级子系统，逐步设计控制器，适用于非线性欠驱动系统</td>
+</tr>
+<tr>
+<td>优化控制与MPC（Model Predictive Control）</td>
+<td>-
+利用模型预测未来状态，求解带约束的最优控制输入，特别适合处理欠驱动系统的运动规划和实时控制</td>
+</tr>
+<tr>
+<td>学习控制与强化学习</td>
+<td>-
+通过数据驱动的方法，学习欠驱动系统的控制策略，适合模型不准确或环境复杂的情况</td>
+</tr>
+</tbody>
+</table>
+<h3 id="双足机器人中走的更快的问题">双足机器人中走的更快的问题</h3>
+<p>轨迹规划改进 - 动态步态生成 - 可变的步态调整 -</p>
+<p>控制算法应该怎么改进</p>
+<ul>
+<li>前馈和反馈进行结合：前馈部分用于快速响应人体和环境变化，反馈部分保证稳定性和误差校正。</li>
+<li>MPC：利用预测未来状态，提前计算控制输入，增强快速运动的稳定性和灵活性。</li>
+<li>自适应控制：实时调整控制参数，应对人体动力学变化和不同的速度变化。</li>
+</ul>
+<h3 id="解决走路晃动幅度很大的问题">解决走路晃动幅度很大的问题</h3>
+<p>加强平衡控制：对质心和零力矩点进行控制</p>
+<p>控制算法优化： - 增强反馈控制增益 - 阻抗控制或者自适应阻抗控制 -
+模型预测控制</p>
 
     </div>
 
@@ -530,7 +591,7 @@ Transitions）：脚与地面接触或离地引起的状态突变</p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%9A%84%E6%8E%A7%E5%88%B6%E6%96%B9%E6%B3%95%E6%B1%87%E6%80%BB"><span class="nav-number">1.</span> <span class="nav-text">双足机器人的控制方法汇总</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93%E5%9B%BE"><span class="nav-number">2.</span> <span class="nav-text">控制流程总结图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%AD%E6%AD%A5%E8%A1%8C%E5%B8%B8%E7%94%A8%E8%BD%A8%E8%BF%B9%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">双足机器人中步行常用轨迹类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%ADompl%E7%9A%84%E7%94%A8%E9%80%94"><span class="nav-number">4.</span> <span class="nav-text">双足机器人中OMPL的用途</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eso%E5%9C%A8%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">ESO在双足机器人中的应用</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%9A%84%E6%8E%A7%E5%88%B6%E6%96%B9%E6%B3%95%E6%B1%87%E6%80%BB"><span class="nav-number">1.</span> <span class="nav-text">双足机器人的控制方法汇总</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93%E5%9B%BE"><span class="nav-number">2.</span> <span class="nav-text">控制流程总结图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%AD%E6%AD%A5%E8%A1%8C%E5%B8%B8%E7%94%A8%E8%BD%A8%E8%BF%B9%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">双足机器人中步行常用轨迹类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%ADompl%E7%9A%84%E7%94%A8%E9%80%94"><span class="nav-number">4.</span> <span class="nav-text">双足机器人中OMPL的用途</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eso%E5%9C%A8%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">ESO在双足机器人中的应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E8%B6%B3%E4%B8%AD%E7%9A%84%E6%AC%A0%E9%A9%B1%E5%8A%A8%E9%97%AE%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">双足中的欠驱动问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%AD%E8%B5%B0%E7%9A%84%E6%9B%B4%E5%BF%AB%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">7.</span> <span class="nav-text">双足机器人中走的更快的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E8%B5%B0%E8%B7%AF%E6%99%83%E5%8A%A8%E5%B9%85%E5%BA%A6%E5%BE%88%E5%A4%A7%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">8.</span> <span class="nav-text">解决走路晃动幅度很大的问题</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
