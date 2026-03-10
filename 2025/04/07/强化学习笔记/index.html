@@ -21,20 +21,20 @@
     var CONFIG = {"hostname":"zhichengkou.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="此笔记记录学习书本 强化学习（第2版）作者: 【加】Richard S. Sutton（理查德·桑顿） &#x2F; 【美】Andrew G. Barto（安德鲁·巴图） 著的学习与总结笔记，其中部分内容由AI生成。   三种方法对比总结   方法 更新方式 适用场景 是否需要环境模型 计算量 收敛速度    蒙特卡洛 只有回合结束后更新 适用于无模型、离线学习 不需要 高 慢   时序差分（T">
+  <meta name="description" content="此笔记记录学习书本 强化学习（第2版）作者: 【加】Richard S. Sutton（理查德·桑顿） &#x2F; 【美】Andrew G. Barto（安德鲁·巴图） 著的学习与总结笔记，其中部分内容由AI生成。    三种方法对比总结    方法 更新方式 适用场景 是否需要环境模型 计算量 收敛速度     蒙特卡洛 只有回合结束后更新 适用于无模型、离线学习 不需要 高 慢   时序差分（TD）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="强化学习笔记">
 <meta property="og:url" content="https://zhichengkou.github.io/2025/04/07/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Zhicheng">
-<meta property="og:description" content="此笔记记录学习书本 强化学习（第2版）作者: 【加】Richard S. Sutton（理查德·桑顿） &#x2F; 【美】Andrew G. Barto（安德鲁·巴图） 著的学习与总结笔记，其中部分内容由AI生成。   三种方法对比总结   方法 更新方式 适用场景 是否需要环境模型 计算量 收敛速度    蒙特卡洛 只有回合结束后更新 适用于无模型、离线学习 不需要 高 慢   时序差分（T">
+<meta property="og:description" content="此笔记记录学习书本 强化学习（第2版）作者: 【加】Richard S. Sutton（理查德·桑顿） &#x2F; 【美】Andrew G. Barto（安德鲁·巴图） 著的学习与总结笔记，其中部分内容由AI生成。    三种方法对比总结    方法 更新方式 适用场景 是否需要环境模型 计算量 收敛速度     蒙特卡洛 只有回合结束后更新 适用于无模型、离线学习 不需要 高 慢   时序差分（TD）">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://zhichengkou.github.io/2025/04/07/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2d2b97963bdd4ccfdcef6bd330ae1091.png">
 <meta property="article:published_time" content="2025-04-07T11:48:01.000Z">
 <meta property="article:modified_time" content="2025-06-12T15:55:25.495Z">
 <meta property="article:author" content="Zhicheng">
 <meta property="article:tag" content="强化学习">
-<meta property="article:tag" content="笔记总结">
 <meta property="article:tag" content="书本学习">
+<meta property="article:tag" content="笔记总结">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://zhichengkou.github.io/2025/04/07/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2d2b97963bdd4ccfdcef6bd330ae1091.png">
 
@@ -261,10 +261,11 @@
 
       
         <blockquote>
-<p>此笔记记录学习书本 <strong>强化学习（第2版）作者: 【加】Richard S. Sutton（理查德·桑顿） &#x2F; 【美】Andrew G. Barto（安德鲁·巴图） 著</strong>的学习与总结笔记，其中部分内容由AI生成。</p>
+<p>此笔记记录学习书本 <strong>强化学习（第2版）作者: 【加】Richard S. Sutton（理查德·桑顿） / 【美】Andrew G. Barto（安德鲁·巴图） 著</strong>的学习与总结笔记，其中部分内容由AI生成。</p>
 </blockquote>
-<hr>
-<h2 id="三种方法对比总结"><a href="#三种方法对比总结" class="headerlink" title="三种方法对比总结"></a><strong>三种方法对比总结</strong></h2><table>
+<hr />
+<h2 id="三种方法对比总结"><a class="markdownIt-Anchor" href="#三种方法对比总结"></a> <strong>三种方法对比总结</strong></h2>
+<table>
 <thead>
 <tr>
 <th>方法</th>
@@ -275,7 +276,8 @@
 <th>收敛速度</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>蒙特卡洛</strong></td>
 <td>只有回合结束后更新</td>
 <td>适用于无模型、离线学习</td>
@@ -299,15 +301,17 @@
 <td><strong>低</strong></td>
 <td><strong>快</strong></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <ol>
 <li><strong>蒙特卡洛（MC）</strong>：必须 <strong>等待回合结束</strong> 才能更新，不适用于实时学习。</li>
 <li><strong>时序差分（TD）</strong>：<strong>每一步都更新</strong>，比蒙特卡洛更快，适用于 <strong>在线学习</strong>。</li>
 <li><strong>动态规划（DP）</strong>：需要 <strong>环境模型</strong>（转移概率），但计算最精确，适用于 <strong>已知环境</strong>。</li>
 </ol>
 <p>在强化学习中，<strong>TD 学习是最常用的，因为它既能在线更新，又不依赖于环境模型</strong>。蒙特卡洛主要用于 <strong>离线学习</strong>，而动态规划适用于 <strong>已知环境</strong>（如象棋等确定性环境）。</p>
-<hr>
-<h2 id="同轨策略-vs-离轨策略"><a href="#同轨策略-vs-离轨策略" class="headerlink" title="同轨策略 vs. 离轨策略"></a>同轨策略 vs. 离轨策略</h2><table>
+<hr />
+<h2 id="同轨策略-vs-离轨策略"><a class="markdownIt-Anchor" href="#同轨策略-vs-离轨策略"></a> 同轨策略 vs. 离轨策略</h2>
+<table>
 <thead>
 <tr>
 <th></th>
@@ -315,7 +319,8 @@
 <th><strong>离轨策略（Off-policy）</strong></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>数据来源</strong></td>
 <td>当前策略</td>
 <td>其他策略</td>
@@ -340,12 +345,13 @@
 <td>相对较慢</td>
 <td>相对较快</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <ul>
 <li><strong>同轨策略（On-policy）</strong> 更像是一个人在 <strong>边学边做</strong>，不断根据自己的经验来调整行为。</li>
 <li><strong>离轨策略（Off-policy）</strong> 更像是一个人 <strong>看着别人的经验</strong> 来学习，并且能更快收敛到最优解。</li>
 </ul>
-<hr>
+<hr />
 <table>
 <thead>
 <tr>
@@ -354,7 +360,8 @@
 <th><strong>说明</strong></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>TD(0)</strong></td>
 <td>$ V(s_t) \leftarrow V(s_t) + \alpha \left[ r_t + \gamma V(s_{t+1}) - V(s_t) \right] $</td>
 <td>通过当前状态的价值和下一个状态的价值来更新，估计状态的价值。仅依赖下一个状态的值来进行更新，适用于 <strong>状态价值估计</strong>。</td>
@@ -371,30 +378,47 @@
 </tr>
 <tr>
 <td><strong>TD(λ)</strong></td>
-<td>$ Q(s_t, a_t) \leftarrow Q(s_t, a_t) + \alpha \left[ r_t + \gamma \sum_{i&#x3D;0}^{\infty} \lambda^i \delta_i - Q(s_t, a_t) \right] $</td>
+<td>$ Q(s_t, a_t) \leftarrow Q(s_t, a_t) + \alpha \left[ r_t + \gamma \sum_{i=0}^{\infty} \lambda^i \delta_i - Q(s_t, a_t) \right] $</td>
 <td>结合了 TD(0) 和蒙特卡洛方法，回溯多步更新，适用于长期学习，特别是在复杂任务中，考虑到 <strong>多步未来的反馈</strong>。</td>
 </tr>
-</tbody></table>
-<h3 id="为什么SARSA进行的是策略学习而非状态价值估计？"><a href="#为什么SARSA进行的是策略学习而非状态价值估计？" class="headerlink" title="为什么SARSA进行的是策略学习而非状态价值估计？"></a>为什么SARSA进行的是策略学习而非状态价值估计？</h3><ol>
-<li><p><strong>动作价值函数（( Q(s, a) )）的学习</strong>：<br>SARSA的目标是学习动作价值函数 ( Q(s, a) )，而不是单独学习状态价值函数 ( V(s) )。这是因为在强化学习中，我们关心的通常是<strong>在某个状态下采取某个动作后能获得的回报</strong>，而不仅仅是状态本身的“价值”。动作价值函数能够直接反映在某个状态下采取特定动作的好坏。</p>
+</tbody>
+</table>
+<h3 id="为什么sarsa进行的是策略学习而非状态价值估计"><a class="markdownIt-Anchor" href="#为什么sarsa进行的是策略学习而非状态价值估计"></a> 为什么SARSA进行的是策略学习而非状态价值估计？</h3>
+<ol>
+<li>
+<p><strong>动作价值函数（( Q(s, a) )）的学习</strong>：<br />
+SARSA的目标是学习动作价值函数 ( Q(s, a) )，而不是单独学习状态价值函数 ( V(s) )。这是因为在强化学习中，我们关心的通常是<strong>在某个状态下采取某个动作后能获得的回报</strong>，而不仅仅是状态本身的“价值”。动作价值函数能够直接反映在某个状态下采取特定动作的好坏。</p>
 </li>
-<li><p><strong>SARSA是基于策略的学习</strong>：<br>SARSA算法通过采取当前策略下的动作，并根据当前策略的行为来估计未来的回报。这意味着，SARSA本质上是在<strong>同轨策略</strong>下学习，并通过当前策略来选择动作。因此，它不仅关注状态本身，而是通过状态-动作对（( s_t, a_t )）来进行学习。</p>
+<li>
+<p><strong>SARSA是基于策略的学习</strong>：<br />
+SARSA算法通过采取当前策略下的动作，并根据当前策略的行为来估计未来的回报。这意味着，SARSA本质上是在<strong>同轨策略</strong>下学习，并通过当前策略来选择动作。因此，它不仅关注状态本身，而是通过状态-动作对（( s_t, a_t )）来进行学习。</p>
 <ul>
 <li>在每个时间步，SARSA都会通过当前策略选择动作（比如 ( \epsilon )-贪婪策略），然后更新相应的 ( Q(s, a) )。</li>
 <li>而对于<strong>状态价值函数</strong>（( V(s) )），它只是通过所有可能动作的加权平均来得到的，因此，如果我们只学习状态价值而不学习动作价值，我们就无法通过具体的动作决策来直接优化策略。</li>
 </ul>
 </li>
-<li><p><strong>策略学习与状态价值的关系</strong>：<br>状态价值函数 ( V(s) ) 只能在策略已知的情况下计算，而在SARSA中，策略本身是通过<strong>持续更新的动作价值函数</strong>来间接优化的。SARSA不直接估计状态价值函数，而是通过( Q(s, a) )来间接影响策略的改进。</p>
+<li>
+<p><strong>策略学习与状态价值的关系</strong>：<br />
+状态价值函数 ( V(s) ) 只能在策略已知的情况下计算，而在SARSA中，策略本身是通过<strong>持续更新的动作价值函数</strong>来间接优化的。SARSA不直接估计状态价值函数，而是通过( Q(s, a) )来间接影响策略的改进。</p>
 </li>
-<li><p><strong>为什么动作价值比状态价值更有意义？</strong>：<br>在强化学习中，我们的目标通常是<strong>最大化回报</strong>，而回报的最大化依赖于在每个状态下选择合适的动作。学习<strong>状态价值</strong>只是帮助我们知道一个状态本身的好坏，但我们仍然需要知道在每个状态下应该采取什么样的动作来优化回报。这就是为什么SARSA（以及其他基于值的策略学习算法）会直接学习<strong>动作价值函数</strong>。</p>
+<li>
+<p><strong>为什么动作价值比状态价值更有意义？</strong>：<br />
+在强化学习中，我们的目标通常是<strong>最大化回报</strong>，而回报的最大化依赖于在每个状态下选择合适的动作。学习<strong>状态价值</strong>只是帮助我们知道一个状态本身的好坏，但我们仍然需要知道在每个状态下应该采取什么样的动作来优化回报。这就是为什么SARSA（以及其他基于值的策略学习算法）会直接学习<strong>动作价值函数</strong>。</p>
 <ul>
 <li>在<strong>策略迭代</strong>或<strong>值迭代</strong>中，策略是通过状态值函数来更新的，但SARSA通过动作值函数来优化策略，因为动作选择比状态值更直接影响回报。</li>
 </ul>
 </li>
 </ol>
-<h3 id="SARSA与状态价值估计的关系"><a href="#SARSA与状态价值估计的关系" class="headerlink" title="SARSA与状态价值估计的关系"></a>SARSA与状态价值估计的关系</h3><p>尽管SARSA本身不直接估计状态价值函数 ( V(s) )，但通过学习<strong>动作价值函数</strong>（( Q(s, a) )），我们可以间接地得到状态价值函数 ( V(s) )。实际上，状态价值函数可以通过对所有可能动作的加权平均来计算：<br>$<br>V(s) &#x3D; \sum_a \pi(a|s) Q(s, a)<br>$<br>其中，( \pi(a|s) ) 是在状态 ( s ) 下采取动作 ( a ) 的概率。通过这种方式，尽管SARSA不直接估计状态价值函数，但它间接提供了可以计算状态价值函数的所有信息。</p>
-<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>SARSA算法专注于学习<strong>动作价值函数</strong>（( Q(s, a) )），而不是直接估计状态价值函数 ( V(s) )。这是因为在强化学习中，目标是优化策略，通过学习每个状态-动作对的价值来选择最佳动作。SARSA通过直接估计<strong>每个状态下的动作价值</strong>，而不是仅仅估计状态本身的价值，从而能够更有效地学习和改进策略。</p>
-<h3 id="常用-TD-方法的区别"><a href="#常用-TD-方法的区别" class="headerlink" title="常用 TD 方法的区别"></a><strong>常用 TD 方法的区别</strong></h3><table>
+<h3 id="sarsa与状态价值估计的关系"><a class="markdownIt-Anchor" href="#sarsa与状态价值估计的关系"></a> SARSA与状态价值估计的关系</h3>
+<p>尽管SARSA本身不直接估计状态价值函数 ( V(s) )，但通过学习<strong>动作价值函数</strong>（( Q(s, a) )），我们可以间接地得到状态价值函数 ( V(s) )。实际上，状态价值函数可以通过对所有可能动作的加权平均来计算：<br />
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mo>∑</mo><mi>a</mi></msub><mi>π</mi><mo stretchy="false">(</mo><mi>a</mi><mi mathvariant="normal">∣</mi><mi>s</mi><mo stretchy="false">)</mo><mi>Q</mi><mo stretchy="false">(</mo><mi>s</mi><mo separator="true">,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+V(s) = \sum_a \pi(a|s) Q(s, a)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.0497100000000001em;vertical-align:-0.29971000000000003em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.0016819999999999613em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mord">∣</span><span class="mord mathnormal">s</span><span class="mclose">)</span><span class="mord mathnormal">Q</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">a</span><span class="mclose">)</span></span></span></span><br />
+其中，( \pi(a|s) ) 是在状态 ( s ) 下采取动作 ( a ) 的概率。通过这种方式，尽管SARSA不直接估计状态价值函数，但它间接提供了可以计算状态价值函数的所有信息。</p>
+<h3 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结：</h3>
+<p>SARSA算法专注于学习<strong>动作价值函数</strong>（( Q(s, a) )），而不是直接估计状态价值函数 ( V(s) )。这是因为在强化学习中，目标是优化策略，通过学习每个状态-动作对的价值来选择最佳动作。SARSA通过直接估计<strong>每个状态下的动作价值</strong>，而不是仅仅估计状态本身的价值，从而能够更有效地学习和改进策略。</p>
+<h3 id="常用-td-方法的区别"><a class="markdownIt-Anchor" href="#常用-td-方法的区别"></a> <strong>常用 TD 方法的区别</strong></h3>
+<table>
 <thead>
 <tr>
 <th>方法</th>
@@ -404,7 +428,8 @@
 <th>适用场景</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>TD(0)</strong></td>
 <td>同轨</td>
 <td>仅依赖当前状态的价值和下一个状态的价值进行更新</td>
@@ -432,18 +457,21 @@
 <td>估计状态-动作值函数</td>
 <td>长期学习，适用于复杂任务</td>
 </tr>
-</tbody></table>
-<h3 id="对比说明："><a href="#对比说明：" class="headerlink" title="对比说明："></a><strong>对比说明：</strong></h3><ul>
+</tbody>
+</table>
+<h3 id="对比说明"><a class="markdownIt-Anchor" href="#对比说明"></a> <strong>对比说明：</strong></h3>
+<ul>
 <li><strong>TD(0)</strong>：只考虑一个时间步的更新，适用于简单的状态价值估计。</li>
 <li><strong>SARSA</strong>：基于当前策略，更新状态-动作值 Q(s, a)，适用于<strong>在线学习</strong>和<strong>行为安全</strong>。</li>
 <li><strong>Q-learning</strong>：选择未来最大 Q 值的动作更新状态-动作值，适用于追求<strong>最优策略</strong>。</li>
 <li><strong>TD(λ)</strong>：通过多个时间步回溯来更新，结合了 TD(0) 和蒙特卡洛方法，适用于 <strong>长期学习</strong>和 <strong>复杂任务</strong>。</li>
 </ul>
-<hr>
+<hr />
 <p>Dyna-Q 算法家族是基于强化学习中 <strong>将真实经验与模型模拟经验结合</strong> 的一类算法。它们融合了<strong>模型学习（Model-based）<strong>与</strong>价值函数更新（如 Q-learning）</strong>，具有较高的样本效率。</p>
 <p>以下是 Dyna-Q 及其常见变体的对比表格，包括其核心思路、改进点、是否探索模型变化等关键特征。</p>
-<hr>
-<h2 id="Dyna-Q-及其主要变体对比表"><a href="#Dyna-Q-及其主要变体对比表" class="headerlink" title="Dyna-Q 及其主要变体对比表"></a>Dyna-Q 及其主要变体对比表</h2><table>
+<hr />
+<h2 id="dyna-q-及其主要变体对比表"><a class="markdownIt-Anchor" href="#dyna-q-及其主要变体对比表"></a> Dyna-Q 及其主要变体对比表</h2>
+<table>
 <thead>
 <tr>
 <th>算法名称</th>
@@ -455,7 +483,8 @@
 <th>缺点</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>Dyna-Q</strong></td>
 <td>基础版本，将 Q-learning 与模拟经验结合</td>
 <td>✅ 有</td>
@@ -509,39 +538,60 @@
 <td>可用于连续空间、复杂环境</td>
 <td>容易不稳定，需要技巧调参</td>
 </tr>
-</tbody></table>
-<h3 id="1-Dyna-Q"><a href="#1-Dyna-Q" class="headerlink" title="1. Dyna-Q"></a>1. <strong>Dyna-Q</strong></h3><ul>
+</tbody>
+</table>
+<h3 id="1-dyna-q"><a class="markdownIt-Anchor" href="#1-dyna-q"></a> 1. <strong>Dyna-Q</strong></h3>
+<ul>
 <li>基础版本，结合真实交互 + 模拟经验。</li>
 <li>每次从模型中随机选择过往 (s, a)，进行“虚拟更新”。</li>
 </ul>
-<h3 id="2-Dyna-Q"><a href="#2-Dyna-Q" class="headerlink" title="2. Dyna-Q+"></a>2. <strong>Dyna-Q+</strong></h3><ul>
+<h3 id="2-dyna-q"><a class="markdownIt-Anchor" href="#2-dyna-q"></a> 2. <strong>Dyna-Q+</strong></h3>
+<ul>
 <li>解决 Dyna-Q 早期探索不足的问题。</li>
 <li>给模型中<strong>长时间未访问的 (s, a)</strong> 加一个额外奖励：</li>
 </ul>
-<p>$<br>\text{bonus} &#x3D; k \cdot \sqrt{\tau}<br>$</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>bonus</mtext><mo>=</mo><mi>k</mi><mo>⋅</mo><msqrt><mi>τ</mi></msqrt></mrow><annotation encoding="application/x-tex">
+\text{bonus} = k \cdot \sqrt{\tau}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord text"><span class="mord">bonus</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.23972em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8002800000000001em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span></span></span><span style="top:-2.76028em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.23972em;"><span></span></span></span></span></span></span></span></span></p>
 <p>其中 τ 是未访问的时间步数，k 是超参数。</p>
-<h3 id="3-Prioritized-Dyna-Q"><a href="#3-Prioritized-Dyna-Q" class="headerlink" title="3. Prioritized Dyna-Q"></a>3. <strong>Prioritized Dyna-Q</strong></h3><ul>
+<h3 id="3-prioritized-dyna-q"><a class="markdownIt-Anchor" href="#3-prioritized-dyna-q"></a> 3. <strong>Prioritized Dyna-Q</strong></h3>
+<ul>
 <li>模拟更新不再随机，而是基于“状态更新的重要性”进行排序更新（如 TD 误差越大，越优先）。</li>
 <li>使用优先队列实现，更高效。</li>
 </ul>
-<h3 id="4-Dyna-2"><a href="#4-Dyna-2" class="headerlink" title="4. Dyna-2"></a>4. <strong>Dyna-2</strong></h3><ul>
+<h3 id="4-dyna-2"><a class="markdownIt-Anchor" href="#4-dyna-2"></a> 4. <strong>Dyna-2</strong></h3>
+<ul>
 <li>使用多个不同的模型（表示环境可能的变化），每次模拟时从这些模型中采样。</li>
 <li>更适合非定常或不确定环境（如博弈、对手变换等）。</li>
 </ul>
-<h3 id="5-函数逼近版本（线性-神经网络）"><a href="#5-函数逼近版本（线性-神经网络）" class="headerlink" title="5. 函数逼近版本（线性 &#x2F; 神经网络）"></a>5. <strong>函数逼近版本（线性 &#x2F; 神经网络）</strong></h3><ul>
+<h3 id="5-函数逼近版本线性-神经网络"><a class="markdownIt-Anchor" href="#5-函数逼近版本线性-神经网络"></a> 5. <strong>函数逼近版本（线性 / 神经网络）</strong></h3>
+<ul>
 <li>替代表格型 Q 值，用函数逼近器（如神经网络）逼近 Q 值或环境动态。</li>
-<li>适用于大规模&#x2F;连续状态空间的环境。</li>
+<li>适用于大规模/连续状态空间的环境。</li>
 </ul>
-<h2 id="总结推荐（不同需求）"><a href="#总结推荐（不同需求）" class="headerlink" title="总结推荐（不同需求）"></a>总结推荐（不同需求）</h2><table>
+<h2 id="总结推荐不同需求"><a class="markdownIt-Anchor" href="#总结推荐不同需求"></a> 总结推荐（不同需求）</h2>
+<table>
 <thead>
 <tr>
 <th>使用场景</th>
 <th>推荐算法</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>小型离散环境</td>
-<td>Dyna-Q &#x2F; Dyna-Q+</td>
+<td>Dyna-Q / Dyna-Q+</td>
 </tr>
 <tr>
 <td>希望强化探索、避免早收敛</td>
@@ -556,16 +606,18 @@
 <td>Dyna-Q+ 或 Dyna-2</td>
 </tr>
 <tr>
-<td>状态空间较大 &#x2F; 连续</td>
+<td>状态空间较大 / 连续</td>
 <td>函数逼近版 Dyna-Q</td>
 </tr>
 <tr>
 <td>有强大计算资源+深度学习</td>
 <td>Dyna-Q with Neural Networks</td>
 </tr>
-</tbody></table>
-<hr>
-<h3 id="第一部分总结"><a href="#第一部分总结" class="headerlink" title="第一部分总结"></a>第一部分总结</h3><p><img src="/2025/04/07/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2d2b97963bdd4ccfdcef6bd330ae1091.png" alt="alt text"></p>
+</tbody>
+</table>
+<hr />
+<h3 id="第一部分总结"><a class="markdownIt-Anchor" href="#第一部分总结"></a> 第一部分总结</h3>
+<p><img src="2d2b97963bdd4ccfdcef6bd330ae1091.png" alt="alt text" /></p>
 <p>在强化学习中，**时间差分（TD）**方法、**动态规划（DP）<strong>方法和</strong>蒙特卡洛（MC）**方法是三种常见的策略评估和优化技术。每种方法都有其适用的场景，并且它们的优缺点也有所不同。下面是对这三种方法的简要概述，以及它们分别适合的场景。</p>
 <table>
 <thead>
@@ -576,7 +628,8 @@
 <th>缺点</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>TD（时间差分）</strong></td>
 <td>在线学习、实时学习、大规模状态空间、部分可观察的环境</td>
 <td>能够在线更新，适合实时学习，计算效率高</td>
@@ -594,22 +647,33 @@
 <td>不需要环境模型，只需回报进行更新，适合复杂环境</td>
 <td>需要等待回合结束，不适合在线学习，计算低效（尤其状态空间大时）</td>
 </tr>
-</tbody></table>
-<hr>
+</tbody>
+</table>
+<hr />
 <p>在强化学习中，<strong>基于函数逼近的同轨策略预测</strong>（On-Policy Prediction with Function Approximation）是指在使用<strong>函数逼近</strong>来估计值函数时，采用与当前策略相同的轨迹来进行学习。这种方法通常是为了处理大规模或连续的状态空间，其中使用表格型方法来表示值函数变得不再可行。</p>
-<h3 id="1-同轨策略（On-Policy）："><a href="#1-同轨策略（On-Policy）：" class="headerlink" title="1. 同轨策略（On-Policy）："></a>1. <strong>同轨策略（On-Policy）</strong>：</h3><ul>
+<h3 id="1-同轨策略on-policy"><a class="markdownIt-Anchor" href="#1-同轨策略on-policy"></a> 1. <strong>同轨策略（On-Policy）</strong>：</h3>
+<ul>
 <li><strong>同轨策略</strong>意味着学习过程中使用的策略（通常是行为策略）和用于估计状态值函数的策略是相同的。在这种方法中，智能体根据当前策略与环境进行交互并收集经验，而使用这些经验来更新策略的值函数。</li>
 </ul>
-<h3 id="2-函数逼近（Function-Approximation）："><a href="#2-函数逼近（Function-Approximation）：" class="headerlink" title="2. 函数逼近（Function Approximation）："></a>2. <strong>函数逼近（Function Approximation）</strong>：</h3><ul>
+<h3 id="2-函数逼近function-approximation"><a class="markdownIt-Anchor" href="#2-函数逼近function-approximation"></a> 2. <strong>函数逼近（Function Approximation）</strong>：</h3>
+<ul>
 <li><strong>函数逼近</strong>是为了处理大规模状态空间（或者连续空间），通过使用参数化函数（如线性函数、神经网络等）来逼近值函数（如状态值函数 ( V(s) ) 或动作值函数 ( Q(s, a) )），避免使用表格形式存储所有可能的状态或动作。</li>
 <li>函数逼近可以帮助将值函数从一个巨大的状态空间简化为一个相对较小的参数空间，从而能够在更大的环境中进行有效的学习。</li>
 </ul>
-<h3 id="3-同轨策略预测的内容："><a href="#3-同轨策略预测的内容：" class="headerlink" title="3. 同轨策略预测的内容："></a>3. <strong>同轨策略预测的内容</strong>：</h3><p>在基于函数逼近的同轨策略预测中，主要包括以下几个方面：</p>
-<h4 id="1-使用TD（时间差分）方法进行同轨策略预测："><a href="#1-使用TD（时间差分）方法进行同轨策略预测：" class="headerlink" title="1. 使用TD（时间差分）方法进行同轨策略预测："></a>1. <strong>使用TD（时间差分）方法进行同轨策略预测</strong>：</h4><ul>
-<li><p>同轨策略预测的经典方法是使用<strong>TD方法</strong>，例如<strong>TD(0)</strong>，在这种方法中，值函数是通过逐步更新的。</p>
+<h3 id="3-同轨策略预测的内容"><a class="markdownIt-Anchor" href="#3-同轨策略预测的内容"></a> 3. <strong>同轨策略预测的内容</strong>：</h3>
+<p>在基于函数逼近的同轨策略预测中，主要包括以下几个方面：</p>
+<h4 id="1-使用td时间差分方法进行同轨策略预测"><a class="markdownIt-Anchor" href="#1-使用td时间差分方法进行同轨策略预测"></a> 1. <strong>使用TD（时间差分）方法进行同轨策略预测</strong>：</h4>
+<ul>
+<li>
+<p>同轨策略预测的经典方法是使用<strong>TD方法</strong>，例如<strong>TD(0)</strong>，在这种方法中，值函数是通过逐步更新的。</p>
 </li>
-<li><p>通过<strong>TD(0)</strong> 或 <strong>SARSA</strong>（基于同轨策略的TD方法），智能体根据其当前策略进行状态转移并计算每一步的回报。随着时间的推移，智能体不断根据回报对其值函数进行更新。</p>
-<p>典型的更新公式为：<br>$<br>V(s_t) \leftarrow V(s_t) + \alpha [r_{t+1} + \gamma V(s_{t+1}) - V(s_t)]<br>$<br>其中：</p>
+<li>
+<p>通过<strong>TD(0)</strong> 或 <strong>SARSA</strong>（基于同轨策略的TD方法），智能体根据其当前策略进行状态转移并计算每一步的回报。随着时间的推移，智能体不断根据回报对其值函数进行更新。</p>
+<p>典型的更新公式为：<br />
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo stretchy="false">(</mo><msub><mi>s</mi><mi>t</mi></msub><mo stretchy="false">)</mo><mo>←</mo><mi>V</mi><mo stretchy="false">(</mo><msub><mi>s</mi><mi>t</mi></msub><mo stretchy="false">)</mo><mo>+</mo><mi>α</mi><mo stretchy="false">[</mo><msub><mi>r</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>+</mo><mi>γ</mi><mi>V</mi><mo stretchy="false">(</mo><msub><mi>s</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo><mo>−</mo><mi>V</mi><mo stretchy="false">(</mo><msub><mi>s</mi><mi>t</mi></msub><mo stretchy="false">)</mo><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">
+V(s_t) \leftarrow V(s_t) + \alpha [r_{t+1} + \gamma V(s_{t+1}) - V(s_t)]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">←</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="mopen">[</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05556em;">γ</span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mclose">]</span></span></span></span><br />
+其中：</p>
 <ul>
 <li>( s_t ) 是当前状态，</li>
 <li>( r_{t+1} ) 是当前奖励，</li>
@@ -619,46 +683,63 @@
 </ul>
 </li>
 </ul>
-<h4 id="2-线性函数逼近："><a href="#2-线性函数逼近：" class="headerlink" title="2. 线性函数逼近："></a>2. <strong>线性函数逼近</strong>：</h4><ul>
-<li>在使用<strong>线性函数逼近</strong>时，值函数 ( V(s) ) 被表示为状态特征的线性组合：<br>$<br>V(s) &#x3D; \theta^T \phi(s)<br>$<br>其中 ( \theta ) 是参数向量，( \phi(s) ) 是状态 ( s ) 的特征向量。</li>
+<h4 id="2-线性函数逼近"><a class="markdownIt-Anchor" href="#2-线性函数逼近"></a> 2. <strong>线性函数逼近</strong>：</h4>
+<ul>
+<li>在使用<strong>线性函数逼近</strong>时，值函数 ( V(s) ) 被表示为状态特征的线性组合：<br />
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo>=</mo><msup><mi>θ</mi><mi>T</mi></msup><mi>ϕ</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+V(s) = \theta^T \phi(s)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.0913309999999998em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span></span></span></span></span></span></span></span><span class="mord mathnormal">ϕ</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span></span></span></span><br />
+其中 ( \theta ) 是参数向量，( \phi(s) ) 是状态 ( s ) 的特征向量。</li>
 <li>通过<strong>梯度下降</strong>或其他优化方法，智能体学习合适的参数 ( \theta ) 来逼近状态的值函数。</li>
 </ul>
-<h4 id="3-非线性函数逼近（例如神经网络）："><a href="#3-非线性函数逼近（例如神经网络）：" class="headerlink" title="3. 非线性函数逼近（例如神经网络）："></a>3. <strong>非线性函数逼近</strong>（例如神经网络）：</h4><ul>
+<h4 id="3-非线性函数逼近例如神经网络"><a class="markdownIt-Anchor" href="#3-非线性函数逼近例如神经网络"></a> 3. <strong>非线性函数逼近</strong>（例如神经网络）：</h4>
+<ul>
 <li>对于更加复杂的任务，尤其是当状态空间非常大且不容易用线性函数表示时，可以使用<strong>神经网络</strong>作为函数逼近器。神经网络可以通过多层结构捕捉状态和价值之间的复杂关系。</li>
 <li>**深度Q网络（DQN）**是一个经典的例子，它使用深度神经网络来逼近动作值函数 ( Q(s, a) )，并通过同轨策略进行学习。</li>
 </ul>
-<h4 id="4-策略评估和更新："><a href="#4-策略评估和更新：" class="headerlink" title="4. 策略评估和更新："></a>4. <strong>策略评估和更新</strong>：</h4><ul>
+<h4 id="4-策略评估和更新"><a class="markdownIt-Anchor" href="#4-策略评估和更新"></a> 4. <strong>策略评估和更新</strong>：</h4>
+<ul>
 <li>在基于函数逼近的同轨策略预测中，智能体不断评估当前策略的表现并使用TD方法更新其值函数。同时，策略也会基于这些估计进行调整，以改善智能体的表现。</li>
 </ul>
-<h4 id="5-基于梯度的更新："><a href="#5-基于梯度的更新：" class="headerlink" title="5. 基于梯度的更新："></a>5. <strong>基于梯度的更新</strong>：</h4><ul>
-<li><p>对于非线性逼近（如神经网络），值函数的更新通常通过<strong>梯度下降</strong>进行。智能体根据策略评估的结果（即对状态值函数或动作值函数的估计），通过反向传播算法来更新函数逼近器的参数。</p>
+<h4 id="5-基于梯度的更新"><a class="markdownIt-Anchor" href="#5-基于梯度的更新"></a> 5. <strong>基于梯度的更新</strong>：</h4>
+<ul>
+<li>
+<p>对于非线性逼近（如神经网络），值函数的更新通常通过<strong>梯度下降</strong>进行。智能体根据策略评估的结果（即对状态值函数或动作值函数的估计），通过反向传播算法来更新函数逼近器的参数。</p>
 <p>例如，在使用神经网络时，参数 ( \theta ) 会根据损失函数的梯度进行调整，以最小化预测值与真实回报之间的差距。</p>
 </li>
 </ul>
-<h3 id="4-同轨策略预测的经典算法："><a href="#4-同轨策略预测的经典算法：" class="headerlink" title="4. 同轨策略预测的经典算法："></a>4. <strong>同轨策略预测的经典算法</strong>：</h3><p>以下是一些常见的使用函数逼近的同轨策略预测算法：</p>
-<h4 id="1-SARSA-λ-："><a href="#1-SARSA-λ-：" class="headerlink" title="(1) SARSA(λ)："></a>(1) <strong>SARSA(λ)</strong>：</h4><ul>
+<h3 id="4-同轨策略预测的经典算法"><a class="markdownIt-Anchor" href="#4-同轨策略预测的经典算法"></a> 4. <strong>同轨策略预测的经典算法</strong>：</h3>
+<p>以下是一些常见的使用函数逼近的同轨策略预测算法：</p>
+<h4 id="1-sarsaλ"><a class="markdownIt-Anchor" href="#1-sarsaλ"></a> (1) <strong>SARSA(λ)</strong>：</h4>
+<ul>
 <li><strong>SARSA(λ)</strong> 是一种结合了<strong>时间差分学习（TD）<strong>和</strong>跟踪误差</strong>的算法，使用λ-回溯来进行更长期的估计。</li>
 <li>使用类似于TD(0)的更新规则，但通过加权历史的TD误差来改进更新过程，从而获得更快的收敛。</li>
 </ul>
-<h4 id="2-深度Q学习（DQN）："><a href="#2-深度Q学习（DQN）：" class="headerlink" title="(2) 深度Q学习（DQN）："></a>(2) <strong>深度Q学习（DQN）</strong>：</h4><ul>
+<h4 id="2-深度q学习dqn"><a class="markdownIt-Anchor" href="#2-深度q学习dqn"></a> (2) <strong>深度Q学习（DQN）</strong>：</h4>
+<ul>
 <li><strong>DQN</strong> 是一种结合了<strong>Q-learning</strong>和<strong>深度神经网络</strong>的方法，使用神经网络逼近动作值函数 ( Q(s, a) )。</li>
 <li>在DQN中，策略是基于贪心策略（即选择最大Q值的动作），并且通过训练神经网络来更新Q值。</li>
 </ul>
-<h4 id="3-A3C（异步优势演员-评论家）："><a href="#3-A3C（异步优势演员-评论家）：" class="headerlink" title="(3) A3C（异步优势演员-评论家）："></a>(3) <strong>A3C（异步优势演员-评论家）</strong>：</h4><ul>
+<h4 id="3-a3c异步优势演员-评论家"><a class="markdownIt-Anchor" href="#3-a3c异步优势演员-评论家"></a> (3) <strong>A3C（异步优势演员-评论家）</strong>：</h4>
+<ul>
 <li><strong>A3C</strong> 是一种基于<strong>策略梯度</strong>的强化学习算法，使用两个网络（演员和评论家）来估计策略和状态值函数。A3C采用了多线程训练，在多个环境中同时训练，来提高学习效率。</li>
 </ul>
-<h3 id="5-优缺点分析："><a href="#5-优缺点分析：" class="headerlink" title="5. 优缺点分析："></a>5. <strong>优缺点分析</strong>：</h3><h4 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h4><ul>
+<h3 id="5-优缺点分析"><a class="markdownIt-Anchor" href="#5-优缺点分析"></a> 5. <strong>优缺点分析</strong>：</h3>
+<h4 id="优点"><a class="markdownIt-Anchor" href="#优点"></a> 优点：</h4>
+<ul>
 <li><strong>大规模问题</strong>：基于函数逼近的方法可以处理大规模或连续的状态空间，不需要每个状态都保存一个值。</li>
 <li><strong>适用动态环境</strong>：与表格型方法不同，基于函数逼近的方法可以在动态和复杂的环境中工作。</li>
 <li><strong>灵活性</strong>：可以使用线性和非线性函数逼近（如神经网络），提供了更大的灵活性来应对各种环境。</li>
 </ul>
-<h4 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h4><ul>
+<h4 id="缺点"><a class="markdownIt-Anchor" href="#缺点"></a> 缺点：</h4>
+<ul>
 <li><strong>收敛性问题</strong>：当使用非线性函数逼近时（例如神经网络），可能会面临不稳定性和收敛性问题。</li>
 <li><strong>过拟合</strong>：如果模型过于复杂，可能会过拟合训练数据，导致泛化能力差。</li>
 <li><strong>需要大量计算</strong>：使用深度学习等方法时，计算成本和训练时间可能非常高。</li>
 </ul>
-<h3 id="总结：-1"><a href="#总结：-1" class="headerlink" title="总结："></a>总结：</h3><p><strong>基于函数逼近的同轨策略预测</strong>利用当前策略下的经验来更新值函数或策略，适用于大规模或连续的状态空间，并使用函数逼近（如线性函数或神经网络）来解决表格型方法无法处理的问题。常见的算法包括SARSA(λ)、DQN和A3C等。</p>
-<hr>
+<h3 id="总结-2"><a class="markdownIt-Anchor" href="#总结-2"></a> 总结：</h3>
+<p><strong>基于函数逼近的同轨策略预测</strong>利用当前策略下的经验来更新值函数或策略，适用于大规模或连续的状态空间，并使用函数逼近（如线性函数或神经网络）来解决表格型方法无法处理的问题。常见的算法包括SARSA(λ)、DQN和A3C等。</p>
+<hr />
 <table>
 <thead>
 <tr>
@@ -667,10 +748,11 @@
 <th>LSTD（最小二乘TD）</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>方法类型</strong></td>
 <td>增量式更新算法</td>
-<td>批量方法 &#x2F; 解线性方程组</td>
+<td>批量方法 / 解线性方程组</td>
 </tr>
 <tr>
 <td><strong>是否使用采样</strong></td>
@@ -737,13 +819,17 @@
 <td>随机性大，结果随步长波动</td>
 <td>更平滑、可解释性好</td>
 </tr>
-</tbody></table>
-<h3 id="总结推荐："><a href="#总结推荐：" class="headerlink" title="总结推荐："></a>总结推荐：</h3><ul>
+</tbody>
+</table>
+<h3 id="总结推荐"><a class="markdownIt-Anchor" href="#总结推荐"></a> 总结推荐：</h3>
+<ul>
 <li><strong>TD(0)</strong>：适合在线学习、环境交互、资源有限时使用。算法简单，适合实时任务。</li>
 <li><strong>LSTD</strong>：适合批量数据分析、预测任务，或者需要快速稳定收敛的场景，但计算复杂度高，适合线性逼近小维度问题。</li>
 </ul>
-<hr>
-<h1 id="第九章：基于函数逼近的同轨策略预测"><a href="#第九章：基于函数逼近的同轨策略预测" class="headerlink" title="第九章：基于函数逼近的同轨策略预测"></a>第九章：基于函数逼近的同轨策略预测</h1><h2 id="核心背景：为什么要函数逼近？"><a href="#核心背景：为什么要函数逼近？" class="headerlink" title="核心背景：为什么要函数逼近？"></a>核心背景：为什么要函数逼近？</h2><blockquote>
+<hr />
+<h1 id="第九章基于函数逼近的同轨策略预测"><a class="markdownIt-Anchor" href="#第九章基于函数逼近的同轨策略预测"></a> 第九章：基于函数逼近的同轨策略预测</h1>
+<h2 id="核心背景为什么要函数逼近"><a class="markdownIt-Anchor" href="#核心背景为什么要函数逼近"></a> 核心背景：为什么要函数逼近？</h2>
+<blockquote>
 <p>如果希望强化学习系统能够应用于人工智能和大型工程应用中，则系统必须有能力进行<strong>泛化</strong>。</p>
 </blockquote>
 <p>强化学习传统方法（比如表格型 Q-learning）依赖于将每个状态或状态-动作对显式地存储在表格中。当状态空间很大或是连续的时候（比如自动驾驶、围棋、股票市场），这种方法就无法胜任了。</p>
@@ -755,8 +841,9 @@
 <li>RBF（径向基函数）</li>
 <li>瓦片编码（tile coding）</li>
 </ul>
-<hr>
-<h2 id="核心思想：用监督学习方法逼近值函数"><a href="#核心思想：用监督学习方法逼近值函数" class="headerlink" title="核心思想：用监督学习方法逼近值函数"></a>核心思想：用监督学习方法逼近值函数</h2><blockquote>
+<hr />
+<h2 id="核心思想用监督学习方法逼近值函数"><a class="markdownIt-Anchor" href="#核心思想用监督学习方法逼近值函数"></a> 核心思想：用监督学习方法逼近值函数</h2>
+<blockquote>
 <p>只要将每次更新时涉及的二元组 <code>(s → g)</code> 作为训练样本就可以了。</p>
 </blockquote>
 <p>在强化学习中，我们在每一步都可以得到一个样本：</p>
@@ -764,42 +851,44 @@
 <p>其中目标值 g 可能是：</p>
 <ul>
 <li>蒙特卡洛返回：<code>G = r1 + r2 + ... + rn</code></li>
-<li>TD 返回：<code>r + γ * V(s&#39;)</code></li>
+<li>TD 返回：<code>r + γ * V(s')</code></li>
 </ul>
 <p>这些“输入→目标值”本质上和<strong>监督学习</strong>里的训练对没什么不同。</p>
 <p>所以我们可以借用监督学习的工具（比如神经网络训练）来拟合这个过程。</p>
-<hr>
-<h2 id="💡-什么是同轨策略（on-policy）？"><a href="#💡-什么是同轨策略（on-policy）？" class="headerlink" title="💡 什么是同轨策略（on-policy）？"></a>💡 什么是同轨策略（on-policy）？</h2><blockquote>
+<hr />
+<h2 id="什么是同轨策略on-policy"><a class="markdownIt-Anchor" href="#什么是同轨策略on-policy"></a> 💡 什么是同轨策略（on-policy）？</h2>
+<blockquote>
 <p>我们定义均方价值误差 VE(w) 为对使用权值向量 w 的近似价值函数 <code>v̂_w(s)</code> 的加权误差。</p>
 </blockquote>
 <p>在强化学习中，<strong>同轨策略</strong>是指：</p>
 <ul>
-<li>使用的策略 π 既用于<strong>生成数据</strong>（交互环境），又用于<strong>评估&#x2F;学习</strong>。</li>
+<li>使用的策略 π 既用于<strong>生成数据</strong>（交互环境），又用于<strong>评估/学习</strong>。</li>
 </ul>
 <p>相比之下，<strong>异轨策略 off-policy</strong>（比如 Q-learning）是指用一个行为策略采样，但学习的是另一个目标策略。</p>
 <p><code>VE(w)</code> 衡量的是：近似函数 <code>v̂_w(s)</code> 相对于真实状态值 <code>v_π(s)</code> 的误差，通常定义为：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VE(w) = ∑ μ(s) * (v̂_w(s) - v_π(s))²</span><br></pre></td></tr></table></figure>
-
 <p>其中 μ(s) 是状态的访问概率（stationary distribution）。</p>
-<hr>
-<h2 id="📉-如何优化这个误差？"><a href="#📉-如何优化这个误差？" class="headerlink" title="📉 如何优化这个误差？"></a>📉 如何优化这个误差？</h2><blockquote>
+<hr />
+<h2 id="如何优化这个误差"><a class="markdownIt-Anchor" href="#如何优化这个误差"></a> 📉 如何优化这个误差？</h2>
+<blockquote>
 <p>最常见的方法是随机梯度下降（SGD）及其变种</p>
 </blockquote>
 <p>我们希望通过调整参数 <code>w</code> 来让 <code>VE(w)</code> 尽可能小：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w ← w - α * ∇VE(w)</span><br></pre></td></tr></table></figure>
-
 <p>但问题是，我们<strong>不知道</strong> <code>v_π(s)</code> 的真实值，所以不能直接计算 ∇VE(w)。</p>
 <p>于是我们使用<strong>TD目标或蒙特卡洛目标来估计</strong>误差，从而构造所谓的<strong>半梯度算法（semi-gradient methods）</strong>。</p>
-<hr>
-<h2 id="🧮-什么是“半梯度方法”？为什么叫这个名？"><a href="#🧮-什么是“半梯度方法”？为什么叫这个名？" class="headerlink" title="🧮 什么是“半梯度方法”？为什么叫这个名？"></a>🧮 什么是“半梯度方法”？为什么叫这个名？</h2><blockquote>
+<hr />
+<h2 id="什么是半梯度方法为什么叫这个名"><a class="markdownIt-Anchor" href="#什么是半梯度方法为什么叫这个名"></a> 🧮 什么是“半梯度方法”？为什么叫这个名？</h2>
+<blockquote>
 <p>在这种自举法（如DP）中，权值向量在更新目标中出现，但计算梯度时不考虑它</p>
 </blockquote>
-<p>“半梯度”意思是：你在 TD 学习中更新的目标 <code>r + γ * v̂_w(s&#39;)</code> 是带有 <code>w</code> 的，但你却<strong>不对这个目标求梯度</strong>。你只对 <code>v̂_w(s)</code> 这一部分求梯度。</p>
-<h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">delta = r + γ * v̂_w(s<span class="string">&#x27;) - v̂_w(s)   # TD误差</span></span><br><span class="line"><span class="string">w ← w + α * delta * ∇v̂_w(s)</span></span><br></pre></td></tr></table></figure>
-
-<p>注意：目标中有 <code>v̂_w(s&#39;)</code>，但我们更新时<strong>不对它求导</strong>，所以叫“半梯度”。</p>
-<hr>
-<h2 id="🔢-线性函数逼近（最重要的一个基类）"><a href="#🔢-线性函数逼近（最重要的一个基类）" class="headerlink" title="🔢 线性函数逼近（最重要的一个基类）"></a>🔢 线性函数逼近（最重要的一个基类）</h2><blockquote>
+<p>“半梯度”意思是：你在 TD 学习中更新的目标 <code>r + γ * v̂_w(s')</code> 是带有 <code>w</code> 的，但你却<strong>不对这个目标求梯度</strong>。你只对 <code>v̂_w(s)</code> 这一部分求梯度。</p>
+<h3 id="示例"><a class="markdownIt-Anchor" href="#示例"></a> 示例：</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">delta = r + γ * v̂_w(s<span class="string">&#x27;) - v̂_w(s)   # TD误差</span></span><br><span class="line"><span class="string">w ← w + α * delta * ∇v̂_w(s)</span></span><br></pre></td></tr></table></figure>
+<p>注意：目标中有 <code>v̂_w(s')</code>，但我们更新时<strong>不对它求导</strong>，所以叫“半梯度”。</p>
+<hr />
+<h2 id="线性函数逼近最重要的一个基类"><a class="markdownIt-Anchor" href="#线性函数逼近最重要的一个基类"></a> 🔢 线性函数逼近（最重要的一个基类）</h2>
+<blockquote>
 <p>线性函数逼近中，值估计是特征加权求和：<code>v̂(s) = φ(s)^T w</code></p>
 </blockquote>
 <p>这是强化学习中最容易分析和收敛性最好的逼近方式。</p>
@@ -808,8 +897,9 @@
 <li><code>w</code> 是权值向量（参数）</li>
 <li>优点：分析简单，收敛性好，计算快</li>
 </ul>
-<hr>
-<h2 id="🎨-特征选择的策略？"><a href="#🎨-特征选择的策略？" class="headerlink" title="🎨 特征选择的策略？"></a>🎨 特征选择的策略？</h2><blockquote>
+<hr />
+<h2 id="特征选择的策略"><a class="markdownIt-Anchor" href="#特征选择的策略"></a> 🎨 特征选择的策略？</h2>
+<blockquote>
 <p>选择好的特征是加先验知识的一种重要方式</p>
 </blockquote>
 <p>特征越好，泛化效果越好。</p>
@@ -819,8 +909,9 @@
 <li><strong>瓦片编码（Tile coding）</strong>：非常适合离散近似连续空间，计算快</li>
 <li><strong>径向基函数（RBF）</strong>：适用于平滑响应的低维问题</li>
 </ul>
-<hr>
-<h2 id="📚-不同方法对比"><a href="#📚-不同方法对比" class="headerlink" title="📚 不同方法对比"></a>📚 不同方法对比</h2><table>
+<hr />
+<h2 id="不同方法对比"><a class="markdownIt-Anchor" href="#不同方法对比"></a> 📚 不同方法对比</h2>
+<table>
 <thead>
 <tr>
 <th>方法</th>
@@ -829,7 +920,8 @@
 <th>计算复杂度</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>半梯度 TD(0)</strong></td>
 <td>单步更新，自举</td>
 <td>中等</td>
@@ -859,12 +951,14 @@
 <td>取决于模型</td>
 <td>高</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <blockquote>
 <p>d：权值数量（特征维度）</p>
 </blockquote>
-<hr>
-<h2 id="🚀-深度强化学习：非线性逼近"><a href="#🚀-深度强化学习：非线性逼近" class="headerlink" title="🚀 深度强化学习：非线性逼近"></a>🚀 深度强化学习：非线性逼近</h2><blockquote>
+<hr />
+<h2 id="深度强化学习非线性逼近"><a class="markdownIt-Anchor" href="#深度强化学习非线性逼近"></a> 🚀 深度强化学习：非线性逼近</h2>
+<blockquote>
 <p>用神经网络表示价值函数或策略，常见于 DQN、Actor-Critic 等方法。</p>
 </blockquote>
 <p>训练方法：</p>
@@ -872,20 +966,27 @@
 <li>使用反向传播算法</li>
 <li>通常使用经验回放 + 目标网络等机制</li>
 </ul>
-<hr>
-<h2 id="✅-总结核心点"><a href="#✅-总结核心点" class="headerlink" title="✅ 总结核心点"></a>✅ 总结核心点</h2><ol>
+<hr />
+<h2 id="总结核心点"><a class="markdownIt-Anchor" href="#总结核心点"></a> ✅ 总结核心点</h2>
+<ol>
 <li>大状态空间 → 必须使用函数逼近</li>
 <li>同轨策略 → 策略评估任务中，常用半梯度方法</li>
 <li>线性函数逼近 → 理论最清晰、收敛性最强</li>
 <li>特征选择 → 是模型性能的核心关键</li>
 <li>深度强化学习 → 实现非线性逼近，适用于复杂任务</li>
 </ol>
-<h1 id="第十一章"><a href="#第十一章" class="headerlink" title="第十一章"></a>第十一章</h1><p>强化学习（Reinforcement Learning, RL）中，**预测（Prediction）<strong>和</strong>控制（Control）**是两个核心任务。</p>
-<h2 id="一、预测算法（Prediction）"><a href="#一、预测算法（Prediction）" class="headerlink" title="一、预测算法（Prediction）"></a>一、预测算法（Prediction）</h2><h3 id="✅-目标："><a href="#✅-目标：" class="headerlink" title="✅ 目标："></a>✅ 目标：</h3><p>在给定策略 π 下，<strong>估计状态价值函数 v(s)</strong> 或 <strong>动作价值函数 q(s,a)</strong>。</p>
+<h1 id="第十一章"><a class="markdownIt-Anchor" href="#第十一章"></a> 第十一章</h1>
+<p>强化学习（Reinforcement Learning, RL）中，**预测（Prediction）<strong>和</strong>控制（Control）**是两个核心任务。</p>
+<h2 id="一-预测算法prediction"><a class="markdownIt-Anchor" href="#一-预测算法prediction"></a> 一、预测算法（Prediction）</h2>
+<h3 id="目标"><a class="markdownIt-Anchor" href="#目标"></a> ✅ 目标：</h3>
+<p>在给定策略 π 下，<strong>估计状态价值函数 v(s)</strong> 或 <strong>动作价值函数 q(s,a)</strong>。</p>
 <p>即：不改变策略，仅预测它的长期收益。</p>
-<h3 id="🔧-常见算法："><a href="#🔧-常见算法：" class="headerlink" title="🔧 常见算法："></a>🔧 常见算法：</h3><h4 id="1-蒙特卡洛方法（Monte-Carlo）"><a href="#1-蒙特卡洛方法（Monte-Carlo）" class="headerlink" title="1. 蒙特卡洛方法（Monte Carlo）"></a>1. <strong>蒙特卡洛方法（Monte Carlo）</strong></h4><ul>
+<h3 id="常见算法"><a class="markdownIt-Anchor" href="#常见算法"></a> 🔧 常见算法：</h3>
+<h4 id="1-蒙特卡洛方法monte-carlo"><a class="markdownIt-Anchor" href="#1-蒙特卡洛方法monte-carlo"></a> 1. <strong>蒙特卡洛方法（Monte Carlo）</strong></h4>
+<ul>
 <li>特点：基于完整episode的回报计算。</li>
-<li>算法：<ul>
+<li>算法：
+<ul>
 <li>每次经历一个完整的episode后更新。</li>
 <li>一般有<strong>首次访问</strong>和<strong>每次访问</strong>两种方式。</li>
 </ul>
@@ -893,30 +994,41 @@
 <li>优点：收敛性强。</li>
 <li>缺点：需要完整轨迹，不适合持续型任务。</li>
 </ul>
-<h4 id="2-时序差分方法（Temporal-Difference-TD）"><a href="#2-时序差分方法（Temporal-Difference-TD）" class="headerlink" title="2. 时序差分方法（Temporal Difference, TD）"></a>2. <strong>时序差分方法（Temporal Difference, TD）</strong></h4><ul>
+<h4 id="2-时序差分方法temporal-difference-td"><a class="markdownIt-Anchor" href="#2-时序差分方法temporal-difference-td"></a> 2. <strong>时序差分方法（Temporal Difference, TD）</strong></h4>
+<ul>
 <li>典型代表：<strong>TD(0)</strong></li>
 <li>特点：在每一步进行更新，结合了DP和MC的优点。</li>
-<li>更新公式：<br>$$ V(s) \leftarrow V(s) + \alpha \cdot [r + \gamma V(s’) - V(s)] $$</li>
+<li>更新公式：<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>V</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo>←</mo><mi>V</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo>+</mo><mi>α</mi><mo>⋅</mo><mo stretchy="false">[</mo><mi>r</mi><mo>+</mo><mi>γ</mi><mi>V</mi><mo stretchy="false">(</mo><msup><mi>s</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">)</mo><mo>−</mo><mi>V</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">V(s) \leftarrow V(s) + \alpha \cdot [r + \gamma V(s&#x27;) - V(s)] 
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">←</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.44445em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.051892em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05556em;">γ</span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.801892em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span><span class="mclose">]</span></span></span></span></span></p>
+</li>
 </ul>
-<h4 id="3-n-步-TD"><a href="#3-n-步-TD" class="headerlink" title="3. n 步 TD"></a>3. <strong>n 步 TD</strong></h4><ul>
+<h4 id="3-n-步-td"><a class="markdownIt-Anchor" href="#3-n-步-td"></a> 3. <strong>n 步 TD</strong></h4>
+<ul>
 <li>将 MC 与 TD 做平衡。</li>
 <li>融合了更多未来信息，n 越大越接近 MC。</li>
 </ul>
-<h4 id="4-λ回报方法（TD-λ-Eligibility-Traces）"><a href="#4-λ回报方法（TD-λ-Eligibility-Traces）" class="headerlink" title="4. λ回报方法（TD(λ), Eligibility Traces）"></a>4. <strong>λ回报方法（TD(λ), Eligibility Traces）</strong></h4><ul>
+<h4 id="4-λ回报方法tdλ-eligibility-traces"><a class="markdownIt-Anchor" href="#4-λ回报方法tdλ-eligibility-traces"></a> 4. <strong>λ回报方法（TD(λ), Eligibility Traces）</strong></h4>
+<ul>
 <li>融合了不同步长 TD。</li>
 <li>使用资格迹（Eligibility Traces）追踪状态出现的痕迹，更新时考虑多个状态。</li>
 </ul>
-<h4 id="5-LSTD（Least-Squares-TD）"><a href="#5-LSTD（Least-Squares-TD）" class="headerlink" title="5. LSTD（Least Squares TD）"></a>5. <strong>LSTD（Least Squares TD）</strong></h4><ul>
+<h4 id="5-lstdleast-squares-td"><a class="markdownIt-Anchor" href="#5-lstdleast-squares-td"></a> 5. <strong>LSTD（Least Squares TD）</strong></h4>
+<ul>
 <li>基于线性逼近的高效预测方法。</li>
 <li>数据效率高，适合小规模线性问题。</li>
 </ul>
-<h4 id="6-半梯度方法（Semi-gradient-TD）"><a href="#6-半梯度方法（Semi-gradient-TD）" class="headerlink" title="6. 半梯度方法（Semi-gradient TD）"></a>6. <strong>半梯度方法（Semi-gradient TD）</strong></h4><ul>
+<h4 id="6-半梯度方法semi-gradient-td"><a class="markdownIt-Anchor" href="#6-半梯度方法semi-gradient-td"></a> 6. <strong>半梯度方法（Semi-gradient TD）</strong></h4>
+<ul>
 <li>用于函数逼近时的预测算法。</li>
 <li>应用于：线性函数逼近、神经网络等。</li>
 </ul>
-<hr>
-<h2 id="🧭-二、控制算法（Control）"><a href="#🧭-二、控制算法（Control）" class="headerlink" title="🧭 二、控制算法（Control）"></a>🧭 二、控制算法（Control）</h2><h3 id="✅-目标：-1"><a href="#✅-目标：-1" class="headerlink" title="✅ 目标："></a>✅ 目标：</h3><p>通过不断与环境交互，<strong>学出最优策略 π*</strong>，从而最大化累积奖励。</p>
-<h3 id="🔧-常见算法：-1"><a href="#🔧-常见算法：-1" class="headerlink" title="🔧 常见算法："></a>🔧 常见算法：</h3><h4 id="1-基于价值的方法（Value-based）"><a href="#1-基于价值的方法（Value-based）" class="headerlink" title="1. 基于价值的方法（Value-based）"></a>1. <strong>基于价值的方法（Value-based）</strong></h4><ul>
+<hr />
+<h2 id="二-控制算法control"><a class="markdownIt-Anchor" href="#二-控制算法control"></a> 🧭 二、控制算法（Control）</h2>
+<h3 id="目标-2"><a class="markdownIt-Anchor" href="#目标-2"></a> ✅ 目标：</h3>
+<p>通过不断与环境交互，<strong>学出最优策略 π*</strong>，从而最大化累积奖励。</p>
+<h3 id="常见算法-2"><a class="markdownIt-Anchor" href="#常见算法-2"></a> 🔧 常见算法：</h3>
+<h4 id="1-基于价值的方法value-based"><a class="markdownIt-Anchor" href="#1-基于价值的方法value-based"></a> 1. <strong>基于价值的方法（Value-based）</strong></h4>
+<ul>
 <li>使用 Q-learning、SARSA 等估计 q(s, a)，然后从中导出策略。</li>
 </ul>
 <table>
@@ -927,7 +1039,8 @@
 <th>特点</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>Q-learning</td>
 <td>离策略</td>
 <td>目标值使用最大 q 值，更新稳定</td>
@@ -942,30 +1055,37 @@
 <td>同策略</td>
 <td>使用期望而非最大 q 值，减少方差</td>
 </tr>
-</tbody></table>
-<h4 id="2-基于策略的方法（Policy-based）"><a href="#2-基于策略的方法（Policy-based）" class="headerlink" title="2. 基于策略的方法（Policy-based）"></a>2. <strong>基于策略的方法（Policy-based）</strong></h4><ul>
+</tbody>
+</table>
+<h4 id="2-基于策略的方法policy-based"><a class="markdownIt-Anchor" href="#2-基于策略的方法policy-based"></a> 2. <strong>基于策略的方法（Policy-based）</strong></h4>
+<ul>
 <li>直接优化策略 π(a|s)，不通过 q。</li>
-<li>常见算法：<ul>
+<li>常见算法：
+<ul>
 <li>REINFORCE（蒙特卡洛型策略梯度）</li>
 <li>Actor-Critic（结合值函数和策略函数）</li>
 </ul>
 </li>
 </ul>
-<h4 id="3-基于值-策略的方法（Actor-Critic）"><a href="#3-基于值-策略的方法（Actor-Critic）" class="headerlink" title="3. 基于值+策略的方法（Actor-Critic）"></a>3. <strong>基于值+策略的方法（Actor-Critic）</strong></h4><ul>
+<h4 id="3-基于值策略的方法actor-critic"><a class="markdownIt-Anchor" href="#3-基于值策略的方法actor-critic"></a> 3. <strong>基于值+策略的方法（Actor-Critic）</strong></h4>
+<ul>
 <li>Actor：生成策略。</li>
 <li>Critic：评价策略（估计价值）。</li>
 <li>优点：兼顾稳定性和泛化能力。</li>
 </ul>
-<h4 id="4-深度强化学习方法（Deep-RL）"><a href="#4-深度强化学习方法（Deep-RL）" class="headerlink" title="4. 深度强化学习方法（Deep RL）"></a>4. <strong>深度强化学习方法（Deep RL）</strong></h4><ul>
+<h4 id="4-深度强化学习方法deep-rl"><a class="markdownIt-Anchor" href="#4-深度强化学习方法deep-rl"></a> 4. <strong>深度强化学习方法（Deep RL）</strong></h4>
+<ul>
 <li>DQN（Deep Q-Network）：Q-learning + CNN。</li>
-<li>A3C&#x2F;A2C、PPO、DDPG、SAC 等：更适合连续动作空间或复杂环境。</li>
+<li>A3C/A2C、PPO、DDPG、SAC 等：更适合连续动作空间或复杂环境。</li>
 </ul>
-<h4 id="5-层次化强化学习（HRL）"><a href="#5-层次化强化学习（HRL）" class="headerlink" title="5. 层次化强化学习（HRL）"></a>5. <strong>层次化强化学习（HRL）</strong></h4><ul>
+<h4 id="5-层次化强化学习hrl"><a class="markdownIt-Anchor" href="#5-层次化强化学习hrl"></a> 5. <strong>层次化强化学习（HRL）</strong></h4>
+<ul>
 <li>将任务分解为子任务，每个子任务有独立策略。</li>
 <li>提升泛化性和解决复杂任务的能力。</li>
 </ul>
-<hr>
-<h2 id="三、预测-vs-控制-总结对比"><a href="#三、预测-vs-控制-总结对比" class="headerlink" title="三、预测 vs 控制 总结对比"></a>三、预测 vs 控制 总结对比</h2><table>
+<hr />
+<h2 id="三-预测-vs-控制-总结对比"><a class="markdownIt-Anchor" href="#三-预测-vs-控制-总结对比"></a> 三、预测 vs 控制 总结对比</h2>
+<table>
 <thead>
 <tr>
 <th>项目</th>
@@ -973,7 +1093,8 @@
 <th>控制（Control）</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>目标</td>
 <td>给定策略，估计值函数</td>
 <td>找到最优策略，最大化长期回报</td>
@@ -993,10 +1114,12 @@
 <td>TD(0), MC, TD(λ), LSTD</td>
 <td>Q-learning, SARSA, PPO, DDPG等</td>
 </tr>
-</tbody></table>
-<hr>
+</tbody>
+</table>
+<hr />
 <p>策略梯度方法（Policy Gradient）和基于动作价值的方法（Value-based）是<strong>强化学习中两大主流控制类算法</strong>，它们有着本质的区别。下面从核心原理、表达方式、优化方式、优劣点等方面来做详细对比，并举例说明。</p>
-<h3 id="一、核心区别概述"><a href="#一、核心区别概述" class="headerlink" title="一、核心区别概述"></a>一、核心区别概述</h3><table>
+<h3 id="一-核心区别概述"><a class="markdownIt-Anchor" href="#一-核心区别概述"></a> 一、核心区别概述</h3>
+<table>
 <thead>
 <tr>
 <th>对比项</th>
@@ -1004,7 +1127,8 @@
 <th>动作价值方法（Value-based）</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>优化目标</td>
 <td>直接优化策略 π(a</td>
 <td>s)</td>
@@ -1029,25 +1153,38 @@
 <td>REINFORCE、PPO、A3C、TRPO</td>
 <td>DQN、DDPG（混合型）、Q-learning</td>
 </tr>
-</tbody></table>
-<h3 id="二、数学表达差异"><a href="#二、数学表达差异" class="headerlink" title="二、数学表达差异"></a>二、数学表达差异</h3><h4 id="✅-策略梯度方法"><a href="#✅-策略梯度方法" class="headerlink" title="✅ 策略梯度方法"></a>✅ 策略梯度方法</h4><ul>
+</tbody>
+</table>
+<h3 id="二-数学表达差异"><a class="markdownIt-Anchor" href="#二-数学表达差异"></a> 二、数学表达差异</h3>
+<h4 id="策略梯度方法"><a class="markdownIt-Anchor" href="#策略梯度方法"></a> ✅ 策略梯度方法</h4>
+<ul>
 <li><strong>直接学习策略函数</strong> πθ(a|s)，θ 是可学习的参数。</li>
 <li>优化目标是期望回报：</li>
 </ul>
-<p>$<br>J(\theta) &#x3D; \mathbb{E}<em>{\pi</em>\theta} [R]<br>$</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi mathvariant="double-struck">E</mi><msub><mi>π</mi><mi>θ</mi></msub></msub><mo stretchy="false">[</mo><mi>R</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">
+J(\theta) = \mathbb{E}_{\pi_\theta} [R]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.09618em;">J</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.00586em;vertical-align:-0.25586em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">E</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139199999999997em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.25586em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mclose">]</span></span></span></span></p>
 <ul>
 <li>使用策略梯度定理求梯度更新：</li>
 </ul>
-<p>$<br>\nabla_\theta J(\theta) &#x3D; \mathbb{E}<em>{s,a \sim \pi</em>\theta} [\nabla_\theta \log \pi_\theta(a|s) \cdot Q^\pi(s,a)]<br>$</p>
-<h4 id="✅-动作价值方法"><a href="#✅-动作价值方法" class="headerlink" title="✅ 动作价值方法"></a>✅ 动作价值方法</h4><ul>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="normal">∇</mi><mi>θ</mi></msub><mi>J</mi><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi mathvariant="double-struck">E</mi><mrow><mi>s</mi><mo separator="true">,</mo><mi>a</mi><mo>∼</mo><msub><mi>π</mi><mi>θ</mi></msub></mrow></msub><mo stretchy="false">[</mo><msub><mi mathvariant="normal">∇</mi><mi>θ</mi></msub><mi>log</mi><mo>⁡</mo><msub><mi>π</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><mi>a</mi><mi mathvariant="normal">∣</mi><mi>s</mi><mo stretchy="false">)</mo><mo>⋅</mo><msup><mi>Q</mi><mi>π</mi></msup><mo stretchy="false">(</mo><mi>s</mi><mo separator="true">,</mo><mi>a</mi><mo stretchy="false">)</mo><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">
+\nabla_\theta J(\theta) = \mathbb{E}_{s,a \sim \pi_\theta} [\nabla_\theta \log \pi_\theta(a|s) \cdot Q^\pi(s,a)]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.09618em;">J</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">E</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight">a</span><span class="mrel mtight">∼</span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mord">∣</span><span class="mord mathnormal">s</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">π</span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">a</span><span class="mclose">)</span><span class="mclose">]</span></span></span></span></p>
+<h4 id="动作价值方法"><a class="markdownIt-Anchor" href="#动作价值方法"></a> ✅ 动作价值方法</h4>
+<ul>
 <li>学习一个值函数 Q(s, a)，利用贝尔曼方程：</li>
 </ul>
-<p>$<br>Q(s,a) &#x3D; \mathbb{E}[r + \gamma \max_{a’} Q(s’, a’) | s, a]<br>$</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo stretchy="false">(</mo><mi>s</mi><mo separator="true">,</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="double-struck">E</mi><mo stretchy="false">[</mo><mi>r</mi><mo>+</mo><mi>γ</mi><msub><mo><mi>max</mi><mo>⁡</mo></mo><msup><mi>a</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup></msub><mi>Q</mi><mo stretchy="false">(</mo><msup><mi>s</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo separator="true">,</mo><msup><mi>a</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">)</mo><mi mathvariant="normal">∣</mi><mi>s</mi><mo separator="true">,</mo><mi>a</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">
+Q(s,a) = \mathbb{E}[r + \gamma \max_{a&#x27;} Q(s&#x27;, a&#x27;) | s, a]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">Q</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">a</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathbb">E</span></span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.001892em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05556em;">γ</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mop">max</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32797999999999994em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6828285714285715em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">Q</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord">∣</span><span class="mord mathnormal">s</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">a</span><span class="mclose">]</span></span></span></span></p>
 <ul>
 <li>最终策略为贪婪策略：</li>
 </ul>
-<p>$<br>\pi(s) &#x3D; \arg\max_a Q(s,a)<br>$</p>
-<h3 id="🧪-三、优缺点对比"><a href="#🧪-三、优缺点对比" class="headerlink" title="🧪 三、优缺点对比"></a>🧪 三、优缺点对比</h3><table>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo>=</mo><mi>arg</mi><mo>⁡</mo><msub><mo><mi>max</mi><mo>⁡</mo></mo><mi>a</mi></msub><mi>Q</mi><mo stretchy="false">(</mo><mi>s</mi><mo separator="true">,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+\pi(s) = \arg\max_a Q(s,a)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">ar<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mop">max</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">Q</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">a</span><span class="mclose">)</span></span></span></span></p>
+<h3 id="三-优缺点对比"><a class="markdownIt-Anchor" href="#三-优缺点对比"></a> 🧪 三、优缺点对比</h3>
+<table>
 <thead>
 <tr>
 <th>特性</th>
@@ -1055,7 +1192,8 @@
 <th>动作价值方法</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>可处理连续动作空间</td>
 <td>✅ 非常适合</td>
 <td>❌ 不适用（Q值最大化不好做）</td>
@@ -1067,7 +1205,7 @@
 </tr>
 <tr>
 <td>收敛稳定性</td>
-<td>✅ 稳定（TRPO&#x2F;PPO）</td>
+<td>✅ 稳定（TRPO/PPO）</td>
 <td>❌ 容易发散（如DQN）</td>
 </tr>
 <tr>
@@ -1085,8 +1223,10 @@
 <td>❌ 高</td>
 <td>✅ 低</td>
 </tr>
-</tbody></table>
-<h3 id="📘-四、常见算法对照"><a href="#📘-四、常见算法对照" class="headerlink" title="📘 四、常见算法对照"></a>📘 四、常见算法对照</h3><table>
+</tbody>
+</table>
+<h3 id="四-常见算法对照"><a class="markdownIt-Anchor" href="#四-常见算法对照"></a> 📘 四、常见算法对照</h3>
+<table>
 <thead>
 <tr>
 <th>类型</th>
@@ -1094,7 +1234,8 @@
 <th>简介</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>Policy-based</td>
 <td>REINFORCE</td>
 <td>基础策略梯度方法</td>
@@ -1111,18 +1252,21 @@
 </tr>
 <tr>
 <td>Hybrid（Actor-Critic）</td>
-<td>A3C &#x2F; DDPG</td>
+<td>A3C / DDPG</td>
 <td>同时学习策略和价值（兼顾两者）</td>
 </tr>
-</tbody></table>
-<h3 id="📌-五、实际应用区别"><a href="#📌-五、实际应用区别" class="headerlink" title="📌 五、实际应用区别"></a>📌 五、实际应用区别</h3><table>
+</tbody>
+</table>
+<h3 id="五-实际应用区别"><a class="markdownIt-Anchor" href="#五-实际应用区别"></a> 📌 五、实际应用区别</h3>
+<table>
 <thead>
 <tr>
 <th>应用场景</th>
 <th>建议方法</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>自动驾驶、机械臂</td>
 <td>策略梯度方法（如PPO，DDPG）</td>
 </tr>
@@ -1138,48 +1282,81 @@
 <td>聊天机器人策略</td>
 <td>策略梯度更灵活</td>
 </tr>
-</tbody></table>
-<h2 id="✨-六、一个简单比喻"><a href="#✨-六、一个简单比喻" class="headerlink" title="✨ 六、一个简单比喻"></a>✨ 六、一个简单比喻</h2><ul>
+</tbody>
+</table>
+<h2 id="六-一个简单比喻"><a class="markdownIt-Anchor" href="#六-一个简单比喻"></a> ✨ 六、一个简单比喻</h2>
+<ul>
 <li><strong>Value-based方法</strong>像是在地图上学习每个地点到终点的最佳路线（Q值），然后选择路径；</li>
 <li><strong>Policy-based方法</strong>像是直接学习一个“导航员”，每走一步都告诉你该怎么走（策略函数）。</li>
 </ul>
-<hr>
+<hr />
 <p>TD类算法是value-based方法的一种；</p>
-<h2 id="policy-based-中核心公式的推导过程"><a href="#policy-based-中核心公式的推导过程" class="headerlink" title="policy-based 中核心公式的推导过程"></a>policy-based 中核心公式的推导过程</h2><p>你提到的这个公式是 <strong>策略梯度定理（Policy Gradient Theorem）</strong> 的核心表达式，用于直接优化策略，属于策略优化方法（Policy-based）的理论基础。我们来一步步推导它，看看它是如何来的。</p>
-<h3 id="目标函数定义"><a href="#目标函数定义" class="headerlink" title="目标函数定义"></a><strong>目标函数定义</strong></h3><p>我们希望最大化策略的期望回报：</p>
-<p>$<br>J(\theta) &#x3D; \mathbb{E}<em>{\tau \sim \pi</em>\theta} \left[ R(\tau) \right]<br>$</p>
+<h2 id="policy-based-中核心公式的推导过程"><a class="markdownIt-Anchor" href="#policy-based-中核心公式的推导过程"></a> policy-based 中核心公式的推导过程</h2>
+<p>你提到的这个公式是 <strong>策略梯度定理（Policy Gradient Theorem）</strong> 的核心表达式，用于直接优化策略，属于策略优化方法（Policy-based）的理论基础。我们来一步步推导它，看看它是如何来的。</p>
+<h3 id="目标函数定义"><a class="markdownIt-Anchor" href="#目标函数定义"></a> <strong>目标函数定义</strong></h3>
+<p>我们希望最大化策略的期望回报：</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi mathvariant="double-struck">E</mi><mrow><mi>τ</mi><mo>∼</mo><msub><mi>π</mi><mi>θ</mi></msub></mrow></msub><mrow><mo fence="true">[</mo><mi>R</mi><mo stretchy="false">(</mo><mi>τ</mi><mo stretchy="false">)</mo><mo fence="true">]</mo></mrow></mrow><annotation encoding="application/x-tex">
+J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta} \left[ R(\tau) \right]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.09618em;">J</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.00586em;vertical-align:-0.25586em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">E</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139199999999997em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.1132em;">τ</span><span class="mrel mtight">∼</span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.25586em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">[</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;">]</span></span></span></span></span></p>
 <p>其中：</p>
 <ul>
 <li>( \pi_\theta ) 是由参数 ( \theta ) 定义的策略；</li>
-<li>( \tau ) 表示一个完整的轨迹（trajectory）：( \tau &#x3D; (s_0, a_0, s_1, a_1, …, s_T) )；</li>
+<li>( \tau ) 表示一个完整的轨迹（trajectory）：( \tau = (s_0, a_0, s_1, a_1, …, s_T) )；</li>
 <li>( R(\tau) ) 是轨迹的总回报（可以是 ( \sum_t \gamma^t r_t )）。</li>
 </ul>
-<h3 id="第一步：将期望展开为积分"><a href="#第一步：将期望展开为积分" class="headerlink" title="第一步：将期望展开为积分"></a><strong>第一步：将期望展开为积分</strong></h3><p>我们先将目标函数写成关于轨迹概率分布的积分形式：</p>
-<p>$<br>J(\theta) &#x3D; \int_\tau P(\tau; \theta) R(\tau) , d\tau<br>$</p>
-<h3 id="第二步：对-theta-求导"><a href="#第二步：对-theta-求导" class="headerlink" title="第二步：对 ( \theta ) 求导"></a><strong>第二步：对 ( \theta ) 求导</strong></h3><p>对参数 ( \theta ) 求梯度：</p>
-<p>$<br>\nabla_\theta J(\theta) &#x3D; \int_\tau \nabla_\theta P(\tau; \theta) R(\tau) , d\tau<br>$</p>
+<h3 id="第一步将期望展开为积分"><a class="markdownIt-Anchor" href="#第一步将期望展开为积分"></a> <strong>第一步：将期望展开为积分</strong></h3>
+<p>我们先将目标函数写成关于轨迹概率分布的积分形式：</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mo>∫</mo><mi>τ</mi></msub><mi>P</mi><mo stretchy="false">(</mo><mi>τ</mi><mo separator="true">;</mo><mi>θ</mi><mo stretchy="false">)</mo><mi>R</mi><mo stretchy="false">(</mo><mi>τ</mi><mo stretchy="false">)</mo><mtext> </mtext><mi>d</mi><mi>τ</mi></mrow><annotation encoding="application/x-tex">
+J(\theta) = \int_\tau P(\tau; \theta) R(\tau) \, d\tau
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.09618em;">J</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.1608200000000002em;vertical-align:-0.35582em;"></span><span class="mop"><span class="mop op-symbol small-op" style="margin-right:0.19445em;position:relative;top:-0.0005599999999999772em;">∫</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:-0.05442800000000003em;"><span style="top:-2.34418em;margin-left:-0.19445em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.1132em;">τ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.35582em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span></span></span></span></p>
+<h3 id="第二步对-theta-求导"><a class="markdownIt-Anchor" href="#第二步对-theta-求导"></a> <strong>第二步：对 ( \theta ) 求导</strong></h3>
+<p>对参数 ( \theta ) 求梯度：</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="normal">∇</mi><mi>θ</mi></msub><mi>J</mi><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mo>∫</mo><mi>τ</mi></msub><msub><mi mathvariant="normal">∇</mi><mi>θ</mi></msub><mi>P</mi><mo stretchy="false">(</mo><mi>τ</mi><mo separator="true">;</mo><mi>θ</mi><mo stretchy="false">)</mo><mi>R</mi><mo stretchy="false">(</mo><mi>τ</mi><mo stretchy="false">)</mo><mtext> </mtext><mi>d</mi><mi>τ</mi></mrow><annotation encoding="application/x-tex">
+\nabla_\theta J(\theta) = \int_\tau \nabla_\theta P(\tau; \theta) R(\tau) \, d\tau
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.09618em;">J</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.1608200000000002em;vertical-align:-0.35582em;"></span><span class="mop"><span class="mop op-symbol small-op" style="margin-right:0.19445em;position:relative;top:-0.0005599999999999772em;">∫</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:-0.05442800000000003em;"><span style="top:-2.34418em;margin-left:-0.19445em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.1132em;">τ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.35582em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span></span></span></span></p>
 <p>接下来用 <strong>对数技巧（likelihood trick）</strong>：</p>
-<p>$<br>\nabla_\theta P(\tau; \theta) &#x3D; P(\tau; \theta) \nabla_\theta \log P(\tau; \theta)<br>$</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="normal">∇</mi><mi>θ</mi></msub><mi>P</mi><mo stretchy="false">(</mo><mi>τ</mi><mo separator="true">;</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo><mi>P</mi><mo stretchy="false">(</mo><mi>τ</mi><mo separator="true">;</mo><mi>θ</mi><mo stretchy="false">)</mo><msub><mi mathvariant="normal">∇</mi><mi>θ</mi></msub><mi>log</mi><mo>⁡</mo><mi>P</mi><mo stretchy="false">(</mo><mi>τ</mi><mo separator="true">;</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+\nabla_\theta P(\tau; \theta) = P(\tau; \theta) \nabla_\theta \log P(\tau; \theta)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span></span></span></span></p>
 <p>于是变成：</p>
-<p>$<br>\nabla_\theta J(\theta) &#x3D; \int_\tau P(\tau; \theta) \nabla_\theta \log P(\tau; \theta) R(\tau) , d\tau<br>&#x3D; \mathbb{E}<em>{\tau \sim \pi</em>\theta} \left[ \nabla_\theta \log P(\tau; \theta) R(\tau) \right]<br>$</p>
-<h3 id="第三步：轨迹的概率分解"><a href="#第三步：轨迹的概率分解" class="headerlink" title="第三步：轨迹的概率分解"></a><strong>第三步：轨迹的概率分解</strong></h3><p>轨迹的概率可以写成状态转移和策略乘积的形式：</p>
-<p>$<br>P(\tau; \theta) &#x3D; \rho(s_0) \prod_{t&#x3D;0}^{T-1} \pi_\theta(a_t|s_t) P(s_{t+1}|s_t, a_t)<br>$</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="normal">∇</mi><mi>θ</mi></msub><mi>J</mi><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mo>∫</mo><mi>τ</mi></msub><mi>P</mi><mo stretchy="false">(</mo><mi>τ</mi><mo separator="true">;</mo><mi>θ</mi><mo stretchy="false">)</mo><msub><mi mathvariant="normal">∇</mi><mi>θ</mi></msub><mi>log</mi><mo>⁡</mo><mi>P</mi><mo stretchy="false">(</mo><mi>τ</mi><mo separator="true">;</mo><mi>θ</mi><mo stretchy="false">)</mo><mi>R</mi><mo stretchy="false">(</mo><mi>τ</mi><mo stretchy="false">)</mo><mtext> </mtext><mi>d</mi><mi>τ</mi><mo>=</mo><msub><mi mathvariant="double-struck">E</mi><mrow><mi>τ</mi><mo>∼</mo><msub><mi>π</mi><mi>θ</mi></msub></mrow></msub><mrow><mo fence="true">[</mo><msub><mi mathvariant="normal">∇</mi><mi>θ</mi></msub><mi>log</mi><mo>⁡</mo><mi>P</mi><mo stretchy="false">(</mo><mi>τ</mi><mo separator="true">;</mo><mi>θ</mi><mo stretchy="false">)</mo><mi>R</mi><mo stretchy="false">(</mo><mi>τ</mi><mo stretchy="false">)</mo><mo fence="true">]</mo></mrow></mrow><annotation encoding="application/x-tex">
+\nabla_\theta J(\theta) = \int_\tau P(\tau; \theta) \nabla_\theta \log P(\tau; \theta) R(\tau) \, d\tau
+= \mathbb{E}_{\tau \sim \pi_\theta} \left[ \nabla_\theta \log P(\tau; \theta) R(\tau) \right]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.09618em;">J</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.1608200000000002em;vertical-align:-0.35582em;"></span><span class="mop"><span class="mop op-symbol small-op" style="margin-right:0.19445em;position:relative;top:-0.0005599999999999772em;">∫</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:-0.05442800000000003em;"><span style="top:-2.34418em;margin-left:-0.19445em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.1132em;">τ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.35582em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.00586em;vertical-align:-0.25586em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">E</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139199999999997em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.1132em;">τ</span><span class="mrel mtight">∼</span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.25586em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">[</span><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;">]</span></span></span></span></span></p>
+<h3 id="第三步轨迹的概率分解"><a class="markdownIt-Anchor" href="#第三步轨迹的概率分解"></a> <strong>第三步：轨迹的概率分解</strong></h3>
+<p>轨迹的概率可以写成状态转移和策略乘积的形式：</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>τ</mi><mo separator="true">;</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo><mi>ρ</mi><mo stretchy="false">(</mo><msub><mi>s</mi><mn>0</mn></msub><mo stretchy="false">)</mo><msubsup><mo>∏</mo><mrow><mi>t</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>T</mi><mo>−</mo><mn>1</mn></mrow></msubsup><msub><mi>π</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><msub><mi>a</mi><mi>t</mi></msub><mi mathvariant="normal">∣</mi><msub><mi>s</mi><mi>t</mi></msub><mo stretchy="false">)</mo><mi>P</mi><mo stretchy="false">(</mo><msub><mi>s</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mi mathvariant="normal">∣</mi><msub><mi>s</mi><mi>t</mi></msub><mo separator="true">,</mo><msub><mi>a</mi><mi>t</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+P(\tau; \theta) = \rho(s_0) \prod_{t=0}^{T-1} \pi_\theta(a_t|s_t) P(s_{t+1}|s_t, a_t)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.2809409999999999em;vertical-align:-0.29971000000000003em;"></span><span class="mord mathnormal">ρ</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∏</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.981231em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mord">∣</span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
 <p>其中，环境转移概率 ( P(s_{t+1}|s_t, a_t) ) 与策略无关，因此求导时不影响，只剩下对策略部分求导：</p>
-<p>$<br>\log P(\tau; \theta) &#x3D; \sum_{t&#x3D;0}^{T-1} \log \pi_\theta(a_t | s_t)<br>$</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>log</mi><mo>⁡</mo><mi>P</mi><mo stretchy="false">(</mo><mi>τ</mi><mo separator="true">;</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo><msubsup><mo>∑</mo><mrow><mi>t</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>T</mi><mo>−</mo><mn>1</mn></mrow></msubsup><mi>log</mi><mo>⁡</mo><msub><mi>π</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><msub><mi>a</mi><mi>t</mi></msub><mi mathvariant="normal">∣</mi><msub><mi>s</mi><mi>t</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+\log P(\tau; \theta) = \sum_{t=0}^{T-1} \log \pi_\theta(a_t | s_t)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.2809409999999999em;vertical-align:-0.29971000000000003em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.981231em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
 <p>于是：</p>
-<p>$<br>\nabla_\theta J(\theta) &#x3D; \mathbb{E}<em>{\tau \sim \pi</em>\theta} \left[ \left( \sum_{t&#x3D;0}^{T-1} \nabla_\theta \log \pi_\theta(a_t | s_t) \right) R(\tau) \right]<br>$</p>
-<h3 id="第四步：引入状态分布与动作值函数"><a href="#第四步：引入状态分布与动作值函数" class="headerlink" title="第四步：引入状态分布与动作值函数"></a><strong>第四步：引入状态分布与动作值函数</strong></h3><p>假设我们只用时间 ( t ) 的动作做一次更新，可以写成：</p>
-<p>$<br>\nabla_\theta J(\theta) &#x3D; \mathbb{E}<em>{s \sim d^\pi, a \sim \pi</em>\theta} \left[ \nabla_\theta \log \pi_\theta(a|s) Q^\pi(s, a) \right]<br>$</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="normal">∇</mi><mi>θ</mi></msub><mi>J</mi><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi mathvariant="double-struck">E</mi><mrow><mi>τ</mi><mo>∼</mo><msub><mi>π</mi><mi>θ</mi></msub></mrow></msub><mrow><mo fence="true">[</mo><mrow><mo fence="true">(</mo><msubsup><mo>∑</mo><mrow><mi>t</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>T</mi><mo>−</mo><mn>1</mn></mrow></msubsup><msub><mi mathvariant="normal">∇</mi><mi>θ</mi></msub><mi>log</mi><mo>⁡</mo><msub><mi>π</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><msub><mi>a</mi><mi>t</mi></msub><mi mathvariant="normal">∣</mi><msub><mi>s</mi><mi>t</mi></msub><mo stretchy="false">)</mo><mo fence="true">)</mo></mrow><mi>R</mi><mo stretchy="false">(</mo><mi>τ</mi><mo stretchy="false">)</mo><mo fence="true">]</mo></mrow></mrow><annotation encoding="application/x-tex">
+\nabla_\theta J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta} \left[ \left( \sum_{t=0}^{T-1} \nabla_\theta \log \pi_\theta(a_t | s_t) \right) R(\tau) \right]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.09618em;">J</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.80002em;vertical-align:-0.65002em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">E</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139199999999997em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.1132em;">τ</span><span class="mrel mtight">∼</span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.25586em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size2">[</span></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size2">(</span></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.981231em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size2">)</span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size2">]</span></span></span></span></span></span></p>
+<h3 id="第四步引入状态分布与动作值函数"><a class="markdownIt-Anchor" href="#第四步引入状态分布与动作值函数"></a> <strong>第四步：引入状态分布与动作值函数</strong></h3>
+<p>假设我们只用时间 ( t ) 的动作做一次更新，可以写成：</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="normal">∇</mi><mi>θ</mi></msub><mi>J</mi><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi mathvariant="double-struck">E</mi><mrow><mi>s</mi><mo>∼</mo><msup><mi>d</mi><mi>π</mi></msup><mo separator="true">,</mo><mi>a</mi><mo>∼</mo><msub><mi>π</mi><mi>θ</mi></msub></mrow></msub><mrow><mo fence="true">[</mo><msub><mi mathvariant="normal">∇</mi><mi>θ</mi></msub><mi>log</mi><mo>⁡</mo><msub><mi>π</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><mi>a</mi><mi mathvariant="normal">∣</mi><mi>s</mi><mo stretchy="false">)</mo><msup><mi>Q</mi><mi>π</mi></msup><mo stretchy="false">(</mo><mi>s</mi><mo separator="true">,</mo><mi>a</mi><mo stretchy="false">)</mo><mo fence="true">]</mo></mrow></mrow><annotation encoding="application/x-tex">
+\nabla_\theta J(\theta) = \mathbb{E}_{s \sim d^\pi, a \sim \pi_\theta} \left[ \nabla_\theta \log \pi_\theta(a|s) Q^\pi(s, a) \right]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.09618em;">J</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">E</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span><span class="mrel mtight">∼</span><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5935428571428571em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">π</span></span></span></span></span></span></span></span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight">a</span><span class="mrel mtight">∼</span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">[</span><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mord">∣</span><span class="mord mathnormal">s</span><span class="mclose">)</span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">π</span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">a</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;">]</span></span></span></span></span></p>
 <p>这就是：</p>
-<p>$<br>\boxed{<br>\nabla_\theta J(\theta) &#x3D; \mathbb{E}<em>{s \sim d^\pi, a \sim \pi</em>\theta} \left[ \nabla_\theta \log \pi_\theta(a|s) \cdot Q^\pi(s, a) \right]<br>}<br>$</p>
-<h3 id="✅-总结："><a href="#✅-总结：" class="headerlink" title="✅ 总结："></a>✅ 总结：</h3><p>这个公式说明：</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><msub><mi mathvariant="normal">∇</mi><mi>θ</mi></msub><mi>J</mi><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi mathvariant="double-struck">E</mi><mrow><mi>s</mi><mo>∼</mo><msup><mi>d</mi><mi>π</mi></msup><mo separator="true">,</mo><mi>a</mi><mo>∼</mo><msub><mi>π</mi><mi>θ</mi></msub></mrow></msub><mrow><mo fence="true">[</mo><msub><mi mathvariant="normal">∇</mi><mi>θ</mi></msub><mi>log</mi><mo>⁡</mo><msub><mi>π</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><mi>a</mi><mi mathvariant="normal">∣</mi><mi>s</mi><mo stretchy="false">)</mo><mo>⋅</mo><msup><mi>Q</mi><mi>π</mi></msup><mo stretchy="false">(</mo><mi>s</mi><mo separator="true">,</mo><mi>a</mi><mo stretchy="false">)</mo><mo fence="true">]</mo></mrow></mrow></mstyle></mstyle></mstyle></menclose></mrow><annotation encoding="application/x-tex">
+\boxed{
+\nabla_\theta J(\theta) = \mathbb{E}_{s \sim d^\pi, a \sim \pi_\theta} \left[ \nabla_\theta \log \pi_\theta(a|s) \cdot Q^\pi(s, a) \right]
+}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.716108em;vertical-align:-0.6261079999999999em;"></span><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.09em;"><span style="top:-3.716108em;"><span class="pstrut" style="height:3.716108em;"></span><span class="boxpad"><span class="mord"><span class="mord"><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.09618em;">J</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">E</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span><span class="mrel mtight">∼</span><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5935428571428571em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">π</span></span></span></span></span></span></span></span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight">a</span><span class="mrel mtight">∼</span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">[</span><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mord">∣</span><span class="mord mathnormal">s</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7143919999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">π</span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">a</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;">]</span></span></span></span></span></span><span style="top:-3.0900000000000003em;"><span class="pstrut" style="height:3.716108em;"></span><span class="stretchy fbox" style="height:1.716108em;border-style:solid;border-width:0.04em;"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.6261079999999999em;"><span></span></span></span></span></span></span></span></span></p>
+<h3 id="总结-3"><a class="markdownIt-Anchor" href="#总结-3"></a> ✅ 总结：</h3>
+<p>这个公式说明：</p>
 <ul>
 <li>我们可以用策略对数的梯度乘以当前策略下的动作价值，来更新策略参数；</li>
 <li>即使不知 ( Q^\pi(s,a) )，也可以用 sample-based 的方式估计它（如使用 REINFORCE 或 Actor-Critic）；</li>
 <li>它是策略优化的核心理论。</li>
 </ul>
-<hr>
-<h3 id="🔍-强化学习三大类方法对比表"><a href="#🔍-强化学习三大类方法对比表" class="headerlink" title="🔍 强化学习三大类方法对比表"></a>🔍 强化学习三大类方法对比表</h3><table>
+<hr />
+<h3 id="强化学习三大类方法对比表"><a class="markdownIt-Anchor" href="#强化学习三大类方法对比表"></a> 🔍 强化学习三大类方法对比表</h3>
+<table>
 <thead>
 <tr>
 <th>特征维度</th>
@@ -1188,7 +1365,8 @@
 <th><strong>Model-based</strong></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>🔧 <strong>核心目标</strong></td>
 <td>估计状态或动作的价值函数 ( V(s) ), ( Q(s, a) )</td>
 <td>直接优化策略 ( \pi_\theta(a</td>
@@ -1216,7 +1394,7 @@
 <td>🧠 <strong>策略表示</strong></td>
 <td>隐式：从 Q 值中导出策略（如 ε-greedy）</td>
 <td>显式：策略网络直接输出动作概率</td>
-<td>显式或隐式策略；可结合 Value&#x2F;Policy 方法</td>
+<td>显式或隐式策略；可结合 Value/Policy 方法</td>
 </tr>
 <tr>
 <td>📉 <strong>稳定性</strong></td>
@@ -1242,8 +1420,9 @@
 <td>连续动作、高维策略优化</td>
 <td>长远推理、高数据效率要求（如机器人控制）</td>
 </tr>
-</tbody></table>
-<hr>
+</tbody>
+</table>
+<hr />
 
     </div>
 
@@ -1254,8 +1433,8 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" rel="tag"># 强化学习</a>
-              <a href="/tags/%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93/" rel="tag"># 笔记总结</a>
               <a href="/tags/%E4%B9%A6%E6%9C%AC%E5%AD%A6%E4%B9%A0/" rel="tag"># 书本学习</a>
+              <a href="/tags/%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93/" rel="tag"># 笔记总结</a>
           </div>
 
         
@@ -1329,7 +1508,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">三种方法对比总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E8%BD%A8%E7%AD%96%E7%95%A5-vs-%E7%A6%BB%E8%BD%A8%E7%AD%96%E7%95%A5"><span class="nav-number">2.</span> <span class="nav-text">同轨策略 vs. 离轨策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88SARSA%E8%BF%9B%E8%A1%8C%E7%9A%84%E6%98%AF%E7%AD%96%E7%95%A5%E5%AD%A6%E4%B9%A0%E8%80%8C%E9%9D%9E%E7%8A%B6%E6%80%81%E4%BB%B7%E5%80%BC%E4%BC%B0%E8%AE%A1%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">为什么SARSA进行的是策略学习而非状态价值估计？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SARSA%E4%B8%8E%E7%8A%B6%E6%80%81%E4%BB%B7%E5%80%BC%E4%BC%B0%E8%AE%A1%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">2.2.</span> <span class="nav-text">SARSA与状态价值估计的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-number">2.3.</span> <span class="nav-text">总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8-TD-%E6%96%B9%E6%B3%95%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.4.</span> <span class="nav-text">常用 TD 方法的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="nav-number">2.5.</span> <span class="nav-text">对比说明：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dyna-Q-%E5%8F%8A%E5%85%B6%E4%B8%BB%E8%A6%81%E5%8F%98%E4%BD%93%E5%AF%B9%E6%AF%94%E8%A1%A8"><span class="nav-number">3.</span> <span class="nav-text">Dyna-Q 及其主要变体对比表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Dyna-Q"><span class="nav-number">3.1.</span> <span class="nav-text">1. Dyna-Q</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Dyna-Q"><span class="nav-number">3.2.</span> <span class="nav-text">2. Dyna-Q+</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Prioritized-Dyna-Q"><span class="nav-number">3.3.</span> <span class="nav-text">3. Prioritized Dyna-Q</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Dyna-2"><span class="nav-number">3.4.</span> <span class="nav-text">4. Dyna-2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91%E7%89%88%E6%9C%AC%EF%BC%88%E7%BA%BF%E6%80%A7-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%89"><span class="nav-number">3.5.</span> <span class="nav-text">5. 函数逼近版本（线性 &#x2F; 神经网络）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E6%8E%A8%E8%8D%90%EF%BC%88%E4%B8%8D%E5%90%8C%E9%9C%80%E6%B1%82%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">总结推荐（不同需求）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%E6%80%BB%E7%BB%93"><span class="nav-number">4.1.</span> <span class="nav-text">第一部分总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%90%8C%E8%BD%A8%E7%AD%96%E7%95%A5%EF%BC%88On-Policy%EF%BC%89%EF%BC%9A"><span class="nav-number">4.2.</span> <span class="nav-text">1. 同轨策略（On-Policy）：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91%EF%BC%88Function-Approximation%EF%BC%89%EF%BC%9A"><span class="nav-number">4.3.</span> <span class="nav-text">2. 函数逼近（Function Approximation）：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%90%8C%E8%BD%A8%E7%AD%96%E7%95%A5%E9%A2%84%E6%B5%8B%E7%9A%84%E5%86%85%E5%AE%B9%EF%BC%9A"><span class="nav-number">4.4.</span> <span class="nav-text">3. 同轨策略预测的内容：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BD%BF%E7%94%A8TD%EF%BC%88%E6%97%B6%E9%97%B4%E5%B7%AE%E5%88%86%EF%BC%89%E6%96%B9%E6%B3%95%E8%BF%9B%E8%A1%8C%E5%90%8C%E8%BD%A8%E7%AD%96%E7%95%A5%E9%A2%84%E6%B5%8B%EF%BC%9A"><span class="nav-number">4.4.1.</span> <span class="nav-text">1. 使用TD（时间差分）方法进行同轨策略预测：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E7%BA%BF%E6%80%A7%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91%EF%BC%9A"><span class="nav-number">4.4.2.</span> <span class="nav-text">2. 线性函数逼近：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91%EF%BC%88%E4%BE%8B%E5%A6%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%89%EF%BC%9A"><span class="nav-number">4.4.3.</span> <span class="nav-text">3. 非线性函数逼近（例如神经网络）：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E7%AD%96%E7%95%A5%E8%AF%84%E4%BC%B0%E5%92%8C%E6%9B%B4%E6%96%B0%EF%BC%9A"><span class="nav-number">4.4.4.</span> <span class="nav-text">4. 策略评估和更新：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E5%9F%BA%E4%BA%8E%E6%A2%AF%E5%BA%A6%E7%9A%84%E6%9B%B4%E6%96%B0%EF%BC%9A"><span class="nav-number">4.4.5.</span> <span class="nav-text">5. 基于梯度的更新：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%90%8C%E8%BD%A8%E7%AD%96%E7%95%A5%E9%A2%84%E6%B5%8B%E7%9A%84%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95%EF%BC%9A"><span class="nav-number">4.5.</span> <span class="nav-text">4. 同轨策略预测的经典算法：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-SARSA-%CE%BB-%EF%BC%9A"><span class="nav-number">4.5.1.</span> <span class="nav-text">(1) SARSA(λ)：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%B7%B1%E5%BA%A6Q%E5%AD%A6%E4%B9%A0%EF%BC%88DQN%EF%BC%89%EF%BC%9A"><span class="nav-number">4.5.2.</span> <span class="nav-text">(2) 深度Q学习（DQN）：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-A3C%EF%BC%88%E5%BC%82%E6%AD%A5%E4%BC%98%E5%8A%BF%E6%BC%94%E5%91%98-%E8%AF%84%E8%AE%BA%E5%AE%B6%EF%BC%89%EF%BC%9A"><span class="nav-number">4.5.3.</span> <span class="nav-text">(3) A3C（异步优势演员-评论家）：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E4%BC%98%E7%BC%BA%E7%82%B9%E5%88%86%E6%9E%90%EF%BC%9A"><span class="nav-number">4.6.</span> <span class="nav-text">5. 优缺点分析：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A"><span class="nav-number">4.6.1.</span> <span class="nav-text">优点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9%EF%BC%9A"><span class="nav-number">4.6.2.</span> <span class="nav-text">缺点：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A-1"><span class="nav-number">4.7.</span> <span class="nav-text">总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E6%8E%A8%E8%8D%90%EF%BC%9A"><span class="nav-number">4.8.</span> <span class="nav-text">总结推荐：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B9%9D%E7%AB%A0%EF%BC%9A%E5%9F%BA%E4%BA%8E%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91%E7%9A%84%E5%90%8C%E8%BD%A8%E7%AD%96%E7%95%A5%E9%A2%84%E6%B5%8B"><span class="nav-number"></span> <span class="nav-text">第九章：基于函数逼近的同轨策略预测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E8%83%8C%E6%99%AF%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">核心背景：为什么要函数逼近？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3%EF%BC%9A%E7%94%A8%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E9%80%BC%E8%BF%91%E5%80%BC%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">核心思想：用监督学习方法逼近值函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%A1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%90%8C%E8%BD%A8%E7%AD%96%E7%95%A5%EF%BC%88on-policy%EF%BC%89%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">💡 什么是同轨策略（on-policy）？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%89-%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%E8%BF%99%E4%B8%AA%E8%AF%AF%E5%B7%AE%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">📉 如何优化这个误差？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%A7%AE-%E4%BB%80%E4%B9%88%E6%98%AF%E2%80%9C%E5%8D%8A%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95%E2%80%9D%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AB%E8%BF%99%E4%B8%AA%E5%90%8D%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">🧮 什么是“半梯度方法”？为什么叫这个名？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="nav-number">5.1.</span> <span class="nav-text">示例：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%A2-%E7%BA%BF%E6%80%A7%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91%EF%BC%88%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E4%B8%80%E4%B8%AA%E5%9F%BA%E7%B1%BB%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">🔢 线性函数逼近（最重要的一个基类）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%8E%A8-%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9%E7%9A%84%E7%AD%96%E7%95%A5%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">🎨 特征选择的策略？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%9A-%E4%B8%8D%E5%90%8C%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94"><span class="nav-number">8.</span> <span class="nav-text">📚 不同方法对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%9A%80-%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%EF%BC%9A%E9%9D%9E%E7%BA%BF%E6%80%A7%E9%80%BC%E8%BF%91"><span class="nav-number">9.</span> <span class="nav-text">🚀 深度强化学习：非线性逼近</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9C%85-%E6%80%BB%E7%BB%93%E6%A0%B8%E5%BF%83%E7%82%B9"><span class="nav-number">10.</span> <span class="nav-text">✅ 总结核心点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0"><span class="nav-number"></span> <span class="nav-text">第十一章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%A2%84%E6%B5%8B%E7%AE%97%E6%B3%95%EF%BC%88Prediction%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">一、预测算法（Prediction）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9C%85-%E7%9B%AE%E6%A0%87%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">✅ 目标：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">🔧 常见算法：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%EF%BC%88Monte-Carlo%EF%BC%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 蒙特卡洛方法（Monte Carlo）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%97%B6%E5%BA%8F%E5%B7%AE%E5%88%86%E6%96%B9%E6%B3%95%EF%BC%88Temporal-Difference-TD%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 时序差分方法（Temporal Difference, TD）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-n-%E6%AD%A5-TD"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. n 步 TD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%CE%BB%E5%9B%9E%E6%8A%A5%E6%96%B9%E6%B3%95%EF%BC%88TD-%CE%BB-Eligibility-Traces%EF%BC%89"><span class="nav-number">1.2.4.</span> <span class="nav-text">4. λ回报方法（TD(λ), Eligibility Traces）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-LSTD%EF%BC%88Least-Squares-TD%EF%BC%89"><span class="nav-number">1.2.5.</span> <span class="nav-text">5. LSTD（Least Squares TD）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E5%8D%8A%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95%EF%BC%88Semi-gradient-TD%EF%BC%89"><span class="nav-number">1.2.6.</span> <span class="nav-text">6. 半梯度方法（Semi-gradient TD）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%A7%AD-%E4%BA%8C%E3%80%81%E6%8E%A7%E5%88%B6%E7%AE%97%E6%B3%95%EF%BC%88Control%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">🧭 二、控制算法（Control）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9C%85-%E7%9B%AE%E6%A0%87%EF%BC%9A-1"><span class="nav-number">2.1.</span> <span class="nav-text">✅ 目标：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%A7-%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95%EF%BC%9A-1"><span class="nav-number">2.2.</span> <span class="nav-text">🔧 常见算法：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%9F%BA%E4%BA%8E%E4%BB%B7%E5%80%BC%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%88Value-based%EF%BC%89"><span class="nav-number">2.2.1.</span> <span class="nav-text">1. 基于价值的方法（Value-based）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%9F%BA%E4%BA%8E%E7%AD%96%E7%95%A5%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%88Policy-based%EF%BC%89"><span class="nav-number">2.2.2.</span> <span class="nav-text">2. 基于策略的方法（Policy-based）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%9F%BA%E4%BA%8E%E5%80%BC-%E7%AD%96%E7%95%A5%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%88Actor-Critic%EF%BC%89"><span class="nav-number">2.2.3.</span> <span class="nav-text">3. 基于值+策略的方法（Actor-Critic）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%EF%BC%88Deep-RL%EF%BC%89"><span class="nav-number">2.2.4.</span> <span class="nav-text">4. 深度强化学习方法（Deep RL）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E5%B1%82%E6%AC%A1%E5%8C%96%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%EF%BC%88HRL%EF%BC%89"><span class="nav-number">2.2.5.</span> <span class="nav-text">5. 层次化强化学习（HRL）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E9%A2%84%E6%B5%8B-vs-%E6%8E%A7%E5%88%B6-%E6%80%BB%E7%BB%93%E5%AF%B9%E6%AF%94"><span class="nav-number">3.</span> <span class="nav-text">三、预测 vs 控制 总结对比</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%A0%B8%E5%BF%83%E5%8C%BA%E5%88%AB%E6%A6%82%E8%BF%B0"><span class="nav-number">3.1.</span> <span class="nav-text">一、核心区别概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%95%B0%E5%AD%A6%E8%A1%A8%E8%BE%BE%E5%B7%AE%E5%BC%82"><span class="nav-number">3.2.</span> <span class="nav-text">二、数学表达差异</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%9C%85-%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.1.</span> <span class="nav-text">✅ 策略梯度方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%9C%85-%E5%8A%A8%E4%BD%9C%E4%BB%B7%E5%80%BC%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.2.</span> <span class="nav-text">✅ 动作价值方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%A7%AA-%E4%B8%89%E3%80%81%E4%BC%98%E7%BC%BA%E7%82%B9%E5%AF%B9%E6%AF%94"><span class="nav-number">3.3.</span> <span class="nav-text">🧪 三、优缺点对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%98-%E5%9B%9B%E3%80%81%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95%E5%AF%B9%E7%85%A7"><span class="nav-number">3.4.</span> <span class="nav-text">📘 四、常见算法对照</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%8C-%E4%BA%94%E3%80%81%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E5%8C%BA%E5%88%AB"><span class="nav-number">3.5.</span> <span class="nav-text">📌 五、实际应用区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9C%A8-%E5%85%AD%E3%80%81%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E6%AF%94%E5%96%BB"><span class="nav-number">4.</span> <span class="nav-text">✨ 六、一个简单比喻</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#policy-based-%E4%B8%AD%E6%A0%B8%E5%BF%83%E5%85%AC%E5%BC%8F%E7%9A%84%E6%8E%A8%E5%AF%BC%E8%BF%87%E7%A8%8B"><span class="nav-number">5.</span> <span class="nav-text">policy-based 中核心公式的推导过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89"><span class="nav-number">5.1.</span> <span class="nav-text">目标函数定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%B0%86%E6%9C%9F%E6%9C%9B%E5%B1%95%E5%BC%80%E4%B8%BA%E7%A7%AF%E5%88%86"><span class="nav-number">5.2.</span> <span class="nav-text">第一步：将期望展开为积分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%AF%B9-theta-%E6%B1%82%E5%AF%BC"><span class="nav-number">5.3.</span> <span class="nav-text">第二步：对 ( \theta ) 求导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E8%BD%A8%E8%BF%B9%E7%9A%84%E6%A6%82%E7%8E%87%E5%88%86%E8%A7%A3"><span class="nav-number">5.4.</span> <span class="nav-text">第三步：轨迹的概率分解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E5%BC%95%E5%85%A5%E7%8A%B6%E6%80%81%E5%88%86%E5%B8%83%E4%B8%8E%E5%8A%A8%E4%BD%9C%E5%80%BC%E5%87%BD%E6%95%B0"><span class="nav-number">5.5.</span> <span class="nav-text">第四步：引入状态分布与动作值函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9C%85-%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-number">5.6.</span> <span class="nav-text">✅ 总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8D-%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B8%89%E5%A4%A7%E7%B1%BB%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94%E8%A1%A8"><span class="nav-number">5.7.</span> <span class="nav-text">🔍 强化学习三大类方法对比表</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text"> 三种方法对比总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E8%BD%A8%E7%AD%96%E7%95%A5-vs-%E7%A6%BB%E8%BD%A8%E7%AD%96%E7%95%A5"><span class="nav-number">2.</span> <span class="nav-text"> 同轨策略 vs. 离轨策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88sarsa%E8%BF%9B%E8%A1%8C%E7%9A%84%E6%98%AF%E7%AD%96%E7%95%A5%E5%AD%A6%E4%B9%A0%E8%80%8C%E9%9D%9E%E7%8A%B6%E6%80%81%E4%BB%B7%E5%80%BC%E4%BC%B0%E8%AE%A1"><span class="nav-number">2.1.</span> <span class="nav-text"> 为什么SARSA进行的是策略学习而非状态价值估计？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sarsa%E4%B8%8E%E7%8A%B6%E6%80%81%E4%BB%B7%E5%80%BC%E4%BC%B0%E8%AE%A1%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">2.2.</span> <span class="nav-text"> SARSA与状态价值估计的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.3.</span> <span class="nav-text"> 总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8-td-%E6%96%B9%E6%B3%95%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.4.</span> <span class="nav-text"> 常用 TD 方法的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94%E8%AF%B4%E6%98%8E"><span class="nav-number">2.5.</span> <span class="nav-text"> 对比说明：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dyna-q-%E5%8F%8A%E5%85%B6%E4%B8%BB%E8%A6%81%E5%8F%98%E4%BD%93%E5%AF%B9%E6%AF%94%E8%A1%A8"><span class="nav-number">3.</span> <span class="nav-text"> Dyna-Q 及其主要变体对比表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-dyna-q"><span class="nav-number">3.1.</span> <span class="nav-text"> 1. Dyna-Q</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-dyna-q"><span class="nav-number">3.2.</span> <span class="nav-text"> 2. Dyna-Q+</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-prioritized-dyna-q"><span class="nav-number">3.3.</span> <span class="nav-text"> 3. Prioritized Dyna-Q</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-dyna-2"><span class="nav-number">3.4.</span> <span class="nav-text"> 4. Dyna-2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91%E7%89%88%E6%9C%AC%E7%BA%BF%E6%80%A7-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">3.5.</span> <span class="nav-text"> 5. 函数逼近版本（线性 &#x2F; 神经网络）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E6%8E%A8%E8%8D%90%E4%B8%8D%E5%90%8C%E9%9C%80%E6%B1%82"><span class="nav-number">4.</span> <span class="nav-text"> 总结推荐（不同需求）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%E6%80%BB%E7%BB%93"><span class="nav-number">4.1.</span> <span class="nav-text"> 第一部分总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%90%8C%E8%BD%A8%E7%AD%96%E7%95%A5on-policy"><span class="nav-number">4.2.</span> <span class="nav-text"> 1. 同轨策略（On-Policy）：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91function-approximation"><span class="nav-number">4.3.</span> <span class="nav-text"> 2. 函数逼近（Function Approximation）：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%90%8C%E8%BD%A8%E7%AD%96%E7%95%A5%E9%A2%84%E6%B5%8B%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">4.4.</span> <span class="nav-text"> 3. 同轨策略预测的内容：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BD%BF%E7%94%A8td%E6%97%B6%E9%97%B4%E5%B7%AE%E5%88%86%E6%96%B9%E6%B3%95%E8%BF%9B%E8%A1%8C%E5%90%8C%E8%BD%A8%E7%AD%96%E7%95%A5%E9%A2%84%E6%B5%8B"><span class="nav-number">4.4.1.</span> <span class="nav-text"> 1. 使用TD（时间差分）方法进行同轨策略预测：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E7%BA%BF%E6%80%A7%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91"><span class="nav-number">4.4.2.</span> <span class="nav-text"> 2. 线性函数逼近：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91%E4%BE%8B%E5%A6%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">4.4.3.</span> <span class="nav-text"> 3. 非线性函数逼近（例如神经网络）：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E7%AD%96%E7%95%A5%E8%AF%84%E4%BC%B0%E5%92%8C%E6%9B%B4%E6%96%B0"><span class="nav-number">4.4.4.</span> <span class="nav-text"> 4. 策略评估和更新：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E5%9F%BA%E4%BA%8E%E6%A2%AF%E5%BA%A6%E7%9A%84%E6%9B%B4%E6%96%B0"><span class="nav-number">4.4.5.</span> <span class="nav-text"> 5. 基于梯度的更新：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%90%8C%E8%BD%A8%E7%AD%96%E7%95%A5%E9%A2%84%E6%B5%8B%E7%9A%84%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95"><span class="nav-number">4.5.</span> <span class="nav-text"> 4. 同轨策略预测的经典算法：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-sarsa%CE%BB"><span class="nav-number">4.5.1.</span> <span class="nav-text"> (1) SARSA(λ)：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%B7%B1%E5%BA%A6q%E5%AD%A6%E4%B9%A0dqn"><span class="nav-number">4.5.2.</span> <span class="nav-text"> (2) 深度Q学习（DQN）：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-a3c%E5%BC%82%E6%AD%A5%E4%BC%98%E5%8A%BF%E6%BC%94%E5%91%98-%E8%AF%84%E8%AE%BA%E5%AE%B6"><span class="nav-number">4.5.3.</span> <span class="nav-text"> (3) A3C（异步优势演员-评论家）：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E4%BC%98%E7%BC%BA%E7%82%B9%E5%88%86%E6%9E%90"><span class="nav-number">4.6.</span> <span class="nav-text"> 5. 优缺点分析：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%82%B9"><span class="nav-number">4.6.1.</span> <span class="nav-text"> 优点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9"><span class="nav-number">4.6.2.</span> <span class="nav-text"> 缺点：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-2"><span class="nav-number">4.7.</span> <span class="nav-text"> 总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E6%8E%A8%E8%8D%90"><span class="nav-number">4.8.</span> <span class="nav-text"> 总结推荐：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B9%9D%E7%AB%A0%E5%9F%BA%E4%BA%8E%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91%E7%9A%84%E5%90%8C%E8%BD%A8%E7%AD%96%E7%95%A5%E9%A2%84%E6%B5%8B"><span class="nav-number"></span> <span class="nav-text"> 第九章：基于函数逼近的同轨策略预测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E8%83%8C%E6%99%AF%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91"><span class="nav-number">1.</span> <span class="nav-text"> 核心背景：为什么要函数逼近？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3%E7%94%A8%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E9%80%BC%E8%BF%91%E5%80%BC%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text"> 核心思想：用监督学习方法逼近值函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%90%8C%E8%BD%A8%E7%AD%96%E7%95%A5on-policy"><span class="nav-number">3.</span> <span class="nav-text"> 💡 什么是同轨策略（on-policy）？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%E8%BF%99%E4%B8%AA%E8%AF%AF%E5%B7%AE"><span class="nav-number">4.</span> <span class="nav-text"> 📉 如何优化这个误差？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%8A%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AB%E8%BF%99%E4%B8%AA%E5%90%8D"><span class="nav-number">5.</span> <span class="nav-text"> 🧮 什么是“半梯度方法”？为什么叫这个名？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-number">5.1.</span> <span class="nav-text"> 示例：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E4%B8%80%E4%B8%AA%E5%9F%BA%E7%B1%BB"><span class="nav-number">6.</span> <span class="nav-text"> 🔢 线性函数逼近（最重要的一个基类）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9%E7%9A%84%E7%AD%96%E7%95%A5"><span class="nav-number">7.</span> <span class="nav-text"> 🎨 特征选择的策略？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94"><span class="nav-number">8.</span> <span class="nav-text"> 📚 不同方法对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E9%9D%9E%E7%BA%BF%E6%80%A7%E9%80%BC%E8%BF%91"><span class="nav-number">9.</span> <span class="nav-text"> 🚀 深度强化学习：非线性逼近</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E6%A0%B8%E5%BF%83%E7%82%B9"><span class="nav-number">10.</span> <span class="nav-text"> ✅ 总结核心点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0"><span class="nav-number"></span> <span class="nav-text"> 第十一章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80-%E9%A2%84%E6%B5%8B%E7%AE%97%E6%B3%95prediction"><span class="nav-number">1.</span> <span class="nav-text"> 一、预测算法（Prediction）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87"><span class="nav-number">1.1.</span> <span class="nav-text"> ✅ 目标：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text"> 🔧 常见算法：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95monte-carlo"><span class="nav-number">1.2.1.</span> <span class="nav-text"> 1. 蒙特卡洛方法（Monte Carlo）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%97%B6%E5%BA%8F%E5%B7%AE%E5%88%86%E6%96%B9%E6%B3%95temporal-difference-td"><span class="nav-number">1.2.2.</span> <span class="nav-text"> 2. 时序差分方法（Temporal Difference, TD）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-n-%E6%AD%A5-td"><span class="nav-number">1.2.3.</span> <span class="nav-text"> 3. n 步 TD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%CE%BB%E5%9B%9E%E6%8A%A5%E6%96%B9%E6%B3%95td%CE%BB-eligibility-traces"><span class="nav-number">1.2.4.</span> <span class="nav-text"> 4. λ回报方法（TD(λ), Eligibility Traces）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-lstdleast-squares-td"><span class="nav-number">1.2.5.</span> <span class="nav-text"> 5. LSTD（Least Squares TD）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E5%8D%8A%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95semi-gradient-td"><span class="nav-number">1.2.6.</span> <span class="nav-text"> 6. 半梯度方法（Semi-gradient TD）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C-%E6%8E%A7%E5%88%B6%E7%AE%97%E6%B3%95control"><span class="nav-number">2.</span> <span class="nav-text"> 🧭 二、控制算法（Control）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87-2"><span class="nav-number">2.1.</span> <span class="nav-text"> ✅ 目标：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95-2"><span class="nav-number">2.2.</span> <span class="nav-text"> 🔧 常见算法：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%9F%BA%E4%BA%8E%E4%BB%B7%E5%80%BC%E7%9A%84%E6%96%B9%E6%B3%95value-based"><span class="nav-number">2.2.1.</span> <span class="nav-text"> 1. 基于价值的方法（Value-based）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%9F%BA%E4%BA%8E%E7%AD%96%E7%95%A5%E7%9A%84%E6%96%B9%E6%B3%95policy-based"><span class="nav-number">2.2.2.</span> <span class="nav-text"> 2. 基于策略的方法（Policy-based）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%9F%BA%E4%BA%8E%E5%80%BC%E7%AD%96%E7%95%A5%E7%9A%84%E6%96%B9%E6%B3%95actor-critic"><span class="nav-number">2.2.3.</span> <span class="nav-text"> 3. 基于值+策略的方法（Actor-Critic）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95deep-rl"><span class="nav-number">2.2.4.</span> <span class="nav-text"> 4. 深度强化学习方法（Deep RL）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E5%B1%82%E6%AC%A1%E5%8C%96%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0hrl"><span class="nav-number">2.2.5.</span> <span class="nav-text"> 5. 层次化强化学习（HRL）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89-%E9%A2%84%E6%B5%8B-vs-%E6%8E%A7%E5%88%B6-%E6%80%BB%E7%BB%93%E5%AF%B9%E6%AF%94"><span class="nav-number">3.</span> <span class="nav-text"> 三、预测 vs 控制 总结对比</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80-%E6%A0%B8%E5%BF%83%E5%8C%BA%E5%88%AB%E6%A6%82%E8%BF%B0"><span class="nav-number">3.1.</span> <span class="nav-text"> 一、核心区别概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C-%E6%95%B0%E5%AD%A6%E8%A1%A8%E8%BE%BE%E5%B7%AE%E5%BC%82"><span class="nav-number">3.2.</span> <span class="nav-text"> 二、数学表达差异</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.1.</span> <span class="nav-text"> ✅ 策略梯度方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A8%E4%BD%9C%E4%BB%B7%E5%80%BC%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.2.</span> <span class="nav-text"> ✅ 动作价值方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89-%E4%BC%98%E7%BC%BA%E7%82%B9%E5%AF%B9%E6%AF%94"><span class="nav-number">3.3.</span> <span class="nav-text"> 🧪 三、优缺点对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B-%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95%E5%AF%B9%E7%85%A7"><span class="nav-number">3.4.</span> <span class="nav-text"> 📘 四、常见算法对照</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94-%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E5%8C%BA%E5%88%AB"><span class="nav-number">3.5.</span> <span class="nav-text"> 📌 五、实际应用区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD-%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E6%AF%94%E5%96%BB"><span class="nav-number">4.</span> <span class="nav-text"> ✨ 六、一个简单比喻</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#policy-based-%E4%B8%AD%E6%A0%B8%E5%BF%83%E5%85%AC%E5%BC%8F%E7%9A%84%E6%8E%A8%E5%AF%BC%E8%BF%87%E7%A8%8B"><span class="nav-number">5.</span> <span class="nav-text"> policy-based 中核心公式的推导过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89"><span class="nav-number">5.1.</span> <span class="nav-text"> 目标函数定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%E5%B0%86%E6%9C%9F%E6%9C%9B%E5%B1%95%E5%BC%80%E4%B8%BA%E7%A7%AF%E5%88%86"><span class="nav-number">5.2.</span> <span class="nav-text"> 第一步：将期望展开为积分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%E5%AF%B9-theta-%E6%B1%82%E5%AF%BC"><span class="nav-number">5.3.</span> <span class="nav-text"> 第二步：对 ( \theta ) 求导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%E8%BD%A8%E8%BF%B9%E7%9A%84%E6%A6%82%E7%8E%87%E5%88%86%E8%A7%A3"><span class="nav-number">5.4.</span> <span class="nav-text"> 第三步：轨迹的概率分解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%E5%BC%95%E5%85%A5%E7%8A%B6%E6%80%81%E5%88%86%E5%B8%83%E4%B8%8E%E5%8A%A8%E4%BD%9C%E5%80%BC%E5%87%BD%E6%95%B0"><span class="nav-number">5.5.</span> <span class="nav-text"> 第四步：引入状态分布与动作值函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-3"><span class="nav-number">5.6.</span> <span class="nav-text"> ✅ 总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B8%89%E5%A4%A7%E7%B1%BB%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94%E8%A1%A8"><span class="nav-number">5.7.</span> <span class="nav-text"> 🔍 强化学习三大类方法对比表</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

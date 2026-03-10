@@ -237,7 +237,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="Safe-Reinforcement-Learning-on-the-Constraint-Manifold-Theory-and-Applications"><a href="#Safe-Reinforcement-Learning-on-the-Constraint-Manifold-Theory-and-Applications" class="headerlink" title="Safe Reinforcement Learning on the Constraint Manifold: Theory and Applications"></a>Safe Reinforcement Learning on the Constraint Manifold: Theory and Applications</h3><p>在线学习的需求：</p>
+          <h3 id="safe-reinforcement-learning-on-the-constraint-manifold-theory-and-applications"><a class="markdownIt-Anchor" href="#safe-reinforcement-learning-on-the-constraint-manifold-theory-and-applications"></a> Safe Reinforcement Learning on the Constraint Manifold: Theory and Applications</h3>
+<p>在线学习的需求：</p>
 <ul>
 <li>机器人自适应控制要求策略在部署中持续（适应环境变化或者硬件老化）</li>
 <li>CMDP的离线训练：训练后直接部署无法解决真实世界的动态不确定性</li>
@@ -246,55 +247,89 @@
 <p>同时如果在仿真训练时已经满足鲁棒性约束，迁移到现实时更能保证安全</p>
 <p>举例：在一个机械臂避障任务中，机械臂末端需要从起点运动到目标点并在途中避开障碍物，其中有安全约束为机械臂与障碍物之间的距离D(q)&gt; d_safe.扰动是关节控制过程中的噪声（如电机误差或外部力干扰）。</p>
 <ul>
-<li><p>当没有扰动（标称情况）<br>此时使用ATACOM控制方法：构造约束函数；随后在构造的约束函数切空间生成安全动作，从而严格保证k(q) &lt;&#x3D; 0</p>
+<li>
+<p>当没有扰动（标称情况）<br />
+此时使用ATACOM控制方法：构造约束函数；随后在构造的约束函数切空间生成安全动作，从而严格保证k(q) &lt;= 0</p>
 </li>
-<li><p>当存在扰动<br>扰动模型:控制输入受到噪声影响；定理2可以保证机械臂可能短暂进入不安全区域，但是不会完全碰撞到障碍物</p>
+<li>
+<p>当存在扰动<br />
+扰动模型:控制输入受到噪声影响；定理2可以保证机械臂可能短暂进入不安全区域，但是不会完全碰撞到障碍物</p>
 </li>
 </ul>
 <p>通过一个 机械臂避障 的实例，结合ATACOM算法的设计步骤，说明如何从问题建模到控制器实现的全过程。假设机械臂需在避免碰撞（安全约束）的同时完成末端轨迹跟踪（任务目标）。</p>
-<hr>
+<hr />
 <ol>
-<li>问题建模<br>状态与动力学</li>
+<li>问题建模<br />
+状态与动力学</li>
 </ol>
 <ul>
-<li>状态变量：<br>( s &#x3D; [q, \dot{q}] \in \mathbb{R}^{2n} )，其中 ( q ) 为关节角度，( \dot{q} ) 为角速度。  </li>
-<li>动力学模型（控制仿射形式）：<br>[<br>\dot{s} &#x3D; \underbrace{\begin{bmatrix} \dot{q} \ -M(q)^{-1}(C(q,\dot{q})\dot{q} + g(q)) \end{bmatrix}}<em>{f(s)} + \underbrace{\begin{bmatrix} 0 \ M(q)^{-1} \end{bmatrix}}</em>{G(s)} u_s<br>]<ul>
-<li>( M(q) )：惯性矩阵，( C(q,\dot{q}) )：科氏力矩阵，( g(q) )：重力项。  </li>
+<li>状态变量：<br />
+( s = [q, \dot{q}] \in \mathbb{R}^{2n} )，其中 ( q ) 为关节角度，( \dot{q} ) 为角速度。</li>
+<li>动力学模型（控制仿射形式）：<br />
+[<br />
+\dot{s} = \underbrace{\begin{bmatrix} \dot{q} \ -M(q)^{-1}(C(q,\dot{q})\dot{q} + g(q)) \end{bmatrix}}<em>{f(s)} + \underbrace{\begin{bmatrix} 0 \ M(q)^{-1} \end{bmatrix}}</em>{G(s)} u_s<br />
+]
+<ul>
+<li>( M(q) )：惯性矩阵，( C(q,\dot{q}) )：科氏力矩阵，( g(q) )：重力项。</li>
 <li>控制输入 ( u_s \in \mathbb{R}^n )：关节力矩。</li>
 </ul>
 </li>
 </ul>
 <p>安全约束</p>
 <ul>
-<li>避障约束（距离函数）：<br>[<br>k(s) &#x3D; d_{\text{min}} - |p(q) - p_{\text{obs}}| \leq 0<br>]<ul>
-<li>( p(q) )：机械臂末端位置，( p_{\text{obs}} )：障碍物位置，( d_{\text{min}} )：最小安全距离。  </li>
+<li>避障约束（距离函数）：<br />
+[<br />
+k(s) = d_{\text{min}} - |p(q) - p_{\text{obs}}| \leq 0<br />
+]
+<ul>
+<li>( p(q) )：机械臂末端位置，( p_{\text{obs}} )：障碍物位置，( d_{\text{min}} )：最小安全距离。</li>
 <li>约束函数 ( k(s) ) 需满足 ( C^1 ) 光滑性（可通过距离场平滑化实现）。</li>
 </ul>
 </li>
 </ul>
-<hr>
+<hr />
 <ol start="2">
-<li>ATACOM算法设计步骤<br>步骤1：构造约束流形</li>
+<li>ATACOM算法设计步骤<br />
+步骤1：构造约束流形</li>
 </ol>
 <ul>
-<li>引入松弛变量 ( \mu \geq 0 )，定义等式约束：<br>[<br>c(s, \mu) &#x3D; k(s) + \mu &#x3D; 0<br>]</li>
-<li>约束流形：<br>[<br>\mathcal{M} &#x3D; {(s, \mu) \in \mathbb{R}^{2n} \times [0, +\infty) : c(s, \mu) &#x3D; 0}<br>]<ul>
+<li>引入松弛变量 ( \mu \geq 0 )，定义等式约束：<br />
+[<br />
+c(s, \mu) = k(s) + \mu = 0<br />
+]</li>
+<li>约束流形：<br />
+[<br />
+\mathcal{M} = {(s, \mu) \in \mathbb{R}^{2n} \times [0, +\infty) : c(s, \mu) = 0}<br />
+]
+<ul>
 <li>投影性质：若 ( (s, \mu) \in \mathcal{M} )，则 ( s ) 满足原始约束 ( k(s) \leq 0 )。</li>
 </ul>
 </li>
 </ul>
 <p>步骤2：设计松弛变量动力学</p>
 <ul>
-<li>动态更新规则（类K函数控制）：<br>[<br>\dot{\mu} &#x3D; \alpha(\mu) u_\mu, \quad \alpha(\mu) &#x3D; \mu \quad (\text{例：线性函数})<br>]<ul>
-<li>控制输入 ( u_\mu \in \mathbb{R} )：调节松弛变量的变化速率。  </li>
+<li>动态更新规则（类K函数控制）：<br />
+[<br />
+\dot{\mu} = \alpha(\mu) u_\mu, \quad \alpha(\mu) = \mu \quad (\text{例：线性函数})<br />
+]
+<ul>
+<li>控制输入 ( u_\mu \in \mathbb{R} )：调节松弛变量的变化速率。</li>
 <li>性质：若初始 ( \mu(0) &gt; 0 )，则 ( \mu(t) &gt; 0 ) 对所有 ( t \geq 0 ) 成立（Lemma 1）。</li>
 </ul>
 </li>
 </ul>
 <p>步骤3：增广系统动力学</p>
 <ul>
-<li>联合系统：<br>[<br>\begin{bmatrix} \dot{s} \ \dot{\mu} \end{bmatrix} &#x3D; \begin{bmatrix} f(s) \ 0 \end{bmatrix} + \begin{bmatrix} G(s) &amp; 0 \ 0 &amp; \alpha(\mu) \end{bmatrix} \begin{bmatrix} u_s \ u_\mu \end{bmatrix}<br>]<ul>
-<li>控制矩阵：<br>[<br>J_u(s, \mu) &#x3D; \nabla_s c(s, \mu) G(s) &#x3D; \nabla_q k(s) \cdot J_{\text{arm}}(q) \cdot M(q)^{-1}<br>]<ul>
+<li>联合系统：<br />
+[<br />
+\begin{bmatrix} \dot{s} \ \dot{\mu} \end{bmatrix} = \begin{bmatrix} f(s) \ 0 \end{bmatrix} + \begin{bmatrix} G(s) &amp; 0 \ 0 &amp; \alpha(\mu) \end{bmatrix} \begin{bmatrix} u_s \ u_\mu \end{bmatrix}<br />
+]
+<ul>
+<li>控制矩阵：<br />
+[<br />
+J_u(s, \mu) = \nabla_s c(s, \mu) G(s) = \nabla_q k(s) \cdot J_{\text{arm}}(q) \cdot M(q)^{-1}<br />
+]
+<ul>
 <li>( J_{\text{arm}}(q) )：机械臂末端雅可比矩阵。</li>
 </ul>
 </li>
@@ -303,32 +338,40 @@
 </ul>
 <p>步骤4：切空间投影</p>
 <ul>
-<li>切空间基 ( B_u ) 计算：  <ul>
-<li>对 ( J_u ) 进行SVD分解，取右奇异向量 ( B_u \in \mathbb{R}^{(n+1) \times n} ) 满足 ( J_u B_u &#x3D; 0 )。  </li>
+<li>切空间基 ( B_u ) 计算：
+<ul>
+<li>对 ( J_u ) 进行SVD分解，取右奇异向量 ( B_u \in \mathbb{R}^{(n+1) \times n} ) 满足 ( J_u B_u = 0 )。</li>
 <li>物理意义：( B_u ) 的列向量张成允许的安全控制方向（即不违反约束的力矩组合）。</li>
 </ul>
 </li>
 </ul>
 <p>步骤5：安全控制器</p>
 <ul>
-<li>控制律（公式12）：<br>[<br>\begin{bmatrix} u_s \ u_\mu \end{bmatrix} &#x3D; \underbrace{-J_u^\dagger \psi}<em>{\text{漂移补偿}} + \underbrace{B_u u}</em>{\text{任务控制}} - \underbrace{\lambda J_u^\dagger c}_{\text{收缩项}}<br>]<ul>
-<li>参数说明：  <ul>
-<li>( \psi &#x3D; \nabla_s k(s) \cdot f(s) )：约束对自然动态的敏感度。  </li>
-<li>( u )：RL策略输出的原始力矩（如跟踪PD控制信号）。  </li>
+<li>控制律（公式12）：<br />
+[<br />
+\begin{bmatrix} u_s \ u_\mu \end{bmatrix} = \underbrace{-J_u^\dagger \psi}<em>{\text{漂移补偿}} + \underbrace{B_u u}</em>{\text{任务控制}} - \underbrace{\lambda J_u^\dagger c}_{\text{收缩项}}<br />
+]
+<ul>
+<li>参数说明：
+<ul>
+<li>( \psi = \nabla_s k(s) \cdot f(s) )：约束对自然动态的敏感度。</li>
+<li>( u )：RL策略输出的原始力矩（如跟踪PD控制信号）。</li>
 <li>( \lambda &gt; 0 )：收缩速率。</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<hr>
+<hr />
 <ol start="3">
 <li>实例运行流程</li>
-<li>初始化：机械臂位于安全位置 ( s_0 )，松弛变量 ( \mu(0) &#x3D; \max(-k(s_0), \text{tol}) )。  </li>
-<li>在线控制循环：  <ul>
-<li>RL策略输出 ( u )：如目标跟踪的PD控制信号。  </li>
-<li>ATACOM修正：  <ul>
-<li>计算 ( J_u ) 和 ( B_u )，投影 ( u ) 到切空间。  </li>
+<li>初始化：机械臂位于安全位置 ( s_0 )，松弛变量 ( \mu(0) = \max(-k(s_0), \text{tol}) )。</li>
+<li>在线控制循环：
+<ul>
+<li>RL策略输出 ( u )：如目标跟踪的PD控制信号。</li>
+<li>ATACOM修正：
+<ul>
+<li>计算 ( J_u ) 和 ( B_u )，投影 ( u ) 到切空间。</li>
 <li>若机械臂接近障碍物（( k(s) \to 0 )），收缩项 ( -\lambda J_u^\dagger c ) 主导，产生避障力矩。</li>
 </ul>
 </li>
@@ -337,53 +380,34 @@
 </li>
 <li>结果：机械臂末端绕开障碍物并收敛到目标轨迹（见下图）。</li>
 </ol>
-<hr>
+<hr />
 <ol start="4">
-<li>关键设计要点<table>
-<thead>
-<tr>
-<th>设计环节</th>
-<th>解决方法</th>
-<th>实例中的实现</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>约束建模</td>
-<td>距离函数 + 松弛变量</td>
-<td>( k(s) &#x3D; d_{\text{min}} - |p - p_{\text{obs}}| )</td>
-</tr>
-<tr>
-<td>流形切空间计算</td>
-<td>SVD分解控制矩阵 ( J_u )</td>
-<td>机械臂雅可比矩阵与惯性矩阵耦合</td>
-</tr>
-<tr>
-<td>安全控制律</td>
-<td>漂移补偿 + 任务投影 + 收缩项</td>
-<td>避障力矩自动生成</td>
-</tr>
-<tr>
-<td>动态松弛变量</td>
-<td>类K函数控制的 ( \dot{\mu} )</td>
-<td>保证 ( \mu(t) &gt; 0 ) 避免数值奇点</td>
-</tr>
-</tbody></table>
-</li>
+<li>关键设计要点<br />
+| 设计环节       | 解决方法                                      | 实例中的实现                          |<br />
+|--------------------|--------------------------------------------------|------------------------------------------|<br />
+| 约束建模           | 距离函数 + 松弛变量                              | ( k(s) = d_{\text{min}} - |p - p_{\text{obs}}| ) |<br />
+| 流形切空间计算     | SVD分解控制矩阵 ( J_u )                        | 机械臂雅可比矩阵与惯性矩阵耦合            |<br />
+| 安全控制律         | 漂移补偿 + 任务投影 + 收缩项                     | 避障力矩自动生成                          |<br />
+| 动态松弛变量       | 类K函数控制的 ( \dot{\mu} )                    | 保证 ( \mu(t) &gt; 0 ) 避免数值奇点        |</li>
 </ol>
-<hr>
+<hr />
 <ol start="5">
 <li>数学与物理意义对应</li>
 </ol>
 <ul>
-<li>切空间投影：将关节力矩限制在“不缩短机械臂与障碍物距离”的方向。  </li>
-<li>收缩项：类似虚拟排斥力，强度随 ( k(s) ) 接近0而增大。  </li>
+<li>切空间投影：将关节力矩限制在“不缩短机械臂与障碍物距离”的方向。</li>
+<li>收缩项：类似虚拟排斥力，强度随 ( k(s) ) 接近0而增大。</li>
 <li>松弛变量：量化“允许的临时约束违反”，动态调整控制保守性。</li>
 </ul>
-<h3 id="几种RL对于约束函数的处理方法"><a href="#几种RL对于约束函数的处理方法" class="headerlink" title="几种RL对于约束函数的处理方法"></a>几种RL对于约束函数的处理方法</h3><p>假设约束函数$k(s) \leq 0$, 机械臂与障碍物距离 $ D ( s ) \geq d _ { s a f e }$ 可以表示为 $ k(s) &#x3D; d_safe - D(s) \leq 0 $</p>
+<h3 id="几种rl对于约束函数的处理方法"><a class="markdownIt-Anchor" href="#几种rl对于约束函数的处理方法"></a> 几种RL对于约束函数的处理方法</h3>
+<p>假设约束函数<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo>≤</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k(s) \leq 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>, 机械臂与障碍物距离 $ D ( s ) \geq d _ { s a f e }$ 可以表示为 $ k(s) = d_safe - D(s) \leq 0 $</p>
 <p>方法对比与切空间的优越性</p>
 <p>以下是针对同一个约束函数，不同安全强化学习方法处理方式的对比分析，结合数学形式、实现逻辑和应用场景的详细说明：</p>
 <ol>
-<li>问题设定<br>约束函数：<br>[ k(s) \leq 0 ]<br>（例如：机械臂与障碍物距离 ( D(s) \geq d_{\text{safe}} ) 可表示为 ( k(s) &#x3D; d_{\text{safe}} - D(s) \leq 0 )）</li>
+<li>问题设定<br />
+约束函数：<br />
+[ k(s) \leq 0 ]<br />
+（例如：机械臂与障碍物距离 ( D(s) \geq d_{\text{safe}} ) 可表示为 ( k(s) = d_{\text{safe}} - D(s) \leq 0 )）</li>
 </ol>
 <p>目标：在强化学习训练和部署中保证 ( k(s) \leq 0 ) 始终成立。</p>
 <ol>
@@ -391,58 +415,90 @@
 </ol>
 <p>(1) 惩罚函数法（Penalty Method）</p>
 <ul>
-<li>处理方式：<br>在奖励函数中加入惩罚项：<br>[<br>R_{\text{penalized}} &#x3D; R_{\text{task}} - \lambda \max(0, k(s))^2<br>]  <ul>
+<li>处理方式：<br />
+在奖励函数中加入惩罚项：<br />
+[<br />
+R_{\text{penalized}} = R_{\text{task}} - \lambda \max(0, k(s))^2<br />
+]
+<ul>
 <li>(\lambda) 为惩罚系数，需手动调节。</li>
 </ul>
 </li>
-<li>特点：  <ul>
-<li>数学简单：无需修改策略结构。  </li>
-<li>安全无保证：训练早期可能严重违反约束（如图1左）。  </li>
+<li>特点：
+<ul>
+<li>数学简单：无需修改策略结构。</li>
+<li>安全无保证：训练早期可能严重违反约束（如图1左）。</li>
 <li>调参敏感：(\lambda) 过小导致约束失效，过大抑制探索。</li>
 </ul>
 </li>
-<li>适用场景：<br>仿真环境预训练，且约束违反无严重后果时。</li>
+<li>适用场景：<br />
+仿真环境预训练，且约束违反无严重后果时。</li>
 </ul>
 <p>(2) 安全滤波器（QP-Based Safety Filter）</p>
 <ul>
-<li>处理方式：<br>在线求解二次规划问题，修正动作 ( u )：<br>[<br>\begin{aligned}<br>\min_{u} \quad &amp; |u - u_{\text{RL}}|^2 \<br>\text{s.t.} \quad &amp; \nabla k(s)^T (f(s) + G(s)u) \leq -\alpha k(s)<br>\end{aligned}<br>]  <ul>
+<li>处理方式：<br />
+在线求解二次规划问题，修正动作 ( u )：<br />
+[<br />
+\begin{aligned}<br />
+\min_{u} \quad &amp; |u - u_{\text{RL}}|^2 \<br />
+\text{s.t.} \quad &amp; \nabla k(s)^T (f(s) + G(s)u) \leq -\alpha k(s)<br />
+\end{aligned}<br />
+]
+<ul>
 <li>通过CBF（Control Barrier Function）保证约束。</li>
 </ul>
 </li>
-<li>特点：  <ul>
-<li>即时安全：每一步动作均满足约束。  </li>
-<li>计算开销大：实时求解QP问题（毫秒级延迟）。  </li>
+<li>特点：
+<ul>
+<li>即时安全：每一步动作均满足约束。</li>
+<li>计算开销大：实时求解QP问题（毫秒级延迟）。</li>
 <li>可行性风险：约束冲突时无解（如机械臂被“卡死”）。</li>
 </ul>
 </li>
-<li>适用场景：<br>计算资源充足的实时控制系统（如自动驾驶）。</li>
+<li>适用场景：<br />
+计算资源充足的实时控制系统（如自动驾驶）。</li>
 </ul>
 <p>(3) 备份策略（Backup Policy）</p>
 <ul>
-<li>处理方式：<br>预设安全策略 ( \pi_{\text{safe}} )（如零速度指令），当 ( k(s) &gt; \epsilon ) 时切换：<br>[<br>u &#x3D; \begin{cases}<br>u_{\text{RL}} &amp; \text{if } k(s) \leq \epsilon, \<br>\pi_{\text{safe}}(s) &amp; \text{otherwise}.<br>\end{cases}<br>]  </li>
-<li>特点：  <ul>
-<li>简单可靠：硬件易实现。  </li>
-<li>保守性：任务中断频繁（如图1中）。  </li>
+<li>处理方式：<br />
+预设安全策略 ( \pi_{\text{safe}} )（如零速度指令），当 ( k(s) &gt; \epsilon ) 时切换：<br />
+[<br />
+u = \begin{cases}<br />
+u_{\text{RL}} &amp; \text{if } k(s) \leq \epsilon, \<br />
+\pi_{\text{safe}}(s) &amp; \text{otherwise}.<br />
+\end{cases}<br />
+]</li>
+<li>特点：
+<ul>
+<li>简单可靠：硬件易实现。</li>
+<li>保守性：任务中断频繁（如图1中）。</li>
 <li>泛化性差：需为每个任务单独设计 ( \pi_{\text{safe}} )。</li>
 </ul>
 </li>
-<li>适用场景：<br>已知明确安全动作的简单系统（如急停按钮）。</li>
+<li>适用场景：<br />
+已知明确安全动作的简单系统（如急停按钮）。</li>
 </ul>
 <p>(4) 切空间投影（ATACOM，Tangent Space Projection）</p>
 <ul>
-<li>处理方式：  <ol>
-<li>构造约束流形 ( \mathcal{M} &#x3D; {s \mid k(s) &#x3D; 0} ) 的切空间 ( T_s\mathcal{M} )。  </li>
-<li>将RL动作 ( u ) 投影到切空间：<br>[<br>u_{\text{safe}} &#x3D; (I - \nabla k(s) (\nabla k(s)^T \nabla k(s))^{-1} \nabla k(s)^T) u<br>]  </li>
+<li>处理方式：
+<ol>
+<li>构造约束流形 ( \mathcal{M} = {s \mid k(s) = 0} ) 的切空间 ( T_s\mathcal{M} )。</li>
+<li>将RL动作 ( u ) 投影到切空间：<br />
+[<br />
+u_{\text{safe}} = (I - \nabla k(s) (\nabla k(s)^T \nabla k(s))^{-1} \nabla k(s)^T) u<br />
+]</li>
 <li>动态调整松弛变量 ( \mu ) 保证渐近收敛（见原文公式12）。</li>
 </ol>
 </li>
-<li>特点：  <ul>
-<li>严格安全：数学保证 ( k(s) \leq 0 )（即使训练中）。  </li>
-<li>高效：投影计算仅需矩阵乘法（微秒级）。  </li>
+<li>特点：
+<ul>
+<li>严格安全：数学保证 ( k(s) \leq 0 )（即使训练中）。</li>
+<li>高效：投影计算仅需矩阵乘法（微秒级）。</li>
 <li>自适应：无需手动设计安全策略。</li>
 </ul>
 </li>
-<li>适用场景：<br>高维复杂系统（如机器人、无人机）的在线安全学习。</li>
+<li>适用场景：<br />
+高维复杂系统（如机器人、无人机）的在线安全学习。</li>
 </ul>
 <p>对比总结表</p>
 <table>
@@ -456,7 +512,8 @@
 <th>适用场景</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>惩罚函数法</td>
 <td>修改奖励函数</td>
 <td>❌ 无</td>
@@ -488,28 +545,36 @@
 <td>❌ 无需</td>
 <td>复杂在线学习</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <ol>
 <li>实例说明（机械臂避障）</li>
 </ol>
 <ul>
-<li>惩罚函数法：<br>训练早期机械臂碰撞障碍物（( k(s) &gt; 0 )），直到策略学会规避。  </li>
-<li>安全滤波器：<br>每个时间步求解QP，保证 ( D(s) \geq 0.1 ) m，但计算延迟导致控制频率下降。  </li>
-<li>备份策略：<br>机械臂接近障碍物时紧急停止，无法完成任务。  </li>
-<li>切空间投影：<br>机械臂沿障碍物表面切线运动（( D(s) \equiv 0.1 ) m），既安全又完成任务。</li>
+<li>惩罚函数法：<br />
+训练早期机械臂碰撞障碍物（( k(s) &gt; 0 )），直到策略学会规避。</li>
+<li>安全滤波器：<br />
+每个时间步求解QP，保证 ( D(s) \geq 0.1 ) m，但计算延迟导致控制频率下降。</li>
+<li>备份策略：<br />
+机械臂接近障碍物时紧急停止，无法完成任务。</li>
+<li>切空间投影：<br />
+机械臂沿障碍物表面切线运动（( D(s) \equiv 0.1 ) m），既安全又完成任务。</li>
 </ul>
 <ol>
 <li>核心差异总结</li>
-<li>安全性的数学基础：  <ul>
-<li>切空间投影和QP滤波器通过微分几何&#x2F;优化理论严格保证安全。  </li>
+<li>安全性的数学基础：
+<ul>
+<li>切空间投影和QP滤波器通过微分几何/优化理论严格保证安全。</li>
 <li>其他方法依赖启发式设计。</li>
 </ul>
 </li>
-<li>计算本质：  <ul>
+<li>计算本质：
+<ul>
 <li>切空间投影是解析解，QP是数值解，备份策略是规则匹配。</li>
 </ul>
 </li>
-<li>适用性：  <ul>
+<li>适用性：
+<ul>
 <li>切空间方法唯一同时满足实时性、严格安全和自适应学习的要求。</li>
 </ul>
 </li>
@@ -651,10 +716,11 @@
 <th>推荐算法</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>自主步态生成</td>
 <td>✅</td>
-<td>PPO &#x2F; SAC</td>
+<td>PPO / SAC</td>
 </tr>
 <tr>
 <td>多地形适应</td>
@@ -664,20 +730,22 @@
 <tr>
 <td>扰动恢复</td>
 <td>✅</td>
-<td>TD3 &#x2F; SAC</td>
+<td>TD3 / SAC</td>
 </tr>
 <tr>
 <td>动力学复杂、控制难</td>
 <td>✅</td>
-<td>RL + WBC &#x2F; MPC</td>
+<td>RL + WBC / MPC</td>
 </tr>
 <tr>
 <td>纯平地、稳定任务</td>
 <td>❌（传统控制器足够）</td>
 <td>-</td>
 </tr>
-</tbody></table>
-<h3 id="强化学习在双足机器人中的问题和解决方案"><a href="#强化学习在双足机器人中的问题和解决方案" class="headerlink" title="强化学习在双足机器人中的问题和解决方案"></a>强化学习在双足机器人中的问题和解决方案</h3><table>
+</tbody>
+</table>
+<h3 id="强化学习在双足机器人中的问题和解决方案"><a class="markdownIt-Anchor" href="#强化学习在双足机器人中的问题和解决方案"></a> 强化学习在双足机器人中的问题和解决方案</h3>
+<table>
 <thead>
 <tr>
 <th>问题类别</th>
@@ -686,7 +754,8 @@
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>Sim-to-Real Gap</strong></td>
 <td>仿真与现实存在建模差异，策略迁移失败</td>
 <td><strong>Domain Randomization</strong></td>
@@ -695,7 +764,7 @@
 <tr>
 <td></td>
 <td></td>
-<td><strong>Domain Adaptation &#x2F; Fine-tuning</strong></td>
+<td><strong>Domain Adaptation / Fine-tuning</strong></td>
 <td>用少量真实数据微调策略</td>
 </tr>
 <tr>
@@ -725,13 +794,13 @@
 <tr>
 <td></td>
 <td></td>
-<td><strong>Model-based RL &#x2F; Dynamics model</strong></td>
+<td><strong>Model-based RL / Dynamics model</strong></td>
 <td>引入动力学模型减少试错次数</td>
 </tr>
 <tr>
 <td><strong>安全性差</strong></td>
 <td>实机训练中容易跌倒、损伤硬件</td>
-<td><strong>Safe RL &#x2F; Shielded RL</strong></td>
+<td><strong>Safe RL / Shielded RL</strong></td>
 <td>引入安全约束、屏蔽高风险动作</td>
 </tr>
 <tr>
@@ -749,7 +818,7 @@
 <tr>
 <td><strong>不可解释性强</strong></td>
 <td>策略黑箱、调试难、难验证稳定性</td>
-<td><strong>Hybrid Control (RL + MPC&#x2F;WBC)</strong></td>
+<td><strong>Hybrid Control (RL + MPC/WBC)</strong></td>
 <td>RL 生成参考，稳定由经典控制器保障</td>
 </tr>
 <tr>
@@ -764,8 +833,10 @@
 <td><strong>结构化策略设计</strong></td>
 <td>将任务拆解成可控子模块组合训练</td>
 </tr>
-</tbody></table>
-<h3 id="扩散模型在其中的作用"><a href="#扩散模型在其中的作用" class="headerlink" title="扩散模型在其中的作用"></a>扩散模型在其中的作用</h3><table>
+</tbody>
+</table>
+<h3 id="扩散模型在其中的作用"><a class="markdownIt-Anchor" href="#扩散模型在其中的作用"></a> 扩散模型在其中的作用</h3>
+<table>
 <thead>
 <tr>
 <th>Sim2Real问题点</th>
@@ -773,7 +844,8 @@
 <th>原理与作用说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>1. 物理环境差异</td>
 <td><strong>生成更真实、丰富的环境扰动样本</strong></td>
 <td>扩散模型可以学习仿真环境和真实环境间的差异分布，生成多样化、接近真实环境的状态或扰动样本，丰富训练数据，使策略对真实环境有更好的鲁棒性。</td>
@@ -793,7 +865,8 @@
 <td><strong>通过生成多样化情景样本，增强策略对未见环境的泛化</strong></td>
 <td>多样化生成可以让RL策略在训练时接触更广泛的状态分布，减少策略过拟合，提升现实适应能力。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
       
     </div>
@@ -861,7 +934,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="双足机器人的控制方法汇总"><a href="#双足机器人的控制方法汇总" class="headerlink" title="双足机器人的控制方法汇总"></a>双足机器人的控制方法汇总</h3><table>
+          <h3 id="双足机器人的控制方法汇总"><a class="markdownIt-Anchor" href="#双足机器人的控制方法汇总"></a> 双足机器人的控制方法汇总</h3>
+<table>
 <thead>
 <tr>
 <th>层级</th>
@@ -869,9 +943,10 @@
 <th>代表方法</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>1⃣ 底层控制</td>
-<td>位置&#x2F;速度&#x2F;力控制</td>
+<td>位置/速度/力控制</td>
 <td>PID控制、阻抗控制、力控制</td>
 </tr>
 <tr>
@@ -894,7 +969,8 @@
 <td>稳定性优化与学习</td>
 <td>HZD、强化学习、RL-MPC、模仿学习</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <table>
 <thead>
 <tr>
@@ -905,15 +981,16 @@
 <th>适合场景</th>
 </tr>
 </thead>
-<tbody><tr>
-<td>PID&#x2F;阻抗</td>
+<tbody>
+<tr>
+<td>PID/阻抗</td>
 <td>底层</td>
 <td>简单鲁棒</td>
 <td>控制力弱</td>
 <td>力控制、人机交互</td>
 </tr>
 <tr>
-<td>SoT &#x2F; OSC</td>
+<td>SoT / OSC</td>
 <td>运动学</td>
 <td>多任务清晰</td>
 <td>不考虑动态</td>
@@ -927,7 +1004,7 @@
 <td>全身控制、双足</td>
 </tr>
 <tr>
-<td>MPC &#x2F; Preview</td>
+<td>MPC / Preview</td>
 <td>预测</td>
 <td>稳定性强</td>
 <td>需模型、优化开销大</td>
@@ -947,7 +1024,8 @@
 <td>样本量大、转移难</td>
 <td>非结构环境</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>杂交系统是指包含连续动态系统（例如由微分方程描述的运动）和离散事件系统（例如接触切换、碰撞、跳跃）的组合系统。</p>
 <p>双足机器人中的杂交结构</p>
 <ul>
@@ -955,9 +1033,25 @@
 </ul>
 <p>例如：单腿支撑期、双腿支撑期的动力学模型</p>
 <p>离散事件（Discrete Transitions）：脚与地面接触或离地引起的状态突变</p>
-<p>一个杂交系统一般写作如下六元组：$ H &#x3D; ( Q , X , f , D , R , G )$</p>
-<h3 id="控制流程总结图"><a href="#控制流程总结图" class="headerlink" title="控制流程总结图"></a>控制流程总结图</h3><p>目标行走任务（如向前走）<br>        ↓<br>[高层任务] 决定步长&#x2F;频率<br>        ↓<br>[步态生成] 生成ZMP轨迹、抬脚时序<br>        ↓<br>[运动规划] 用ZMP规划CoM轨迹（如 Preview Control）<br>        ↓<br>[任务空间控制] 生成CoM和足端运动指令<br>        ↓<br>[关节控制] 逆解得到关节目标值（IK&#x2F;ID）<br>        ↓<br>[底层控制] PID or 力矩控制跟踪<br>        ↓<br>[电机执行，机器人行走]</p>
-<h3 id="双足机器人中步行常用轨迹类型"><a href="#双足机器人中步行常用轨迹类型" class="headerlink" title="双足机器人中步行常用轨迹类型"></a>双足机器人中步行常用轨迹类型</h3><table>
+<p>一个杂交系统一般写作如下六元组：$ H = ( Q , X , f , D , R , G )$</p>
+<h3 id="控制流程总结图"><a class="markdownIt-Anchor" href="#控制流程总结图"></a> 控制流程总结图</h3>
+<p>目标行走任务（如向前走）<br />
+↓<br />
+[高层任务] 决定步长/频率<br />
+↓<br />
+[步态生成] 生成ZMP轨迹、抬脚时序<br />
+↓<br />
+[运动规划] 用ZMP规划CoM轨迹（如 Preview Control）<br />
+↓<br />
+[任务空间控制] 生成CoM和足端运动指令<br />
+↓<br />
+[关节控制] 逆解得到关节目标值（IK/ID）<br />
+↓<br />
+[底层控制] PID or 力矩控制跟踪<br />
+↓<br />
+[电机执行，机器人行走]</p>
+<h3 id="双足机器人中步行常用轨迹类型"><a class="markdownIt-Anchor" href="#双足机器人中步行常用轨迹类型"></a> 双足机器人中步行常用轨迹类型</h3>
+<table>
 <thead>
 <tr>
 <th>轨迹类型</th>
@@ -965,7 +1059,8 @@
 <th>怎么求得的</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>ZMP轨迹</strong>（零力矩点）</td>
 <td>动态稳定性</td>
 <td>ZMP保持在支撑面内部</td>
@@ -973,7 +1068,7 @@
 <tr>
 <td><strong>质心轨迹</strong>（CoM）</td>
 <td>平衡、重心移动</td>
-<td>CoM 按LIPM&#x2F;MPC等控制</td>
+<td>CoM 按LIPM/MPC等控制</td>
 </tr>
 <tr>
 <td><strong>足端轨迹</strong>（swing foot）</td>
@@ -986,16 +1081,19 @@
 <td>由逆运动学或优化求得</td>
 </tr>
 <tr>
-<td><strong>任务空间轨迹</strong>（如髋&#x2F;躯干）</td>
+<td><strong>任务空间轨迹</strong>（如髋/躯干）</td>
 <td>姿态保持</td>
-<td>水平&#x2F;垂直速度稳定</td>
+<td>水平/垂直速度稳定</td>
 </tr>
-</tbody></table>
-<h3 id="双足机器人中OMPL的用途"><a href="#双足机器人中OMPL的用途" class="headerlink" title="双足机器人中OMPL的用途"></a>双足机器人中OMPL的用途</h3><ul>
+</tbody>
+</table>
+<h3 id="双足机器人中ompl的用途"><a class="markdownIt-Anchor" href="#双足机器人中ompl的用途"></a> 双足机器人中OMPL的用途</h3>
+<ul>
 <li>环境中的路径规划（从A到B点）</li>
 <li>多步脚印序列规划： OMPL 可用来在配置空间中搜索一条“步态合法序列”。</li>
 </ul>
-<h3 id="ESO在双足机器人中的应用"><a href="#ESO在双足机器人中的应用" class="headerlink" title="ESO在双足机器人中的应用"></a>ESO在双足机器人中的应用</h3><p>双足机器人是高度非线性、耦合、强扰动的系统：</p>
+<h3 id="eso在双足机器人中的应用"><a class="markdownIt-Anchor" href="#eso在双足机器人中的应用"></a> ESO在双足机器人中的应用</h3>
+<p>双足机器人是高度非线性、耦合、强扰动的系统：</p>
 <table>
 <thead>
 <tr>
@@ -1003,7 +1101,8 @@
 <th>对应解决目标</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>地面不确定性（软硬、摩擦）</td>
 <td>外部扰动估计</td>
 </tr>
@@ -1019,8 +1118,10 @@
 <td>状态难以精确传感（如关节加速度）</td>
 <td>使用 ESO 估计不可测状态</td>
 </tr>
-</tbody></table>
-<h3 id="双足中的欠驱动问题"><a href="#双足中的欠驱动问题" class="headerlink" title="双足中的欠驱动问题"></a>双足中的欠驱动问题</h3><p>欠驱动意味着控制输入的自由度少于系统的自由度，导致系统无法直接驱动所有运动变量。控制这类系统时，通常需要利用系统本身的动力学特性和非线性控制方法。</p>
+</tbody>
+</table>
+<h3 id="双足中的欠驱动问题"><a class="markdownIt-Anchor" href="#双足中的欠驱动问题"></a> 双足中的欠驱动问题</h3>
+<p>欠驱动意味着控制输入的自由度少于系统的自由度，导致系统无法直接驱动所有运动变量。控制这类系统时，通常需要利用系统本身的动力学特性和非线性控制方法。</p>
 <table>
 <thead>
 <tr>
@@ -1028,7 +1129,8 @@
 <th>具体方法</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>反馈线性化控制</td>
 <td>利用系统的非线性动力学方程，通过反馈设计奖系统部分状态线性化，便于设计线性控制器</td>
 </tr>
@@ -1056,8 +1158,10 @@
 <td>学习控制与强化学习</td>
 <td>- 通过数据驱动的方法，学习欠驱动系统的控制策略，适合模型不准确或环境复杂的情况</td>
 </tr>
-</tbody></table>
-<h3 id="双足机器人中走的更快的问题"><a href="#双足机器人中走的更快的问题" class="headerlink" title="双足机器人中走的更快的问题"></a>双足机器人中走的更快的问题</h3><p>轨迹规划改进</p>
+</tbody>
+</table>
+<h3 id="双足机器人中走的更快的问题"><a class="markdownIt-Anchor" href="#双足机器人中走的更快的问题"></a> 双足机器人中走的更快的问题</h3>
+<p>轨迹规划改进</p>
 <ul>
 <li>动态步态生成</li>
 <li>可变的步态调整</li>
@@ -1069,7 +1173,8 @@
 <li>MPC：利用预测未来状态，提前计算控制输入，增强快速运动的稳定性和灵活性。</li>
 <li>自适应控制：实时调整控制参数，应对人体动力学变化和不同的速度变化。</li>
 </ul>
-<h3 id="解决走路晃动幅度很大的问题"><a href="#解决走路晃动幅度很大的问题" class="headerlink" title="解决走路晃动幅度很大的问题"></a>解决走路晃动幅度很大的问题</h3><p>加强平衡控制：对质心和零力矩点进行控制</p>
+<h3 id="解决走路晃动幅度很大的问题"><a class="markdownIt-Anchor" href="#解决走路晃动幅度很大的问题"></a> 解决走路晃动幅度很大的问题</h3>
+<p>加强平衡控制：对质心和零力矩点进行控制</p>
 <p>控制算法优化：</p>
 <ul>
 <li>增强反馈控制增益</li>
@@ -1143,7 +1248,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="MPC-for-Humanoid-Gait-Generation-Stability-and-Feasibility"><a href="#MPC-for-Humanoid-Gait-Generation-Stability-and-Feasibility" class="headerlink" title="MPC for Humanoid Gait Generation: Stability and Feasibility"></a>MPC for Humanoid Gait Generation: Stability and Feasibility</h3><p>问题：传统的ZMP方法与质心（CoM）动力学存在内在不稳定性。<br>创新方法：提出了一种本质稳定的模型预测控制，通过稳定性约束保证CoM轨迹相对于ZMP轨迹有界。</p>
+          <h3 id="mpc-for-humanoid-gait-generation-stability-and-feasibility"><a class="markdownIt-Anchor" href="#mpc-for-humanoid-gait-generation-stability-and-feasibility"></a> MPC for Humanoid Gait Generation: Stability and Feasibility</h3>
+<p>问题：传统的ZMP方法与质心（CoM）动力学存在内在不稳定性。<br />
+创新方法：提出了一种本质稳定的模型预测控制，通过稳定性约束保证CoM轨迹相对于ZMP轨迹有界。</p>
 <p>整体框架：</p>
 <ul>
 <li>高层指令：接收外部驱动的参考速度（平移速度v_x, v_y和转向速度\omaga）;</li>
@@ -1209,13 +1316,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="DreamPolicy-A-Scalable-Unified-Policy-for-Versatile-Humanoid-Locomotion"><a href="#DreamPolicy-A-Scalable-Unified-Policy-for-Versatile-Humanoid-Locomotion" class="headerlink" title="DreamPolicy: A Scalable Unified Policy for Versatile Humanoid Locomotion"></a>DreamPolicy: A Scalable Unified Policy for Versatile Humanoid Locomotion</h3><p>任务的依赖性：传统的强化学习需要为每种地形设计特定的奖励函数，导致“一个任务一个策略”<br>数据利用不足：即使数据量增长，但是传统的强化学习难以有效利用离线数据提升泛化能力。<br>泛化性差：策略容易过拟合训练地形，在未见地形中表现不佳。</p>
+          <h3 id="dreampolicy-a-scalable-unified-policy-for-versatile-humanoid-locomotion"><a class="markdownIt-Anchor" href="#dreampolicy-a-scalable-unified-policy-for-versatile-humanoid-locomotion"></a> DreamPolicy: A Scalable Unified Policy for Versatile Humanoid Locomotion</h3>
+<p>任务的依赖性：传统的强化学习需要为每种地形设计特定的奖励函数，导致“一个任务一个策略”<br />
+数据利用不足：即使数据量增长，但是传统的强化学习难以有效利用离线数据提升泛化能力。<br />
+泛化性差：策略容易过拟合训练地形，在未见地形中表现不佳。</p>
 <p>现有解决方案的缺陷：</p>
 <ul>
 <li>人类运动数据集需要复杂重定向到人形机器人，而且无法直接编码地形约束。</li>
 <li>策略蒸馏（将一个性能好但是计算开销高的策略压缩给一个较小较高效的策略网络）依赖在线仿真，计算成本较高。</li>
 </ul>
-<p>DreamPolicy的框架创新<br>地形感知的的专家技能收集：</p>
+<p>DreamPolicy的框架创新<br />
+地形感知的的专家技能收集：</p>
 <ul>
 <li>在六种单一地形上训练专用的RL策略，生成巨大的离线数据集</li>
 <li>数据直接捕获人形机器人运动学，包含本地感知，地形高度图，历史状态等</li>
@@ -1302,83 +1413,114 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="算法模块"><a href="#算法模块" class="headerlink" title="算法模块"></a>算法模块</h3><table>
+          <h3 id="算法模块"><a class="markdownIt-Anchor" href="#算法模块"></a> 算法模块</h3>
+<table>
 <thead>
 <tr>
 <th>文件名</th>
 <th>功能简要</th>
 </tr>
 </thead>
-<tbody><tr>
-<td><strong>Eul_w_filter.cpp &#x2F; Eul_w_filter.h</strong></td>
+<tbody>
+<tr>
+<td><strong>Eul_w_filter.cpp / Eul_w_filter.h</strong></td>
 <td>用于欧拉角速度滤波（姿态估计的角速度平滑）</td>
 </tr>
 <tr>
-<td><strong>foot_placement.cpp &#x2F; foot_placement.h</strong></td>
+<td><strong>foot_placement.cpp / foot_placement.h</strong></td>
 <td>足端位置规划（多用于步态规划、平衡控制）</td>
 </tr>
 <tr>
-<td><strong>gait_scheduler.cpp &#x2F; gait_scheduler.h</strong></td>
+<td><strong>gait_scheduler.cpp / gait_scheduler.h</strong></td>
 <td>步态调度器（步态状态机、步态切换、步态周期控制）</td>
 </tr>
 <tr>
-<td><strong>joystick_interpreter.cpp &#x2F; joystick_interpreter.h</strong></td>
+<td><strong>joystick_interpreter.cpp / joystick_interpreter.h</strong></td>
 <td>摇杆解释器（人机交互或远程控制的速度指令解析）</td>
 </tr>
 <tr>
-<td><strong>mpc.cpp &#x2F; mpc.h</strong></td>
+<td><strong>mpc.cpp / mpc.h</strong></td>
 <td>模型预测控制（用于轨迹规划、步态控制或平衡控制）</td>
 </tr>
 <tr>
-<td><strong>pino_kin_dyn.cpp &#x2F; pino_kin_dyn.h</strong></td>
-<td>Pinocchio动力学&#x2F;运动学接口（封装好的运动学求解器）</td>
+<td><strong>pino_kin_dyn.cpp / pino_kin_dyn.h</strong></td>
+<td>Pinocchio动力学/运动学接口（封装好的运动学求解器）</td>
 </tr>
 <tr>
-<td><strong>priority_tasks.cpp &#x2F; priority_tasks.h</strong></td>
+<td><strong>priority_tasks.cpp / priority_tasks.h</strong></td>
 <td>任务优先级模块（多任务控制，如Stack-of-Tasks等）</td>
 </tr>
 <tr>
-<td><strong>StateEst.cpp &#x2F; StateEst.h</strong></td>
+<td><strong>StateEst.cpp / StateEst.h</strong></td>
 <td>状态估计模块（卡尔曼滤波或其他方法估计机器人状态）</td>
 </tr>
 <tr>
-<td><strong>wbc_priority.cpp &#x2F; wbc_priority.h</strong></td>
+<td><strong>wbc_priority.cpp / wbc_priority.h</strong></td>
 <td>具有优先级的全身控制（Whole-Body Control）模块</td>
 </tr>
-</tbody></table>
-<h3 id="jocabi矩阵的作用"><a href="#jocabi矩阵的作用" class="headerlink" title="jocabi矩阵的作用"></a>jocabi矩阵的作用</h3><h3 id="四元数的形式"><a href="#四元数的形式" class="headerlink" title="四元数的形式"></a>四元数的形式</h3><ul>
-<li><p>四元数通常表示为：q&#x3D;w+xi+yj+zk<br>w：实部（标量部分），表示旋转的角度信息。<br>x,y,z：虚部（向量部分），表示旋转轴的方向。<br>避免万向节锁：欧拉角在特定角度（如俯仰角±90°）时丢失自由度，而四元数无此问题。</p>
+</tbody>
+</table>
+<h3 id="jocabi矩阵的作用"><a class="markdownIt-Anchor" href="#jocabi矩阵的作用"></a> jocabi矩阵的作用</h3>
+<h3 id="四元数的形式"><a class="markdownIt-Anchor" href="#四元数的形式"></a> 四元数的形式</h3>
+<ul>
+<li>
+<p>四元数通常表示为：q=w+xi+yj+zk<br />
+w：实部（标量部分），表示旋转的角度信息。<br />
+x,y,z：虚部（向量部分），表示旋转轴的方向。<br />
+避免万向节锁：欧拉角在特定角度（如俯仰角±90°）时丢失自由度，而四元数无此问题。</p>
 </li>
-<li><p>四元数的规范化：<br> $ | | q | | &#x3D; \sqrt { w ^ { 2 } + x ^ { 2 } + y ^ { 2 } + z ^ { 2 } } &#x3D; 1$</p>
+<li>
+<p>四元数的规范化：<br />
+$ | | q | | = \sqrt { w ^ { 2 } + x ^ { 2 } + y ^ { 2 } + z ^ { 2 } } = 1$</p>
 </li>
-<li><p>四元数到旋转矩阵：$ R &#x3D; \begin{bmatrix} 1 - 2 y ^ { 2 } - 2 z ^ { 2 } 2 x y - 2 w z 2 x z 2 x z 2 x z \ 2 x y + 2 w z 1 - 2 x ^ { 2 } - 2 z ^ { 2 } 2 y z - 2 w x \ 2 x z - 2 w y 2 y z + 2 w x 1 - 2 x ^ { 2 } - 2 y ^ { 2 } \end{bmatrix} $</p>
+<li>
+<p>四元数到旋转矩阵：$ R = \begin{bmatrix} 1 - 2 y ^ { 2 } - 2 z ^ { 2 } 2 x y - 2 w z 2 x z 2 x z 2 x z \ 2 x y + 2 w z 1 - 2 x ^ { 2 } - 2 z ^ { 2 } 2 y z - 2 w x \ 2 x z - 2 w y 2 y z + 2 w x 1 - 2 x ^ { 2 } - 2 y ^ { 2 } \end{bmatrix} $</p>
 </li>
 </ul>
-<h3 id="旋转矩阵的使用"><a href="#旋转矩阵的使用" class="headerlink" title="旋转矩阵的使用"></a>旋转矩阵的使用</h3><ul>
-<li><p>绕x轴旋转：<br>  M &lt;&lt; 1, 0, 0,<br>   0, cos(theta), -sin(theta),<br>   0, sin(theta), cos(theta);</p>
+<h3 id="旋转矩阵的使用"><a class="markdownIt-Anchor" href="#旋转矩阵的使用"></a> 旋转矩阵的使用</h3>
+<ul>
+<li>
+<p>绕x轴旋转：<br />
+M &lt;&lt; 1, 0, 0,<br />
+0, cos(theta), -sin(theta),<br />
+0, sin(theta), cos(theta);</p>
 </li>
-<li><p>绕y轴旋转：<br>  M &lt;&lt; cos(theta), 0, sin(theta),<br>   0, 1, 0,<br>   -sin(theta), 0, cos(theta);</p>
+<li>
+<p>绕y轴旋转：<br />
+M &lt;&lt; cos(theta), 0, sin(theta),<br />
+0, 1, 0,<br />
+-sin(theta), 0, cos(theta);</p>
 </li>
-<li><p>绕z轴旋转：<br>  M &lt;&lt; cos(theta), -sin(theta), 0,<br>   sin(theta), cos(theta), 0,<br>   0, 0, 1;</p>
+<li>
+<p>绕z轴旋转：<br />
+M &lt;&lt; cos(theta), -sin(theta), 0,<br />
+sin(theta), cos(theta), 0,<br />
+0, 0, 1;</p>
 </li>
 </ul>
-<h3 id="贝塞尔曲线的使用"><a href="#贝塞尔曲线的使用" class="headerlink" title="贝塞尔曲线的使用"></a>贝塞尔曲线的使用</h3><ul>
-<li>$ B ( s ) &#x3D; \sum _ { i &#x3D; 0 } ^ { n } C ( n , i ) ( 1 - s ) ^ { n - i } s ^ { i } P _ { i }， 其中 s∈[0,1] $ 。</li>
+<h3 id="贝塞尔曲线的使用"><a class="markdownIt-Anchor" href="#贝塞尔曲线的使用"></a> 贝塞尔曲线的使用</h3>
+<ul>
+<li>$ B ( s ) = \sum _ { i = 0 } ^ { n } C ( n , i ) ( 1 - s ) ^ { n - i } s ^ { i } P _ { i }， 其中 s∈[0,1] $ 。</li>
 <li>上面的贝塞尔曲线本身就是连续没有拐点的，同时导数也是连续的。</li>
 <li>在一维（Bezier_1D）里，P 是一个向量，保存了 控制点的值。</li>
 </ul>
-<h3 id="卡尔曼滤波"><a href="#卡尔曼滤波" class="headerlink" title="卡尔曼滤波"></a>卡尔曼滤波</h3><p>卡尔曼滤波是一种递归状态估计算法，通过融合系统模型预测和传感器观测数据，在噪声干扰下得到最优状态估计。</p>
+<h3 id="卡尔曼滤波"><a class="markdownIt-Anchor" href="#卡尔曼滤波"></a> 卡尔曼滤波</h3>
+<p>卡尔曼滤波是一种递归状态估计算法，通过融合系统模型预测和传感器观测数据，在噪声干扰下得到最优状态估计。</p>
 <ul>
 <li>预测-更新循环：交替进行模型预测和测量校正。</li>
 <li>最小方差准则：通过协方差矩阵量化不确定性，追求估计误差最小。</li>
 </ul>
-<p>状态方程：$ x _ { k } &#x3D; A _ { k } x _ { k - 1 } + B _ { k } u _ { k } + w _ { k }$<br>观测方程： $z _ { k } &#x3D; H _ { k } x _ { k } + v _ { k } $<br>以下是卡尔曼滤波（Kalman Filter）的详细过程解析，结合数学推导和实际意义说明：</p>
+<p>状态方程：$ x _ { k } = A _ { k } x _ { k - 1 } + B _ { k } u _ { k } + w _ { k }$<br />
+观测方程： $z _ { k } = H _ { k } x _ { k } + v _ { k } $<br />
+以下是卡尔曼滤波（Kalman Filter）的详细过程解析，结合数学推导和实际意义说明：</p>
 <ol>
-<li>卡尔曼滤波五大公式及解释<br>假设线性系统模型如下：</li>
+<li>卡尔曼滤波五大公式及解释<br />
+假设线性系统模型如下：</li>
 </ol>
 <ul>
-<li>状态方程：( \mathbf{x}_k &#x3D; \mathbf{A}<em>k \mathbf{x}</em>{k-1} + \mathbf{B}_k \mathbf{u}_k + \mathbf{w}_k )  </li>
-<li>观测方程：( \mathbf{z}_k &#x3D; \mathbf{H}_k \mathbf{x}_k + \mathbf )<br>其中：</li>
+<li>状态方程：( \mathbf{x}_k = \mathbf{A}<em>k \mathbf{x}</em>{k-1} + \mathbf{B}_k \mathbf{u}_k + \mathbf{w}_k )</li>
+<li>观测方程：( \mathbf{z}_k = \mathbf{H}_k \mathbf{x}_k + \mathbf )<br />
+其中：</li>
 <li>( \mathbf{x}_k )：系统状态（如位置、速度）。</li>
 <li>( \mathbf{u}_k )：控制输入。</li>
 <li>( \mathbf{w}_k \sim \mathcal{N}(0, \mathbf{Q}_k) )：过程噪声（建模误差）。</li>
@@ -1387,51 +1529,73 @@
 </ul>
 <p>步骤1：状态预测（时间更新）</p>
 <ol>
-<li><p>先验状态估计：<br>[ \hat{\mathbf{x}}_k^- &#x3D; \mathbf{A}<em>k \hat{\mathbf{x}}</em>{k-1} + \mathbf{B}_k \mathbf{u}_k<br>]  </p>
+<li>
+<p>先验状态估计：<br />
+[ \hat{\mathbf{x}}_k^- = \mathbf{A}<em>k \hat{\mathbf{x}}</em>{k-1} + \mathbf{B}_k \mathbf{u}_k<br />
+]</p>
 <ul>
 <li>基于上一时刻最优估计 ( \hat{\mathbf{x}}_{k-1} ) 和系统模型预测当前状态。</li>
 </ul>
 </li>
-<li><p>先验协方差预测：<br>[<br>\mathbf{P}_k^- &#x3D; \mathbf{A}<em>k \mathbf{P}</em>{k-1} \mathbf{A}_k^T + \mathbf{Q}_k<br>]  </p>
+<li>
+<p>先验协方差预测：<br />
+[<br />
+\mathbf{P}_k^- = \mathbf{A}<em>k \mathbf{P}</em>{k-1} \mathbf{A}_k^T + \mathbf{Q}_k<br />
+]</p>
 <ul>
 <li>( \mathbf{P}_k^- ) 表示预测状态的不确定性（含过程噪声 ( \mathbf{Q}_k )）。</li>
 </ul>
 </li>
 </ol>
-<p>步骤2：卡尔曼增益计算<br>[<br>\mathbf{K}_k &#x3D; \mathbf{P}_k^- \mathbf{H}_k^T (\mathbf{H}_k \mathbf{P}_k^- \mathbf{H}_k^T + \mathbf{R}_k)^{-1}<br>]  </p>
+<p>步骤2：卡尔曼增益计算<br />
+[<br />
+\mathbf{K}_k = \mathbf{P}_k^- \mathbf{H}_k^T (\mathbf{H}_k \mathbf{P}_k^- \mathbf{H}_k^T + \mathbf{R}_k)^{-1}<br />
+]</p>
 <ul>
-<li>物理意义：  <ul>
-<li>分子 ( \mathbf{P}_k^- \mathbf{H}_k^T )：预测状态与观测的协方差。  </li>
+<li>物理意义：
+<ul>
+<li>分子 ( \mathbf{P}_k^- \mathbf{H}_k^T )：预测状态与观测的协方差。</li>
 <li>分母 ( \mathbf{H}_k \mathbf{P}_k^- \mathbf{H}_k^T + \mathbf{R}_k )：预测观测的总不确定性（含传感器噪声 ( \mathbf{R}_k )）。</li>
 </ul>
 </li>
 <li>作用：权衡模型预测与观测的信任度。若传感器噪声大（( \mathbf{R}_k ) 大），增益 ( \mathbf{K}_k ) 减小，更依赖模型预测。</li>
 </ul>
-<p>步骤3：状态更新（测量校正）<br>[<br>\hat{\mathbf{x}}_k &#x3D; \hat{\mathbf{x}}_k^- + \mathbf{K}_k (\mathbf{z}_k - \mathbf{H}_k \hat{\mathbf{x}}_k^-)<br>]  </p>
+<p>步骤3：状态更新（测量校正）<br />
+[<br />
+\hat{\mathbf{x}}_k = \hat{\mathbf{x}}_k^- + \mathbf{K}_k (\mathbf{z}_k - \mathbf{H}_k \hat{\mathbf{x}}_k^-)<br />
+]</p>
 <ul>
-<li>残差项 ( \mathbf{z}_k - \mathbf{H}_k \hat{\mathbf{x}}_k^- )：观测值与预测值的差异（即“新息”）。  </li>
+<li>残差项 ( \mathbf{z}_k - \mathbf{H}_k \hat{\mathbf{x}}_k^- )：观测值与预测值的差异（即“新息”）。</li>
 <li>更新逻辑：通过卡尔曼增益将残差加权修正预测值。</li>
 </ul>
-<p>步骤4：协方差更新<br>[<br>\mathbf{P}_k &#x3D; (\mathbf{I} - \mathbf{K}_k \mathbf{H}_k) \mathbf{P}_k^-<br>]  </p>
+<p>步骤4：协方差更新<br />
+[<br />
+\mathbf{P}_k = (\mathbf{I} - \mathbf{K}_k \mathbf{H}_k) \mathbf{P}_k^-<br />
+]</p>
 <ul>
 <li>意义：修正后的状态不确定性降低（( \mathbf{P}_k \leq \mathbf{P}_k^- )）。</li>
 </ul>
 <ol start="4">
-<li>扩展卡尔曼滤波（EKF）<br>针对非线性系统（如机器人SLAM）：</li>
-<li>线性化：在当前估计点对非线性模型 ( f(\mathbf{x}), h(\mathbf{x}) ) 进行一阶泰勒展开。  <ul>
-<li>状态方程雅可比矩阵：( \mathbf{F}<em>k &#x3D; \left. \frac{\partial f}{\partial \mathbf{x}} \right|</em>{\hat{\mathbf{x}}_{k-1}} )。  </li>
-<li>观测方程雅可比矩阵：( \mathbf{J}<em>k &#x3D; \left. \frac{\partial h}{\partial \mathbf{x}} \right|</em>{\hat{\mathbf{x}}_k^-} )。</li>
+<li>扩展卡尔曼滤波（EKF）<br />
+针对非线性系统（如机器人SLAM）：</li>
+<li>线性化：在当前估计点对非线性模型 ( f(\mathbf{x}), h(\mathbf{x}) ) 进行一阶泰勒展开。
+<ul>
+<li>状态方程雅可比矩阵：( \mathbf{F}<em>k = \left. \frac{\partial f}{\partial \mathbf{x}} \right|</em>{\hat{\mathbf{x}}_{k-1}} )。</li>
+<li>观测方程雅可比矩阵：( \mathbf{J}<em>k = \left. \frac{\partial h}{\partial \mathbf{x}} \right|</em>{\hat{\mathbf{x}}_k^-} )。</li>
 </ul>
 </li>
-<li>公式调整：  <ul>
-<li>预测：( \hat{\mathbf{x}}<em>k^- &#x3D; f(\hat{\mathbf{x}}</em>{k-1}) )。  </li>
-<li>协方差：( \mathbf{P}_k^- &#x3D; \mathbf{F}<em>k \mathbf{P}</em>{k-1} \mathbf{F}_k^T + \mathbf{Q}_k )。  </li>
-<li>增益：( \mathbf{K}_k &#x3D; \mathbf{P}_k^- \mathbf{J}_k^T (\mathbf{J}_k \mathbf{P}_k^- \mathbf{J}_k^T + \mathbf{R}_k)^{-1} )。</li>
+<li>公式调整：
+<ul>
+<li>预测：( \hat{\mathbf{x}}<em>k^- = f(\hat{\mathbf{x}}</em>{k-1}) )。</li>
+<li>协方差：( \mathbf{P}_k^- = \mathbf{F}<em>k \mathbf{P}</em>{k-1} \mathbf{F}_k^T + \mathbf{Q}_k )。</li>
+<li>增益：( \mathbf{K}_k = \mathbf{P}_k^- \mathbf{J}_k^T (\mathbf{J}_k \mathbf{P}_k^- \mathbf{J}_k^T + \mathbf{R}_k)^{-1} )。</li>
 </ul>
 </li>
 </ol>
-<h3 id="MPC的控制过程"><a href="#MPC的控制过程" class="headerlink" title="MPC的控制过程"></a>MPC的控制过程</h3><ul>
-<li>线性化动力学（Ac, Bc）<ul>
+<h3 id="mpc的控制过程"><a class="markdownIt-Anchor" href="#mpc的控制过程"></a> MPC的控制过程</h3>
+<ul>
+<li>线性化动力学（Ac, Bc）
+<ul>
 <li>当前机器人站在世界系某个角度（base_rot），所以要将惯性矩阵和其他力项转换到世界系。</li>
 </ul>
 </li>
@@ -1531,28 +1695,35 @@
 <li>《小王子》圣·埃克苏佩里 —— 重新认识纯真与爱。</li>
 <li>《旅行的艺术》阿兰·德波顿 —— 关于旅途中发现自我。</li>
 </ul>
-<hr>
-<h2 id="《未来简史》"><a href="#《未来简史》" class="headerlink" title="《未来简史》"></a>《未来简史》</h2><h3 id="1-人类将成为“数据生物”"><a href="#1-人类将成为“数据生物”" class="headerlink" title="1. 人类将成为“数据生物”"></a>1. <strong>人类将成为“数据生物”</strong></h3><ul>
+<hr />
+<h2 id="未来简史"><a class="markdownIt-Anchor" href="#未来简史"></a> 《未来简史》</h2>
+<h3 id="1-人类将成为数据生物"><a class="markdownIt-Anchor" href="#1-人类将成为数据生物"></a> 1. <strong>人类将成为“数据生物”</strong></h3>
+<ul>
 <li><strong>生物学的革命</strong>：赫拉利认为，随着基因编辑、人工智能和大数据的进步，生物学将成为未来的主流学科，个人的生命、健康、心理等都会被转化为“数据”来处理。</li>
 <li><strong>人类与机器的融合</strong>：未来，生物与科技将不再是两个独立的领域。人工智能和基因工程可能让人类的能力、寿命甚至思想发生翻天覆地的变化，人与机器的界限会逐渐模糊。</li>
 </ul>
-<h3 id="2-人工智能将取代大部分工作"><a href="#2-人工智能将取代大部分工作" class="headerlink" title="2. 人工智能将取代大部分工作"></a>2. <strong>人工智能将取代大部分工作</strong></h3><ul>
+<h3 id="2-人工智能将取代大部分工作"><a class="markdownIt-Anchor" href="#2-人工智能将取代大部分工作"></a> 2. <strong>人工智能将取代大部分工作</strong></h3>
+<ul>
 <li><strong>技术革命的冲击</strong>：赫拉利指出，人工智能的发展将使许多传统的职业和任务被机器取代，导致大规模失业。大部分的工作可能会由高度智能化的机器完成，尤其是那些重复性强、需要大量数据处理的工作。</li>
 <li><strong>人类的角色转变</strong>：未来人类可能需要从“工作机器”转变为更有创造性和社会功能的角色，而这要求人类具备更高的情感智能、创造力和社交能力。</li>
 </ul>
-<h3 id="3-人类的目标不再是“生存”，而是“意义”"><a href="#3-人类的目标不再是“生存”，而是“意义”" class="headerlink" title="3. 人类的目标不再是“生存”，而是“意义”"></a>3. <strong>人类的目标不再是“生存”，而是“意义”</strong></h3><ul>
+<h3 id="3-人类的目标不再是生存而是意义"><a class="markdownIt-Anchor" href="#3-人类的目标不再是生存而是意义"></a> 3. <strong>人类的目标不再是“生存”，而是“意义”</strong></h3>
+<ul>
 <li><strong>生存问题解决后，新的焦虑出现</strong>：随着生命延续的技术发展，生存不再是最大的问题，问题将转向“为什么活着”。赫拉利提到，未来人类将面临“存在的意义”这一更深层次的哲学问题，如何为自己的生命找到意义和价值，将成为人类的新挑战。</li>
 <li><strong>无聊与虚无感</strong>：随着AI和自动化的普及，人们将不再为了生存而工作，这种自由也可能带来焦虑、无聊和失落，社会如何管理人们的心理健康和情感需求，将变得更加重要。</li>
 </ul>
-<h3 id="4-“智人”将变成“超人”"><a href="#4-“智人”将变成“超人”" class="headerlink" title="4. “智人”将变成“超人”"></a>4. <strong>“智人”将变成“超人”</strong></h3><ul>
+<h3 id="4-智人将变成超人"><a class="markdownIt-Anchor" href="#4-智人将变成超人"></a> 4. <strong>“智人”将变成“超人”</strong></h3>
+<ul>
 <li><strong>超级人类的诞生</strong>：赫拉利预测，未来会有一些人通过基因编辑、神经科学或智能增强等技术，超越现有的人类能力，变成“超人类”。这些“超人”将具备超常的智慧、健康或能力，从而在社会上拥有巨大的优势，甚至可能重新定义“人类”的定义。</li>
 </ul>
-<h3 id="5-全球化与科技进步带来新的社会不平等"><a href="#5-全球化与科技进步带来新的社会不平等" class="headerlink" title="5. 全球化与科技进步带来新的社会不平等"></a>5. <strong>全球化与科技进步带来新的社会不平等</strong></h3><ul>
+<h3 id="5-全球化与科技进步带来新的社会不平等"><a class="markdownIt-Anchor" href="#5-全球化与科技进步带来新的社会不平等"></a> 5. <strong>全球化与科技进步带来新的社会不平等</strong></h3>
+<ul>
 <li><strong>财富和权力的集中</strong>：随着技术的不断进步，赫拉利警告，科技和财富的集中可能会加剧社会不平等。未来，少数拥有控制技术和资源的人可能将拥有巨大的社会权力，而普通人可能面临更多的困境。</li>
 <li><strong>社会结构的变化</strong>：全球化和技术进步将使国家边界变得不那么重要，但全球不平等、社会阶层的固化仍将是世界面临的一大挑战。</li>
 </ul>
-<hr>
-<h2 id="《底层逻辑》"><a href="#《底层逻辑》" class="headerlink" title="《底层逻辑》"></a>《底层逻辑》</h2><p><strong>1. 看到事物背后的规律，而不仅是表面现象</strong></p>
+<hr />
+<h2 id="底层逻辑"><a class="markdownIt-Anchor" href="#底层逻辑"></a> 《底层逻辑》</h2>
+<p><strong>1. 看到事物背后的规律，而不仅是表面现象</strong></p>
 <ul>
 <li>真正聪明的人，不是看见了表象，而是能洞察背后的本质、模式和因果关系。</li>
 </ul>
@@ -1574,8 +1745,9 @@
 <ul>
 <li>不是追求短期的成功和满足，而是能在时间中不断积累优势。</li>
 </ul>
-<hr>
-<h2 id="《被讨厌的勇气》"><a href="#《被讨厌的勇气》" class="headerlink" title="《被讨厌的勇气》"></a>《被讨厌的勇气》</h2><p><strong>1. 所有烦恼都来源于“人际关系”</strong></p>
+<hr />
+<h2 id="被讨厌的勇气"><a class="markdownIt-Anchor" href="#被讨厌的勇气"></a> 《被讨厌的勇气》</h2>
+<p><strong>1. 所有烦恼都来源于“人际关系”</strong></p>
 <ul>
 <li>无论是自卑、愤怒、焦虑，还是不安，本质上都是因为“我在意别人怎么看我”。</li>
 </ul>
@@ -1601,7 +1773,7 @@
 <ul>
 <li>当你觉得自己对他人、社会有贡献时，就能感受到真正的幸福。</li>
 </ul>
-<hr>
+<hr />
 
       
     </div>
@@ -1739,66 +1911,104 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="HiLMa-Res-A-General-Hierarchical-Framework-via-Residual-RL-for-Combining-Quadrupedal-Locomotion-and-Manipulation"><a href="#HiLMa-Res-A-General-Hierarchical-Framework-via-Residual-RL-for-Combining-Quadrupedal-Locomotion-and-Manipulation" class="headerlink" title="HiLMa-Res: A General Hierarchical Framework via Residual RL for Combining Quadrupedal Locomotion and Manipulation"></a>HiLMa-Res: A General Hierarchical Framework via Residual RL for Combining Quadrupedal Locomotion and Manipulation</h1><h3 id="✅-1-提出了一个可泛化的-loco-manipulation-分层强化学习框架"><a href="#✅-1-提出了一个可泛化的-loco-manipulation-分层强化学习框架" class="headerlink" title="✅ 1. 提出了一个可泛化的 loco-manipulation 分层强化学习框架"></a>✅ 1. <strong>提出了一个可泛化的 loco-manipulation 分层强化学习框架</strong></h3><h4 id="📌-原理："><a href="#📌-原理：" class="headerlink" title="📌 原理："></a>📌 原理：</h4><ul>
+          <h1 id="hilma-res-a-general-hierarchical-framework-via-residual-rl-for-combining-quadrupedal-locomotion-and-manipulation"><a class="markdownIt-Anchor" href="#hilma-res-a-general-hierarchical-framework-via-residual-rl-for-combining-quadrupedal-locomotion-and-manipulation"></a> HiLMa-Res: A General Hierarchical Framework via Residual RL for Combining Quadrupedal Locomotion and Manipulation</h1>
+<h3 id="1-提出了一个可泛化的-loco-manipulation-分层强化学习框架"><a class="markdownIt-Anchor" href="#1-提出了一个可泛化的-loco-manipulation-分层强化学习框架"></a> ✅ 1. <strong>提出了一个可泛化的 loco-manipulation 分层强化学习框架</strong></h3>
+<h4 id="原理"><a class="markdownIt-Anchor" href="#原理"></a> 📌 原理：</h4>
+<ul>
 <li>Loco-manipulation 是 locomotion（行走）+ manipulation（操作）的组合问题，控制空间极大，策略难以学习。</li>
-<li>将整体任务<strong>分层</strong>：<ul>
-<li><strong>低层：Locomotion Controller</strong> → 学习行走并追踪任意足端轨迹；<ul>
-<li>用神经网络实现 PPO 策略<br>  输入：包含机器人当前的运动状态、历史状态、外部扰动、目标轨迹（轨迹隐含在相位变量和周期中）；<br>  输出：每只脚的期望接触力 &#x2F; 足端位置（用于力控或位置控）；<br>  训练方法：PPO 强化学习算法；<br>  在 Isaac Gym 中高效并行训练；<br>  加了 domain randomization（随机地形、噪声）以增强泛化性；<br>  特征：一旦训练完成，可以直接部署到真实机器人，无需再训练。</li>
+<li>将整体任务<strong>分层</strong>：
+<ul>
+<li><strong>低层：Locomotion Controller</strong> → 学习行走并追踪任意足端轨迹；
+<ul>
+<li>用神经网络实现 PPO 策略<br />
+输入：包含机器人当前的运动状态、历史状态、外部扰动、目标轨迹（轨迹隐含在相位变量和周期中）；<br />
+输出：每只脚的期望接触力 / 足端位置（用于力控或位置控）；<br />
+训练方法：PPO 强化学习算法；<br />
+在 Isaac Gym 中高效并行训练；<br />
+加了 domain randomization（随机地形、噪声）以增强泛化性；<br />
+特征：一旦训练完成，可以直接部署到真实机器人，无需再训练。</li>
 </ul>
 </li>
-<li><strong>高层：Manipulation Planner</strong> → 规划残差轨迹，实现操纵任务。<ul>
-<li>用神经网络实现轨迹规划策略<br>  输入：状态输入：机器人自身状态、目标信息（如目标位置、速度方向）；<br>  或图像输入：深度图、摄像头画面（需加 CNN）；<br>  输出：每条腿一条 3 阶 Bezier 曲线的控制点（一般是 3~4 个点）；<br>  CPG 的周期&#x2F;相位调节参数（例如走路节奏）；<br>  训练方法：<br>  同样使用强化学习算法（PPO&#x2F;DroQ）；<br>  奖励函数任务相关，比如推球的方向、推箱位置、避障是否成功；<br>  可接入现实数据再训练（RLPD），提升现实表现；<br>  特点：通用框架 + 不同任务换不同 reward 即可复用。</li>
+<li><strong>高层：Manipulation Planner</strong> → 规划残差轨迹，实现操纵任务。
+<ul>
+<li>用神经网络实现轨迹规划策略<br />
+输入：状态输入：机器人自身状态、目标信息（如目标位置、速度方向）；<br />
+或图像输入：深度图、摄像头画面（需加 CNN）；<br />
+输出：每条腿一条 3 阶 Bezier 曲线的控制点（一般是 3~4 个点）；<br />
+CPG 的周期/相位调节参数（例如走路节奏）；<br />
+训练方法：<br />
+同样使用强化学习算法（PPO/DroQ）；<br />
+奖励函数任务相关，比如推球的方向、推箱位置、避障是否成功；<br />
+可接入现实数据再训练（RLPD），提升现实表现；<br />
+特点：通用框架 + 不同任务换不同 reward 即可复用。</li>
 </ul>
 </li>
 <li>用低层网络学“怎么走”；用高层网络学“走向哪里、怎么推、怎么跨”。</li>
 </ul>
 </li>
 </ul>
-<h4 id="✅-好处："><a href="#✅-好处：" class="headerlink" title="✅ 好处："></a>✅ 好处：</h4><ul>
+<h4 id="好处"><a class="markdownIt-Anchor" href="#好处"></a> ✅ 好处：</h4>
+<ul>
 <li>解耦复杂任务 → 降低学习难度；</li>
 <li>低层可重用多个任务，高层策略任务特定，<strong>实现模块化和迁移能力</strong>。</li>
 </ul>
-<h3 id="✅-2-采用任务无关的运动控制器和任务相关的操作规划器"><a href="#✅-2-采用任务无关的运动控制器和任务相关的操作规划器" class="headerlink" title="✅ 2. 采用任务无关的运动控制器和任务相关的操作规划器"></a>✅ 2. <strong>采用任务无关的运动控制器和任务相关的操作规划器</strong></h3><h4 id="📌-原理：-1"><a href="#📌-原理：-1" class="headerlink" title="📌 原理："></a>📌 原理：</h4><ul>
+<h3 id="2-采用任务无关的运动控制器和任务相关的操作规划器"><a class="markdownIt-Anchor" href="#2-采用任务无关的运动控制器和任务相关的操作规划器"></a> ✅ 2. <strong>采用任务无关的运动控制器和任务相关的操作规划器</strong></h3>
+<h4 id="原理-2"><a class="markdownIt-Anchor" href="#原理-2"></a> 📌 原理：</h4>
+<ul>
 <li>低层运动控制器（Locomotion Controller）专注于<strong>足端轨迹跟踪</strong>，不关心上层任务内容。</li>
 <li>高层操作规划器只需要设计<strong>足端轨迹（residual）</strong>，来完成具体任务目标。</li>
 </ul>
-<h4 id="✅-实现方式："><a href="#✅-实现方式：" class="headerlink" title="✅ 实现方式："></a>✅ 实现方式：</h4><ul>
+<h4 id="实现方式"><a class="markdownIt-Anchor" href="#实现方式"></a> ✅ 实现方式：</h4>
+<ul>
 <li>低层训练时，只用模拟中<strong>随机生成的轨迹</strong>训练它追踪；</li>
 <li>高层策略负责设计这些轨迹的“形状”（比如球要往左推 → 左脚向外伸）；</li>
 <li>二者通过轨迹接口（Bezier + CPG）连接，高层给轨迹，低层负责执行。</li>
-<li>实现方式：<ul>
+<li>实现方式：
+<ul>
 <li>低层训练时，只用模拟中随机生成的轨迹训练它追踪；</li>
 <li>高层策略负责设计这些轨迹的“形状”（比如球要往左推 → 左脚向外伸）；</li>
 <li>二者通过轨迹接口（Bezier + CPG）连接，高层给轨迹，低层负责执行。</li>
 </ul>
 </li>
 </ul>
-<h3 id="✅-3-利用了残差学习（Bezier-曲线）-CPG（中央模式发生器）来灵活生成轨迹"><a href="#✅-3-利用了残差学习（Bezier-曲线）-CPG（中央模式发生器）来灵活生成轨迹" class="headerlink" title="✅ 3. 利用了残差学习（Bezier 曲线）+ CPG（中央模式发生器）来灵活生成轨迹"></a>✅ 3. <strong>利用了残差学习（Bezier 曲线）+ CPG（中央模式发生器）来灵活生成轨迹</strong></h3><h4 id="📌-原理：-2"><a href="#📌-原理：-2" class="headerlink" title="📌 原理："></a>📌 原理：</h4><ul>
+<h3 id="3-利用了残差学习bezier-曲线-cpg中央模式发生器来灵活生成轨迹"><a class="markdownIt-Anchor" href="#3-利用了残差学习bezier-曲线-cpg中央模式发生器来灵活生成轨迹"></a> ✅ 3. <strong>利用了残差学习（Bezier 曲线）+ CPG（中央模式发生器）来灵活生成轨迹</strong></h3>
+<h4 id="原理-3"><a class="markdownIt-Anchor" href="#原理-3"></a> 📌 原理：</h4>
+<ul>
 <li><strong>CPG</strong>（Central Pattern Generator）：用于生成周期性足端轨迹，如走路、跳跃；</li>
 <li><strong>Bezier 曲线</strong>：高层策略学习残差，用平滑的曲线微调轨迹，实现操作动作（如推、踢、跨越）。</li>
 </ul>
-<h4 id="✅-实现方式：-1"><a href="#✅-实现方式：-1" class="headerlink" title="✅ 实现方式："></a>✅ 实现方式：</h4><ul>
-<li>控制器最终执行的轨迹 &#x3D; <strong>CPG生成的默认轨迹 + Bezier残差轨迹</strong>；</li>
+<h4 id="实现方式-2"><a class="markdownIt-Anchor" href="#实现方式-2"></a> ✅ 实现方式：</h4>
+<ul>
+<li>控制器最终执行的轨迹 = <strong>CPG生成的默认轨迹 + Bezier残差轨迹</strong>；</li>
 <li>Bezier 的控制点由高层网络输出，调节轨迹形状；</li>
 <li>可用较少参数，<strong>生成复杂、多样的足端轨迹</strong>。</li>
 </ul>
-<h3 id="✅-4-在多个现实任务上验证了方法的通用性与优越性"><a href="#✅-4-在多个现实任务上验证了方法的通用性与优越性" class="headerlink" title="✅ 4. 在多个现实任务上验证了方法的通用性与优越性"></a>✅ 4. <strong>在多个现实任务上验证了方法的通用性与优越性</strong></h3><h4 id="📌-实验设计原理："><a href="#📌-实验设计原理：" class="headerlink" title="📌 实验设计原理："></a>📌 实验设计原理：</h4><ul>
-<li><p>将高层策略迁移到多个任务上，如：</p>
+<h3 id="4-在多个现实任务上验证了方法的通用性与优越性"><a class="markdownIt-Anchor" href="#4-在多个现实任务上验证了方法的通用性与优越性"></a> ✅ 4. <strong>在多个现实任务上验证了方法的通用性与优越性</strong></h3>
+<h4 id="实验设计原理"><a class="markdownIt-Anchor" href="#实验设计原理"></a> 📌 实验设计原理：</h4>
+<ul>
+<li>
+<p>将高层策略迁移到多个任务上，如：</p>
 <ol>
 <li>带球（dribble）</li>
 <li>踩点避障（stepostone）</li>
 <li>推箱（navload）</li>
 </ol>
 </li>
-<li><p>低层控制器不变，仅更换高层策略 → 验证了框架的<strong>模块化和通用性</strong>。</p>
+<li>
+<p>低层控制器不变，仅更换高层策略 → 验证了框架的<strong>模块化和通用性</strong>。</p>
 </li>
 </ul>
-<h4 id="✅-成果："><a href="#✅-成果：" class="headerlink" title="✅ 成果："></a>✅ 成果：</h4><ul>
+<h4 id="成果"><a class="markdownIt-Anchor" href="#成果"></a> ✅ 成果：</h4>
+<ul>
 <li>所有任务均能<strong>从仿真零样本直接迁移到现实机器人</strong>，性能优于多个对比基线（Reward shaping、Motion tracking、AMP 等）。</li>
 </ul>
-<h3 id="✅-5-支持视觉、状态、多模态输入，适配多种-RL-算法"><a href="#✅-5-支持视觉、状态、多模态输入，适配多种-RL-算法" class="headerlink" title="✅ 5. 支持视觉、状态、多模态输入，适配多种 RL 算法"></a>✅ 5. <strong>支持视觉、状态、多模态输入，适配多种 RL 算法</strong></h3><h4 id="📌-原理：-3"><a href="#📌-原理：-3" class="headerlink" title="📌 原理："></a>📌 原理：</h4><ul>
-<li>高层策略输入是任务相关的信息，具有很强的扩展性；<ul>
-<li>可接受：<ul>
+<h3 id="5-支持视觉-状态-多模态输入适配多种-rl-算法"><a class="markdownIt-Anchor" href="#5-支持视觉-状态-多模态输入适配多种-rl-算法"></a> ✅ 5. <strong>支持视觉、状态、多模态输入，适配多种 RL 算法</strong></h3>
+<h4 id="原理-4"><a class="markdownIt-Anchor" href="#原理-4"></a> 📌 原理：</h4>
+<ul>
+<li>高层策略输入是任务相关的信息，具有很强的扩展性；
+<ul>
+<li>可接受：
+<ul>
 <li>状态向量（如物体位置、机器人速度等）；</li>
 <li>视觉输入（如深度图）；</li>
 <li>多模态（状态 + 视觉）；</li>
@@ -1808,12 +2018,13 @@
 </li>
 <li>可适配不同类型的 RL 算法，如 PPO、DroQ、RLPD（现实数据驱动）等。</li>
 </ul>
-<h4 id="✅-实现方式：-2"><a href="#✅-实现方式：-2" class="headerlink" title="✅ 实现方式："></a>✅ 实现方式：</h4><ul>
+<h4 id="实现方式-3"><a class="markdownIt-Anchor" href="#实现方式-3"></a> ✅ 实现方式：</h4>
+<ul>
 <li>高层策略结构灵活：可以是 MLP（状态输入）或 CNN+MLP（图像输入）；</li>
 <li>训练框架可无缝切换不同策略优化器；</li>
 <li>利用现实 fine-tuning（如 RLPD）<strong>提升现实成功率和样本效率</strong>。</li>
 </ul>
-<hr>
+<hr />
 
       
     </div>

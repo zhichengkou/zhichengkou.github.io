@@ -231,34 +231,50 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="王雪松-王荣荣-程玉虎-安全强化学习综述-自动化学报-2023-49-9-1813−1835"><a href="#王雪松-王荣荣-程玉虎-安全强化学习综述-自动化学报-2023-49-9-1813−1835" class="headerlink" title="王雪松,  王荣荣,  程玉虎.  安全强化学习综述.  自动化学报,  2023, 49(9): 1813−1835"></a>王雪松,  王荣荣,  程玉虎.  安全强化学习综述.  自动化学报,  2023, 49(9): 1813−1835</h1><p><img src="/2025/04/22/%E5%AE%89%E5%85%A8%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/image.png" alt="alt text"></p>
-<p><img src="/2025/04/22/%E5%AE%89%E5%85%A8%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/image1.png" alt="alt text"></p>
-<hr>
-<h1 id="《Safe-Reinforcement-Learning-Using-Robust-Control-Barrier-Functions》（Emam-et-al-2022）（本质上是一种策略约束方法）"><a href="#《Safe-Reinforcement-Learning-Using-Robust-Control-Barrier-Functions》（Emam-et-al-2022）（本质上是一种策略约束方法）" class="headerlink" title="《Safe Reinforcement Learning Using Robust Control Barrier Functions》（Emam et al., 2022）（本质上是一种策略约束方法）"></a>《<strong>Safe Reinforcement Learning Using Robust Control Barrier Functions</strong>》（Emam et al., 2022）（本质上是一种策略约束方法）</h1><p>提出了一种结合**鲁棒控制屏障函数（RCBF）<strong>和强化学习的安全强化学习框架，并以</strong>Soft Actor-Critic (SAC)**为基底，解决训练过程中可能进入不安全状态的问题。</p>
-<h2 id="论文核心结构与思路"><a href="#论文核心结构与思路" class="headerlink" title="论文核心结构与思路"></a>论文核心结构与思路</h2><h3 id="1-问题背景"><a href="#1-问题背景" class="headerlink" title="1. 问题背景"></a>1. 问题背景</h3><ul>
+          <h1 id="王雪松-王荣荣-程玉虎-安全强化学习综述-自动化学报-2023-499-18131835"><a class="markdownIt-Anchor" href="#王雪松-王荣荣-程玉虎-安全强化学习综述-自动化学报-2023-499-18131835"></a> 王雪松,  王荣荣,  程玉虎.  安全强化学习综述.  自动化学报,  2023, 49(9): 1813−1835</h1>
+<p><img src="image.png" alt="alt text" /></p>
+<p><img src="image1.png" alt="alt text" /></p>
+<hr />
+<h1 id="safe-reinforcement-learning-using-robust-control-barrier-functionsemam-et-al-2022本质上是一种策略约束方法"><a class="markdownIt-Anchor" href="#safe-reinforcement-learning-using-robust-control-barrier-functionsemam-et-al-2022本质上是一种策略约束方法"></a> 《<strong>Safe Reinforcement Learning Using Robust Control Barrier Functions</strong>》（Emam et al., 2022）（本质上是一种策略约束方法）</h1>
+<p>提出了一种结合**鲁棒控制屏障函数（RCBF）<strong>和强化学习的安全强化学习框架，并以</strong>Soft Actor-Critic (SAC)**为基底，解决训练过程中可能进入不安全状态的问题。</p>
+<h2 id="论文核心结构与思路"><a class="markdownIt-Anchor" href="#论文核心结构与思路"></a> 论文核心结构与思路</h2>
+<h3 id="1-问题背景"><a class="markdownIt-Anchor" href="#1-问题背景"></a> 1. 问题背景</h3>
+<ul>
 <li>强化学习需要大量探索，但这可能会引发<strong>安全问题</strong>（如机器人撞墙、无人机坠落）。</li>
 <li>安全强化学习目标：在训练中就<strong>保持系统不进入不安全状态</strong>，而不是仅最终收敛到安全策略。</li>
 </ul>
-<h3 id="2-方法结构（SAC-RCBF）"><a href="#2-方法结构（SAC-RCBF）" class="headerlink" title="2. 方法结构（SAC-RCBF）"></a>2. 方法结构（SAC-RCBF）</h3><h4 id="📎-系统建模："><a href="#📎-系统建模：" class="headerlink" title="📎 系统建模："></a>📎 系统建模：</h4><p>考虑扰动控制仿射系统：</p>
-<p>[<br>\dot{x}(t) &#x3D; f(x(t)) + g(x(t))u(x(t)) + d(x(t))<br>]</p>
+<h3 id="2-方法结构sac-rcbf"><a class="markdownIt-Anchor" href="#2-方法结构sac-rcbf"></a> 2. 方法结构（SAC-RCBF）</h3>
+<h4 id="系统建模"><a class="markdownIt-Anchor" href="#系统建模"></a> 📎 系统建模：</h4>
+<p>考虑扰动控制仿射系统：</p>
+<p>[<br />
+\dot{x}(t) = f(x(t)) + g(x(t))u(x(t)) + d(x(t))<br />
+]</p>
 <ul>
 <li>(d(x))：未知扰动，用**高斯过程（GP）**建模。</li>
 <li>控制目标是：用 RL 找最优策略 ( \pi )，在执行前通过 <strong>RCBF 层</strong>进行修正，确保安全。</li>
 </ul>
-<h4 id="📎-安全模块：RCBF-QP-层"><a href="#📎-安全模块：RCBF-QP-层" class="headerlink" title="📎 安全模块：RCBF-QP 层"></a>📎 安全模块：RCBF-QP 层</h4><ul>
-<li>用**鲁棒控制屏障函数（RCBF）**构造约束：<br>[<br>\nabla h(x)^T(f(x) + g(x)u(x)) \geq -\alpha(h(x)) - \min \nabla h(x)^T d(x)<br>]</li>
+<h4 id="安全模块rcbf-qp-层"><a class="markdownIt-Anchor" href="#安全模块rcbf-qp-层"></a> 📎 安全模块：RCBF-QP 层</h4>
+<ul>
+<li>用**鲁棒控制屏障函数（RCBF）**构造约束：<br />
+[<br />
+\nabla h(x)^T(f(x) + g(x)u(x)) \geq -\alpha(h(x)) - \min \nabla h(x)^T d(x)<br />
+]</li>
 <li>通过**二次规划（QP）**调整策略输出，最小化修改幅度，确保满足约束。</li>
 </ul>
-<h4 id="📎-强化学习部分：Soft-Actor-Critic-SAC"><a href="#📎-强化学习部分：Soft-Actor-Critic-SAC" class="headerlink" title="📎 强化学习部分：Soft Actor-Critic (SAC)"></a>📎 强化学习部分：Soft Actor-Critic (SAC)</h4><ul>
-<li><p>引入<strong>可微分安全层</strong>，可以反向传播梯度，增强策略学习能力。</p>
+<h4 id="强化学习部分soft-actor-critic-sac"><a class="markdownIt-Anchor" href="#强化学习部分soft-actor-critic-sac"></a> 📎 强化学习部分：Soft Actor-Critic (SAC)</h4>
+<ul>
+<li>
+<p>引入<strong>可微分安全层</strong>，可以反向传播梯度，增强策略学习能力。</p>
 </li>
-<li><p>提出两个优化：</p>
+<li>
+<p>提出两个优化：</p>
 <ol>
 <li><strong>Differentiable RCBF Layer</strong>：允许梯度传播：使得策略能够进行自动修正。可微分安全层让“安全修正”变成了策略可以感知和优化的目标，因此是实实在在的“加速 + 提升性能”的方法。</li>
 <li><strong>Model-based rollout</strong>：用学习到的模型生成合成数据，加速学习</li>
 </ol>
 </li>
-<li><p><strong>没有可微分安全层：</strong></p>
+<li>
+<p><strong>没有可微分安全层：</strong></p>
 </li>
 </ul>
 <table>
@@ -268,7 +284,8 @@
 <th>影响</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>策略网络不知道“自己动作被改了”</td>
 <td>无法学习“避开”那些不安全动作</td>
 </tr>
@@ -284,7 +301,8 @@
 <td>高维控制系统尤其严重</td>
 <td>RL 很难靠试错探索到“刚刚好不触碰屏障”的策略</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <ul>
 <li><strong>有安全层：</strong></li>
 </ul>
@@ -295,7 +313,8 @@
 <th>结果</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>策略能“感知到”安全边界的位置</td>
 <td>不再只是靠碰撞惩罚、随机试错</td>
 </tr>
@@ -305,20 +324,24 @@
 </tr>
 <tr>
 <td>策略更快收敛、学到更优行为</td>
-<td>不容易陷入安全&#x2F;性能折中困境</td>
+<td>不容易陷入安全/性能折中困境</td>
 </tr>
-</tbody></table>
-<h4 id="📎-模块化任务学习（Modular-Learning）"><a href="#📎-模块化任务学习（Modular-Learning）" class="headerlink" title="📎 模块化任务学习（Modular Learning）"></a>📎 模块化任务学习（Modular Learning）</h4><ul>
+</tbody>
+</table>
+<h4 id="模块化任务学习modular-learning"><a class="markdownIt-Anchor" href="#模块化任务学习modular-learning"></a> 📎 模块化任务学习（Modular Learning）</h4>
+<ul>
 <li><strong>任务 reward 与安全 constraint 解耦</strong>，使得训练出的策略具有更强的<strong>迁移能力（zero-shot transfer）</strong>。</li>
 </ul>
-<h2 id="创新点总结"><a href="#创新点总结" class="headerlink" title="创新点总结"></a>创新点总结</h2><table>
+<h2 id="创新点总结"><a class="markdownIt-Anchor" href="#创新点总结"></a> 创新点总结</h2>
+<table>
 <thead>
 <tr>
 <th>创新点类别</th>
 <th>内容说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>✅ 融合方法创新</td>
 <td>将 RCBF 融入 SAC 中，确保训练过程安全</td>
 </tr>
@@ -334,29 +357,38 @@
 <td>✅ 数据效率优化</td>
 <td>使用部分已学模型做合成 rollout，提升样本效率</td>
 </tr>
-</tbody></table>
-<h2 id="可改进方向-研究机会"><a href="#可改进方向-研究机会" class="headerlink" title="可改进方向 &#x2F; 研究机会"></a>可改进方向 &#x2F; 研究机会</h2><ol>
+</tbody>
+</table>
+<h2 id="可改进方向-研究机会"><a class="markdownIt-Anchor" href="#可改进方向-研究机会"></a> 可改进方向 / 研究机会</h2>
+<ol>
 <li><strong>更多维度扰动建模方法</strong>：GP 对高维 d(x) 效率有限，可考虑使用贝叶斯神经网络或 ensemble 模型。</li>
 <li><strong>更通用的 CBF 设计工具</strong>：当前构造 CBF 需先验经验，可引入自动构造或学习 CBF 的方法。</li>
 <li><strong>现实部署实验验证缺失</strong>：目前只在模拟环境中测试，若能在真实机器人上测试更具说服力。</li>
 <li><strong>与 MPC 的融合探索</strong>：框架可拓展为 hybrid RL-MPC，进一步提升实时安全性。</li>
 </ol>
-<hr>
-<h2 id="SAC算法："><a href="#SAC算法：" class="headerlink" title="SAC算法："></a>SAC算法：</h2><blockquote>
+<hr />
+<h2 id="sac算法"><a class="markdownIt-Anchor" href="#sac算法"></a> SAC算法：</h2>
+<blockquote>
 <p><strong>SAC 是一种最大化奖励 + 最大化动作多样性（熵）的 off-policy 深度强化学习算法，具有高效、稳定、探索性强的特点。</strong></p>
 </blockquote>
-<h3 id="一、SAC-的基本思想"><a href="#一、SAC-的基本思想" class="headerlink" title="一、SAC 的基本思想"></a>一、SAC 的基本思想</h3><p>传统强化学习只最大化期望回报：</p>
-<p>[<br>\max_\pi \mathbb{E}_{\pi} \left[\sum_t r(s_t, a_t)\right]<br>]</p>
+<h3 id="一-sac-的基本思想"><a class="markdownIt-Anchor" href="#一-sac-的基本思想"></a> 一、SAC 的基本思想</h3>
+<p>传统强化学习只最大化期望回报：</p>
+<p>[<br />
+\max_\pi \mathbb{E}_{\pi} \left[\sum_t r(s_t, a_t)\right]<br />
+]</p>
 <blockquote>
 <p>不仅希望获得高奖励，还希望策略<strong>有足够的“随机性”</strong>，保持探索能力。</p>
 </blockquote>
 <p>引入<strong>最大熵强化学习目标</strong>：</p>
-<p>[<br>\max_\pi \mathbb{E}_{\pi} \left[\sum_t r(s_t, a_t) + \alpha \mathcal{H}(\pi(\cdot|s_t)) \right]<br>]</p>
+<p>[<br />
+\max_\pi \mathbb{E}_{\pi} \left[\sum_t r(s_t, a_t) + \alpha \mathcal{H}(\pi(\cdot|s_t)) \right]<br />
+]</p>
 <ul>
-<li>( \mathcal{H}(\pi) &#x3D; -\log \pi(a|s) ) 是策略的<strong>熵</strong></li>
+<li>( \mathcal{H}(\pi) = -\log \pi(a|s) ) 是策略的<strong>熵</strong></li>
 <li>( \alpha )：探索与奖励之间的平衡因子</li>
 </ul>
-<h3 id="🔍-二、SAC-的结构组成"><a href="#🔍-二、SAC-的结构组成" class="headerlink" title="🔍 二、SAC 的结构组成"></a>🔍 二、SAC 的结构组成</h3><p>SAC 有四个主要模块（四个网络）：</p>
+<h3 id="二-sac-的结构组成"><a class="markdownIt-Anchor" href="#二-sac-的结构组成"></a> 🔍 二、SAC 的结构组成</h3>
+<p>SAC 有四个主要模块（四个网络）：</p>
 <table>
 <thead>
 <tr>
@@ -364,7 +396,8 @@
 <th>作用</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>Actor</strong>（策略网络）</td>
 <td>输出当前状态下的概率分布 ( \pi(a</td>
 </tr>
@@ -376,18 +409,21 @@
 <td><strong>Value 网络（可选）</strong></td>
 <td>估计当前状态下的“soft value” ( V(s) )（新版可省略）</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <blockquote>
 <p>训练使用目标网络（target Q）、经验池（replay buffer）等稳定手段。</p>
 </blockquote>
-<h3 id="四、SAC-的优点"><a href="#四、SAC-的优点" class="headerlink" title="四、SAC 的优点"></a>四、SAC 的优点</h3><table>
+<h3 id="四-sac-的优点"><a class="markdownIt-Anchor" href="#四-sac-的优点"></a> 四、SAC 的优点</h3>
+<table>
 <thead>
 <tr>
 <th>特点</th>
 <th>描述</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>✅ off-policy</td>
 <td>能重复使用旧数据，训练效率高</td>
 </tr>
@@ -407,29 +443,32 @@
 <td>✅ 可扩展</td>
 <td>可结合可微分安全层（如前文 RCBF）</td>
 </tr>
-</tbody></table>
-<h2 id="关于-“在线-离线”强化学习-与-“on-policy-off-policy”"><a href="#关于-“在线-离线”强化学习-与-“on-policy-off-policy”" class="headerlink" title="关于 “在线 &#x2F; 离线”强化学习 与 “on-policy &#x2F; off-policy”"></a>关于 “在线 &#x2F; 离线”强化学习 与 “on-policy &#x2F; off-policy”</h2><table>
+</tbody>
+</table>
+<h2 id="关于-在线-离线强化学习-与-on-policy-off-policy"><a class="markdownIt-Anchor" href="#关于-在线-离线强化学习-与-on-policy-off-policy"></a> 关于 “在线 / 离线”强化学习 与 “on-policy / off-policy”</h2>
+<table>
 <thead>
 <tr>
 <th>比较点</th>
-<th>在线 &#x2F; 离线</th>
-<th>On-policy &#x2F; Off-policy</th>
+<th>在线 / 离线</th>
+<th>On-policy / Off-policy</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>关注的是？</td>
 <td>数据是否来自当前环境？</td>
 <td>样本是否由当前策略生成？</td>
 </tr>
 <tr>
 <td>数据是否更新？</td>
-<td>在线更新 &#x2F; 离线固定</td>
+<td>在线更新 / 离线固定</td>
 <td>都可以实时或离线训练</td>
 </tr>
 <tr>
 <td>能否与环境交互？</td>
 <td>离线不能，在线可以</td>
-<td>无限制，on&#x2F;off-policy 都可在线训练</td>
+<td>无限制，on/off-policy 都可在线训练</td>
 </tr>
 <tr>
 <td>是否用 replay buffer？</td>
@@ -441,35 +480,43 @@
 <td>离线更安全</td>
 <td>与安全性无直接关系</td>
 </tr>
-</tbody></table>
-<hr>
-<h1 id="《Learning-Safety-in-Model-Based-Reinforcement-Learning-using-MPC-and-Gaussian-Processes》"><a href="#《Learning-Safety-in-Model-Based-Reinforcement-Learning-using-MPC-and-Gaussian-Processes》" class="headerlink" title="《Learning Safety in Model-Based Reinforcement Learning using MPC and Gaussian Processes》"></a><strong>《Learning Safety in Model-Based Reinforcement Learning using MPC and Gaussian Processes》</strong></h1><blockquote>
+</tbody>
+</table>
+<hr />
+<h1 id="learning-safety-in-model-based-reinforcement-learning-using-mpc-and-gaussian-processes"><a class="markdownIt-Anchor" href="#learning-safety-in-model-based-reinforcement-learning-using-mpc-and-gaussian-processes"></a> <strong>《Learning Safety in Model-Based Reinforcement Learning using MPC and Gaussian Processes》</strong></h1>
+<blockquote>
 <p>提出了一种结合 <strong>高斯过程（GP）与模型预测控制（MPC）</strong> 的 <strong>安全强化学习（Safe RL）方法</strong>。它的研究目标是<strong>在不牺牲性能的前提下，提高策略的安全性</strong>。</p>
 </blockquote>
 <p>我将从三个层面来解析：</p>
-<h2 id="一、文章的核心创新点分析"><a href="#一、文章的核心创新点分析" class="headerlink" title="一、文章的核心创新点分析"></a>一、文章的核心创新点分析</h2><h3 id="1-使用-GP-回归学习-MPC-参数空间中的安全集"><a href="#1-使用-GP-回归学习-MPC-参数空间中的安全集" class="headerlink" title="1. 使用 GP 回归学习 MPC 参数空间中的安全集"></a><strong>1. 使用 GP 回归学习 MPC 参数空间中的安全集</strong></h3><ul>
+<h2 id="一-文章的核心创新点分析"><a class="markdownIt-Anchor" href="#一-文章的核心创新点分析"></a> 一、文章的核心创新点分析</h2>
+<h3 id="1-使用-gp-回归学习-mpc-参数空间中的安全集"><a class="markdownIt-Anchor" href="#1-使用-gp-回归学习-mpc-参数空间中的安全集"></a> <strong>1. 使用 GP 回归学习 MPC 参数空间中的安全集</strong></h3>
+<ul>
 <li>提出了一个 <strong>用高斯过程回归建模安全约束</strong> 的方法，不直接建模系统动力学，而是建模“哪个 MPC 参数组合是安全的”。</li>
 <li>安全性不再是手工设定的硬约束，而是通过历史数据学习的<strong>概率安全区域</strong> SD\mathcal{S}_D。</li>
 </ul>
 <p>👉 <strong>创新点</strong>：这是将黑箱约束建模方法用于 MPC-RL 中安全约束建模的首个系统性应用。</p>
-<h3 id="2-将-MPC-作为-RL-的函数近似器"><a href="#2-将-MPC-作为-RL-的函数近似器" class="headerlink" title="2. 将 MPC 作为 RL 的函数近似器"></a><strong>2. 将 MPC 作为 RL 的函数近似器</strong></h3><ul>
+<h3 id="2-将-mpc-作为-rl-的函数近似器"><a class="markdownIt-Anchor" href="#2-将-mpc-作为-rl-的函数近似器"></a> <strong>2. 将 MPC 作为 RL 的函数近似器</strong></h3>
+<ul>
 <li>与传统 RL 使用神经网络不同，该文使用 <strong>参数化的 MPC 控制器作为策略表示器</strong>。</li>
 <li>学习的不是控制策略本身，而是 MPC 的参数（如模型参数、约束backoff等）。</li>
 </ul>
 <p>👉 <strong>创新点</strong>：相比 DNN 更可解释，且 MPC 本身具有对约束的原生支持。</p>
-<h3 id="3-提出基于-GP-的安全约束嵌入到策略更新优化问题中"><a href="#3-提出基于-GP-的安全约束嵌入到策略更新优化问题中" class="headerlink" title="3. 提出基于 GP 的安全约束嵌入到策略更新优化问题中"></a><strong>3. 提出基于 GP 的安全约束嵌入到策略更新优化问题中</strong></h3><ul>
+<h3 id="3-提出基于-gp-的安全约束嵌入到策略更新优化问题中"><a class="markdownIt-Anchor" href="#3-提出基于-gp-的安全约束嵌入到策略更新优化问题中"></a> <strong>3. 提出基于 GP 的安全约束嵌入到策略更新优化问题中</strong></h3>
+<ul>
 <li>在 RL 参数更新时，加入 GP 学习的安全约束 z(θ)≤0z(\theta) \leq 0，确保新参数落在安全区域。</li>
 <li>若更新不可行，则逐步 <strong>backtrack 安全概率 β</strong>，提升可行性。</li>
 </ul>
 <p>👉 <strong>创新点</strong>：结合了 <strong>概率安全约束 + 二阶 Q-learning + backtracking β</strong>，实现数据驱动的安全探索。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><table>
+<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
+<table>
 <thead>
 <tr>
 <th>类别</th>
 <th>内容</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>核心创新</td>
 <td>基于 GP 的安全参数集建模，嵌入 MPC-RL 训练过程</td>
 </tr>
@@ -485,13 +532,17 @@
 <td>潜在创新方向</td>
 <td>多模型融合、迁移学习、安全 BO 比对、真实机器人部署</td>
 </tr>
-</tbody></table>
-<hr>
-<h1 id="《Constrained-Variational-Policy-Optimization-for-Safe-Reinforcement-Learning》"><a href="#《Constrained-Variational-Policy-Optimization-for-Safe-Reinforcement-Learning》" class="headerlink" title="《Constrained Variational Policy Optimization for Safe Reinforcement Learning》"></a>《Constrained Variational Policy Optimization for Safe Reinforcement Learning》</h1><h2 id="一、研究背景与问题定义"><a href="#一、研究背景与问题定义" class="headerlink" title="一、研究背景与问题定义"></a>一、研究背景与问题定义</h2><p>1.1 安全强化学习的挑战 </p>
+</tbody>
+</table>
+<hr />
+<h1 id="constrained-variational-policy-optimization-for-safe-reinforcement-learning"><a class="markdownIt-Anchor" href="#constrained-variational-policy-optimization-for-safe-reinforcement-learning"></a> 《Constrained Variational Policy Optimization for Safe Reinforcement Learning》</h1>
+<h2 id="一-研究背景与问题定义"><a class="markdownIt-Anchor" href="#一-研究背景与问题定义"></a> 一、研究背景与问题定义</h2>
+<p>1.1 安全强化学习的挑战</p>
 <ul>
 <li>核心问题：在安全关键场景（如机器人控制）中，策略需在最大化奖励的同时满足安全约束（如碰撞避免）。</li>
-<li>传统方法的局限：  <ul>
-<li>原始-对偶方法（Primal-Dual）：交替优化策略参数和对偶变量（拉格朗日乘子），存在数值不稳定性和缺乏最优性保证。 (<strong>核心思想：把约束优化问题转换为拉格朗日形式，交替优化策略参数（θ）和对偶变量（λ），通过迭代更新使策略参数和对偶变量同时收敛。</strong>) </li>
+<li>传统方法的局限：
+<ul>
+<li>原始-对偶方法（Primal-Dual）：交替优化策略参数和对偶变量（拉格朗日乘子），存在数值不稳定性和缺乏最优性保证。 (<strong>核心思想：把约束优化问题转换为拉格朗日形式，交替优化策略参数（θ）和对偶变量（λ），通过迭代更新使策略参数和对偶变量同时收敛。</strong>)</li>
 <li>泰勒近似方法：通过低阶近似简化约束优化问题，但可能导致约束违反率较高，近似不够精确，可能“形式上满足约束”，但实际策略存在约束违反。  （<strong>核心思想：对约束函数进行一阶或二阶泰勒展开，简化约束优化的计算</strong>）</li>
 <li>样本效率低：现有方法多为在线策略（on-policy），难以利用历史数据进行高效学习。</li>
 </ul>
@@ -499,35 +550,55 @@
 </ul>
 <p>1.2 约束马尔可夫决策过程（CMDP）</p>
 <ul>
-<li>定义：在标准MDP基础上引入约束成本函数集合 (C)，目标为：<br>[<br>\pi^* &#x3D; \arg \max_{\pi} J_r(\pi) \quad \text{s.t.} \quad J_c(\pi) \leq \epsilon_1<br>]<br>其中 (J_r(\pi)) 和 (J_c(\pi)) 分别为奖励和成本的累积折扣期望（比如摔倒、电量消耗、与人碰撞等）。</li>
+<li>定义：在标准MDP基础上引入约束成本函数集合 (C)，目标为：<br />
+[<br />
+\pi^* = \arg \max_{\pi} J_r(\pi) \quad \text{s.t.} \quad J_c(\pi) \leq \epsilon_1<br />
+]<br />
+其中 (J_r(\pi)) 和 (J_c(\pi)) 分别为奖励和成本的累积折扣期望（比如摔倒、电量消耗、与人碰撞等）。</li>
 </ul>
-<h2 id="二、方法创新：CVPO算法"><a href="#二、方法创新：CVPO算法" class="headerlink" title="二、方法创新：CVPO算法"></a>二、方法创新：CVPO算法</h2><p>2.1 概率推断视角的重新建模 </p>
+<h2 id="二-方法创新cvpo算法"><a class="markdownIt-Anchor" href="#二-方法创新cvpo算法"></a> 二、方法创新：CVPO算法</h2>
+<p>2.1 概率推断视角的重新建模</p>
 <ul>
 <li>关键思想：将安全RL问题转化为概率推断问题，通过变分推断和EM算法自然融入约束。</li>
-<li>概率图模型：引入最优性变量 (O)，表示轨迹 (\tau) 的“成功事件”，其似然函数与奖励相关：<br>[<br>p(O&#x3D;1|\tau) \propto \exp\left(\sum_t \gamma^t r_t &#x2F; \alpha\right)<br>]</li>
+<li>概率图模型：引入最优性变量 (O)，表示轨迹 (\tau) 的“成功事件”，其似然函数与奖励相关：<br />
+[<br />
+p(O=1|\tau) \propto \exp\left(\sum_t \gamma^t r_t / \alpha\right)<br />
+]</li>
 <li>证据下界（ELBO）：通过变分分布 (q(\tau)) 最大化下界，同时约束 (q) 属于安全分布族 (\Pi_{Q}^{\epsilon_1})。</li>
 </ul>
-<p>2.2 算法框架：EM两步优化<br>E步：凸优化求解变分分布</p>
+<p>2.2 算法框架：EM两步优化<br />
+E步：凸优化求解变分分布</p>
 <ul>
-<li>优化目标：在约束下最大化奖励期望，同时限制与旧策略的KL散度：<br>[<br>\max_q \mathbb{E}<em>{\rho_q} \left[ \mathbb{E}</em>{q} [Q_r(s,a)] \right] \quad \text{s.t.} \quad \mathbb{E}<em>{\rho_q} [\mathbb{E}<em>q [Q_c(s,a)]] \leq \epsilon_1, \quad D</em>{KL}(q | \pi</em>{\theta_i}) \leq \epsilon_2<br>]</li>
-<li>闭式解与强对偶性：  <ul>
-<li>通过拉格朗日对偶方法解析求解，得到非参数变分分布的闭式表达式：<br>[<br>q^*(a|s) \propto \pi_{\theta_i}(a|s) \exp\left( \frac{Q_r(s,a) - \lambda Q_c(s,a)}{\alpha} \right)<br>]</li>
+<li>优化目标：在约束下最大化奖励期望，同时限制与旧策略的KL散度：<br />
+[<br />
+\max_q \mathbb{E}<em>{\rho_q} \left[ \mathbb{E}</em>{q} [Q_r(s,a)] \right] \quad \text{s.t.} \quad \mathbb{E}<em>{\rho_q} [\mathbb{E}<em>q [Q_c(s,a)]] \leq \epsilon_1, \quad D</em>{KL}(q | \pi</em>{\theta_i}) \leq \epsilon_2<br />
+]</li>
+<li>闭式解与强对偶性：
+<ul>
+<li>通过拉格朗日对偶方法解析求解，得到非参数变分分布的闭式表达式：<br />
+[<br />
+q^*(a|s) \propto \pi_{\theta_i}(a|s) \exp\left( \frac{Q_r(s,a) - \lambda Q_c(s,a)}{\alpha} \right)<br />
+]</li>
 <li>证明优化问题的严格凸性，确保解的唯一性和最优性。</li>
 </ul>
 </li>
 </ul>
 <p>M步：监督学习更新策略</p>
 <ul>
-<li>目标函数：在信任域内最小化与最优变分分布的KL散度：<br>[<br>\min_{\theta} \mathbb{E}<em>{\rho_q} \left[ D</em>{KL}(q^*(\cdot|s) | \pi_{\theta}(\cdot|s)) \right]<br>]</li>
+<li>目标函数：在信任域内最小化与最优变分分布的KL散度：<br />
+[<br />
+\min_{\theta} \mathbb{E}<em>{\rho_q} \left[ D</em>{KL}(q^*(\cdot|s) | \pi_{\theta}(\cdot|s)) \right]<br />
+]</li>
 <li>实现方式：通过监督学习（如神经网络）拟合 (q^*)，支持离线策略（off-policy）数据复用。</li>
 </ul>
-<h2 id="三、理论贡献与优势"><a href="#三、理论贡献与优势" class="headerlink" title="三、理论贡献与优势"></a>三、理论贡献与优势</h2><p>3.1 理论保证 </p>
+<h2 id="三-理论贡献与优势"><a class="markdownIt-Anchor" href="#三-理论贡献与优势"></a> 三、理论贡献与优势</h2>
+<p>3.1 理论保证</p>
 <ol>
 <li>最优性与可行性：E步的凸优化确保变分分布同时满足奖励最大化和约束条件。</li>
 <li>信任域机制：M步的KL约束提供策略更新的鲁棒性保证，避免过度偏离安全区域。</li>
 <li>样本效率：离线策略训练减少与环境交互的成本，实验显示样本效率提升高达1000倍。</li>
 </ol>
-<p>3.2 对现有方法的改进 </p>
+<p>3.2 对现有方法的改进</p>
 <ul>
 <li>稳定性：分解为凸优化和监督学习，避免原始-对偶方法的梯度冲突。</li>
 <li>约束满足性：直接优化安全约束，而非通过惩罚项近似。</li>
@@ -591,9 +662,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>行内公式：$a^2 + b^2 &#x3D; c^2$</p>
+          <p>行内公式：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup><mo>=</mo><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">a^2 + b^2 = c^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></p>
 <p>块级公式：</p>
-<p>[<br>\dot{x}(t) &#x3D; f(x(t)) + g(x(t))u(x(t)) + d(x(t))<br>]</p>
+<p>[<br />
+\dot{x}(t) = f(x(t)) + g(x(t))u(x(t)) + d(x(t))<br />
+]</p>
 
       
     </div>
@@ -653,16 +726,19 @@
 
       
           <p>这个问题非常重要！博士≠多读几年书，博士更像是<strong>一个“高强度训练营”，塑造你成为能独立提出、解决、验证问题的人。</strong></p>
-<p>我们可以把博士期间应当掌握的能力分为以下五大核心模块：<br><strong>认知能力、科研能力、工程&#x2F;技术能力、表达与协作能力、元能力（心智层）</strong></p>
-<hr>
-<h2 id="🧠-一、认知能力：这是博士的“思维底盘”"><a href="#🧠-一、认知能力：这是博士的“思维底盘”" class="headerlink" title="🧠 一、认知能力：这是博士的“思维底盘”"></a>🧠 一、认知能力：这是博士的“思维底盘”</h2><table>
+<p>我们可以把博士期间应当掌握的能力分为以下五大核心模块：<br />
+<strong>认知能力、科研能力、工程/技术能力、表达与协作能力、元能力（心智层）</strong></p>
+<hr />
+<h2 id="一-认知能力这是博士的思维底盘"><a class="markdownIt-Anchor" href="#一-认知能力这是博士的思维底盘"></a> 🧠 一、认知能力：这是博士的“思维底盘”</h2>
+<table>
 <thead>
 <tr>
 <th>能力</th>
 <th>具体表现</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>抽象能力</strong></td>
 <td>能从复杂现象中提取本质，比如将实验现象抽象为数学模型或控制系统</td>
 </tr>
@@ -678,17 +754,20 @@
 <td><strong>判断研究价值的能力</strong></td>
 <td>能识别“哪些问题值得做”、“是否有学术贡献”</td>
 </tr>
-</tbody></table>
-<p>📌 <em>一个好的博士不是做得多，而是*<em>思考得深</em></em>。*</p>
-<hr>
-<h2 id="📚-二、科研能力：这是博士的“核心业务”"><a href="#📚-二、科研能力：这是博士的“核心业务”" class="headerlink" title="📚 二、科研能力：这是博士的“核心业务”"></a>📚 二、科研能力：这是博士的“核心业务”</h2><table>
+</tbody>
+</table>
+<p>📌 <em>一个好的博士不是做得多，而是<strong>思考得深</strong>。</em></p>
+<hr />
+<h2 id="二-科研能力这是博士的核心业务"><a class="markdownIt-Anchor" href="#二-科研能力这是博士的核心业务"></a> 📚 二、科研能力：这是博士的“核心业务”</h2>
+<table>
 <thead>
 <tr>
 <th>能力</th>
 <th>具体表现</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>选题能力</strong></td>
 <td>能发现有意义、可行、有创新的问题</td>
 </tr>
@@ -698,27 +777,30 @@
 </tr>
 <tr>
 <td><strong>设计实验能力</strong></td>
-<td>能构造有效的验证方式（仿真 &#x2F; 实验 &#x2F; 数据）</td>
+<td>能构造有效的验证方式（仿真 / 实验 / 数据）</td>
 </tr>
 <tr>
-<td><strong>数学建模&#x2F;算法推导能力</strong></td>
+<td><strong>数学建模/算法推导能力</strong></td>
 <td>能写出合理的公式、证明关键结论</td>
 </tr>
 <tr>
 <td><strong>论文写作能力</strong></td>
 <td>能清楚表达问题、方法、实验、结论，让评审信服</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>📌 <em>“做研究”不仅是做，更是不断地“想、写、讲、验证”。</em></p>
-<hr>
-<h2 id="🛠️-三、技术-工程能力：这是博士的“落地抓手”"><a href="#🛠️-三、技术-工程能力：这是博士的“落地抓手”" class="headerlink" title="🛠️ 三、技术&#x2F;工程能力：这是博士的“落地抓手”"></a>🛠️ 三、技术&#x2F;工程能力：这是博士的“落地抓手”</h2><table>
+<hr />
+<h2 id="️-三-技术工程能力这是博士的落地抓手"><a class="markdownIt-Anchor" href="#️-三-技术工程能力这是博士的落地抓手"></a> 🛠️ 三、技术/工程能力：这是博士的“落地抓手”</h2>
+<table>
 <thead>
 <tr>
 <th>能力</th>
 <th>具体表现</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>代码实现能力</strong></td>
 <td>不仅写得对，还能写得稳、写得快、写得清晰</td>
 </tr>
@@ -731,52 +813,58 @@
 <td>熟练掌握领域主流工具，如 PyTorch、ROS、Isaac Gym、LaTeX、Git 等</td>
 </tr>
 <tr>
-<td><strong>大模型 &#x2F; 控制 &#x2F; 优化 &#x2F; 数据等专项技能</strong></td>
+<td><strong>大模型 / 控制 / 优化 / 数据等专项技能</strong></td>
 <td>针对研究方向具备较强技术深度</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>📌 <em>再“学术”的工作，最后也要通过工程实现才能验证。</em></p>
-<hr>
-<h2 id="🗣️-四、表达与协作能力：这是博士的“输出通道”"><a href="#🗣️-四、表达与协作能力：这是博士的“输出通道”" class="headerlink" title="🗣️ 四、表达与协作能力：这是博士的“输出通道”"></a>🗣️ 四、表达与协作能力：这是博士的“输出通道”</h2><table>
+<hr />
+<h2 id="️-四-表达与协作能力这是博士的输出通道"><a class="markdownIt-Anchor" href="#️-四-表达与协作能力这是博士的输出通道"></a> 🗣️ 四、表达与协作能力：这是博士的“输出通道”</h2>
+<table>
 <thead>
 <tr>
 <th>能力</th>
 <th>具体表现</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>汇报和讲解能力</strong></td>
 <td>能讲清楚自己的研究问题、路线、结果，不绕圈子</td>
 </tr>
 <tr>
 <td><strong>跨领域沟通能力</strong></td>
-<td>和工程&#x2F;算法&#x2F;导师&#x2F;评审有效协作，降低“学术闭塞”风险</td>
+<td>和工程/算法/导师/评审有效协作，降低“学术闭塞”风险</td>
 </tr>
 <tr>
-<td><strong>写 Email &#x2F; 项目申请 &#x2F; Reviewer 回复</strong></td>
+<td><strong>写 Email / 项目申请 / Reviewer 回复</strong></td>
 <td>格式专业，语气得体，能解决实际问题</td>
 </tr>
 <tr>
 <td><strong>合作者管理与合作谈判</strong></td>
 <td>特别是博后阶段，需要带人、带项目、谈合作</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>📌 <em>科研不是一个人的战斗，表达力决定你能否“被听见”。</em></p>
-<hr>
-<h2 id="🧭-五、元能力（心智层）：博士能否坚持下来的“隐形力”"><a href="#🧭-五、元能力（心智层）：博士能否坚持下来的“隐形力”" class="headerlink" title="🧭 五、元能力（心智层）：博士能否坚持下来的“隐形力”"></a>🧭 五、元能力（心智层）：博士能否坚持下来的“隐形力”</h2><table>
+<hr />
+<h2 id="五-元能力心智层博士能否坚持下来的隐形力"><a class="markdownIt-Anchor" href="#五-元能力心智层博士能否坚持下来的隐形力"></a> 🧭 五、元能力（心智层）：博士能否坚持下来的“隐形力”</h2>
+<table>
 <thead>
 <tr>
 <th>能力</th>
 <th>具体表现</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>自我驱动能力</strong></td>
 <td>没人 push 你也能主动推进研究</td>
 </tr>
 <tr>
 <td><strong>时间管理能力</strong></td>
-<td>同时处理多个项目、任务，合理安排周&#x2F;月&#x2F;年计划</td>
+<td>同时处理多个项目、任务，合理安排周/月/年计划</td>
 </tr>
 <tr>
 <td><strong>挫折恢复力</strong></td>
@@ -786,21 +874,26 @@
 <td><strong>自我反思与成长循环</strong></td>
 <td>定期复盘自己：哪里做得好？哪里需要调整？</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>📌 <em>博士拼到最后，不是智商，是系统性和韧性。</em></p>
-<hr>
-<h2 id="✨-最终你应该变成一个怎样的人？"><a href="#✨-最终你应该变成一个怎样的人？" class="headerlink" title="✨ 最终你应该变成一个怎样的人？"></a>✨ 最终你应该变成一个怎样的人？</h2><blockquote>
-<p>🎓 “我可以独立从 0 到 1 地完成一个有意义的问题研究，具备将复杂问题结构化、技术化、学术化地解决并表达出来的能力。”<br>这才是真正的博士能力画像。</p>
+<hr />
+<h2 id="最终你应该变成一个怎样的人"><a class="markdownIt-Anchor" href="#最终你应该变成一个怎样的人"></a> ✨ 最终你应该变成一个怎样的人？</h2>
+<blockquote>
+<p>🎓 “我可以独立从 0 到 1 地完成一个有意义的问题研究，具备将复杂问题结构化、技术化、学术化地解决并表达出来的能力。”<br />
+这才是真正的博士能力画像。</p>
 </blockquote>
-<hr>
-<h2 id="💼-补充：读完博士后，就业-发展方向会非常依赖这些能力"><a href="#💼-补充：读完博士后，就业-发展方向会非常依赖这些能力" class="headerlink" title="💼 补充：读完博士后，就业&#x2F;发展方向会非常依赖这些能力"></a>💼 补充：读完博士后，就业&#x2F;发展方向会非常依赖这些能力</h2><table>
+<hr />
+<h2 id="补充读完博士后就业发展方向会非常依赖这些能力"><a class="markdownIt-Anchor" href="#补充读完博士后就业发展方向会非常依赖这些能力"></a> 💼 补充：读完博士后，就业/发展方向会非常依赖这些能力</h2>
+<table>
 <thead>
 <tr>
 <th>职业方向</th>
 <th>对博士能力的需求侧重</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>高校教职</td>
 <td>科研能力 + 表达能力 + 项目组织能力</td>
 </tr>
@@ -809,16 +902,18 @@
 <td>技术深度 + 系统能力</td>
 </tr>
 <tr>
-<td>AI&#x2F;机器人大厂</td>
+<td>AI/机器人大厂</td>
 <td>算法落地 + 工程能力 + 团队协作</td>
 </tr>
 <tr>
 <td>创业</td>
 <td>问题定义能力 + 心智强度 + 综合运营</td>
 </tr>
-</tbody></table>
-<hr>
-<h2 id="✅-小结：博士五维能力图谱"><a href="#✅-小结：博士五维能力图谱" class="headerlink" title="✅ 小结：博士五维能力图谱"></a>✅ 小结：博士五维能力图谱</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">             元能力（自驱力、时间管理、情绪管理）</span><br><span class="line">                        ↑</span><br><span class="line">表达协作 ← 认知能力（思维框架） → 技术工程</span><br><span class="line">                        ↓</span><br><span class="line">                科研能力（核心任务）</span><br></pre></td></tr></table></figure>
+</tbody>
+</table>
+<hr />
+<h2 id="小结博士五维能力图谱"><a class="markdownIt-Anchor" href="#小结博士五维能力图谱"></a> ✅ 小结：博士五维能力图谱</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">             元能力（自驱力、时间管理、情绪管理）</span><br><span class="line">                        ↑</span><br><span class="line">表达协作 ← 认知能力（思维框架） → 技术工程</span><br><span class="line">                        ↓</span><br><span class="line">                科研能力（核心任务）</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -878,32 +973,41 @@
 
       
           <p>为什么衡量标准<strong>不能太外部化</strong>？我们可以从 <strong>心理机制 + 动力机制 + 行为后果</strong> 三个层面来剖析。</p>
-<hr>
-<h2 id="🧠-1-心理层面：外部目标易引发焦虑、迷失、自我否定"><a href="#🧠-1-心理层面：外部目标易引发焦虑、迷失、自我否定" class="headerlink" title="🧠 1. 心理层面：外部目标易引发焦虑、迷失、自我否定"></a>🧠 1. 心理层面：<strong>外部目标易引发焦虑、迷失、自我否定</strong></h2><h3 id="外部化目标的本质是“我好不好，别人说了算”："><a href="#外部化目标的本质是“我好不好，别人说了算”：" class="headerlink" title="外部化目标的本质是“我好不好，别人说了算”："></a>外部化目标的本质是“我好不好，别人说了算”：</h3><ul>
+<hr />
+<h2 id="1-心理层面外部目标易引发焦虑-迷失-自我否定"><a class="markdownIt-Anchor" href="#1-心理层面外部目标易引发焦虑-迷失-自我否定"></a> 🧠 1. 心理层面：<strong>外部目标易引发焦虑、迷失、自我否定</strong></h2>
+<h3 id="外部化目标的本质是我好不好别人说了算"><a class="markdownIt-Anchor" href="#外部化目标的本质是我好不好别人说了算"></a> 外部化目标的本质是“我好不好，别人说了算”：</h3>
+<ul>
 <li>比如“年薪百万”是由公司评估你值不值；</li>
 <li>“拿称号”是评审专家说了算；</li>
 <li>“某大厂 offer”是 HR 和面试官决定。</li>
 </ul>
-<p>这意味着：<br>你把价值感 <strong>交给了外部</strong>，一旦外界反馈不如预期，就会陷入：</p>
+<p>这意味着：<br />
+你把价值感 <strong>交给了外部</strong>，一旦外界反馈不如预期，就会陷入：</p>
 <ul>
 <li>📉 <strong>自我否定</strong>（我是不是不够好）</li>
 <li>🤯 <strong>焦虑攀比</strong>（别人有了我还没有）</li>
 <li>🔁 <strong>情绪循环</strong>（得不到就痛苦，得到了也很空）</li>
 </ul>
 <p><strong>外部化的衡量标准，往往不指向你真正的成长，而是社会期望的“表演成绩单”。</strong></p>
-<hr>
-<h2 id="🚀-2-动力机制层面：外部目标难以形成可持续的内驱力"><a href="#🚀-2-动力机制层面：外部目标难以形成可持续的内驱力" class="headerlink" title="🚀 2. 动力机制层面：外部目标难以形成可持续的内驱力"></a>🚀 2. 动力机制层面：<strong>外部目标难以形成可持续的内驱力</strong></h2><h3 id="❌-外部目标的典型陷阱："><a href="#❌-外部目标的典型陷阱：" class="headerlink" title="❌ 外部目标的典型陷阱："></a>❌ 外部目标的典型陷阱：</h3><ul>
+<hr />
+<h2 id="2-动力机制层面外部目标难以形成可持续的内驱力"><a class="markdownIt-Anchor" href="#2-动力机制层面外部目标难以形成可持续的内驱力"></a> 🚀 2. 动力机制层面：<strong>外部目标难以形成可持续的内驱力</strong></h2>
+<h3 id="外部目标的典型陷阱"><a class="markdownIt-Anchor" href="#外部目标的典型陷阱"></a> ❌ 外部目标的典型陷阱：</h3>
+<ul>
 <li>得到之后很快失去动力（比如升职后陷入空虚）</li>
 <li>没得到就陷入无意义感（比如努力失败时无法承受）</li>
 <li>做事的动力变成“逃避失败”而非“追求成长”</li>
 </ul>
-<h3 id="✅-内部目标的底层驱动更稳定："><a href="#✅-内部目标的底层驱动更稳定：" class="headerlink" title="✅ 内部目标的底层驱动更稳定："></a>✅ 内部目标的底层驱动更稳定：</h3><p>比如：</p>
+<h3 id="内部目标的底层驱动更稳定"><a class="markdownIt-Anchor" href="#内部目标的底层驱动更稳定"></a> ✅ 内部目标的底层驱动更稳定：</h3>
+<p>比如：</p>
 <blockquote>
-<p>“我想掌握控制机器人上下楼梯的能力”<br>“我想做一件对这个领域有贡献的工作”<br>“我希望自己成为一个更有独立判断力的人”</p>
+<p>“我想掌握控制机器人上下楼梯的能力”<br />
+“我想做一件对这个领域有贡献的工作”<br />
+“我希望自己成为一个更有独立判断力的人”</p>
 </blockquote>
 <p>这些目标和<strong>自我认知、自我实现</strong>绑定，就算过程艰难，也更容易走得下去，因为你不是为别人“演”，你是为自己“活”。</p>
-<hr>
-<h2 id="🧩-3-行为后果层面：外部目标容易导致手段扭曲、路径偏离"><a href="#🧩-3-行为后果层面：外部目标容易导致手段扭曲、路径偏离" class="headerlink" title="🧩 3. 行为后果层面：外部目标容易导致手段扭曲、路径偏离"></a>🧩 3. 行为后果层面：<strong>外部目标容易导致手段扭曲、路径偏离</strong></h2><p>比如：</p>
+<hr />
+<h2 id="3-行为后果层面外部目标容易导致手段扭曲-路径偏离"><a class="markdownIt-Anchor" href="#3-行为后果层面外部目标容易导致手段扭曲-路径偏离"></a> 🧩 3. 行为后果层面：<strong>外部目标容易导致手段扭曲、路径偏离</strong></h2>
+<p>比如：</p>
 <ul>
 <li>为了“年薪百万”去做高压但无成长的岗位</li>
 <li>为了“某称号”把项目写得浮夸不实</li>
@@ -915,15 +1019,17 @@
 <li>虚假反馈（只追 KPI）</li>
 <li>自我价值错位（觉得自己“不配被喜欢”只因没达成某目标）</li>
 </ul>
-<hr>
-<h2 id="✅-所以，正确目标应该这样设定："><a href="#✅-所以，正确目标应该这样设定：" class="headerlink" title="✅ 所以，正确目标应该这样设定："></a>✅ 所以，正确目标应该这样设定：</h2><table>
+<hr />
+<h2 id="所以正确目标应该这样设定"><a class="markdownIt-Anchor" href="#所以正确目标应该这样设定"></a> ✅ 所以，正确目标应该这样设定：</h2>
+<table>
 <thead>
 <tr>
 <th>外部化目标（错误）</th>
 <th>内部化目标（推荐）</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>“我要进某公司”</td>
 <td>“我要成为能胜任该类岗位的工程师”</td>
 </tr>
@@ -936,12 +1042,14 @@
 <td>“我要能创造价值并掌控自由的生活方式”</td>
 </tr>
 <tr>
-<td>“我要被认可&#x2F;表扬”</td>
-<td>“我要能稳定地输出高质量工作&#x2F;内容”</td>
+<td>“我要被认可/表扬”</td>
+<td>“我要能稳定地输出高质量工作/内容”</td>
 </tr>
-</tbody></table>
-<hr>
-<h2 id="🎯-总结金句："><a href="#🎯-总结金句：" class="headerlink" title="🎯 总结金句："></a>🎯 总结金句：</h2><blockquote>
+</tbody>
+</table>
+<hr />
+<h2 id="总结金句"><a class="markdownIt-Anchor" href="#总结金句"></a> 🎯 总结金句：</h2>
+<blockquote>
 <p><strong>外部目标只能当做“里程碑”，真正推动你走远的，是对内在成长的渴望。</strong></p>
 </blockquote>
 <ul>
@@ -949,13 +1057,17 @@
 <li>内部化目标是<strong>可积累的能力与状态</strong></li>
 <li>真正“牛的人”，是<strong>结果有了，心态还是过程型的</strong></li>
 </ul>
-<hr>
-<p>我们都知道“外部目标不靠谱”“要内驱”，但现实中——<br><strong>绝大多数人都在盯着钱、名、offer、称号、头衔……</strong></p>
-<p>那为什么会这样？<br>答案是：<strong>这很“合理”，但不“健康”</strong>。</p>
+<hr />
+<p>我们都知道“外部目标不靠谱”“要内驱”，但现实中——<br />
+<strong>绝大多数人都在盯着钱、名、offer、称号、头衔……</strong></p>
+<p>那为什么会这样？<br />
+答案是：<strong>这很“合理”，但不“健康”</strong>。</p>
 <p>下面我帮你分析背后的<strong>五个原因</strong>：</p>
-<hr>
-<h2 id="❶-社会系统鼓励外部目标：它更容易衡量、管理和比较"><a href="#❶-社会系统鼓励外部目标：它更容易衡量、管理和比较" class="headerlink" title="❶ 社会系统鼓励外部目标：它更容易衡量、管理和比较"></a>❶ 社会系统鼓励外部目标：<strong>它更容易衡量、管理和比较</strong></h2><ul>
-<li><strong>考试分数、绩点、奖学金、职称、年薪、Offer 数</strong>，这些都具备一个特点：<br>👉 <em>可以量化</em>，<em>可以排名</em>，<em>可以一眼看出你“值多少钱”</em></li>
+<hr />
+<h2 id="❶-社会系统鼓励外部目标它更容易衡量-管理和比较"><a class="markdownIt-Anchor" href="#❶-社会系统鼓励外部目标它更容易衡量-管理和比较"></a> ❶ 社会系统鼓励外部目标：<strong>它更容易衡量、管理和比较</strong></h2>
+<ul>
+<li><strong>考试分数、绩点、奖学金、职称、年薪、Offer 数</strong>，这些都具备一个特点：<br />
+👉 <em>可以量化</em>，<em>可以排名</em>，<em>可以一眼看出你“值多少钱”</em></li>
 </ul>
 <p>这对制度来说很方便：</p>
 <ul>
@@ -966,21 +1078,27 @@
 <blockquote>
 <p>所以你不“看它”你就会“掉队”，你不想卷，也会被卷。</p>
 </blockquote>
-<hr>
-<h2 id="❷-大脑的“即时奖励系统”被外部刺激绑架了"><a href="#❷-大脑的“即时奖励系统”被外部刺激绑架了" class="headerlink" title="❷ 大脑的“即时奖励系统”被外部刺激绑架了"></a>❷ 大脑的“即时奖励系统”被外部刺激绑架了</h2><ul>
+<hr />
+<h2 id="❷-大脑的即时奖励系统被外部刺激绑架了"><a class="markdownIt-Anchor" href="#❷-大脑的即时奖励系统被外部刺激绑架了"></a> ❷ 大脑的“即时奖励系统”被外部刺激绑架了</h2>
+<ul>
 <li>收到 offer、加薪、被点赞、上热搜、拿奖——这些会<strong>立刻让你“爽”</strong></li>
-<li>而内在成长，比如：<ul>
+<li>而内在成长，比如：
+<ul>
 <li>掌握一个复杂知识</li>
 <li>读懂一本好书</li>
-<li>理解一个人的心意<br>这些回报 <strong>慢且不确定</strong>，你的大脑要“延迟满足”</li>
+<li>理解一个人的心意<br />
+这些回报 <strong>慢且不确定</strong>，你的大脑要“延迟满足”</li>
 </ul>
 </li>
 </ul>
-<h3 id="所以说："><a href="#所以说：" class="headerlink" title="所以说："></a>所以说：</h3><blockquote>
-<p><strong>外部目标像快餐，随手可得，但不养人；<br>内在成长像慢炖汤，要等，但滋养深沉。</strong></p>
+<h3 id="所以说"><a class="markdownIt-Anchor" href="#所以说"></a> 所以说：</h3>
+<blockquote>
+<p><strong>外部目标像快餐，随手可得，但不养人；<br />
+内在成长像慢炖汤，要等，但滋养深沉。</strong></p>
 </blockquote>
-<hr>
-<h2 id="❸-成长型目标需要“深度的自我理解”——大多数人没机会培养"><a href="#❸-成长型目标需要“深度的自我理解”——大多数人没机会培养" class="headerlink" title="❸ 成长型目标需要“深度的自我理解”——大多数人没机会培养"></a>❸ 成长型目标需要“深度的自我理解”——大多数人没机会培养</h2><ul>
+<hr />
+<h2 id="❸-成长型目标需要深度的自我理解大多数人没机会培养"><a class="markdownIt-Anchor" href="#❸-成长型目标需要深度的自我理解大多数人没机会培养"></a> ❸ 成长型目标需要“深度的自我理解”——大多数人没机会培养</h2>
+<ul>
 <li>想知道“我想解决什么问题”“我想成为什么样的人”其实很难</li>
 <li>教育体系和社会氛围几乎不给你空间去探索这些问题</li>
 <li>所以人们只能转而去追那些<strong>别人都在追、社会说“好”的目标</strong></li>
@@ -989,30 +1107,37 @@
 <blockquote>
 <p><strong>没人教他们“怎么设定真正属于自己的目标”</strong></p>
 </blockquote>
-<hr>
-<h2 id="❹-外部目标更容易用来“证明自己”，满足安全感"><a href="#❹-外部目标更容易用来“证明自己”，满足安全感" class="headerlink" title="❹ 外部目标更容易用来“证明自己”，满足安全感"></a>❹ 外部目标更容易用来“证明自己”，满足安全感</h2><p>很多人不是为了“钱本身”，<br>而是为了“别人觉得我不错”、“爸妈看我有出息”、“不被看不起”……</p>
+<hr />
+<h2 id="❹-外部目标更容易用来证明自己满足安全感"><a class="markdownIt-Anchor" href="#❹-外部目标更容易用来证明自己满足安全感"></a> ❹ 外部目标更容易用来“证明自己”，满足安全感</h2>
+<p>很多人不是为了“钱本身”，<br />
+而是为了“别人觉得我不错”、“爸妈看我有出息”、“不被看不起”……</p>
 <p>这其实是：</p>
 <blockquote>
-<p>把外部目标当成“自我价值的防御工具”<br>外界的评价越不确定，越要“用东西堵上”</p>
+<p>把外部目标当成“自我价值的防御工具”<br />
+外界的评价越不确定，越要“用东西堵上”</p>
 </blockquote>
-<hr>
-<h2 id="❺-“外部目标”确实能在短期内让人冲刺前进"><a href="#❺-“外部目标”确实能在短期内让人冲刺前进" class="headerlink" title="❺ “外部目标”确实能在短期内让人冲刺前进"></a>❺ “外部目标”确实能在短期内让人冲刺前进</h2><p>别误会——<br>外部目标并不是“完全不好”，它有以下好处：</p>
+<hr />
+<h2 id="❺-外部目标确实能在短期内让人冲刺前进"><a class="markdownIt-Anchor" href="#❺-外部目标确实能在短期内让人冲刺前进"></a> ❺ “外部目标”确实能在短期内让人冲刺前进</h2>
+<p>别误会——<br />
+外部目标并不是“完全不好”，它有以下好处：</p>
 <ul>
 <li><strong>可见性强、行动明确、反馈快</strong></li>
 <li><strong>可以激励你迈出第一步</strong></li>
 <li><strong>是内在目标“实现”的副产品</strong></li>
 </ul>
 <p>但它不能成为 <strong>最终驱动力</strong>，否则就会迷失。</p>
-<hr>
-<h2 id="🔁-所以很多人一开始是这样："><a href="#🔁-所以很多人一开始是这样：" class="headerlink" title="🔁 所以很多人一开始是这样："></a>🔁 所以很多人一开始是这样：</h2><ul>
+<hr />
+<h2 id="所以很多人一开始是这样"><a class="markdownIt-Anchor" href="#所以很多人一开始是这样"></a> 🔁 所以很多人一开始是这样：</h2>
+<ul>
 <li>“我想年薪百万” → 所以拼命进大厂</li>
-<li>进了之后发现也很苦 → “那我要升职&#x2F;出国”</li>
-<li>升职了也空虚 → “那我得做一个产品经理&#x2F;leader&#x2F;教授？”</li>
+<li>进了之后发现也很苦 → “那我要升职/出国”</li>
+<li>升职了也空虚 → “那我得做一个产品经理/leader/教授？”</li>
 <li>再往上就开始怀疑人生：“我到底想干嘛？”</li>
 </ul>
 <p>这就是**错把“手段”当“终点”**的代价。</p>
-<hr>
-<h2 id="🌱-怎样跳出这个圈？"><a href="#🌱-怎样跳出这个圈？" class="headerlink" title="🌱 怎样跳出这个圈？"></a>🌱 怎样跳出这个圈？</h2><blockquote>
+<hr />
+<h2 id="怎样跳出这个圈"><a class="markdownIt-Anchor" href="#怎样跳出这个圈"></a> 🌱 怎样跳出这个圈？</h2>
+<blockquote>
 <p><strong>你得用外部目标“养活”自己，同时靠内在目标“成就”自己。</strong></p>
 </blockquote>
 <table>
@@ -1023,7 +1148,8 @@
 <th>内在目标</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>入门</td>
 <td>拿个 Offer</td>
 <td>了解我适合什么样的工作</td>
@@ -1031,19 +1157,22 @@
 <tr>
 <td>中期</td>
 <td>涨工资</td>
-<td>提升解决问题&#x2F;带团队的能力</td>
+<td>提升解决问题/带团队的能力</td>
 </tr>
 <tr>
 <td>长期</td>
 <td>被认可</td>
 <td>成为一个有独立价值的人</td>
 </tr>
-</tbody></table>
-<hr>
-<h2 id="💬-最后送你一句话："><a href="#💬-最后送你一句话：" class="headerlink" title="💬 最后送你一句话："></a>💬 最后送你一句话：</h2><blockquote>
-<p>“你可以用别人的标准活着一阵子，<br>但你必须学会用自己的标准活一辈子。”  </p>
+</tbody>
+</table>
+<hr />
+<h2 id="最后送你一句话"><a class="markdownIt-Anchor" href="#最后送你一句话"></a> 💬 最后送你一句话：</h2>
+<blockquote>
+<p>“你可以用别人的标准活着一阵子，<br />
+但你必须学会用自己的标准活一辈子。”</p>
 </blockquote>
-<hr>
+<hr />
 <blockquote>
 <p><strong>生活中的很多事情确实需要靠外部目标才能完成。</strong></p>
 </blockquote>
@@ -1052,15 +1181,17 @@
 <li>要拿 offer、要毕业、要升职、要还房贷、要给父母一个交代…</li>
 <li>你不可能完全“躺在价值观里”，不管现实 KPI</li>
 </ul>
-<hr>
+<hr />
 <p>那是不是我们之前讲的“不要太外部化”就错了？</p>
 <p>❌ <strong>不是错，而是要加一句完整的话</strong>：</p>
 <blockquote>
-<p><strong>外部目标可以驱动行动，<br>但必须被一个内在系统来“消化”与“统筹”，否则它会反噬你。</strong></p>
+<p><strong>外部目标可以驱动行动，<br />
+但必须被一个内在系统来“消化”与“统筹”，否则它会反噬你。</strong></p>
 </blockquote>
 <p>这就像吃饭：你当然得吃外来的食物，但你身体得能“消化”它，不然就拉肚子。</p>
-<hr>
-<h2 id="📌-所以正确的理解应该是："><a href="#📌-所以正确的理解应该是：" class="headerlink" title="📌 所以正确的理解应该是："></a>📌 所以正确的理解应该是：</h2><table>
+<hr />
+<h2 id="所以正确的理解应该是"><a class="markdownIt-Anchor" href="#所以正确的理解应该是"></a> 📌 所以正确的理解应该是：</h2>
+<table>
 <thead>
 <tr>
 <th>类型</th>
@@ -1068,7 +1199,8 @@
 <th>正确认知</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>外部目标</td>
 <td>全都不要，纯精神内驱才高级</td>
 <td>必须有！外部目标是行动坐标、资源手段</td>
@@ -1083,17 +1215,26 @@
 <td>二选一、互斥</td>
 <td>“外部目标做事、内部目标做人” ✅</td>
 </tr>
-</tbody></table>
-<hr>
-<h2 id="🧭-怎么做到平衡？"><a href="#🧭-怎么做到平衡？" class="headerlink" title="🧭 怎么做到平衡？"></a>🧭 怎么做到平衡？</h2><h3 id="✅-一种很实用的做法叫做："><a href="#✅-一种很实用的做法叫做：" class="headerlink" title="✅ 一种很实用的做法叫做："></a>✅ 一种很实用的做法叫做：</h3><blockquote>
+</tbody>
+</table>
+<hr />
+<h2 id="怎么做到平衡"><a class="markdownIt-Anchor" href="#怎么做到平衡"></a> 🧭 怎么做到平衡？</h2>
+<h3 id="一种很实用的做法叫做"><a class="markdownIt-Anchor" href="#一种很实用的做法叫做"></a> ✅ 一种很实用的做法叫做：</h3>
+<blockquote>
 <p><strong>“外部目标内在化”</strong></p>
 </blockquote>
-<p>就是说：你可以追求现实目标，但你得知道——<br>你<strong>为什么要追这个目标？</strong><br>这个目标对你内在的成长、角色、价值系统<strong>意味着什么？</strong></p>
-<hr>
-<h3 id="🎯-举个例子："><a href="#🎯-举个例子：" class="headerlink" title="🎯 举个例子："></a>🎯 举个例子：</h3><h4 id="💬-表层说法（外部）："><a href="#💬-表层说法（外部）：" class="headerlink" title="💬 表层说法（外部）："></a>💬 表层说法（外部）：</h4><blockquote>
-<p>“我想进大厂”<br>✅ 合理，但风险是容易卷疯、焦虑、受打击</p>
+<p>就是说：你可以追求现实目标，但你得知道——<br />
+你<strong>为什么要追这个目标？</strong><br />
+这个目标对你内在的成长、角色、价值系统<strong>意味着什么？</strong></p>
+<hr />
+<h3 id="举个例子"><a class="markdownIt-Anchor" href="#举个例子"></a> 🎯 举个例子：</h3>
+<h4 id="表层说法外部"><a class="markdownIt-Anchor" href="#表层说法外部"></a> 💬 表层说法（外部）：</h4>
+<blockquote>
+<p>“我想进大厂”<br />
+✅ 合理，但风险是容易卷疯、焦虑、受打击</p>
 </blockquote>
-<h4 id="🧠-内在化处理："><a href="#🧠-内在化处理：" class="headerlink" title="🧠 内在化处理："></a>🧠 内在化处理：</h4><blockquote>
+<h4 id="内在化处理"><a class="markdownIt-Anchor" href="#内在化处理"></a> 🧠 内在化处理：</h4>
+<blockquote>
 <p>“我想进大厂，是因为我希望自己能站在一个高复杂度系统中，看到真正有规模的工程问题，我想成为一个有能力独当一面的技术人。”</p>
 </blockquote>
 <p>这样就会：</p>
@@ -1102,32 +1243,38 @@
 <li>抗挫能力更高（因为不全看 offer 本身）</li>
 <li>目标转化为成长的手段，而不是自我评判的终点</li>
 </ul>
-<hr>
-<h2 id="📚-再比如博士："><a href="#📚-再比如博士：" class="headerlink" title="📚 再比如博士："></a>📚 再比如博士：</h2><table>
+<hr />
+<h2 id="再比如博士"><a class="markdownIt-Anchor" href="#再比如博士"></a> 📚 再比如博士：</h2>
+<table>
 <thead>
 <tr>
 <th>外部目标（不可少）</th>
 <th>内在连接（不可丢）</th>
 </tr>
 </thead>
-<tbody><tr>
-<td>发论文 &#x2F; 毕业 &#x2F; 拿奖学金</td>
+<tbody>
+<tr>
+<td>发论文 / 毕业 / 拿奖学金</td>
 <td>提升表达、研究、系统解决问题的能力</td>
 </tr>
 <tr>
-<td>拿到博后 &#x2F; 教职</td>
+<td>拿到博后 / 教职</td>
 <td>成为有话语权的研究者，对领域有贡献</td>
 </tr>
-</tbody></table>
-<hr>
-<h2 id="🧠-总结金句："><a href="#🧠-总结金句：" class="headerlink" title="🧠 总结金句："></a>🧠 总结金句：</h2><blockquote>
-<p><strong>我们活在现实世界，所以需要外部目标，<br>但我们也活在自己身体里，所以必须有内在动力。</strong></p>
+</tbody>
+</table>
+<hr />
+<h2 id="总结金句-2"><a class="markdownIt-Anchor" href="#总结金句-2"></a> 🧠 总结金句：</h2>
+<blockquote>
+<p><strong>我们活在现实世界，所以需要外部目标，<br />
+但我们也活在自己身体里，所以必须有内在动力。</strong></p>
 </blockquote>
 <p>真正厉害的人，是能做到：</p>
 <blockquote>
-<p><strong>用外部目标做事，用内在目标做人，<br>不被外界绑架，但也不与现实对抗。</strong></p>
+<p><strong>用外部目标做事，用内在目标做人，<br />
+不被外界绑架，但也不与现实对抗。</strong></p>
 </blockquote>
-<hr>
+<hr />
 <p>你可以理解为：</p>
 <ul>
 <li>外部目标像<strong>地图导航</strong></li>
@@ -1200,38 +1347,67 @@
           <blockquote>
 <p>此笔记记录学习书本 <strong>机器人学导论（原书第3版）（美）HLHN J.CRAIG，著贠超等译</strong>的学习与总结笔记，其中部分内容由AI生成。</p>
 </blockquote>
-<hr>
-<h2 id="✅-1-雅可比矩阵是啥？"><a href="#✅-1-雅可比矩阵是啥？" class="headerlink" title="✅ 1. 雅可比矩阵是啥？"></a>✅ 1. 雅可比矩阵是啥？</h2><p>在多变量函数中，雅可比矩阵（Jacobian Matrix）是所有一阶偏导数组成的矩阵：</p>
-<p>如果有函数：<br>[<br>\mathbf{y} &#x3D; f(\mathbf{x}) \quad \text{其中 } \mathbf{x} \in \mathbb{R}^n, \mathbf{y} \in \mathbb{R}^m<br>]</p>
-<p>则雅可比矩阵为：<br>[<br>J &#x3D; \frac{\partial \mathbf{y}}{\partial \mathbf{x}} &#x3D;<br>\begin{bmatrix}<br>\frac{\partial y_1}{\partial x_1} &amp; \cdots &amp; \frac{\partial y_1}{\partial x_n} \<br>\vdots &amp; \ddots &amp; \vdots \<br>\frac{\partial y_m}{\partial x_1} &amp; \cdots &amp; \frac{\partial y_m}{\partial x_n}<br>\end{bmatrix}<br>]</p>
-<p>在机器人中：  </p>
+<hr />
+<h2 id="1-雅可比矩阵是啥"><a class="markdownIt-Anchor" href="#1-雅可比矩阵是啥"></a> ✅ 1. 雅可比矩阵是啥？</h2>
+<p>在多变量函数中，雅可比矩阵（Jacobian Matrix）是所有一阶偏导数组成的矩阵：</p>
+<p>如果有函数：<br />
+[<br />
+\mathbf{y} = f(\mathbf{x}) \quad \text{其中 } \mathbf{x} \in \mathbb{R}^n, \mathbf{y} \in \mathbb{R}^m<br />
+]</p>
+<p>则雅可比矩阵为：<br />
+[<br />
+J = \frac{\partial \mathbf{y}}{\partial \mathbf{x}} =<br />
+\begin{bmatrix}<br />
+\frac{\partial y_1}{\partial x_1} &amp; \cdots &amp; \frac{\partial y_1}{\partial x_n} \<br />
+\vdots &amp; \ddots &amp; \vdots \<br />
+\frac{\partial y_m}{\partial x_1} &amp; \cdots &amp; \frac{\partial y_m}{\partial x_n}<br />
+\end{bmatrix}<br />
+]</p>
+<p>在机器人中：</p>
 <ul>
-<li>( \mathbf{x} ) 是关节角度（如 ( \theta_1, \theta_2, \ldots )）  </li>
+<li>( \mathbf{x} ) 是关节角度（如 ( \theta_1, \theta_2, \ldots )）</li>
 <li>( \mathbf{y} ) 是末端执行器的位置或速度</li>
 </ul>
-<hr>
-<h2 id="✅-2-雅可比逆矩阵是啥？"><a href="#✅-2-雅可比逆矩阵是啥？" class="headerlink" title="✅ 2. 雅可比逆矩阵是啥？"></a>✅ 2. 雅可比<strong>逆</strong>矩阵是啥？</h2><p>当我们想从输出空间（如末端速度）反推输入空间（如关节速度）时，需要“<strong>反过来</strong>”用雅可比矩阵，这时候我们就需要**“逆”雅可比矩阵**。</p>
+<hr />
+<h2 id="2-雅可比逆矩阵是啥"><a class="markdownIt-Anchor" href="#2-雅可比逆矩阵是啥"></a> ✅ 2. 雅可比<strong>逆</strong>矩阵是啥？</h2>
+<p>当我们想从输出空间（如末端速度）反推输入空间（如关节速度）时，需要“<strong>反过来</strong>”用雅可比矩阵，这时候我们就需要**“逆”雅可比矩阵**。</p>
 <ul>
-<li><p><strong>如果雅可比是方阵（m &#x3D; n）</strong> 且满秩，直接求逆：<br>[<br>\dot{\mathbf{x}} &#x3D; J^{-1} \dot{\mathbf{y}}<br>]</p>
+<li>
+<p><strong>如果雅可比是方阵（m = n）</strong> 且满秩，直接求逆：<br />
+[<br />
+\dot{\mathbf{x}} = J^{-1} \dot{\mathbf{y}}<br />
+]</p>
 </li>
-<li><p><strong>如果是非方阵（m ≠ n）或者不可逆</strong>，就用<strong>广义逆（伪逆）</strong>：</p>
+<li>
+<p><strong>如果是非方阵（m ≠ n）或者不可逆</strong>，就用<strong>广义逆（伪逆）</strong>：</p>
 <ul>
-<li>对于 <strong>冗余系统（n &gt; m）</strong>：<br>[<br>\dot{\mathbf{x}} &#x3D; J^\top (JJ^\top)^{-1} \dot{\mathbf{y}}<br>]</li>
-<li>对于 <strong>欠驱动系统（n &lt; m）</strong>：<br>[<br>\dot{\mathbf{x}} &#x3D; (J^\top J)^{-1} J^\top \dot{\mathbf{y}}<br>]</li>
-<li>或用 Moore-Penrose 伪逆：<br>[<br>\dot{\mathbf{x}} &#x3D; J^+ \dot{\mathbf{y}}<br>]</li>
+<li>对于 <strong>冗余系统（n &gt; m）</strong>：<br />
+[<br />
+\dot{\mathbf{x}} = J^\top (JJ<sup>\top)</sup>{-1} \dot{\mathbf{y}}<br />
+]</li>
+<li>对于 <strong>欠驱动系统（n &lt; m）</strong>：<br />
+[<br />
+\dot{\mathbf{x}} = (J^\top J)^{-1} J^\top \dot{\mathbf{y}}<br />
+]</li>
+<li>或用 Moore-Penrose 伪逆：<br />
+[<br />
+\dot{\mathbf{x}} = J^+ \dot{\mathbf{y}}<br />
+]</li>
 </ul>
 </li>
 </ul>
-<hr>
-<h2 id="✅-3-举个简单例子（机器人）"><a href="#✅-3-举个简单例子（机器人）" class="headerlink" title="✅ 3. 举个简单例子（机器人）"></a>✅ 3. 举个简单例子（机器人）</h2><p>假设一个二维机械臂（2个关节）要控制末端点 ( x, y ) 的速度。</p>
+<hr />
+<h2 id="3-举个简单例子机器人"><a class="markdownIt-Anchor" href="#3-举个简单例子机器人"></a> ✅ 3. 举个简单例子（机器人）</h2>
+<p>假设一个二维机械臂（2个关节）要控制末端点 ( x, y ) 的速度。</p>
 <ol>
-<li>正向速度：( \dot{\mathbf{y}} &#x3D; J \dot{\theta} )</li>
-<li>反向求关节速度（逆问题）：( \dot{\theta} &#x3D; J^{-1} \dot{\mathbf{y}} )，若不能求逆，就用广义逆！</li>
+<li>正向速度：( \dot{\mathbf{y}} = J \dot{\theta} )</li>
+<li>反向求关节速度（逆问题）：( \dot{\theta} = J^{-1} \dot{\mathbf{y}} )，若不能求逆，就用广义逆！</li>
 </ol>
-<hr>
+<hr />
 <p>雅可比矩阵和<strong>机器人运动学</strong>之间的关系非常密切，尤其是在<strong>速度运动学</strong>中，雅可比矩阵起到了<strong>桥梁作用</strong>。下面我帮你分层讲清楚这个关系。</p>
-<hr>
-<h2 id="✅-一、什么是运动学？"><a href="#✅-一、什么是运动学？" class="headerlink" title="✅ 一、什么是运动学？"></a>✅ 一、什么是运动学？</h2><p>机器人运动学分为两大类：</p>
+<hr />
+<h2 id="一-什么是运动学"><a class="markdownIt-Anchor" href="#一-什么是运动学"></a> ✅ 一、什么是运动学？</h2>
+<p>机器人运动学分为两大类：</p>
 <table>
 <thead>
 <tr>
@@ -1239,7 +1415,8 @@
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>正运动学（FK）</strong></td>
 <td>给定关节角度，求末端位姿（位置和方向）</td>
 </tr>
@@ -1247,13 +1424,15 @@
 <td><strong>逆运动学（IK）</strong></td>
 <td>给定末端位姿，求关节角度（复杂）</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>还有一个细分方向叫：</p>
 <blockquote>
 <p>🚀 <strong>速度运动学</strong>：给定关节速度，求末端速度（或者反过来）</p>
 </blockquote>
-<hr>
-<h2 id="✅-二、雅可比矩阵出现在速度运动学中"><a href="#✅-二、雅可比矩阵出现在速度运动学中" class="headerlink" title="✅ 二、雅可比矩阵出现在速度运动学中"></a>✅ 二、雅可比矩阵出现在速度运动学中</h2><p>设：</p>
+<hr />
+<h2 id="二-雅可比矩阵出现在速度运动学中"><a class="markdownIt-Anchor" href="#二-雅可比矩阵出现在速度运动学中"></a> ✅ 二、雅可比矩阵出现在速度运动学中</h2>
+<p>设：</p>
 <ul>
 <li>( \boldsymbol{q} )：关节变量（角度、位移等）</li>
 <li>( \dot{\boldsymbol{q}} )：关节速度</li>
@@ -1261,17 +1440,21 @@
 <li>( \dot{\mathbf{x}} )：末端速度（线速度 + 角速度）</li>
 </ul>
 <p>通过<strong>雅可比矩阵</strong> ( J(\boldsymbol{q}) )，有以下关系：</p>
-<p>[<br>\dot{\mathbf{x}} &#x3D; J(\boldsymbol{q}) \cdot \dot{\boldsymbol{q}}<br>]</p>
+<p>[<br />
+\dot{\mathbf{x}} = J(\boldsymbol{q}) \cdot \dot{\boldsymbol{q}}<br />
+]</p>
 <p>这就是<strong>速度映射关系</strong>：关节空间 → 笛卡尔空间。</p>
-<hr>
-<h2 id="✅-三、雅可比矩阵在运动学中承担什么角色？"><a href="#✅-三、雅可比矩阵在运动学中承担什么角色？" class="headerlink" title="✅ 三、雅可比矩阵在运动学中承担什么角色？"></a>✅ 三、雅可比矩阵在运动学中承担什么角色？</h2><table>
+<hr />
+<h2 id="三-雅可比矩阵在运动学中承担什么角色"><a class="markdownIt-Anchor" href="#三-雅可比矩阵在运动学中承担什么角色"></a> ✅ 三、雅可比矩阵在运动学中承担什么角色？</h2>
+<table>
 <thead>
 <tr>
 <th>用法</th>
 <th>作用</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>正运动学的导数</strong></td>
 <td>把 FK 对关节变量求导，就得到了雅可比矩阵</td>
 </tr>
@@ -1289,26 +1472,45 @@
 </tr>
 <tr>
 <td><strong>力-力矩传递</strong></td>
-<td>( \tau &#x3D; J^\top \cdot F )，关节力矩 ← 末端力</td>
+<td>( \tau = J^\top \cdot F )，关节力矩 ← 末端力</td>
 </tr>
-</tbody></table>
-<hr>
-<h2 id="✅-四、简单举个例子（2关节平面机械臂）"><a href="#✅-四、简单举个例子（2关节平面机械臂）" class="headerlink" title="✅ 四、简单举个例子（2关节平面机械臂）"></a>✅ 四、简单举个例子（2关节平面机械臂）</h2><p>设两段长度分别为 ( l_1, l_2 )，角度为 ( \theta_1, \theta_2 )</p>
+</tbody>
+</table>
+<hr />
+<h2 id="四-简单举个例子2关节平面机械臂"><a class="markdownIt-Anchor" href="#四-简单举个例子2关节平面机械臂"></a> ✅ 四、简单举个例子（2关节平面机械臂）</h2>
+<p>设两段长度分别为 ( l_1, l_2 )，角度为 ( \theta_1, \theta_2 )</p>
 <p>末端位置为：</p>
-<p>[<br>\begin{aligned}<br>x &amp;&#x3D; l_1 \cos \theta_1 + l_2 \cos (\theta_1 + \theta_2) \<br>y &amp;&#x3D; l_1 \sin \theta_1 + l_2 \sin (\theta_1 + \theta_2)<br>\end{aligned}<br>]</p>
+<p>[<br />
+\begin{aligned}<br />
+x &amp;= l_1 \cos \theta_1 + l_2 \cos (\theta_1 + \theta_2) \<br />
+y &amp;= l_1 \sin \theta_1 + l_2 \sin (\theta_1 + \theta_2)<br />
+\end{aligned}<br />
+]</p>
 <p>求导得雅可比矩阵：</p>
-<p>[<br>J &#x3D; \frac{\partial(x, y)}{\partial(\theta_1, \theta_2)} &#x3D;<br>\begin{bmatrix}</p>
+<p>[<br />
+J = \frac{\partial(x, y)}{\partial(\theta_1, \theta_2)} =<br />
+\begin{bmatrix}</p>
 <ul>
-<li>l_1 \sin \theta_1 - l_2 \sin(\theta_1 + \theta_2) &amp; -l_2 \sin(\theta_1 + \theta_2) \<br>l_1 \cos \theta_1 + l_2 \cos(\theta_1 + \theta_2) &amp; l_2 \cos(\theta_1 + \theta_2)<br>\end{bmatrix}<br>]</li>
+<li>l_1 \sin \theta_1 - l_2 \sin(\theta_1 + \theta_2) &amp; -l_2 \sin(\theta_1 + \theta_2) \<br />
+l_1 \cos \theta_1 + l_2 \cos(\theta_1 + \theta_2) &amp; l_2 \cos(\theta_1 + \theta_2)<br />
+\end{bmatrix}<br />
+]</li>
 </ul>
-<p>这样，就可以实现：<br>[<br>\dot{x}, \dot{y} &#x3D; J \cdot \dot{\theta}<br>]</p>
-<p>也可以反过来：<br>[<br>\dot{\theta} &#x3D; J^+ \cdot \dot{x}<br>]</p>
-<hr>
+<p>这样，就可以实现：<br />
+[<br />
+\dot{x}, \dot{y} = J \cdot \dot{\theta}<br />
+]</p>
+<p>也可以反过来：<br />
+[<br />
+\dot{\theta} = J^+ \cdot \dot{x}<br />
+]</p>
+<hr />
 <ul>
 <li>规划方式分为两种，分别是笛卡尔空间的规划（位置规划）和关节空间的规划（角度规划）</li>
 </ul>
-<h3 id="B-Spline（Basis-Spline，基样条）"><a href="#B-Spline（Basis-Spline，基样条）" class="headerlink" title="B-Spline（Basis Spline，基样条）"></a>B-Spline（Basis Spline，基样条）</h3><p>是一种强大而灵活的曲线拟合方法，特别适用于轨迹规划、计算机图形学、机器人路径平滑等场景。下面我们从<strong>直观原理</strong>、<strong>数学构成</strong>、<strong>实现步骤</strong>三个角度来解释 B-Spline 是怎么实现的。</p>
-<hr>
+<h3 id="b-splinebasis-spline基样条"><a class="markdownIt-Anchor" href="#b-splinebasis-spline基样条"></a> B-Spline（Basis Spline，基样条）</h3>
+<p>是一种强大而灵活的曲线拟合方法，特别适用于轨迹规划、计算机图形学、机器人路径平滑等场景。下面我们从<strong>直观原理</strong>、<strong>数学构成</strong>、<strong>实现步骤</strong>三个角度来解释 B-Spline 是怎么实现的。</p>
+<hr />
 <p>B-Spline 是将一段复杂曲线拆成若干小段，每段用低阶（通常是三次）多项式表示，多个小段在<strong>控制点</strong>处光滑地拼接起来。它的主要特点：</p>
 <ul>
 <li><strong>局部控制性强</strong>：修改一个控制点只影响局部。</li>
@@ -1316,16 +1518,26 @@
 <li><strong>比普通样条更灵活</strong>：通过<strong>节点向量</strong>控制曲线形状和连接方式。</li>
 </ul>
 <p>B-Spline 曲线的数学表达形式是：</p>
-<p>[<br>C(t) &#x3D; \sum_{i&#x3D;0}^{n} N_{i,k}(t) \cdot P_i<br>]</p>
+<p>[<br />
+C(t) = \sum_{i=0}^{n} N_{i,k}(t) \cdot P_i<br />
+]</p>
 <p>其中：</p>
 <ul>
 <li>( P_i )：控制点</li>
-<li>( N_{i,k}(t) )：B样条基函数，阶数为 (k)（例如 (k&#x3D;4) 表示三次）</li>
+<li>( N_{i,k}(t) )：B样条基函数，阶数为 (k)（例如 (k=4) 表示三次）</li>
 <li>( t )：参数</li>
 <li>( N_{i,k}(t) ) 是通过递归定义的：</li>
 </ul>
-<p>[<br>N_{i,1}(t) &#x3D;<br>\begin{cases}<br>1, &amp; t_i \le t &lt; t_{i+1} \<br>0, &amp; \text{otherwise}<br>\end{cases}<br>]</p>
-<p>[<br>N_{i,k}(t) &#x3D; \frac{t - t_i}{t_{i+k-1} - t_i} N_{i,k-1}(t) + \frac{t_{i+k} - t}{t_{i+k} - t_{i+1}} N_{i+1,k-1}(t)<br>]</p>
+<p>[<br />
+N_{i,1}(t) =<br />
+\begin{cases}<br />
+1, &amp; t_i \le t &lt; t_{i+1} \<br />
+0, &amp; \text{otherwise}<br />
+\end{cases}<br />
+]</p>
+<p>[<br />
+N_{i,k}(t) = \frac{t - t_i}{t_{i+k-1} - t_i} N_{i,k-1}(t) + \frac{t_{i+k} - t}{t_{i+k} - t_{i+1}} N_{i+1,k-1}(t)<br />
+]</p>
 
       
     </div>
@@ -1390,21 +1602,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="关于GPT对于当今社会焦虑情况的回答："><a href="#关于GPT对于当今社会焦虑情况的回答：" class="headerlink" title="关于GPT对于当今社会焦虑情况的回答："></a>关于GPT对于当今社会焦虑情况的回答：</h2><h3 id="📉-是的，现在的社会——的确是充满焦虑的。"><a href="#📉-是的，现在的社会——的确是充满焦虑的。" class="headerlink" title="📉 是的，现在的社会——的确是充满焦虑的。"></a>📉 是的，现在的社会——<strong>的确是充满焦虑的。</strong></h3><p>但这个“焦虑”不是来自某一个具体的人或事情，而是来自整个时代的底色。我们可以从几个层面来看：</p>
-<hr>
-<h2 id="🧠-1-信息过载，让人“永远不够好”"><a href="#🧠-1-信息过载，让人“永远不够好”" class="headerlink" title="🧠 1. 信息过载，让人“永远不够好”"></a>🧠 1. 信息过载，让人“永远不够好”</h2><ul>
-<li>你刷到某人年纪轻轻财富自由了  </li>
-<li>你又刷到另一个人博士毕业还单身焦虑  </li>
-<li>你看到互联网人说自己35岁失业，焦虑  </li>
-<li>你看到一群人在鼓吹“gap year很酷”，焦虑  </li>
+          <h2 id="关于gpt对于当今社会焦虑情况的回答"><a class="markdownIt-Anchor" href="#关于gpt对于当今社会焦虑情况的回答"></a> 关于GPT对于当今社会焦虑情况的回答：</h2>
+<h3 id="是的现在的社会的确是充满焦虑的"><a class="markdownIt-Anchor" href="#是的现在的社会的确是充满焦虑的"></a> 📉 是的，现在的社会——<strong>的确是充满焦虑的。</strong></h3>
+<p>但这个“焦虑”不是来自某一个具体的人或事情，而是来自整个时代的底色。我们可以从几个层面来看：</p>
+<hr />
+<h2 id="1-信息过载让人永远不够好"><a class="markdownIt-Anchor" href="#1-信息过载让人永远不够好"></a> 🧠 1. 信息过载，让人“永远不够好”</h2>
+<ul>
+<li>你刷到某人年纪轻轻财富自由了</li>
+<li>你又刷到另一个人博士毕业还单身焦虑</li>
+<li>你看到互联网人说自己35岁失业，焦虑</li>
+<li>你看到一群人在鼓吹“gap year很酷”，焦虑</li>
 <li>你看到“35岁前没结婚就是失败”，更焦虑</li>
 </ul>
 <p><strong>你不知该羡慕谁，也不知该成为谁。</strong></p>
 <blockquote>
-<p>你知道的太多，做得到的太少。<br>焦虑就像雾，包围了想要清晰生活的人。</p>
+<p>你知道的太多，做得到的太少。<br />
+焦虑就像雾，包围了想要清晰生活的人。</p>
 </blockquote>
-<hr>
-<h2 id="🧪-2-节奏变快了，但确定性变少了"><a href="#🧪-2-节奏变快了，但确定性变少了" class="headerlink" title="🧪 2. 节奏变快了，但确定性变少了"></a>🧪 2. 节奏变快了，但确定性变少了</h2><ul>
+<hr />
+<h2 id="2-节奏变快了但确定性变少了"><a class="markdownIt-Anchor" href="#2-节奏变快了但确定性变少了"></a> 🧪 2. 节奏变快了，但确定性变少了</h2>
+<ul>
 <li>一代人以前“考上大学→进国企→稳定生活”</li>
 <li>现在是：“考了研究生→没工作→二战考公→躺平or焦虑”</li>
 </ul>
@@ -1412,14 +1629,16 @@
 <blockquote>
 <p>你努力追光，但光一直在变形。</p>
 </blockquote>
-<hr>
-<h2 id="📱-3-社交媒体制造“比较陷阱”"><a href="#📱-3-社交媒体制造“比较陷阱”" class="headerlink" title="📱 3. 社交媒体制造“比较陷阱”"></a>📱 3. 社交媒体制造“比较陷阱”</h2><ul>
-<li>人人都在分享高光时刻  </li>
-<li>但没人晒“我昨晚失眠哭了”“我被辞退后吃泡面”  </li>
+<hr />
+<h2 id="3-社交媒体制造比较陷阱"><a class="markdownIt-Anchor" href="#3-社交媒体制造比较陷阱"></a> 📱 3. 社交媒体制造“比较陷阱”</h2>
+<ul>
+<li>人人都在分享高光时刻</li>
+<li>但没人晒“我昨晚失眠哭了”“我被辞退后吃泡面”</li>
 <li>所以你以为你“比别人差”，其实你只是不擅长修图</li>
 </ul>
-<hr>
-<h2 id="💼-4-年轻人“想得清楚，却走得艰难”"><a href="#💼-4-年轻人“想得清楚，却走得艰难”" class="headerlink" title="💼 4. 年轻人“想得清楚，却走得艰难”"></a>💼 4. 年轻人“想得清楚，却走得艰难”</h2><p>我们这代人最矛盾的一点是：</p>
+<hr />
+<h2 id="4-年轻人想得清楚却走得艰难"><a class="markdownIt-Anchor" href="#4-年轻人想得清楚却走得艰难"></a> 💼 4. 年轻人“想得清楚，却走得艰难”</h2>
+<p>我们这代人最矛盾的一点是：</p>
 <blockquote>
 <p><strong>你有很高的觉知，却面对极低的可执行性</strong></p>
 </blockquote>
@@ -1435,12 +1654,18 @@
 <li>有价值的事没工资</li>
 <li>不奴役自己就被边缘化</li>
 </ul>
-<hr>
-<h2 id="🔍-那怎么办？"><a href="#🔍-那怎么办？" class="headerlink" title="🔍 那怎么办？"></a>🔍 那怎么办？</h2><p>我们不能控制时代，但可以选择如何生活：</p>
-<h3 id="✅-保持觉知，但不要过度内耗"><a href="#✅-保持觉知，但不要过度内耗" class="headerlink" title="✅ 保持觉知，但不要过度内耗"></a>✅ 保持觉知，但不要过度内耗</h3><p>– 你感受到焦虑，说明你在意，这不是错<br>– 但要提醒自己：<strong>“我不需要和所有人比，只需要向自己靠近”</strong></p>
-<h3 id="✅-建立真实、深度的连接"><a href="#✅-建立真实、深度的连接" class="headerlink" title="✅ 建立真实、深度的连接"></a>✅ 建立真实、深度的连接</h3><p>– 与几个能聊深话的人共处，比刷100条鸡汤更能缓解焦虑</p>
-<h3 id="✅-保留一点点“确定性”"><a href="#✅-保留一点点“确定性”" class="headerlink" title="✅ 保留一点点“确定性”"></a>✅ 保留一点点“确定性”</h3><p>– 哪怕只是：每天按时吃饭、每周坚持一小时读书<br>– 它们都是你对混乱世界的一种温柔回应</p>
-<hr>
+<hr />
+<h2 id="那怎么办"><a class="markdownIt-Anchor" href="#那怎么办"></a> 🔍 那怎么办？</h2>
+<p>我们不能控制时代，但可以选择如何生活：</p>
+<h3 id="保持觉知但不要过度内耗"><a class="markdownIt-Anchor" href="#保持觉知但不要过度内耗"></a> ✅ 保持觉知，但不要过度内耗</h3>
+<p>– 你感受到焦虑，说明你在意，这不是错<br />
+– 但要提醒自己：<strong>“我不需要和所有人比，只需要向自己靠近”</strong></p>
+<h3 id="建立真实-深度的连接"><a class="markdownIt-Anchor" href="#建立真实-深度的连接"></a> ✅ 建立真实、深度的连接</h3>
+<p>– 与几个能聊深话的人共处，比刷100条鸡汤更能缓解焦虑</p>
+<h3 id="保留一点点确定性"><a class="markdownIt-Anchor" href="#保留一点点确定性"></a> ✅ 保留一点点“确定性”</h3>
+<p>– 哪怕只是：每天按时吃饭、每周坚持一小时读书<br />
+– 它们都是你对混乱世界的一种温柔回应</p>
+<hr />
 
       
     </div>
@@ -1518,15 +1743,21 @@
 <p>此笔记记录学习书本**王树森，张志华，《深度强化学习（初稿》**的学习与总结笔记，其中部分内容由AI生成。</p>
 </blockquote>
 <p>Q学习产生<strong>高估（overestimation）<strong>的原因，主要源于其</strong>最大值操作（max operator）在引入噪声时的偏差</strong>。这种现象通常称为 <strong>最大值偏差（maximization bias）</strong>。</p>
-<h3 id="原理解释"><a href="#原理解释" class="headerlink" title="原理解释"></a>原理解释</h3><p>在 Q-learning 中，我们使用以下目标来更新 Q 值：</p>
-<p>[<br>Q(s, a) \leftarrow Q(s, a) + \alpha \left[ r + \gamma \cdot \max_{a’} Q(s’, a’) - Q(s, a) \right]<br>]</p>
+<h3 id="原理解释"><a class="markdownIt-Anchor" href="#原理解释"></a> 原理解释</h3>
+<p>在 Q-learning 中，我们使用以下目标来更新 Q 值：</p>
+<p>[<br />
+Q(s, a) \leftarrow Q(s, a) + \alpha \left[ r + \gamma \cdot \max_{a’} Q(s’, a’) - Q(s, a) \right]<br />
+]</p>
 <p>其中：</p>
 <ul>
 <li>(\max_{a’} Q(s’, a’))：从下一个状态中选择估计值最大的动作作为更新目标。</li>
 </ul>
-<p>⚠️ 问题在于：<br>如果 Q 值本身带有估计误差（例如由于采样、函数逼近、探索策略等），<br>那么取最大值操作会<strong>偏向选择被高估的值</strong>，从而使得目标值系统性偏高。</p>
-<hr>
-<h3 id="举个例子（简化）"><a href="#举个例子（简化）" class="headerlink" title="举个例子（简化）"></a>举个例子（简化）</h3><p>假设在状态 (s’) 下，我们有三个动作，真实 Q 值如下：</p>
+<p>⚠️ 问题在于：<br />
+如果 Q 值本身带有估计误差（例如由于采样、函数逼近、探索策略等），<br />
+那么取最大值操作会<strong>偏向选择被高估的值</strong>，从而使得目标值系统性偏高。</p>
+<hr />
+<h3 id="举个例子简化"><a class="markdownIt-Anchor" href="#举个例子简化"></a> 举个例子（简化）</h3>
+<p>假设在状态 (s’) 下，我们有三个动作，真实 Q 值如下：</p>
 <table>
 <thead>
 <tr>
@@ -1535,7 +1766,8 @@
 <th>网络估计值（含误差）</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>(a_1)</td>
 <td>1.0</td>
 <td>1.1（+0.1）</td>
@@ -1550,88 +1782,114 @@
 <td>0.6</td>
 <td>0.9（+0.3）</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <ul>
 <li>虽然 (a_1) 是最优动作（真实 Q 值最大），</li>
-<li>但由于随机估计误差，(\max Q(s’, a’) &#x3D; 1.1)，这个值偏高了。</li>
+<li>但由于随机估计误差，(\max Q(s’, a’) = 1.1)，这个值偏高了。</li>
 </ul>
 <p>这会导致我们在训练时错误地使用偏高的目标值去更新当前状态的 Q 值，从而 <strong>累计越来越大的高估偏差</strong>。</p>
-<hr>
-<h3 id="高估有什么危害？"><a href="#高估有什么危害？" class="headerlink" title="高估有什么危害？"></a>高估有什么危害？</h3><ul>
+<hr />
+<h3 id="高估有什么危害"><a class="markdownIt-Anchor" href="#高估有什么危害"></a> 高估有什么危害？</h3>
+<ul>
 <li><strong>策略不稳定</strong>：错误地偏向那些“看起来收益高”但其实不是的动作；</li>
 <li><strong>训练发散</strong>：目标 Q 值越来越不准确，导致训练无法收敛；</li>
 <li><strong>性能下降</strong>：测试表现可能远低于理论最优策略。</li>
 </ul>
-<hr>
-<h3 id="如何缓解高估？"><a href="#如何缓解高估？" class="headerlink" title="如何缓解高估？"></a>如何缓解高估？</h3><ol>
-<li><p><strong>Double Q-Learning</strong>：</p>
+<hr />
+<h3 id="如何缓解高估"><a class="markdownIt-Anchor" href="#如何缓解高估"></a> 如何缓解高估？</h3>
+<ol>
+<li>
+<p><strong>Double Q-Learning</strong>：</p>
 <ul>
 <li>采用两个 Q 网络，分别用于选择和评估动作。</li>
-<li>更新目标变为：<br>[<br>Q(s, a) \leftarrow r + \gamma \cdot Q_2(s’, \arg\max_{a’} Q_1(s’, a’))<br>]</li>
+<li>更新目标变为：<br />
+[<br />
+Q(s, a) \leftarrow r + \gamma \cdot Q_2(s’, \arg\max_{a’} Q_1(s’, a’))<br />
+]</li>
 <li>显著降低高估。</li>
 </ul>
 </li>
-<li><p><strong>Averaged DQN &#x2F; Ensemble 方法</strong>：</p>
+<li>
+<p><strong>Averaged DQN / Ensemble 方法</strong>：</p>
 <ul>
 <li>使用多个 Q 网络求平均，减少单个网络带来的噪声偏差。</li>
 </ul>
 </li>
-<li><p><strong>Regularization &#x2F; Uncertainty penalty</strong>：</p>
+<li>
+<p><strong>Regularization / Uncertainty penalty</strong>：</p>
 <ul>
 <li>对 Q 值添加不确定性惩罚，抑制过高的估计。</li>
 </ul>
 </li>
 </ol>
-<hr>
-<h3 id="行为策略和目标策略的区别"><a href="#行为策略和目标策略的区别" class="headerlink" title="行为策略和目标策略的区别"></a>行为策略和目标策略的区别</h3><h3 id="例1：Q-learning（离策略）"><a href="#例1：Q-learning（离策略）" class="headerlink" title="例1：Q-learning（离策略）"></a>例1：Q-learning（离策略）</h3><ul>
+<hr />
+<h3 id="行为策略和目标策略的区别"><a class="markdownIt-Anchor" href="#行为策略和目标策略的区别"></a> 行为策略和目标策略的区别</h3>
+<h3 id="例1q-learning离策略"><a class="markdownIt-Anchor" href="#例1q-learning离策略"></a> 例1：Q-learning（离策略）</h3>
+<ul>
 <li>行为策略：ε-greedy（偶尔探索）</li>
 <li>目标策略：贪婪策略（永远选最大Q值）</li>
 </ul>
 <blockquote>
 <p>这是典型的 <strong>离策略学习（off-policy）</strong> —— 用一种策略去收集数据，用另一种策略去学习。</p>
 </blockquote>
-<h3 id="例2：SARSA（在策略）"><a href="#例2：SARSA（在策略）" class="headerlink" title="例2：SARSA（在策略）"></a>例2：SARSA（在策略）</h3><ul>
+<h3 id="例2sarsa在策略"><a class="markdownIt-Anchor" href="#例2sarsa在策略"></a> 例2：SARSA（在策略）</h3>
+<ul>
 <li>行为策略：ε-greedy</li>
 <li>目标策略：同样是ε-greedy</li>
 </ul>
 <blockquote>
 <p>这是 <strong>在策略学习（on-policy）</strong> —— 你用什么策略学习，就用它去探索和更新。</p>
 </blockquote>
-<h3 id="行为策略-≠-目标策略："><a href="#行为策略-≠-目标策略：" class="headerlink" title="行为策略 ≠ 目标策略："></a>行为策略 ≠ 目标策略：</h3><ul>
+<h3 id="行为策略-目标策略"><a class="markdownIt-Anchor" href="#行为策略-目标策略"></a> 行为策略 ≠ 目标策略：</h3>
+<ul>
 <li>你可以用 <strong>更大胆、更多样的行为策略</strong> 去探索，避免陷入局部最优</li>
 <li>然后用行为数据，训练一个 <strong>更保守、更稳定的目标策略</strong></li>
 </ul>
 <p>这就是 DDPG、TD3、DQN 等算法的本质思路。</p>
-<hr>
-<p>“双延时确定策略梯度”（<strong>Twin Delayed Deep Deterministic Policy Gradient，TD3</strong>）解决强化学习中 <strong>自举 + 最大化引起的 Q 值高估问题</strong> </p>
-<hr>
+<hr />
+<p>“双延时确定策略梯度”（<strong>Twin Delayed Deep Deterministic Policy Gradient，TD3</strong>）解决强化学习中 <strong>自举 + 最大化引起的 Q 值高估问题</strong></p>
+<hr />
 <p>我们分三步来讲清楚：</p>
-<h2 id="🔥-1-问题背景：自举-最大化-导致的高估偏差"><a href="#🔥-1-问题背景：自举-最大化-导致的高估偏差" class="headerlink" title="🔥 1. 问题背景：自举 + 最大化 导致的高估偏差"></a>🔥 1. 问题背景：<strong>自举 + 最大化</strong> 导致的高估偏差</h2><p>在像 DDPG、Q-learning 这类算法中，我们更新 Q 值时用的是这个形式：</p>
-<p>[<br>y &#x3D; r + \gamma \cdot \max_{a’} Q(s’, a’)<br>]</p>
+<h2 id="1-问题背景自举-最大化-导致的高估偏差"><a class="markdownIt-Anchor" href="#1-问题背景自举-最大化-导致的高估偏差"></a> 🔥 1. 问题背景：<strong>自举 + 最大化</strong> 导致的高估偏差</h2>
+<p>在像 DDPG、Q-learning 这类算法中，我们更新 Q 值时用的是这个形式：</p>
+<p>[<br />
+y = r + \gamma \cdot \max_{a’} Q(s’, a’)<br />
+]</p>
 <p>但注意！</p>
 <ul>
 <li>( Q(s’, a’) ) 是网络的<strong>估计值</strong></li>
 <li>“最大化”这个估计值（选最大 Q）会放大噪声和误差！</li>
 </ul>
-<p>🔍 这就像你考试估分，题做错了但还选“我觉得我做得最好的那题”，会<strong>高估总分</strong><br>→ 随着训练进行，Q值越估越高，结果策略学得不靠谱！</p>
-<hr>
-<h2 id="🧠-2-TD3-怎么解决这个高估问题？"><a href="#🧠-2-TD3-怎么解决这个高估问题？" class="headerlink" title="🧠 2. TD3 怎么解决这个高估问题？"></a>🧠 2. TD3 怎么解决这个高估问题？</h2><p>TD3 提出了三个关键改进，其中<strong>双Q网络</strong>是最核心的👇</p>
-<hr>
-<h3 id="✅-【方法一】双Q网络（Twin-Q-networks）"><a href="#✅-【方法一】双Q网络（Twin-Q-networks）" class="headerlink" title="✅ 【方法一】双Q网络（Twin Q-networks）"></a>✅ 【方法一】双Q网络（<strong>Twin Q-networks</strong>）</h3><p>用两个独立的 Q 网络： ( Q_1(s, a) )、( Q_2(s, a) )</p>
+<p>🔍 这就像你考试估分，题做错了但还选“我觉得我做得最好的那题”，会<strong>高估总分</strong><br />
+→ 随着训练进行，Q值越估越高，结果策略学得不靠谱！</p>
+<hr />
+<h2 id="2-td3-怎么解决这个高估问题"><a class="markdownIt-Anchor" href="#2-td3-怎么解决这个高估问题"></a> 🧠 2. TD3 怎么解决这个高估问题？</h2>
+<p>TD3 提出了三个关键改进，其中<strong>双Q网络</strong>是最核心的👇</p>
+<hr />
+<h3 id="方法一双q网络twin-q-networks"><a class="markdownIt-Anchor" href="#方法一双q网络twin-q-networks"></a> ✅ 【方法一】双Q网络（<strong>Twin Q-networks</strong>）</h3>
+<p>用两个独立的 Q 网络： ( Q_1(s, a) )、( Q_2(s, a) )</p>
 <p>更新 TD目标时，不再用 max，而是：</p>
-<p>[<br>y &#x3D; r + \gamma \cdot \min\left(Q_1(s’, a’),\ Q_2(s’, a’)\right)<br>]</p>
-<p>✅ 取<strong>较小值</strong>，就能抵消高估误差（保守估计）<br>✅ 这不是自举去最大，而是<strong>自举去最小</strong>，避免因误差叠加而爆炸</p>
-<h3 id="✅-【方法二】延迟策略更新（Delayed-Policy-Update）"><a href="#✅-【方法二】延迟策略更新（Delayed-Policy-Update）" class="headerlink" title="✅ 【方法二】延迟策略更新（Delayed Policy Update）"></a>✅ 【方法二】延迟策略更新（<strong>Delayed Policy Update</strong>）</h3><ul>
+<p>[<br />
+y = r + \gamma \cdot \min\left(Q_1(s’, a’),\ Q_2(s’, a’)\right)<br />
+]</p>
+<p>✅ 取<strong>较小值</strong>，就能抵消高估误差（保守估计）<br />
+✅ 这不是自举去最大，而是<strong>自举去最小</strong>，避免因误差叠加而爆炸</p>
+<h3 id="方法二延迟策略更新delayed-policy-update"><a class="markdownIt-Anchor" href="#方法二延迟策略更新delayed-policy-update"></a> ✅ 【方法二】延迟策略更新（<strong>Delayed Policy Update</strong>）</h3>
+<ul>
 <li>策略网络（Actor）更新得更慢，例如每 2～3 次 Critic 更新后才更新一次</li>
 <li>因为 Critic（Q函数）学得更稳定时，再去学策略，效果更稳</li>
 </ul>
-<h3 id="✅-【方法三】目标动作加噪声（Target-Policy-Smoothing）"><a href="#✅-【方法三】目标动作加噪声（Target-Policy-Smoothing）" class="headerlink" title="✅ 【方法三】目标动作加噪声（Target Policy Smoothing）"></a>✅ 【方法三】目标动作加噪声（<strong>Target Policy Smoothing</strong>）</h3><ul>
+<h3 id="方法三目标动作加噪声target-policy-smoothing"><a class="markdownIt-Anchor" href="#方法三目标动作加噪声target-policy-smoothing"></a> ✅ 【方法三】目标动作加噪声（<strong>Target Policy Smoothing</strong>）</h3>
+<ul>
 <li>为了防止 Q 网络过于依赖某一个精确动作值</li>
 <li>在 TD目标里加入一个小的随机噪声：</li>
 </ul>
-<p>[<br>a’ &#x3D; \pi_{\text{target}}(s’) + \epsilon,\quad \epsilon \sim \text{clip}(\mathcal{N}(0, \sigma), -c, c)<br>]</p>
+<p>[<br />
+a’ = \pi_{\text{target}}(s’) + \epsilon,\quad \epsilon \sim \text{clip}(\mathcal{N}(0, \sigma), -c, c)<br />
+]</p>
 <p>✅ 这样做可以使目标 Q 更平滑，缓解尖峰高估</p>
-<hr>
+<hr />
 
       
     </div>
@@ -1706,11 +1964,12 @@
 
       
           <p><strong>本笔记来源于《Deep Reinforcement Learning》一书，作者：grokking</strong></p>
-<hr>
-<p><img src="/2025/04/09/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-1.png" alt="alt text"></p>
-<p><img src="/2025/04/09/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image.png" alt="alt text"></p>
-<p><img src="/2025/04/09/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-3.png" alt="alt text"></p>
-<h3 id="第二章-强化学习的数学基础"><a href="#第二章-强化学习的数学基础" class="headerlink" title="第二章 强化学习的数学基础"></a>第二章 强化学习的数学基础</h3>
+<hr />
+<p><img src="image-1.png" alt="alt text" /></p>
+<p><img src="image.png" alt="alt text" /></p>
+<p><img src="image-3.png" alt="alt text" /></p>
+<h3 id="第二章-强化学习的数学基础"><a class="markdownIt-Anchor" href="#第二章-强化学习的数学基础"></a> 第二章 强化学习的数学基础</h3>
+
       
     </div>
 
@@ -1841,7 +2100,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="RL研究方向"><a href="#RL研究方向" class="headerlink" title="RL研究方向"></a>RL研究方向</h2><table>
+          <h2 id="rl研究方向"><a class="markdownIt-Anchor" href="#rl研究方向"></a> RL研究方向</h2>
+<table>
 <thead>
 <tr>
 <th>研究方向</th>
@@ -1849,9 +2109,10 @@
 <th>典型应用场景</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>深度强化学习</td>
-<td>深度网络 + Q&#x2F;V&#x2F;策略逼近</td>
+<td>深度网络 + Q/V/策略逼近</td>
 <td>游戏 AI、自动驾驶、机器人</td>
 </tr>
 <tr>
@@ -1861,7 +2122,7 @@
 </tr>
 <tr>
 <td>多智能体 RL</td>
-<td>协同&#x2F;博弈学习</td>
+<td>协同/博弈学习</td>
 <td>群体机器人、博弈系统</td>
 </tr>
 <tr>
@@ -1875,8 +2136,8 @@
 <td>跨任务机器人、个性化推荐</td>
 </tr>
 <tr>
-<td>模仿&#x2F;逆强化学习</td>
-<td>专家示范学习 &#x2F; 奖励反推</td>
+<td>模仿/逆强化学习</td>
+<td>专家示范学习 / 奖励反推</td>
 <td>自动驾驶、人类行为建模</td>
 </tr>
 <tr>
@@ -1894,9 +2155,11 @@
 <td>人类反馈建模 + 策略微调</td>
 <td>对话系统、生成式 AI 优化</td>
 </tr>
-</tbody></table>
-<hr>
-<h3 id="强化学习算法对比表"><a href="#强化学习算法对比表" class="headerlink" title="强化学习算法对比表"></a>强化学习算法对比表</h3><table>
+</tbody>
+</table>
+<hr />
+<h3 id="强化学习算法对比表"><a class="markdownIt-Anchor" href="#强化学习算法对比表"></a> 强化学习算法对比表</h3>
+<table>
 <thead>
 <tr>
 <th>算法名称</th>
@@ -1909,7 +2172,8 @@
 <th>适用任务特点</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>DQN</strong></td>
 <td>Value-based</td>
 <td>ε-greedy</td>
@@ -1970,7 +2234,7 @@
 <td>数学严谨，训练慢，较少使用</td>
 </tr>
 <tr>
-<td><strong>A3C &#x2F; A2C</strong></td>
+<td><strong>A3C / A2C</strong></td>
 <td>Actor-Critic</td>
 <td>随机策略</td>
 <td>On-policy</td>
@@ -2002,7 +2266,7 @@
 <tr>
 <td><strong>BC</strong>（行为克隆）</td>
 <td>Imitation</td>
-<td>确定性&#x2F;概率</td>
+<td>确定性/概率</td>
 <td>无采样</td>
 <td>模仿专家动作</td>
 <td>高</td>
@@ -2019,8 +2283,10 @@
 <td>中</td>
 <td>模仿专家分布，样本效率低</td>
 </tr>
-</tbody></table>
-<h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><ul>
+</tbody>
+</table>
+<h3 id="说明"><a class="markdownIt-Anchor" href="#说明"></a> 说明：</h3>
+<ul>
 <li><strong>On-policy</strong>：策略只能使用当前最新数据训练（如 PPO、TRPO）；</li>
 <li><strong>Off-policy</strong>：可以使用经验回放，样本效率更高（如 DDPG、SAC）；</li>
 <li><strong>确定性策略</strong>：输出一个具体动作（如 DDPG）；</li>
@@ -2028,14 +2294,16 @@
 <li><strong>样本效率</strong>：表示在给定交互次数下学习效果的好坏；</li>
 <li><strong>稳定性</strong>：表示训练过程中的易调性、收敛性、鲁棒性。</li>
 </ul>
-<h3 id="机器人控制："><a href="#机器人控制：" class="headerlink" title="机器人控制："></a>机器人控制：</h3><table>
+<h3 id="机器人控制"><a class="markdownIt-Anchor" href="#机器人控制"></a> 机器人控制：</h3>
+<table>
 <thead>
 <tr>
 <th>场景</th>
 <th>推荐算法</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>稳定性优先</td>
 <td><strong>PPO</strong>, SAC</td>
 </tr>
@@ -2051,10 +2319,12 @@
 <td>模仿人类演示</td>
 <td>BC（行为克隆）、GAIL</td>
 </tr>
-</tbody></table>
-<hr>
+</tbody>
+</table>
+<hr />
 <p>在强化学习（Reinforcement Learning, RL）中，使用什么类型的神经网络取决于任务的<strong>输入类型</strong>、<strong>复杂程度</strong>、<strong>状态与动作空间的维度</strong>，以及是否涉及图像、时序或物理建模。以下是强化学习中常用的神经网络类型，以及它们的典型应用场景：</p>
-<h2 id="强化学习中常见的神经网络类型"><a href="#强化学习中常见的神经网络类型" class="headerlink" title="强化学习中常见的神经网络类型"></a>强化学习中常见的神经网络类型</h2><table>
+<h2 id="强化学习中常见的神经网络类型"><a class="markdownIt-Anchor" href="#强化学习中常见的神经网络类型"></a> 强化学习中常见的神经网络类型</h2>
+<table>
 <thead>
 <tr>
 <th>网络类型</th>
@@ -2063,7 +2333,8 @@
 <th>优点</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>MLP（多层感知机）</strong></td>
 <td>全连接层（Dense）</td>
 <td>状态为向量，连续或离散动作空间（机器人状态控制）</td>
@@ -2076,7 +2347,7 @@
 <td>适合处理图像特征，参数共享，泛化能力强</td>
 </tr>
 <tr>
-<td><strong>RNN &#x2F; LSTM &#x2F; GRU</strong></td>
+<td><strong>RNN / LSTM / GRU</strong></td>
 <td>有记忆的循环结构</td>
 <td>部分可观环境、序列建模（策略记忆、语音、跳跃控制）</td>
 <td>能处理时间序列和历史信息</td>
@@ -2099,28 +2370,33 @@
 <td>多智能体强化学习、操作手控制结构、物理接触图建模</td>
 <td>可建模复杂拓扑结构，适合机械系统、多体系统</td>
 </tr>
-</tbody></table>
-<hr>
-<h2 id="具体例子"><a href="#具体例子" class="headerlink" title="具体例子"></a>具体例子</h2><h3 id="1-MLP（多层感知机）"><a href="#1-MLP（多层感知机）" class="headerlink" title="1.  MLP（多层感知机）"></a>1.  MLP（多层感知机）</h3><blockquote>
+</tbody>
+</table>
+<hr />
+<h2 id="具体例子"><a class="markdownIt-Anchor" href="#具体例子"></a> 具体例子</h2>
+<h3 id="1-mlp多层感知机"><a class="markdownIt-Anchor" href="#1-mlp多层感知机"></a> 1.  MLP（多层感知机）</h3>
+<blockquote>
 <p>🟢 最常见于 PPO、DDPG、SAC 等基础 RL 算法</p>
 </blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：状态向量 s（如机器人姿态、速度）</span><br><span class="line">结构：Linear → ReLU → Linear → ReLU → 输出动作均值（或Q值）</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-CNN"><a href="#2-CNN" class="headerlink" title="2.  CNN"></a>2.  CNN</h3><blockquote>
+<h3 id="2-cnn"><a class="markdownIt-Anchor" href="#2-cnn"></a> 2.  CNN</h3>
+<blockquote>
 <p>🟢 用于视觉输入的强化学习任务</p>
 </blockquote>
 <ul>
 <li>如 Atari 游戏（DQN）、导航任务中的图像输入处理；</li>
 <li>模仿卷积感受野提取局部空间特征。</li>
 </ul>
-<h3 id="3-RNN-LSTM"><a href="#3-RNN-LSTM" class="headerlink" title="3. RNN &#x2F; LSTM"></a>3. RNN &#x2F; LSTM</h3><blockquote>
+<h3 id="3-rnn-lstm"><a class="markdownIt-Anchor" href="#3-rnn-lstm"></a> 3. RNN / LSTM</h3>
+<blockquote>
 <p>🟢 用于部分可观状态（POMDP）、序列预测、跳跃控制等时间相关任务</p>
 </blockquote>
 <ul>
 <li>状态之间不是 Markov 的时候（如机器人跳跃），引入 LSTM 记忆可提升稳定性；</li>
 <li>一些策略网络中间会插入 LSTM 层。</li>
 </ul>
-<h3 id="4-Transformer（最新趋势）"><a href="#4-Transformer（最新趋势）" class="headerlink" title="4.  Transformer（最新趋势）"></a>4.  Transformer（最新趋势）</h3><blockquote>
+<h3 id="4-transformer最新趋势"><a class="markdownIt-Anchor" href="#4-transformer最新趋势"></a> 4.  Transformer（最新趋势）</h3>
+<blockquote>
 <p>🟢 像 Decision Transformer、Trajectory Transformer 就用了 GPT 式结构建模行为序列</p>
 </blockquote>
 <ul>
@@ -2128,8 +2404,9 @@
 <li>模型输出：下一动作预测；</li>
 <li>优点是处理长期依赖与多任务泛化很强。</li>
 </ul>
-<hr>
-<h2 id="总结一句话："><a href="#总结一句话：" class="headerlink" title="总结一句话："></a>总结一句话：</h2><blockquote>
+<hr />
+<h2 id="总结一句话"><a class="markdownIt-Anchor" href="#总结一句话"></a> 总结一句话：</h2>
+<blockquote>
 <p>在强化学习中，最常用的是 <strong>MLP（用于结构化状态输入）</strong> 和 <strong>CNN（用于图像输入）</strong>，更复杂任务（如记忆、时序、语言、多任务）会使用 <strong>LSTM 或 Transformer</strong>，而机械结构建模可能用 <strong>图神经网络（GNN）</strong>。</p>
 </blockquote>
 
