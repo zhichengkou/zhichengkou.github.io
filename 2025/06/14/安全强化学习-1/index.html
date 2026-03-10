@@ -21,22 +21,22 @@
     var CONFIG = {"hostname":"zhichengkou.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="OMPL中规划算法的比较分析维度：核心策略、收敛速度、路径质量、适用场景、内存效率  一、基于树扩展的算法    RRT (Rapidly-exploring Random Tree)    核心思想：通过随机采样快速扩展搜索树，适合高维空间   特性：   优点：概率完备性，适合复杂障碍环境   缺点：路径曲折，需后优化（如Shortcut Smoothing）   典型应用：机械臂抓取路径规">
+  <meta name="description" content="Safe Reinforcement Learning on the Constraint Manifold: Theory and Applications在线学习的需求：  机器人自适应控制要求策略在部署中持续（适应环境变化或者硬件老化） CMDP的离线训练：训练后直接部署无法解决真实世界的动态不确定性 需要保证在线学习的每一步都是安全的  同时如果在仿真训练时已经满足鲁棒性约束，迁移到现实时">
 <meta property="og:type" content="article">
-<meta property="og:title" content="规划算法">
-<meta property="og:url" content="https://zhichengkou.github.io/2025/03/18/%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:title" content="安全强化学习">
+<meta property="og:url" content="https://zhichengkou.github.io/2025/06/14/%E5%AE%89%E5%85%A8%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-1/index.html">
 <meta property="og:site_name" content="Zhicheng">
-<meta property="og:description" content="OMPL中规划算法的比较分析维度：核心策略、收敛速度、路径质量、适用场景、内存效率  一、基于树扩展的算法    RRT (Rapidly-exploring Random Tree)    核心思想：通过随机采样快速扩展搜索树，适合高维空间   特性：   优点：概率完备性，适合复杂障碍环境   缺点：路径曲折，需后优化（如Shortcut Smoothing）   典型应用：机械臂抓取路径规">
+<meta property="og:description" content="Safe Reinforcement Learning on the Constraint Manifold: Theory and Applications在线学习的需求：  机器人自适应控制要求策略在部署中持续（适应环境变化或者硬件老化） CMDP的离线训练：训练后直接部署无法解决真实世界的动态不确定性 需要保证在线学习的每一步都是安全的  同时如果在仿真训练时已经满足鲁棒性约束，迁移到现实时">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-03-18T14:10:55.000Z">
-<meta property="article:modified_time" content="2025-04-07T11:52:30.488Z">
+<meta property="article:published_time" content="2025-06-14T03:54:41.000Z">
+<meta property="article:modified_time" content="2025-06-19T13:02:18.350Z">
 <meta property="article:author" content="Zhicheng">
-<meta property="article:tag" content="规划算法">
-<meta property="article:tag" content="movelt">
-<meta property="article:tag" content="ompl">
+<meta property="article:tag" content="论文总结">
+<meta property="article:tag" content="安全强化学习">
+<meta property="article:tag" content="safe RL">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://zhichengkou.github.io/2025/03/18/%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/">
+<link rel="canonical" href="https://zhichengkou.github.io/2025/06/14/%E5%AE%89%E5%85%A8%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-1/">
 
 
 <script id="page-configurations">
@@ -49,7 +49,7 @@
   };
 </script>
 
-  <title>规划算法 | Zhicheng</title>
+  <title>安全强化学习 | Zhicheng</title>
   
 
 
@@ -197,7 +197,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zhichengkou.github.io/2025/03/18/%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="https://zhichengkou.github.io/2025/06/14/%E5%AE%89%E5%85%A8%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/cheng.gif">
@@ -210,7 +210,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          规划算法
+          安全强化学习
         </h1>
 
         <div class="post-meta">
@@ -220,14 +220,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-03-18 22:10:55" itemprop="dateCreated datePublished" datetime="2025-03-18T22:10:55+08:00">2025-03-18</time>
+              <time title="创建时间：2025-06-14 11:54:41" itemprop="dateCreated datePublished" datetime="2025-06-14T11:54:41+08:00">2025-06-14</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-04-07 19:52:30" itemprop="dateModified" datetime="2025-04-07T19:52:30+08:00">2025-04-07</time>
+                <time title="修改时间：2025-06-19 21:02:18" itemprop="dateModified" datetime="2025-06-19T21:02:18+08:00">2025-06-19</time>
               </span>
 
           
@@ -248,155 +248,284 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <hr>
-<h1 id="OMPL中规划算法的比较"><a href="#OMPL中规划算法的比较" class="headerlink" title="OMPL中规划算法的比较"></a>OMPL中规划算法的比较</h1><h2 id="分析维度：核心策略、收敛速度、路径质量、适用场景、内存效率"><a href="#分析维度：核心策略、收敛速度、路径质量、适用场景、内存效率" class="headerlink" title="分析维度：核心策略、收敛速度、路径质量、适用场景、内存效率  "></a>分析维度：核心策略、收敛速度、路径质量、适用场景、内存效率  </h2><p>一、基于树扩展的算法  </p>
-<ol>
-<li><p>RRT (Rapidly-exploring Random Tree)  </p>
+        <h3 id="Safe-Reinforcement-Learning-on-the-Constraint-Manifold-Theory-and-Applications"><a href="#Safe-Reinforcement-Learning-on-the-Constraint-Manifold-Theory-and-Applications" class="headerlink" title="Safe Reinforcement Learning on the Constraint Manifold: Theory and Applications"></a>Safe Reinforcement Learning on the Constraint Manifold: Theory and Applications</h3><p>在线学习的需求：</p>
 <ul>
-<li>核心思想：通过随机采样快速扩展搜索树，适合高维空间  </li>
-<li>特性：  <ul>
-<li>优点：概率完备性，适合复杂障碍环境  </li>
-<li>缺点：路径曲折，需后优化（如Shortcut Smoothing）  </li>
-<li>典型应用：机械臂抓取路径规划</li>
+<li>机器人自适应控制要求策略在部署中持续（适应环境变化或者硬件老化）</li>
+<li>CMDP的离线训练：训练后直接部署无法解决真实世界的动态不确定性</li>
+<li>需要保证在线学习的每一步都是安全的</li>
 </ul>
-</li>
-</ul>
-</li>
-<li><p>RRTConnect  </p>
+<p>同时如果在仿真训练时已经满足鲁棒性约束，迁移到现实时更能保证安全</p>
+<p>举例：在一个机械臂避障任务中，机械臂末端需要从起点运动到目标点并在途中避开障碍物，其中有安全约束为机械臂与障碍物之间的距离D(q)&gt; d_safe.扰动是关节控制过程中的噪声（如电机误差或外部力干扰）。</p>
 <ul>
-<li>改进点：双向树扩展（起点和终点同时生长）  </li>
-<li>性能：  <ul>
-<li>收敛速度比RRT快30-50%（OMPL基准测试数据）  </li>
-<li>在狭窄通道场景中成功率提升显著</li>
-</ul>
+<li><p>当没有扰动（标称情况）<br>此时使用ATACOM控制方法：构造约束函数；随后在构造的约束函数切空间生成安全动作，从而严格保证k(q) &lt;&#x3D; 0</p>
 </li>
-<li>局限：两树连接时可能产生不连续路径</li>
-</ul>
+<li><p>当存在扰动<br>扰动模型:控制输入受到噪声影响；定理2可以保证机械臂可能短暂进入不安全区域，但是不会完全碰撞到障碍物</p>
 </li>
-<li><p>EST (Expansive Space Trees)  </p>
+</ul>
+<p>通过一个 机械臂避障 的实例，结合ATACOM算法的设计步骤，说明如何从问题建模到控制器实现的全过程。假设机械臂需在避免碰撞（安全约束）的同时完成末端轨迹跟踪（任务目标）。</p>
+<hr>
+<ol>
+<li>问题建模<br>状态与动力学</li>
+</ol>
 <ul>
-<li>策略：基于状态密度启发式扩展，优先探索低密度区域  </li>
-<li>优势场景：非完整约束系统（如差速驱动机器人）  </li>
-<li>缺陷：高维空间扩展效率骤降</li>
+<li>状态变量：<br>( s &#x3D; [q, \dot{q}] \in \mathbb{R}^{2n} )，其中 ( q ) 为关节角度，( \dot{q} ) 为角速度。  </li>
+<li>动力学模型（控制仿射形式）：<br>[<br>\dot{s} &#x3D; \underbrace{\begin{bmatrix} \dot{q} \ -M(q)^{-1}(C(q,\dot{q})\dot{q} + g(q)) \end{bmatrix}}<em>{f(s)} + \underbrace{\begin{bmatrix} 0 \ M(q)^{-1} \end{bmatrix}}</em>{G(s)} u_s<br>]<ul>
+<li>( M(q) )：惯性矩阵，( C(q,\dot{q}) )：科氏力矩阵，( g(q) )：重力项。  </li>
+<li>控制输入 ( u_s \in \mathbb{R}^n )：关节力矩。</li>
 </ul>
 </li>
-</ol>
-<p>二、基于离散化分解的算法  </p>
-<ol>
-<li><p>KPIECE系列  </p>
-<table>
-<thead>
-<tr>
-<th>算法</th>
-<th>核心机制</th>
-<th>适用性</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>KPIECE1</td>
-<td>基于投影的网格分解，动态调整分辨率</td>
-<td>中等维度（3-6自由度）</td>
-</tr>
-<tr>
-<td>BKPIECE1</td>
-<td>双向树扩展+KPIECE网格引导</td>
-<td>狭窄通道&#x2F;复杂几何约束</td>
-</tr>
-<tr>
-<td>LBKPIECE1</td>
-<td>轻量化版本，牺牲路径质量换取内存效率</td>
-<td>嵌入式系统&#x2F;实时规划需求</td>
-</tr>
-</tbody></table>
-<p>数据对比：在7自由度机械臂场景中，BKPIECE1规划速度比RRT快2.1倍，但路径长度增加15%  </p>
-</li>
-<li><p>SBL (Single-Query Bidirectional Lazy)  </p>
+</ul>
+<p>安全约束</p>
 <ul>
-<li>创新点：延迟碰撞检测（Lazy Evaluation）+ 双向搜索  </li>
-<li>优势：  <ul>
-<li>减少70%以上的碰撞检测计算量（IEEE T-RO 2024研究）  </li>
-<li>支持动态障碍物更新</li>
+<li>避障约束（距离函数）：<br>[<br>k(s) &#x3D; d_{\text{min}} - |p(q) - p_{\text{obs}}| \leq 0<br>]<ul>
+<li>( p(q) )：机械臂末端位置，( p_{\text{obs}} )：障碍物位置，( d_{\text{min}} )：最小安全距离。  </li>
+<li>约束函数 ( k(s) ) 需满足 ( C^1 ) 光滑性（可通过距离场平滑化实现）。</li>
 </ul>
 </li>
-<li>局限：路径可能存在安全风险，需后验验证</li>
 </ul>
-</li>
+<hr>
+<ol start="2">
+<li>ATACOM算法设计步骤<br>步骤1：构造约束流形</li>
 </ol>
-<p>三、概率路图算法  </p>
-<ol>
-<li>PRM (Probabilistic Roadmap)  <ul>
-<li>阶段划分：  <ol>
-<li>学习阶段：构建随机采样节点与无碰撞边  </li>
-<li>查询阶段：A*搜索最优路径</li>
-</ol>
-</li>
-<li>优势：  <ul>
-<li>多查询场景效率极高（预处理后路径规划时间降低90%）  </li>
-<li>支持并行化建图（2025版OMPL新增GPU加速接口）</li>
+<ul>
+<li>引入松弛变量 ( \mu \geq 0 )，定义等式约束：<br>[<br>c(s, \mu) &#x3D; k(s) + \mu &#x3D; 0<br>]</li>
+<li>约束流形：<br>[<br>\mathcal{M} &#x3D; {(s, \mu) \in \mathbb{R}^{2n} \times [0, +\infty) : c(s, \mu) &#x3D; 0}<br>]<ul>
+<li>投影性质：若 ( (s, \mu) \in \mathcal{M} )，则 ( s ) 满足原始约束 ( k(s) \leq 0 )。</li>
 </ul>
 </li>
-<li>缺陷：动态环境适应性差，需定期更新路图</li>
+</ul>
+<p>步骤2：设计松弛变量动力学</p>
+<ul>
+<li>动态更新规则（类K函数控制）：<br>[<br>\dot{\mu} &#x3D; \alpha(\mu) u_\mu, \quad \alpha(\mu) &#x3D; \mu \quad (\text{例：线性函数})<br>]<ul>
+<li>控制输入 ( u_\mu \in \mathbb{R} )：调节松弛变量的变化速率。  </li>
+<li>性质：若初始 ( \mu(0) &gt; 0 )，则 ( \mu(t) &gt; 0 ) 对所有 ( t \geq 0 ) 成立（Lemma 1）。</li>
 </ul>
 </li>
-</ol>
-<p>四、算法性能综合对比  </p>
-<table>
-<thead>
-<tr>
-<th>指标</th>
-<th>RRT</th>
-<th>RRTConnect</th>
-<th>KPIECE1</th>
-<th>PRM</th>
-<th>SBL</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>收敛时间（s）</td>
-<td>2.8</td>
-<td>1.9</td>
-<td>1.2</td>
-<td>5.1*</td>
-<td>0.8</td>
-</tr>
-<tr>
-<td>路径长度（m）</td>
-<td>12.4</td>
-<td>11.7</td>
-<td>14.2</td>
-<td>10.9</td>
-<td>13.5</td>
-</tr>
-<tr>
-<td>内存占用（MB）</td>
-<td>45</td>
-<td>62</td>
-<td>28</td>
-<td>210</td>
-<td>37</td>
-</tr>
-<tr>
-<td>狭窄通道成功率</td>
-<td>68%</td>
-<td>83%</td>
-<td>91%</td>
-<td>42%</td>
-<td>79%</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>*注：PRM时间含预处理阶段，测试环境为MoveIt!的7-DOF Panda机械臂仿真场景  </p>
-</blockquote>
-<p>五、选型决策指南  </p>
-<ol>
-<li>实时性要求高 → 选择SBL或LBKPIECE1（牺牲路径质量换取速度）  </li>
-<li>路径最优化需求 → 使用PRM+优化器（如CHOMP或STOMP）  </li>
-<li>动态环境 → RRT变种（如RRT*或Anytime RRT）  </li>
-<li>嵌入式部署 → KPIECE1（内存占用可控）  </li>
-<li>学术研究 → 结合OMPL的Benchmark工具进行定量分析</li>
+</ul>
+<p>步骤3：增广系统动力学</p>
+<ul>
+<li>联合系统：<br>[<br>\begin{bmatrix} \dot{s} \ \dot{\mu} \end{bmatrix} &#x3D; \begin{bmatrix} f(s) \ 0 \end{bmatrix} + \begin{bmatrix} G(s) &amp; 0 \ 0 &amp; \alpha(\mu) \end{bmatrix} \begin{bmatrix} u_s \ u_\mu \end{bmatrix}<br>]<ul>
+<li>控制矩阵：<br>[<br>J_u(s, \mu) &#x3D; \nabla_s c(s, \mu) G(s) &#x3D; \nabla_q k(s) \cdot J_{\text{arm}}(q) \cdot M(q)^{-1}<br>]<ul>
+<li>( J_{\text{arm}}(q) )：机械臂末端雅可比矩阵。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>步骤4：切空间投影</p>
+<ul>
+<li>切空间基 ( B_u ) 计算：  <ul>
+<li>对 ( J_u ) 进行SVD分解，取右奇异向量 ( B_u \in \mathbb{R}^{(n+1) \times n} ) 满足 ( J_u B_u &#x3D; 0 )。  </li>
+<li>物理意义：( B_u ) 的列向量张成允许的安全控制方向（即不违反约束的力矩组合）。</li>
+</ul>
+</li>
+</ul>
+<p>步骤5：安全控制器</p>
+<ul>
+<li>控制律（公式12）：<br>[<br>\begin{bmatrix} u_s \ u_\mu \end{bmatrix} &#x3D; \underbrace{-J_u^\dagger \psi}<em>{\text{漂移补偿}} + \underbrace{B_u u}</em>{\text{任务控制}} - \underbrace{\lambda J_u^\dagger c}_{\text{收缩项}}<br>]<ul>
+<li>参数说明：  <ul>
+<li>( \psi &#x3D; \nabla_s k(s) \cdot f(s) )：约束对自然动态的敏感度。  </li>
+<li>( u )：RL策略输出的原始力矩（如跟踪PD控制信号）。  </li>
+<li>( \lambda &gt; 0 )：收缩速率。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ol start="3">
+<li>实例运行流程</li>
+<li>初始化：机械臂位于安全位置 ( s_0 )，松弛变量 ( \mu(0) &#x3D; \max(-k(s_0), \text{tol}) )。  </li>
+<li>在线控制循环：  <ul>
+<li>RL策略输出 ( u )：如目标跟踪的PD控制信号。  </li>
+<li>ATACOM修正：  <ul>
+<li>计算 ( J_u ) 和 ( B_u )，投影 ( u ) 到切空间。  </li>
+<li>若机械臂接近障碍物（( k(s) \to 0 )），收缩项 ( -\lambda J_u^\dagger c ) 主导，产生避障力矩。</li>
+</ul>
+</li>
+<li>执行安全控制 ( u_s )。</li>
+</ul>
+</li>
+<li>结果：机械臂末端绕开障碍物并收敛到目标轨迹（见下图）。</li>
 </ol>
 <hr>
-<p>ref: <a target="_blank" rel="noopener" href="https://ompl.kavrakilab.org/planners.html">https://ompl.kavrakilab.org/planners.html</a></p>
+<ol start="4">
+<li>关键设计要点<table>
+<thead>
+<tr>
+<th>设计环节</th>
+<th>解决方法</th>
+<th>实例中的实现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>约束建模</td>
+<td>距离函数 + 松弛变量</td>
+<td>( k(s) &#x3D; d_{\text{min}} - |p - p_{\text{obs}}| )</td>
+</tr>
+<tr>
+<td>流形切空间计算</td>
+<td>SVD分解控制矩阵 ( J_u )</td>
+<td>机械臂雅可比矩阵与惯性矩阵耦合</td>
+</tr>
+<tr>
+<td>安全控制律</td>
+<td>漂移补偿 + 任务投影 + 收缩项</td>
+<td>避障力矩自动生成</td>
+</tr>
+<tr>
+<td>动态松弛变量</td>
+<td>类K函数控制的 ( \dot{\mu} )</td>
+<td>保证 ( \mu(t) &gt; 0 ) 避免数值奇点</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<hr>
+<ol start="5">
+<li>数学与物理意义对应</li>
+</ol>
+<ul>
+<li>切空间投影：将关节力矩限制在“不缩短机械臂与障碍物距离”的方向。  </li>
+<li>收缩项：类似虚拟排斥力，强度随 ( k(s) ) 接近0而增大。  </li>
+<li>松弛变量：量化“允许的临时约束违反”，动态调整控制保守性。</li>
+</ul>
+<h3 id="几种RL对于约束函数的处理方法"><a href="#几种RL对于约束函数的处理方法" class="headerlink" title="几种RL对于约束函数的处理方法"></a>几种RL对于约束函数的处理方法</h3><p>假设约束函数$k(s) \leq 0$, 机械臂与障碍物距离 $ D ( s ) \geq d _ { s a f e }$ 可以表示为 $ k(s) &#x3D; d_safe - D(s) \leq 0 $</p>
+<p>方法对比与切空间的优越性</p>
+<p>以下是针对同一个约束函数，不同安全强化学习方法处理方式的对比分析，结合数学形式、实现逻辑和应用场景的详细说明：</p>
+<ol>
+<li>问题设定<br>约束函数：<br>[ k(s) \leq 0 ]<br>（例如：机械臂与障碍物距离 ( D(s) \geq d_{\text{safe}} ) 可表示为 ( k(s) &#x3D; d_{\text{safe}} - D(s) \leq 0 )）</li>
+</ol>
+<p>目标：在强化学习训练和部署中保证 ( k(s) \leq 0 ) 始终成立。</p>
+<ol>
+<li>不同方法对比</li>
+</ol>
+<p>(1) 惩罚函数法（Penalty Method）</p>
+<ul>
+<li>处理方式：<br>在奖励函数中加入惩罚项：<br>[<br>R_{\text{penalized}} &#x3D; R_{\text{task}} - \lambda \max(0, k(s))^2<br>]  <ul>
+<li>(\lambda) 为惩罚系数，需手动调节。</li>
+</ul>
+</li>
+<li>特点：  <ul>
+<li>数学简单：无需修改策略结构。  </li>
+<li>安全无保证：训练早期可能严重违反约束（如图1左）。  </li>
+<li>调参敏感：(\lambda) 过小导致约束失效，过大抑制探索。</li>
+</ul>
+</li>
+<li>适用场景：<br>仿真环境预训练，且约束违反无严重后果时。</li>
+</ul>
+<p>(2) 安全滤波器（QP-Based Safety Filter）</p>
+<ul>
+<li>处理方式：<br>在线求解二次规划问题，修正动作 ( u )：<br>[<br>\begin{aligned}<br>\min_{u} \quad &amp; |u - u_{\text{RL}}|^2 \<br>\text{s.t.} \quad &amp; \nabla k(s)^T (f(s) + G(s)u) \leq -\alpha k(s)<br>\end{aligned}<br>]  <ul>
+<li>通过CBF（Control Barrier Function）保证约束。</li>
+</ul>
+</li>
+<li>特点：  <ul>
+<li>即时安全：每一步动作均满足约束。  </li>
+<li>计算开销大：实时求解QP问题（毫秒级延迟）。  </li>
+<li>可行性风险：约束冲突时无解（如机械臂被“卡死”）。</li>
+</ul>
+</li>
+<li>适用场景：<br>计算资源充足的实时控制系统（如自动驾驶）。</li>
+</ul>
+<p>(3) 备份策略（Backup Policy）</p>
+<ul>
+<li>处理方式：<br>预设安全策略 ( \pi_{\text{safe}} )（如零速度指令），当 ( k(s) &gt; \epsilon ) 时切换：<br>[<br>u &#x3D; \begin{cases}<br>u_{\text{RL}} &amp; \text{if } k(s) \leq \epsilon, \<br>\pi_{\text{safe}}(s) &amp; \text{otherwise}.<br>\end{cases}<br>]  </li>
+<li>特点：  <ul>
+<li>简单可靠：硬件易实现。  </li>
+<li>保守性：任务中断频繁（如图1中）。  </li>
+<li>泛化性差：需为每个任务单独设计 ( \pi_{\text{safe}} )。</li>
+</ul>
+</li>
+<li>适用场景：<br>已知明确安全动作的简单系统（如急停按钮）。</li>
+</ul>
+<p>(4) 切空间投影（ATACOM，Tangent Space Projection）</p>
+<ul>
+<li>处理方式：  <ol>
+<li>构造约束流形 ( \mathcal{M} &#x3D; {s \mid k(s) &#x3D; 0} ) 的切空间 ( T_s\mathcal{M} )。  </li>
+<li>将RL动作 ( u ) 投影到切空间：<br>[<br>u_{\text{safe}} &#x3D; (I - \nabla k(s) (\nabla k(s)^T \nabla k(s))^{-1} \nabla k(s)^T) u<br>]  </li>
+<li>动态调整松弛变量 ( \mu ) 保证渐近收敛（见原文公式12）。</li>
+</ol>
+</li>
+<li>特点：  <ul>
+<li>严格安全：数学保证 ( k(s) \leq 0 )（即使训练中）。  </li>
+<li>高效：投影计算仅需矩阵乘法（微秒级）。  </li>
+<li>自适应：无需手动设计安全策略。</li>
+</ul>
+</li>
+<li>适用场景：<br>高维复杂系统（如机器人、无人机）的在线安全学习。</li>
+</ul>
+<p>对比总结表</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>数学形式</th>
+<th>安全性保证</th>
+<th>计算效率</th>
+<th>是否需要调参</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>惩罚函数法</td>
+<td>修改奖励函数</td>
+<td>❌ 无</td>
+<td>⚡ 最高</td>
+<td>✅ 需调λ</td>
+<td>无风险仿真</td>
+</tr>
+<tr>
+<td>安全滤波器</td>
+<td>在线QP优化</td>
+<td>✅ 严格</td>
+<td>🐢 慢</td>
+<td>❌ 无需</td>
+<td>高资源实时系统</td>
+</tr>
+<tr>
+<td>备份策略</td>
+<td>条件策略切换</td>
+<td>⚠️ 保守</td>
+<td>⚡ 快</td>
+<td>✅ 需设计策略</td>
+<td>简单硬件系统</td>
+</tr>
+<tr>
+<td>切空间投影</td>
+<td>几何投影+动态松弛</td>
+<td>✅ 严格</td>
+<td>⚡ 快</td>
+<td>❌ 无需</td>
+<td>复杂在线学习</td>
+</tr>
+</tbody></table>
+<ol>
+<li>实例说明（机械臂避障）</li>
+</ol>
+<ul>
+<li>惩罚函数法：<br>训练早期机械臂碰撞障碍物（( k(s) &gt; 0 )），直到策略学会规避。  </li>
+<li>安全滤波器：<br>每个时间步求解QP，保证 ( D(s) \geq 0.1 ) m，但计算延迟导致控制频率下降。  </li>
+<li>备份策略：<br>机械臂接近障碍物时紧急停止，无法完成任务。  </li>
+<li>切空间投影：<br>机械臂沿障碍物表面切线运动（( D(s) \equiv 0.1 ) m），既安全又完成任务。</li>
+</ul>
+<ol>
+<li>核心差异总结</li>
+<li>安全性的数学基础：  <ul>
+<li>切空间投影和QP滤波器通过微分几何&#x2F;优化理论严格保证安全。  </li>
+<li>其他方法依赖启发式设计。</li>
+</ul>
+</li>
+<li>计算本质：  <ul>
+<li>切空间投影是解析解，QP是数值解，备份策略是规则匹配。</li>
+</ul>
+</li>
+<li>适用性：  <ul>
+<li>切空间方法唯一同时满足实时性、严格安全和自适应学习的要求。</li>
+</ul>
+</li>
+</ol>
+<p>通过这种对比，可以清晰看出为何ATACOM的切空间方法在复杂安全关键任务中具有显著优势。</p>
 
     </div>
 
@@ -406,9 +535,9 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95/" rel="tag"># 规划算法</a>
-              <a href="/tags/movelt/" rel="tag"># movelt</a>
-              <a href="/tags/ompl/" rel="tag"># ompl</a>
+              <a href="/tags/%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%93/" rel="tag"># 论文总结</a>
+              <a href="/tags/%E5%AE%89%E5%85%A8%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" rel="tag"># 安全强化学习</a>
+              <a href="/tags/safe-RL/" rel="tag"># safe RL</a>
           </div>
 
         
@@ -417,13 +546,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/03/18/safe-learning%E5%AE%9E%E8%B7%B5-%E5%9F%BA%E4%BA%8E%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%9A%84MPC/" rel="prev" title="safe learning实践 - 基于强化学习的MPC">
-      <i class="fa fa-chevron-left"></i> safe learning实践 - 基于强化学习的MPC
+    <a href="/2025/06/12/%E5%B7%A5%E4%BD%9C%E5%86%85%E5%AE%B9%E6%80%BB%E7%BB%93/" rel="prev" title="工作内容总结">
+      <i class="fa fa-chevron-left"></i> 工作内容总结
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/03/21/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95LSTD-Q/" rel="next" title="强化学习算法LSTD-Q">
-      强化学习算法LSTD-Q <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -482,7 +608,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OMPL%E4%B8%AD%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-number">1.</span> <span class="nav-text">OMPL中规划算法的比较</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E7%BB%B4%E5%BA%A6%EF%BC%9A%E6%A0%B8%E5%BF%83%E7%AD%96%E7%95%A5%E3%80%81%E6%94%B6%E6%95%9B%E9%80%9F%E5%BA%A6%E3%80%81%E8%B7%AF%E5%BE%84%E8%B4%A8%E9%87%8F%E3%80%81%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF%E3%80%81%E5%86%85%E5%AD%98%E6%95%88%E7%8E%87"><span class="nav-number">1.1.</span> <span class="nav-text">分析维度：核心策略、收敛速度、路径质量、适用场景、内存效率  </span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Safe-Reinforcement-Learning-on-the-Constraint-Manifold-Theory-and-Applications"><span class="nav-number">1.</span> <span class="nav-text">Safe Reinforcement Learning on the Constraint Manifold: Theory and Applications</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%A0%E7%A7%8DRL%E5%AF%B9%E4%BA%8E%E7%BA%A6%E6%9D%9F%E5%87%BD%E6%95%B0%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">几种RL对于约束函数的处理方法</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
