@@ -1168,7 +1168,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #665ccb;
+  background: #cdff81;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2668,5 +2668,185 @@ mjx-container + br {
   }
   .pagination {
     margin: 8px 0 0;
+  }
+}
+:root {
+  --site-accent: #0f766e;
+  --site-accent-soft: #d9f3ef;
+  --site-warm: #f3eee6;
+  --site-paper: #fffdf8;
+  --site-ink: #1f2937;
+  --site-muted: #5b6472;
+  --site-line: rgba(15,23,42,0.08);
+  --site-shadow: 0 16px 40px rgba(15,23,42,0.08);
+}
+body {
+  background: linear-gradient(180deg, #f7f4ec 0%, #f3f7f8 50%, #f8fafc 100%);
+  color: var(--site-ink);
+}
+.headband {
+  background: linear-gradient(90deg, #0f766e 0%, #1d4ed8 50%, #d97706 100%);
+  height: 4px;
+}
+.header {
+  background: rgba(255,253,248,0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--site-line);
+}
+.site-meta {
+  padding: 12px 0;
+}
+.site-title {
+  font-size: 1.8em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.site-subtitle {
+  color: var(--site-muted);
+  font-size: 0.9em;
+  margin-top: 6px;
+}
+.menu .menu-item a {
+  border-radius: 999px;
+  margin: 0 4px;
+  padding: 6px 14px;
+  transition: all 0.2s ease;
+}
+.menu .menu-item a:hover,
+.menu .menu-item-active a {
+  background: var(--site-accent-soft);
+  color: var(--site-accent);
+}
+.post-block,
+.sidebar-inner,
+.comments,
+.pagination,
+.search-popup {
+  background: rgba(255,253,248,0.92);
+  border: 1px solid var(--site-line);
+  border-radius: 22px;
+  box-shadow: var(--site-shadow);
+}
+.post-block {
+  padding: 34px 38px;
+}
+.post-title,
+.post-title-link {
+  font-weight: 700;
+  line-height: 1.35;
+}
+.post-meta,
+.post-meta-item,
+.sidebar .links-of-author-item a,
+.site-state-item-count,
+.site-state-item-name {
+  color: var(--site-muted);
+}
+.post-body {
+  font-size: 16px;
+  line-height: 1.95;
+}
+.post-body h2,
+.post-body h3,
+.post-body h4 {
+  position: relative;
+  margin-top: 2.4em;
+  margin-bottom: 0.9em;
+  padding-left: 14px;
+}
+.post-body h2::before,
+.post-body h3::before,
+.post-body h4::before {
+  background: linear-gradient(180deg, #0f766e, #1d4ed8);
+  border-radius: 999px;
+  content: '';
+  height: 0.9em;
+  left: 0;
+  position: absolute;
+  top: 0.35em;
+  width: 5px;
+}
+.post-body p,
+.post-body li {
+  color: var(--site-ink);
+}
+.post-body a {
+  border-bottom: 1px solid rgba(15,118,110,0.3);
+  color: var(--site-accent);
+}
+.post-body blockquote {
+  background: linear-gradient(135deg, rgba(15,118,110,0.08), rgba(29,78,216,0.06));
+  border-left: 4px solid var(--site-accent);
+  border-radius: 16px;
+  margin: 1.8em 0;
+  padding: 18px 20px;
+}
+.post-body table {
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1.6em 0;
+  overflow: hidden;
+  width: 100%;
+}
+.post-body table th {
+  background: #eef7f6;
+  color: #0f172a;
+}
+.post-body table th,
+.post-body table td {
+  border-color: var(--site-line);
+  padding: 12px 14px;
+}
+.post-body code {
+  background: rgba(15,118,110,0.08);
+  border-radius: 8px;
+  color: #0f766e;
+  padding: 2px 6px;
+}
+.post-body .highlight,
+.post-body pre,
+.post-body .math.display {
+  border-radius: 18px;
+}
+.post-body .math.display,
+.post-body mjx-container[display='true'] {
+  background: rgba(241,245,249,0.7);
+  border: 1px solid var(--site-line);
+  margin: 1.6em 0;
+  overflow-x: auto;
+  padding: 16px 20px;
+}
+.sidebar-inner {
+  padding-top: 22px;
+}
+.site-author-name {
+  font-size: 1.1em;
+  font-weight: 700;
+}
+.links-of-author-item a,
+.sidebar-nav li,
+.site-state-wrap {
+  border-radius: 14px;
+}
+.pagination .page-number,
+.pagination .extend {
+  background: rgba(255,255,255,0.82);
+  border: 1px solid var(--site-line);
+  border-radius: 12px;
+  margin: 0 6px;
+  min-width: 38px;
+}
+.back-to-top {
+  background: var(--site-accent);
+  border-radius: 999px;
+  box-shadow: 0 12px 24px rgba(15,118,110,0.2);
+}
+@media (max-width: 767px) {
+  .post-block {
+    border-radius: 16px;
+    padding: 24px 20px;
+  }
+  .menu .menu-item a {
+    margin: 2px 0;
   }
 }

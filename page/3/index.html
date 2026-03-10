@@ -21,10 +21,12 @@
     var CONFIG = {"hostname":"zhichengkou.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta property="og:type" content="website">
+  <meta name="description" content="面向机器人、强化学习与控制的研究笔记">
+<meta property="og:type" content="website">
 <meta property="og:title" content="Zhicheng">
 <meta property="og:url" content="https://zhichengkou.github.io/page/3/index.html">
 <meta property="og:site_name" content="Zhicheng">
+<meta property="og:description" content="面向机器人、强化学习与控制的研究笔记">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Zhicheng">
 <meta name="twitter:card" content="summary">
@@ -96,6 +98,7 @@
       <h1 class="site-title">Zhicheng</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
+      <p class="site-subtitle" itemprop="description">Robotics, Learning, and Control</p>
   </div>
 
   <div class="site-nav-right">
@@ -194,7 +197,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/cheng.gif">
       <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="面向机器人、强化学习与控制的研究笔记">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1251,7 +1254,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/cheng.gif">
       <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="面向机器人、强化学习与控制的研究笔记">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1455,7 +1458,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/cheng.gif">
       <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="面向机器人、强化学习与控制的研究笔记">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1565,7 +1568,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/cheng.gif">
       <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="面向机器人、强化学习与控制的研究笔记">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1778,7 +1781,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/cheng.gif">
       <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="面向机器人、强化学习与控制的研究笔记">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1804,7 +1807,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-13 00:00:04" itemprop="dateModified" datetime="2025-06-13T00:00:04+08:00">2025-06-13</time>
+                <time title="修改时间：2026-03-10 17:56:06" itemprop="dateModified" datetime="2026-03-10T17:56:06+08:00">2026-03-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1827,300 +1830,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>论文《Learning Safety in Model-Based Reinforcement Learning using MPC and Gaussian Processes》提出了一种结合模型预测控制 (MPC) 和高斯过程 (GP) 回归的安全强化学习 (RL) 方法。以下是论文的核心内容分析：</p>
-<ol>
-<li><strong>背景与动机</strong>:<ul>
-<li>现代机器学习结合MPC已成为提高控制系统性能和安全性的重要方向。然而，大多数RL算法是基于模型无关的方法，缺乏对系统动态的充分了解，容易导致不安全的决策。</li>
-<li>论文提出了一种通过GP回归估计MPC参数的安全集合，以在RL更新过程中确保安全性。</li>
-</ul>
-</li>
-<li><strong>方法论</strong>:<ul>
-<li><strong>MPC框架</strong>: 作为控制器，通过近似系统动态进行预测和优化。</li>
-<li><strong>强化学习 (RL)</strong>: 调整MPC的参数以提高性能。</li>
-<li><strong>高斯过程 (GP) 回归</strong>: 用于从数据中直接估计MPC参数的约束，预测某个参数是否会导致安全或不安全的策略。</li>
-</ul>
-</li>
-<li><strong>关键贡献</strong>:<ul>
-<li>论文的创新点在于通过GP回归在RL过程中动态学习安全集合 (Safe Set)。</li>
-<li>通过概率约束的方式，确保学习过程中不会出现违反系统约束的情况。</li>
-<li>与其他安全强化学习方法相比，该方法不需要对预测模型做过多的假设，提升了计算效率。</li>
-</ul>
-</li>
-<li><strong>实验验证</strong>:<ul>
-<li>通过一个无人机控制实验验证了该方法的有效性。</li>
-<li>结果显示，使用GP回归的安全强化学习方法在减少不安全的轨迹、加快收敛速度以及提高整体性能方面优于传统的RL方法。</li>
-</ul>
-</li>
-<li><strong>优点与不足</strong>:<ul>
-<li><strong>优点</strong>: 通过数据驱动的方法提高安全性，并且避免了模型误差导致的控制失效。</li>
-<li><strong>不足</strong>: 需要在早期阶段通过数据不断更新GP模型，并且在安全概率 (β) 的回退机制上存在一定的性能权衡。</li>
-</ul>
-</li>
-<li><strong>未来工作</strong>:<ul>
-<li>解决因GP模型不准确导致的初期高不确定性问题。</li>
-<li>将该方法扩展到更复杂的非线性和随机MPC框架中。</li>
-</ul>
-</li>
-</ol>
-<p>总结来说，这篇论文提出了一种创新性的基于GP的安全强化学习方法，通过对MPC参数的概率约束，实现了数据驱动的安全学习，大大减少了不安全行为的发生。</p>
-<p>论文中的强化学习 (Reinforcement Learning, RL) 主要用于<strong>动态调整MPC控制器的参数</strong>，以<strong>提高系统性能</strong>，同时<strong>确保控制策略的安全性</strong>。具体过程如下：</p>
-<hr>
-<h2 id="1-强化学习目标"><a href="#1-强化学习目标" class="headerlink" title="1. 强化学习目标"></a>1. 强化学习目标</h2><p>强化学习的目标是通过不断交互和试探，<strong>找到最优的MPC参数 θ</strong>，使得在保持安全性的同时，最大化性能指标（或最小化损失函数）。</p>
-<p>目标函数是：<br>$$<br>J(πθ)&#x3D;Eτπθ[∑k&#x3D;0∞γkL(sk,ak)]J(π_{\theta}) &#x3D; \mathbb{E}<em>{\tau</em>{\pi_{\theta}}} \left[ \sum_{k&#x3D;0}^{\infty} \gamma^k L(s_k, a_k) \right]<br>$$</p>
-<ul>
-<li>$\theta$ 是MPC的参数（例如无人机的动力学参数）。</li>
-<li>$L(sk,ak)L(s_k, a_k)$ 是每个时间步的损失（如偏离目标位置或违反安全约束）。</li>
-<li>γ\gamma 是折扣因子。</li>
-<li>τπθ\tau_{\pi_{\theta}} 是当前MPC策略下的轨迹。</li>
-</ul>
-<hr>
-<h2 id="2-强化学习如何更新MPC参数"><a href="#2-强化学习如何更新MPC参数" class="headerlink" title="2. 强化学习如何更新MPC参数"></a>2. 强化学习如何更新MPC参数</h2><p>论文采用了一种<strong>基于梯度更新的强化学习方法</strong>，例如Q-Learning或Policy Gradient方法。</p>
-<p>参数更新公式：</p>
-<p>$θ←θ−α∇θ∑k&#x3D;0mψ(sk,ak,sk+1,θ)\theta \leftarrow \theta - \alpha \nabla_{\theta} \sum_{k&#x3D;0}^{m} \psi(s_k, a_k, s_{k+1}, \theta)$</p>
-<ul>
-<li>$\alpha$ 是学习率。</li>
-<li>$\psi$ 是强化学习损失项（例如Q-learning损失或策略梯度）。</li>
-<li>mm 是观测批量（Batch size）。</li>
-</ul>
-<hr>
-<h2 id="3-结合MPC的作用"><a href="#3-结合MPC的作用" class="headerlink" title="3. 结合MPC的作用"></a>3. 结合MPC的作用</h2><p>在本方法中，MPC不仅提供了控制信号，还作为<strong>强化学习的策略函数</strong>：</p>
-<p>$πθ(s)&#x3D;arg⁡min⁡uQθ(s,u)\pi_{\theta}(s) &#x3D; \arg \min_{u} Q_{\theta}(s, u)$</p>
-<ul>
-<li>通过MPC的优化过程直接得到当前状态 ss 下的最优控制输入 uu。</li>
-<li>强化学习通过<strong>调整MPC中的参数 θ\theta</strong>，间接实现了策略的改进。</li>
-</ul>
-<hr>
-<h2 id="4-安全性约束"><a href="#4-安全性约束" class="headerlink" title="4. 安全性约束"></a>4. 安全性约束</h2><p>由于强化学习过程中的探索可能导致<strong>违反安全约束</strong>，论文使用<strong>高斯过程 (GP) 回归</strong>来估计安全区域 SS，并限制强化学习的参数更新范围：</p>
-<p>$θ+&#x3D;arg⁡min⁡θ12∥θ+−θ∥2+α∇θ∑k&#x3D;0mψ(sk,ak,sk+1,θ)\theta^+ &#x3D; \arg \min_{\theta} \frac{1}{2} | \theta^+ - \theta |^2 + \alpha \nabla_{\theta} \sum_{k&#x3D;0}^{m} \psi(s_k, a_k, s_{k+1}, \theta)$</p>
-<p>subject to: θ∈SD\text{subject to:} \ \theta \in S_D</p>
-<p>其中，安全集合 SDS_D 是通过GP估计的“安全参数集合”，确保每次更新的MPC参数不会导致系统违反约束。</p>
-<hr>
-<h2 id="5-强化学习-安全机制的循环过程"><a href="#5-强化学习-安全机制的循环过程" class="headerlink" title="5. 强化学习-安全机制的循环过程"></a>5. 强化学习-安全机制的循环过程</h2><h3 id="强化学习循环："><a href="#强化学习循环：" class="headerlink" title="强化学习循环："></a>强化学习循环：</h3><ol>
-<li><strong>MPC控制器执行一轮任务 (Trajectory Rollout)</strong>，收集状态-动作-奖励数据。</li>
-<li><strong>计算当前MPC参数的安全性</strong>（是否违反了状态或控制约束）。</li>
-<li><strong>GP回归模型更新安全区域</strong> SDS_D。</li>
-<li><strong>强化学习更新MPC参数 θ\theta</strong>，同时确保参数更新受安全区域 SDS_D 限制。</li>
-<li><strong>下一次MPC控制器使用新的参数 θ\theta</strong>，并重复上述过程。</li>
-</ol>
-<hr>
-<h2 id="6-为什么引入强化学习？"><a href="#6-为什么引入强化学习？" class="headerlink" title="6. 为什么引入强化学习？"></a>6. 为什么引入强化学习？</h2><ul>
-<li><strong>MPC本身具有良好的控制性能</strong>，但在面对不确定性（如风扰动）和复杂环境时，需要不断<strong>在线调整参数</strong>。</li>
-<li>强化学习提供了一种<strong>数据驱动的方式</strong>，通过多轮交互不断改进MPC参数。</li>
-<li>传统RL算法容易出现探索导致安全性破坏的问题，而论文通过<strong>GP约束机制</strong>，确保在强化学习过程中不会发生安全约束的违反。</li>
-</ul>
-<hr>
-<h2 id="✅-总结："><a href="#✅-总结：" class="headerlink" title="✅ 总结："></a>✅ 总结：</h2><h3 id="强化学习的角色："><a href="#强化学习的角色：" class="headerlink" title="强化学习的角色："></a>强化学习的角色：</h3><ol>
-<li><strong>通过调整MPC参数 θ\theta</strong>，不断提高控制性能；</li>
-<li><strong>利用GP回归评估安全性</strong>，确保在探索过程中不会违反安全约束；</li>
-<li><strong>数据驱动</strong> + <strong>模型预测控制</strong>，实现了<strong>安全性保证</strong> + <strong>性能优化</strong>的双重目标。</li>
-</ol>
-<hr>
-<p>如果需要详细的图示解释或算法流程图，我可以帮你画出来！ 😊</p>
-<p>论文中使用的强化学习方法是**“基于最小二乘的Q学习 (LSTD Q-Learning)”<strong>，具体来说是</strong>二阶LSTD Q-Learning (Second-Order Least Squares Temporal Difference Q-Learning)**。</p>
-<hr>
-<h2 id="✅-为什么使用-LSTD-Q-Learning？"><a href="#✅-为什么使用-LSTD-Q-Learning？" class="headerlink" title="✅ 为什么使用 LSTD Q-Learning？"></a>✅ 为什么使用 LSTD Q-Learning？</h2><p>LSTD Q-Learning 是一种<strong>基于值函数 (Value-based) 的强化学习方法</strong>，相较于传统的Q-Learning，LSTD方法通过<strong>最小二乘回归</strong>直接拟合Q值函数，从而<strong>加快了学习速度</strong>，并且<strong>提高了数据效率</strong>。</p>
-<hr>
-<h2 id="🎯-强化学习目标"><a href="#🎯-强化学习目标" class="headerlink" title="🎯 强化学习目标"></a>🎯 强化学习目标</h2><p>论文中的目标是通过调整MPC参数 θ\theta，最小化以下目标函数：</p>
-<p>J(πθ)&#x3D;Eτπθ[∑k&#x3D;0∞γkL(sk,ak)]J(π_{\theta}) &#x3D; \mathbb{E}<em>{\tau</em>{\pi_{\theta}}} \left[ \sum_{k&#x3D;0}^{\infty} \gamma^k L(s_k, a_k) \right]</p>
-<ul>
-<li>J(πθ)J(π_{\theta}) 是累积损失；</li>
-<li>L(sk,ak)L(s_k, a_k) 是每个时间步的损失 (如偏离目标位置、违反约束等)；</li>
-<li>θ\theta 是MPC的可调参数；</li>
-<li>γ\gamma 是折扣因子。</li>
-</ul>
-<hr>
-<h2 id="🚀-LSTD-Q-Learning-的更新方式"><a href="#🚀-LSTD-Q-Learning-的更新方式" class="headerlink" title="🚀 LSTD Q-Learning 的更新方式"></a>🚀 LSTD Q-Learning 的更新方式</h2><h3 id="💡-1-目标：估计Q值函数"><a href="#💡-1-目标：估计Q值函数" class="headerlink" title="💡 (1) 目标：估计Q值函数"></a>💡 (1) 目标：估计Q值函数</h3><p>Qθ(s,a)&#x3D;L(s,a)+γVθ(s′)Q_{\theta}(s, a) &#x3D; L(s, a) + \gamma V_{\theta}(s’)</p>
-<h3 id="💡-2-TD误差-Temporal-Difference-Error"><a href="#💡-2-TD误差-Temporal-Difference-Error" class="headerlink" title="💡 (2) TD误差 (Temporal Difference Error)"></a>💡 (2) TD误差 (Temporal Difference Error)</h3><p>δ&#x3D;L(s,a)+γVθ(s′)−Qθ(s,a)\delta &#x3D; L(s, a) + \gamma V_{\theta}(s’) - Q_{\theta}(s, a)</p>
-<h3 id="💡-3-更新梯度和Hessian矩阵"><a href="#💡-3-更新梯度和Hessian矩阵" class="headerlink" title="💡 (3) 更新梯度和Hessian矩阵"></a>💡 (3) 更新梯度和Hessian矩阵</h3><p>p&#x3D;−∑i&#x3D;1mδi∇θQθ(si,ai)p &#x3D; - \sum_{i&#x3D;1}^{m} \delta_i \nabla_{\theta} Q_{\theta}(s_i, a_i)</p>
-<p>H&#x3D;∑i&#x3D;1m∇θQθ(si,ai)∇θQθ(si,ai)T−δi∇θ2Qθ(si,ai)H &#x3D; \sum_{i&#x3D;1}^{m} \nabla_{\theta} Q_{\theta}(s_i, a_i) \nabla_{\theta} Q_{\theta}(s_i, a_i)^T - \delta_i \nabla^2_{\theta} Q_{\theta}(s_i, a_i)</p>
-<ul>
-<li>pp 是梯度方向；</li>
-<li>HH 是近似Hessian矩阵；</li>
-<li>mm 是观测批量 (Batch size)。</li>
-</ul>
-<h3 id="💡-4-参数更新"><a href="#💡-4-参数更新" class="headerlink" title="💡 (4) 参数更新"></a>💡 (4) 参数更新</h3><p>θ←θ+αH−1p\theta \leftarrow \theta + \alpha H^{-1} p</p>
-<hr>
-<h2 id="🔥-强化学习-MPC-GP的完整流程"><a href="#🔥-强化学习-MPC-GP的完整流程" class="headerlink" title="🔥 强化学习-MPC-GP的完整流程"></a>🔥 强化学习-MPC-GP的完整流程</h2><table>
-<thead>
-<tr>
-<th>过程</th>
-<th>方法</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>策略 (Policy)</td>
-<td>MPC控制器 (通过解最优控制问题得到动作 uu)</td>
-</tr>
-<tr>
-<td>值函数 (Value)</td>
-<td>LSTD Q-Learning 拟合Q值函数</td>
-</tr>
-<tr>
-<td>安全性保证</td>
-<td>高斯过程 (GP) 建模MPC参数的安全约束</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="✅-为什么选用-LSTD-Q-Learning？"><a href="#✅-为什么选用-LSTD-Q-Learning？" class="headerlink" title="✅ 为什么选用 LSTD Q-Learning？"></a>✅ 为什么选用 LSTD Q-Learning？</h2><table>
-<thead>
-<tr>
-<th>优点</th>
-<th>LSTD Q-Learning</th>
-<th>传统Q-Learning</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>学习效率</td>
-<td>高 (通过最小二乘法直接拟合)</td>
-<td>低</td>
-</tr>
-<tr>
-<td>数据利用率</td>
-<td>高 (支持小批量学习)</td>
-<td>依赖大量采样</td>
-</tr>
-<tr>
-<td>收敛速度</td>
-<td>快</td>
-<td>慢</td>
-</tr>
-<tr>
-<td>与MPC兼容性</td>
-<td>强 (可以结合梯度更新MPC参数)</td>
-<td>较弱</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="🌟-总结"><a href="#🌟-总结" class="headerlink" title="🌟 总结"></a>🌟 总结</h2><p>论文选择 LSTD Q-Learning 是因为它：</p>
-<ul>
-<li>能够<strong>快速收敛</strong>；</li>
-<li>能<strong>直接通过梯度更新MPC参数 θ\theta</strong>；</li>
-<li>能通过<strong>高斯过程 (GP) 回归确保安全性</strong>；</li>
-<li>有效解决了传统RL中“安全性”和“数据效率”之间的矛盾。</li>
-</ul>
-<hr>
-<p>我可以给你画一个完整的强化学习-MPC安全学习流程图，或者写一个Python实现的框架代码，你需要吗？ 😊</p>
-<h3 id="🌟-用一个具体的例子来解释-LSTD-Q-Learning-的原理："><a href="#🌟-用一个具体的例子来解释-LSTD-Q-Learning-的原理：" class="headerlink" title="🌟 用一个具体的例子来解释 LSTD Q-Learning 的原理："></a>🌟 用一个具体的例子来解释 LSTD Q-Learning 的原理：</h3><hr>
-<h2 id="🎯-问题背景："><a href="#🎯-问题背景：" class="headerlink" title="🎯 问题背景："></a>🎯 <strong>问题背景</strong>：</h2><p>假设我们正在控制一架无人机 (Quadrotor)，目标是让无人机从起点飞到目标点，同时避开障碍物，并保持飞行稳定。</p>
-<ul>
-<li><strong>状态 ss</strong>：无人机的位置和速度</li>
-<li><strong>动作 aa</strong>：无人机的推力和姿态角度</li>
-<li><strong>奖励 rr</strong>：目标位置的接近程度，以及是否违反了安全约束</li>
-<li><strong>MPC控制器参数 θ\theta</strong>：无人机的动力学参数（如重力常数 gg 和推力系数 KzK_z）</li>
-</ul>
-<hr>
-<h2 id="✅-传统Q-Learning的问题："><a href="#✅-传统Q-Learning的问题：" class="headerlink" title="✅ 传统Q-Learning的问题："></a>✅ <strong>传统Q-Learning的问题</strong>：</h2><p>传统的Q-Learning使用的是“表格型”或者“神经网络”来估计Q值函数 Q(s,a)Q(s, a)，但：</p>
-<ul>
-<li><strong>收敛速度慢</strong></li>
-<li><strong>需要大量的训练数据</strong></li>
-<li><strong>无法处理连续状态和连续动作空间</strong></li>
-</ul>
-<hr>
-<h2 id="🚀-LSTD-Q-Learning的核心思路："><a href="#🚀-LSTD-Q-Learning的核心思路：" class="headerlink" title="🚀 LSTD Q-Learning的核心思路："></a>🚀 <strong>LSTD Q-Learning的核心思路</strong>：</h2><h3 id="直接用最小二乘法-Least-Squares-估计Q值函数："><a href="#直接用最小二乘法-Least-Squares-估计Q值函数：" class="headerlink" title="直接用最小二乘法 (Least Squares) 估计Q值函数："></a><strong>直接用最小二乘法 (Least Squares) 估计Q值函数</strong>：</h3><p>目标：直接学习<strong>Q值函数的参数化表达</strong>：</p>
-<p>Qθ(s,a)&#x3D;ϕ(s,a)TθQ_{\theta}(s, a) &#x3D; \phi(s, a)^T \theta</p>
-<ul>
-<li>ϕ(s,a)\phi(s, a) 是特征向量 (Feature Vector)，比如无人机的位置、速度、姿态等；</li>
-<li>θ\theta 是我们希望学习的MPC参数 (例如重力常数 gg、推力系数 KzK_z)。</li>
-</ul>
-<hr>
-<h2 id="✅-具体步骤："><a href="#✅-具体步骤：" class="headerlink" title="✅ 具体步骤："></a>✅ <strong>具体步骤</strong>：</h2><hr>
-<h2 id="🎯-第1步：收集交互数据："><a href="#🎯-第1步：收集交互数据：" class="headerlink" title="🎯 第1步：收集交互数据："></a>🎯 <strong>第1步：收集交互数据</strong>：</h2><p>在第 tt 次飞行任务中，我们收集到了一条轨迹：</p>
-<p>(st,at,rt,st+1)(s_t, a_t, r_t, s_{t+1})</p>
-<ul>
-<li>sts_t：当前状态（当前位置和速度）</li>
-<li>ata_t：当前MPC控制器输出的推力</li>
-<li>rtr_t：即时奖励 (Reward)，如到目标点的距离和违反约束的惩罚</li>
-<li>st+1s_{t+1}：下一时刻的状态</li>
-</ul>
-<hr>
-<h2 id="🎯-第2步：计算TD误差-Temporal-Difference-Error-："><a href="#🎯-第2步：计算TD误差-Temporal-Difference-Error-：" class="headerlink" title="🎯 第2步：计算TD误差 (Temporal Difference Error)："></a>🎯 <strong>第2步：计算TD误差 (Temporal Difference Error)</strong>：</h2><p>δ&#x3D;rt+γQθ(st+1,at+1)−Qθ(st,at)\delta &#x3D; r_t + \gamma Q_{\theta}(s_{t+1}, a_{t+1}) - Q_{\theta}(s_t, a_t)</p>
-<ul>
-<li>γ\gamma 是折扣因子 (Discount Factor)</li>
-<li>Qθ(st+1,at+1)Q_{\theta}(s_{t+1}, a_{t+1}) 是下一状态的估计Q值</li>
-</ul>
-<hr>
-<h2 id="🎯-第3步：LSTD最小二乘更新"><a href="#🎯-第3步：LSTD最小二乘更新" class="headerlink" title="🎯 第3步：LSTD最小二乘更新"></a>🎯 <strong>第3步：LSTD最小二乘更新</strong></h2><p>在传统Q-Learning中，我们使用的是：</p>
-<p>θ←θ+αδ∇θQθ(st,at)\theta \leftarrow \theta + \alpha \delta \nabla_{\theta} Q_{\theta}(s_t, a_t)</p>
-<p>但在LSTD Q-Learning中，我们不直接用梯度，而是<strong>用最小二乘法 (Least Squares) 直接拟合Q值函数</strong>。</p>
-<hr>
-<h3 id="🔥-核心公式："><a href="#🔥-核心公式：" class="headerlink" title="🔥 核心公式："></a>🔥 <strong>核心公式</strong>：</h3><p>Aθ&#x3D;bA \theta &#x3D; b</p>
-<ul>
-<li>AA 是特征的协方差矩阵；</li>
-<li>bb 是Q值目标与特征的相关性；</li>
-</ul>
-<hr>
-<h3 id="🌈-矩阵形式："><a href="#🌈-矩阵形式：" class="headerlink" title="🌈 矩阵形式："></a>🌈 <strong>矩阵形式</strong>：</h3><p>A&#x3D;∑t&#x3D;1mϕ(st,at)(ϕ(st,at)−γϕ(st+1,at+1))TA &#x3D; \sum_{t&#x3D;1}^{m} \phi(s_t, a_t) \left( \phi(s_t, a_t) - \gamma \phi(s_{t+1}, a_{t+1}) \right)^T</p>
-<p>b&#x3D;∑t&#x3D;1mϕ(st,at)rtb &#x3D; \sum_{t&#x3D;1}^{m} \phi(s_t, a_t) r_t</p>
-<hr>
-<h3 id="✅-解出最优参数："><a href="#✅-解出最优参数：" class="headerlink" title="✅ 解出最优参数："></a>✅ <strong>解出最优参数</strong>：</h3><p>θ&#x3D;A−1b\theta &#x3D; A^{-1} b</p>
-<hr>
-<h2 id="🎯-第4步：MPC参数更新"><a href="#🎯-第4步：MPC参数更新" class="headerlink" title="🎯 第4步：MPC参数更新"></a>🎯 <strong>第4步：MPC参数更新</strong></h2><p>在每一轮飞行任务之后，使用LSTD-Q学习到的参数 θ\theta 来更新MPC控制器：</p>
-<p>θnew&#x3D;θold−αH−1p\theta_{new} &#x3D; \theta_{old} - \alpha H^{-1} p</p>
-<ul>
-<li>HH：近似Hessian矩阵</li>
-<li>pp：梯度方向</li>
-</ul>
-<hr>
-<h2 id="🎯-第5步：引入高斯过程-GP-进行安全约束"><a href="#🎯-第5步：引入高斯过程-GP-进行安全约束" class="headerlink" title="🎯 第5步：引入高斯过程 (GP) 进行安全约束"></a>🎯 <strong>第5步：引入高斯过程 (GP) 进行安全约束</strong></h2><p>通过高斯过程 (GP) 建模MPC参数 θ\theta 的安全区域：</p>
-<p>θ∈SD&#x3D;{θ∣P[z(θ)≤0]≥β}\theta \in S_D &#x3D; { \theta | P[z(\theta) \leq 0] \geq \beta }</p>
-<hr>
-<h2 id="✅-最终效果："><a href="#✅-最终效果：" class="headerlink" title="✅ 最终效果："></a>✅ <strong>最终效果</strong>：</h2><table>
-<thead>
-<tr>
-<th>强化学习方法</th>
-<th>学习速度</th>
-<th>安全性</th>
-<th>收敛速度</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>传统Q-Learning</td>
-<td>慢</td>
-<td>无法保证</td>
-<td>慢</td>
-</tr>
-<tr>
-<td>LSTD Q-Learning + GP</td>
-<td>快</td>
-<td>高斯过程约束</td>
-<td>快</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="🎁-完整流程图："><a href="#🎁-完整流程图：" class="headerlink" title="🎁 完整流程图："></a>🎁 <strong>完整流程图</strong>：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">+----------------------------+</span><br><span class="line">|     强化学习模块 (RL)       |</span><br><span class="line">|                            |</span><br><span class="line">|     LSTD Q-Learning        |</span><br><span class="line">|   更新MPC参数 θ            |</span><br><span class="line">+----------------------------+</span><br><span class="line">             ↓</span><br><span class="line">+----------------------------+</span><br><span class="line">|          MPC控制器            |</span><br><span class="line">|                            |</span><br><span class="line">|   min_u Q_θ(s, u)          |</span><br><span class="line">|   预测下一步控制动作 u      |</span><br><span class="line">+----------------------------+</span><br><span class="line">             ↓</span><br><span class="line">+----------------------------+</span><br><span class="line">|        系统环境                  |</span><br><span class="line">|                            |</span><br><span class="line">|   接收动作 u，反馈状态 s&#x27; |</span><br><span class="line">+----------------------------+</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="✅-总结"><a href="#✅-总结" class="headerlink" title="✅ 总结"></a>✅ <strong>总结</strong></h2><p>LSTD Q-Learning 的优点：</p>
-<table>
-<thead>
-<tr>
-<th>特点</th>
-<th>传统Q-Learning</th>
-<th>LSTD Q-Learning</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>学习速度</td>
-<td>慢</td>
-<td>快 (最小二乘法)</td>
-</tr>
-<tr>
-<td>样本效率</td>
-<td>低</td>
-<td>高</td>
-</tr>
-<tr>
-<td>收敛速度</td>
-<td>慢</td>
-<td>快</td>
-</tr>
-<tr>
-<td>安全性保证</td>
-<td>无</td>
-<td>通过高斯过程 (GP)</td>
-</tr>
-</tbody></table>
-
+          <p>从安全强化学习角度梳理论文中 MPC、GP 与 LSTD Q-Learning 的关系，并给出关键公式与直观解释。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/03/18/safe-learning%E5%AE%9E%E8%B7%B5-%E5%9F%BA%E4%BA%8E%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%9A%84MPC/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -2144,7 +1862,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/cheng.gif">
       <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="面向机器人、强化学习与控制的研究笔记">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -2221,7 +1939,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/cheng.gif">
       <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="面向机器人、强化学习与控制的研究笔记">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -2324,7 +2042,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/cheng.gif">
       <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="面向机器人、强化学习与控制的研究笔记">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -2401,7 +2119,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/cheng.gif">
       <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="面向机器人、强化学习与控制的研究笔记">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -2520,7 +2238,7 @@
     <img class="site-author-image" itemprop="image" alt="Zhicheng"
       src="/images/cheng.gif">
   <p class="site-author-name" itemprop="name">Zhicheng</p>
-  <div class="site-description" itemprop="description"></div>
+  <div class="site-description" itemprop="description">面向机器人、强化学习与控制的研究笔记</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
