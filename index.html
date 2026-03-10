@@ -223,7 +223,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-10 19:29:30" itemprop="dateModified" datetime="2026-03-10T19:29:30+08:00">2026-03-10</time>
+                <time title="修改时间：2026-03-10 19:57:45" itemprop="dateModified" datetime="2026-03-10T19:57:45+08:00">2026-03-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -272,29 +272,31 @@
 状态与动力学</li>
 </ol>
 <ul>
-<li>状态变量：<br />
-( s = [q, \dot{q}] \in \mathbb{R}^{2n} )，其中 ( q ) 为关节角度，( \dot{q} ) 为角速度。</li>
-<li>动力学模型（控制仿射形式）：<br />
-[<br />
-\dot{s} = \underbrace{\begin{bmatrix} \dot{q} \ -M(q)^{-1}(C(q,\dot{q})\dot{q} + g(q)) \end{bmatrix}}<em>{f(s)} + \underbrace{\begin{bmatrix} 0 \ M(q)^{-1} \end{bmatrix}}</em>{G(s)} u_s<br />
-]
+<li>状态变量：</li>
+</ul>
+$$
+\( s = [q, \dot{q}] \in \mathbb{R}^{2n} \)，其中 \( q \) 为关节角度，\( \dot{q} \) 为角速度。
+$$ 
+<ul>
+<li>动力学模型（控制仿射形式）：</li>
+</ul>
+$$
+\dot{s} = \underbrace{\begin{bmatrix} \dot{q} \\ -M(q)^{-1}(C(q,\dot{q})\dot{q} + g(q)) \end{bmatrix}}_{f(s)} + \underbrace{\begin{bmatrix} 0 \\ M(q)^{-1} \end{bmatrix}}_{G(s)} u_s
+$$ 
 <ul>
 <li>( M(q) )：惯性矩阵，( C(q,\dot{q}) )：科氏力矩阵，( g(q) )：重力项。</li>
 <li>控制输入 ( u_s \in \mathbb{R}^n )：关节力矩。</li>
 </ul>
-</li>
-</ul>
 <p>安全约束</p>
 <ul>
-<li>避障约束（距离函数）：<br />
-[<br />
-k(s) = d_{\text{min}} - |p(q) - p_{\text{obs}}| \leq 0<br />
-]
+<li>避障约束（距离函数）：</li>
+</ul>
+$$
+k(s) = d_{\text{min}} - \|p(q) - p_{\text{obs}}\| \leq 0
+$$ 
 <ul>
 <li>( p(q) )：机械臂末端位置，( p_{\text{obs}} )：障碍物位置，( d_{\text{min}} )：最小安全距离。</li>
 <li>约束函数 ( k(s) ) 需满足 ( C^1 ) 光滑性（可通过距离场平滑化实现）。</li>
-</ul>
-</li>
 </ul>
 <hr />
 <ol start="2">
@@ -302,49 +304,46 @@ k(s) = d_{\text{min}} - |p(q) - p_{\text{obs}}| \leq 0<br />
 步骤1：构造约束流形</li>
 </ol>
 <ul>
-<li>引入松弛变量 ( \mu \geq 0 )，定义等式约束：<br />
-[<br />
-c(s, \mu) = k(s) + \mu = 0<br />
-]</li>
-<li>约束流形：<br />
-[<br />
-\mathcal{M} = {(s, \mu) \in \mathbb{R}^{2n} \times [0, +\infty) : c(s, \mu) = 0}<br />
-]
+<li>引入松弛变量 ( \mu \geq 0 )，定义等式约束：</li>
+</ul>
+$$
+c(s, \mu) = k(s) + \mu = 0
+$$ 
+<ul>
+<li>约束流形：</li>
+</ul>
+$$
+\mathcal{M} = \{(s, \mu) \in \mathbb{R}^{2n} \times [0, +\infty) : c(s, \mu) = 0\}
+$$ 
 <ul>
 <li>投影性质：若 ( (s, \mu) \in \mathcal{M} )，则 ( s ) 满足原始约束 ( k(s) \leq 0 )。</li>
 </ul>
-</li>
-</ul>
 <p>步骤2：设计松弛变量动力学</p>
 <ul>
-<li>动态更新规则（类K函数控制）：<br />
-[<br />
-\dot{\mu} = \alpha(\mu) u_\mu, \quad \alpha(\mu) = \mu \quad (\text{例：线性函数})<br />
-]
+<li>动态更新规则（类K函数控制）：</li>
+</ul>
+$$
+\dot{\mu} = \alpha(\mu) u_\mu, \quad \alpha(\mu) = \mu \quad (\text{例：线性函数})
+$$ 
 <ul>
 <li>控制输入 ( u_\mu \in \mathbb{R} )：调节松弛变量的变化速率。</li>
 <li>性质：若初始 ( \mu(0) &gt; 0 )，则 ( \mu(t) &gt; 0 ) 对所有 ( t \geq 0 ) 成立（Lemma 1）。</li>
 </ul>
-</li>
-</ul>
 <p>步骤3：增广系统动力学</p>
 <ul>
-<li>联合系统：<br />
-[<br />
-\begin{bmatrix} \dot{s} \ \dot{\mu} \end{bmatrix} = \begin{bmatrix} f(s) \ 0 \end{bmatrix} + \begin{bmatrix} G(s) &amp; 0 \ 0 &amp; \alpha(\mu) \end{bmatrix} \begin{bmatrix} u_s \ u_\mu \end{bmatrix}<br />
-]
+<li>联合系统：</li>
+</ul>
+$$
+\begin{bmatrix} \dot{s} \\ \dot{\mu} \end{bmatrix} = \begin{bmatrix} f(s) \\ 0 \end{bmatrix} + \begin{bmatrix} G(s) & 0 \\ 0 & \alpha(\mu) \end{bmatrix} \begin{bmatrix} u_s \\ u_\mu \end{bmatrix}
+$$ 
 <ul>
-<li>控制矩阵：<br />
-[<br />
-J_u(s, \mu) = \nabla_s c(s, \mu) G(s) = \nabla_q k(s) \cdot J_{\text{arm}}(q) \cdot M(q)^{-1}<br />
-]
-<ul>
-<li>( J_{\text{arm}}(q) )：机械臂末端雅可比矩阵。</li>
+<li>控制矩阵：</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
+$$
+J_u(s, \mu) = \nabla_s c(s, \mu) G(s) = \nabla_q k(s) \cdot J_{\text{arm}}(q) \cdot M(q)^{-1}
+$$ 
+<pre><code>- \( J_&#123;\text&#123;arm&#125;&#125;(q) \)：机械臂末端雅可比矩阵。
+</code></pre>
 <p>步骤4：切空间投影</p>
 <ul>
 <li>切空间基 ( B_u ) 计算：
@@ -356,18 +355,17 @@ J_u(s, \mu) = \nabla_s c(s, \mu) G(s) = \nabla_q k(s) \cdot J_{\text{arm}}(q) \c
 </ul>
 <p>步骤5：安全控制器</p>
 <ul>
-<li>控制律（公式12）：<br />
-[<br />
-\begin{bmatrix} u_s \ u_\mu \end{bmatrix} = \underbrace{-J_u^\dagger \psi}<em>{\text{漂移补偿}} + \underbrace{B_u u}</em>{\text{任务控制}} - \underbrace{\lambda J_u^\dagger c}_{\text{收缩项}}<br />
-]
+<li>控制律（公式12）：</li>
+</ul>
+$$
+\begin{bmatrix} u_s \\ u_\mu \end{bmatrix} = \underbrace{-J_u^\dagger \psi}_{\text{漂移补偿}} + \underbrace{B_u u}_{\text{任务控制}} - \underbrace{\lambda J_u^\dagger c}_{\text{收缩项}}
+$$ 
 <ul>
 <li>参数说明：
 <ul>
 <li>( \psi = \nabla_s k(s) \cdot f(s) )：约束对自然动态的敏感度。</li>
 <li>( u )：RL策略输出的原始力矩（如跟踪PD控制信号）。</li>
 <li>( \lambda &gt; 0 )：收缩速率。</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -414,10 +412,14 @@ J_u(s, \mu) = \nabla_s c(s, \mu) G(s) = \nabla_q k(s) \cdot J_{\text{arm}}(q) \c
 <p>以下是针对同一个约束函数，不同安全强化学习方法处理方式的对比分析，结合数学形式、实现逻辑和应用场景的详细说明：</p>
 <ol>
 <li>问题设定<br />
-约束函数：<br />
-[ k(s) \leq 0 ]<br />
-（例如：机械臂与障碍物距离 ( D(s) \geq d_{\text{safe}} ) 可表示为 ( k(s) = d_{\text{safe}} - D(s) \leq 0 )）</li>
+约束函数：</li>
 </ol>
+$$
+k(s) \leq 0
+$$ 
+$$
+（例如：机械臂与障碍物距离 \( D(s) \geq d_{\text{safe}} \) 可表示为 \( k(s) = d_{\text{safe}} - D(s) \leq 0 \)）
+$$ 
 <p>目标：在强化学习训练和部署中保证 ( k(s) \leq 0 ) 始终成立。</p>
 <ol>
 <li>不同方法对比</li>
@@ -425,14 +427,13 @@ J_u(s, \mu) = \nabla_s c(s, \mu) G(s) = \nabla_q k(s) \cdot J_{\text{arm}}(q) \c
 <p>(1) 惩罚函数法（Penalty Method）</p>
 <ul>
 <li>处理方式：<br />
-在奖励函数中加入惩罚项：<br />
-[<br />
-R_{\text{penalized}} = R_{\text{task}} - \lambda \max(0, k(s))^2<br />
-]
+在奖励函数中加入惩罚项：</li>
+</ul>
+$$
+R_{\text{penalized}} = R_{\text{task}} - \lambda \max(0, k(s))^2
+$$ 
 <ul>
 <li>(\lambda) 为惩罚系数，需手动调节。</li>
-</ul>
-</li>
 <li>特点：
 <ul>
 <li>数学简单：无需修改策略结构。</li>
@@ -446,17 +447,16 @@ R_{\text{penalized}} = R_{\text{task}} - \lambda \max(0, k(s))^2<br />
 <p>(2) 安全滤波器（QP-Based Safety Filter）</p>
 <ul>
 <li>处理方式：<br />
-在线求解二次规划问题，修正动作 ( u )：<br />
-[<br />
-\begin{aligned}<br />
-\min_{u} \quad &amp; |u - u_{\text{RL}}|^2 \<br />
-\text{s.t.} \quad &amp; \nabla k(s)^T (f(s) + G(s)u) \leq -\alpha k(s)<br />
-\end{aligned}<br />
-]
+在线求解二次规划问题，修正动作 ( u )：</li>
+</ul>
+$$
+\begin{aligned}
+\min_{u} \quad & \|u - u_{\text{RL}}\|^2 \\
+\text{s.t.} \quad & \nabla k(s)^T (f(s) + G(s)u) \leq -\alpha k(s)
+\end{aligned}
+$$ 
 <ul>
 <li>通过CBF（Control Barrier Function）保证约束。</li>
-</ul>
-</li>
 <li>特点：
 <ul>
 <li>即时安全：每一步动作均满足约束。</li>
@@ -469,14 +469,18 @@ R_{\text{penalized}} = R_{\text{task}} - \lambda \max(0, k(s))^2<br />
 </ul>
 <p>(3) 备份策略（Backup Policy）</p>
 <ul>
-<li>处理方式：<br />
-预设安全策略 ( \pi_{\text{safe}} )（如零速度指令），当 ( k(s) &gt; \epsilon ) 时切换：<br />
-[<br />
-u = \begin{cases}<br />
-u_{\text{RL}} &amp; \text{if } k(s) \leq \epsilon, \<br />
-\pi_{\text{safe}}(s) &amp; \text{otherwise}.<br />
-\end{cases}<br />
-]</li>
+<li>处理方式：</li>
+</ul>
+$$
+预设安全策略 \( \pi_{\text{safe}} \)（如零速度指令），当 \( k(s) > \epsilon \) 时切换：
+$$ 
+$$
+u = \begin{cases}
+u_{\text{RL}} & \text{if } k(s) \leq \epsilon, \\
+\pi_{\text{safe}}(s) & \text{otherwise}.
+\end{cases}
+$$ 
+<ul>
 <li>特点：
 <ul>
 <li>简单可靠：硬件易实现。</li>
@@ -492,13 +496,17 @@ u_{\text{RL}} &amp; \text{if } k(s) \leq \epsilon, \<br />
 <li>处理方式：
 <ol>
 <li>构造约束流形 ( \mathcal{M} = {s \mid k(s) = 0} ) 的切空间 ( T_s\mathcal{M} )。</li>
-<li>将RL动作 ( u ) 投影到切空间：<br />
-[<br />
-u_{\text{safe}} = (I - \nabla k(s) (\nabla k(s)^T \nabla k(s))^{-1} \nabla k(s)^T) u<br />
-]</li>
-<li>动态调整松弛变量 ( \mu ) 保证渐近收敛（见原文公式12）。</li>
+<li>将RL动作 ( u ) 投影到切空间：</li>
 </ol>
 </li>
+</ul>
+$$
+u_{\text{safe}} = (I - \nabla k(s) (\nabla k(s)^T \nabla k(s))^{-1} \nabla k(s)^T) u
+$$ 
+<ol start="3">
+<li>动态调整松弛变量 ( \mu ) 保证渐近收敛（见原文公式12）。</li>
+</ol>
+<ul>
 <li>特点：
 <ul>
 <li>严格安全：数学保证 ( k(s) \leq 0 )（即使训练中）。</li>
@@ -1359,7 +1367,7 @@ u_{\text{safe}} = (I - \nabla k(s) (\nabla k(s)^T \nabla k(s))^{-1} \nabla k(s)^
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-12 23:57:06" itemprop="dateModified" datetime="2025-06-12T23:57:06+08:00">2025-06-12</time>
+                <time title="修改时间：2026-03-10 19:57:45" itemprop="dateModified" datetime="2026-03-10T19:57:45+08:00">2026-03-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1498,28 +1506,27 @@ sin(theta), cos(theta), 0,<br />
 </ul>
 <p>步骤1：状态预测（时间更新）</p>
 <ol>
-<li>
-<p>先验状态估计：<br />
-[ \hat{\mathbf{x}}_k^- = \mathbf{A}<em>k \hat{\mathbf{x}}</em>{k-1} + \mathbf{B}_k \mathbf{u}_k<br />
-]</p>
+<li>先验状态估计：</li>
+</ol>
+$$
+\hat{\mathbf{x}}_k^- = \mathbf{A}_k \hat{\mathbf{x}}_{k-1} + \mathbf{B}_k \mathbf{u}_k
+$$ 
 <ul>
 <li>基于上一时刻最优估计 ( \hat{\mathbf{x}}_{k-1} ) 和系统模型预测当前状态。</li>
 </ul>
-</li>
-<li>
-<p>先验协方差预测：<br />
-[<br />
-\mathbf{P}_k^- = \mathbf{A}<em>k \mathbf{P}</em>{k-1} \mathbf{A}_k^T + \mathbf{Q}_k<br />
-]</p>
+<ol start="2">
+<li>先验协方差预测：</li>
+</ol>
+$$
+\mathbf{P}_k^- = \mathbf{A}_k \mathbf{P}_{k-1} \mathbf{A}_k^T + \mathbf{Q}_k
+$$ 
 <ul>
 <li>( \mathbf{P}_k^- ) 表示预测状态的不确定性（含过程噪声 ( \mathbf{Q}_k )）。</li>
 </ul>
-</li>
-</ol>
-<p>步骤2：卡尔曼增益计算<br />
-[<br />
-\mathbf{K}_k = \mathbf{P}_k^- \mathbf{H}_k^T (\mathbf{H}_k \mathbf{P}_k^- \mathbf{H}_k^T + \mathbf{R}_k)^{-1}<br />
-]</p>
+<p>步骤2：卡尔曼增益计算</p>
+$$
+\mathbf{K}_k = \mathbf{P}_k^- \mathbf{H}_k^T (\mathbf{H}_k \mathbf{P}_k^- \mathbf{H}_k^T + \mathbf{R}_k)^{-1}
+$$ 
 <ul>
 <li>物理意义：
 <ul>
@@ -1529,18 +1536,18 @@ sin(theta), cos(theta), 0,<br />
 </li>
 <li>作用：权衡模型预测与观测的信任度。若传感器噪声大（( \mathbf{R}_k ) 大），增益 ( \mathbf{K}_k ) 减小，更依赖模型预测。</li>
 </ul>
-<p>步骤3：状态更新（测量校正）<br />
-[<br />
-\hat{\mathbf{x}}_k = \hat{\mathbf{x}}_k^- + \mathbf{K}_k (\mathbf{z}_k - \mathbf{H}_k \hat{\mathbf{x}}_k^-)<br />
-]</p>
+<p>步骤3：状态更新（测量校正）</p>
+$$
+\hat{\mathbf{x}}_k = \hat{\mathbf{x}}_k^- + \mathbf{K}_k (\mathbf{z}_k - \mathbf{H}_k \hat{\mathbf{x}}_k^-)
+$$ 
 <ul>
 <li>残差项 ( \mathbf{z}_k - \mathbf{H}_k \hat{\mathbf{x}}_k^- )：观测值与预测值的差异（即“新息”）。</li>
 <li>更新逻辑：通过卡尔曼增益将残差加权修正预测值。</li>
 </ul>
-<p>步骤4：协方差更新<br />
-[<br />
-\mathbf{P}_k = (\mathbf{I} - \mathbf{K}_k \mathbf{H}_k) \mathbf{P}_k^-<br />
-]</p>
+<p>步骤4：协方差更新</p>
+$$
+\mathbf{P}_k = (\mathbf{I} - \mathbf{K}_k \mathbf{H}_k) \mathbf{P}_k^-
+$$ 
 <ul>
 <li>意义：修正后的状态不确定性降低（( \mathbf{P}_k \leq \mathbf{P}_k^- )）。</li>
 </ul>
@@ -1574,70 +1581,6 @@ sin(theta), cos(theta), 0,<br />
 <li>构建QP问题</li>
 </ul>
 
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zhichengkou.github.io/2025/04/23/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/cheng.gif">
-      <meta itemprop="name" content="Zhicheng">
-      <meta itemprop="description" content="面向机器人、强化学习与控制的研究笔记">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zhicheng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/23/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-04-23 15:35:03" itemprop="dateCreated datePublished" datetime="2025-04-23T15:35:03+08:00">2025-04-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-13 00:06:53" itemprop="dateModified" datetime="2025-06-13T00:06:53+08:00">2025-06-13</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
       
     </div>
 
@@ -1874,7 +1817,7 @@ CPG 的周期/相位调节参数（例如走路节奏）；<br />
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-10 19:29:30" itemprop="dateModified" datetime="2026-03-10T19:29:30+08:00">2026-03-10</time>
+                <time title="修改时间：2026-03-10 19:53:54" itemprop="dateModified" datetime="2026-03-10T19:53:54+08:00">2026-03-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1912,19 +1855,17 @@ CPG 的周期/相位调节参数（例如走路节奏）；<br />
 <h3 id="2-方法结构sac-rcbf"><a class="markdownIt-Anchor" href="#2-方法结构sac-rcbf"></a> 2. 方法结构（SAC-RCBF）</h3>
 <h4 id="系统建模"><a class="markdownIt-Anchor" href="#系统建模"></a> 📎 系统建模：</h4>
 <p>考虑扰动控制仿射系统：</p>
-<p>[<br />
-\dot{x}(t) = f(x(t)) + g(x(t))u(x(t)) + d(x(t))<br />
-]</p>
+<p>\dot{x}(t) = f(x(t)) + g(x(t))u(x(t)) + d(x(t))</p>
 <ul>
 <li>(d(x))：未知扰动，用**高斯过程（GP）**建模。</li>
 <li>控制目标是：用 RL 找最优策略 ( \pi )，在执行前通过 <strong>RCBF 层</strong>进行修正，确保安全。</li>
 </ul>
 <h4 id="安全模块rcbf-qp-层"><a class="markdownIt-Anchor" href="#安全模块rcbf-qp-层"></a> 📎 安全模块：RCBF-QP 层</h4>
 <ul>
-<li>用**鲁棒控制屏障函数（RCBF）**构造约束：<br />
-[<br />
-\nabla h(x)^T(f(x) + g(x)u(x)) \geq -\alpha(h(x)) - \min \nabla h(x)^T d(x)<br />
-]</li>
+<li>用**鲁棒控制屏障函数（RCBF）**构造约束：</li>
+</ul>
+<p>\nabla h(x)^T(f(x) + g(x)u(x)) \geq -\alpha(h(x)) - \min \nabla h(x)^T d(x)</p>
+<ul>
 <li>通过**二次规划（QP）**调整策略输出，最小化修改幅度，确保满足约束。</li>
 </ul>
 <h4 id="强化学习部分soft-actor-critic-sac"><a class="markdownIt-Anchor" href="#强化学习部分soft-actor-critic-sac"></a> 📎 强化学习部分：Soft Actor-Critic (SAC)</h4>
@@ -2039,16 +1980,12 @@ CPG 的周期/相位调节参数（例如走路节奏）；<br />
 </blockquote>
 <h3 id="一-sac-的基本思想"><a class="markdownIt-Anchor" href="#一-sac-的基本思想"></a> 一、SAC 的基本思想</h3>
 <p>传统强化学习只最大化期望回报：</p>
-<p>[<br />
-\max_\pi \mathbb{E}_{\pi} \left[\sum_t r(s_t, a_t)\right]<br />
-]</p>
+<p>\max_\pi \mathbb{E}_{\pi} \left[\sum_t r(s_t, a_t)\right]</p>
 <blockquote>
 <p>不仅希望获得高奖励，还希望策略<strong>有足够的“随机性”</strong>，保持探索能力。</p>
 </blockquote>
 <p>引入<strong>最大熵强化学习目标</strong>：</p>
-<p>[<br />
-\max_\pi \mathbb{E}_{\pi} \left[\sum_t r(s_t, a_t) + \alpha \mathcal{H}(\pi(\cdot|s_t)) \right]<br />
-]</p>
+<p>\max_\pi \mathbb{E}_{\pi} \left[\sum_t r(s_t, a_t) + \alpha \mathcal{H}(\pi(\cdot|s_t)) \right]</p>
 <ul>
 <li>( \mathcal{H}(\pi) = -\log \pi(a|s) ) 是策略的<strong>熵</strong></li>
 <li>( \alpha )：探索与奖励之间的平衡因子</li>
@@ -2216,45 +2153,43 @@ CPG 的周期/相位调节参数（例如走路节奏）；<br />
 </ul>
 <p>1.2 约束马尔可夫决策过程（CMDP）</p>
 <ul>
-<li>定义：在标准MDP基础上引入约束成本函数集合 (C)，目标为：<br />
-[<br />
-\pi^* = \arg \max_{\pi} J_r(\pi) \quad \text{s.t.} \quad J_c(\pi) \leq \epsilon_1<br />
-]<br />
-其中 (J_r(\pi)) 和 (J_c(\pi)) 分别为奖励和成本的累积折扣期望（比如摔倒、电量消耗、与人碰撞等）。</li>
+<li>定义：在标准MDP基础上引入约束成本函数集合 (C)，目标为：</li>
 </ul>
+<p>\pi^* = \arg \max_{\pi} J_r(\pi) \quad \text{s.t.} \quad J_c(\pi) \leq \epsilon_1</p>
+<p>其中 (J_r(\pi)) 和 (J_c(\pi)) 分别为奖励和成本的累积折扣期望（比如摔倒、电量消耗、与人碰撞等）。</p>
 <h2 id="二-方法创新cvpo算法"><a class="markdownIt-Anchor" href="#二-方法创新cvpo算法"></a> 二、方法创新：CVPO算法</h2>
 <p>2.1 概率推断视角的重新建模</p>
 <ul>
 <li>关键思想：将安全RL问题转化为概率推断问题，通过变分推断和EM算法自然融入约束。</li>
-<li>概率图模型：引入最优性变量 (O)，表示轨迹 (\tau) 的“成功事件”，其似然函数与奖励相关：<br />
-[<br />
-p(O=1|\tau) \propto \exp\left(\sum_t \gamma^t r_t / \alpha\right)<br />
-]</li>
+<li>概率图模型：引入最优性变量 (O)，表示轨迹 (\tau) 的“成功事件”，其似然函数与奖励相关：</li>
+</ul>
+<p>p(O=1|\tau) \propto \exp\left(\sum_t \gamma^t r_t / \alpha\right)</p>
+<ul>
 <li>证据下界（ELBO）：通过变分分布 (q(\tau)) 最大化下界，同时约束 (q) 属于安全分布族 (\Pi_{Q}^{\epsilon_1})。</li>
 </ul>
 <p>2.2 算法框架：EM两步优化<br />
 E步：凸优化求解变分分布</p>
 <ul>
-<li>优化目标：在约束下最大化奖励期望，同时限制与旧策略的KL散度：<br />
-[<br />
-\max_q \mathbb{E}<em>{\rho_q} \left[ \mathbb{E}</em>{q} [Q_r(s,a)] \right] \quad \text{s.t.} \quad \mathbb{E}<em>{\rho_q} [\mathbb{E}<em>q [Q_c(s,a)]] \leq \epsilon_1, \quad D</em>{KL}(q | \pi</em>{\theta_i}) \leq \epsilon_2<br />
-]</li>
+<li>优化目标：在约束下最大化奖励期望，同时限制与旧策略的KL散度：</li>
+</ul>
+<p>\max_q \mathbb{E}<em>{\rho_q} \left[ \mathbb{E}</em>{q} [Q_r(s,a)] \right] \quad \text{s.t.} \quad \mathbb{E}<em>{\rho_q} [\mathbb{E}<em>q [Q_c(s,a)]] \leq \epsilon_1, \quad D</em>{KL}(q | \pi</em>{\theta_i}) \leq \epsilon_2</p>
+<ul>
 <li>闭式解与强对偶性：
 <ul>
-<li>通过拉格朗日对偶方法解析求解，得到非参数变分分布的闭式表达式：<br />
-[<br />
-q^*(a|s) \propto \pi_{\theta_i}(a|s) \exp\left( \frac{Q_r(s,a) - \lambda Q_c(s,a)}{\alpha} \right)<br />
-]</li>
-<li>证明优化问题的严格凸性，确保解的唯一性和最优性。</li>
+<li>通过拉格朗日对偶方法解析求解，得到非参数变分分布的闭式表达式：</li>
 </ul>
 </li>
 </ul>
+<p>q^*(a|s) \propto \pi_{\theta_i}(a|s) \exp\left( \frac{Q_r(s,a) - \lambda Q_c(s,a)}{\alpha} \right)</p>
+<ul>
+<li>证明优化问题的严格凸性，确保解的唯一性和最优性。</li>
+</ul>
 <p>M步：监督学习更新策略</p>
 <ul>
-<li>目标函数：在信任域内最小化与最优变分分布的KL散度：<br />
-[<br />
-\min_{\theta} \mathbb{E}<em>{\rho_q} \left[ D</em>{KL}(q^*(\cdot|s) | \pi_{\theta}(\cdot|s)) \right]<br />
-]</li>
+<li>目标函数：在信任域内最小化与最优变分分布的KL散度：</li>
+</ul>
+<p>\min_{\theta} \mathbb{E}<em>{\rho_q} \left[ D</em>{KL}(q^*(\cdot|s) | \pi_{\theta}(\cdot|s)) \right]</p>
+<ul>
 <li>实现方式：通过监督学习（如神经网络）拟合 (q^*)，支持离线策略（off-policy）数据复用。</li>
 </ul>
 <h2 id="三-理论贡献与优势"><a class="markdownIt-Anchor" href="#三-理论贡献与优势"></a> 三、理论贡献与优势</h2>
@@ -2320,7 +2255,7 @@ q^*(a|s) \propto \pi_{\theta_i}(a|s) \exp\left( \frac{Q_r(s,a) - \lambda Q_c(s,a
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-10 19:29:30" itemprop="dateModified" datetime="2026-03-10T19:29:30+08:00">2026-03-10</time>
+                <time title="修改时间：2026-03-10 19:57:45" itemprop="dateModified" datetime="2026-03-10T19:57:45+08:00">2026-03-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -2349,19 +2284,21 @@ q^*(a|s) \propto \pi_{\theta_i}(a|s) \exp\left( \frac{Q_r(s,a) - \lambda Q_c(s,a
 <hr />
 <h2 id="1-雅可比矩阵是啥"><a class="markdownIt-Anchor" href="#1-雅可比矩阵是啥"></a> ✅ 1. 雅可比矩阵是啥？</h2>
 <p>在多变量函数中，雅可比矩阵（Jacobian Matrix）是所有一阶偏导数组成的矩阵：</p>
-<p>如果有函数：<br />
-[<br />
-\mathbf{y} = f(\mathbf{x}) \quad \text{其中 } \mathbf{x} \in \mathbb{R}^n, \mathbf{y} \in \mathbb{R}^m<br />
-]</p>
-<p>则雅可比矩阵为：<br />
-[<br />
-J = \frac{\partial \mathbf{y}}{\partial \mathbf{x}} =<br />
-\begin{bmatrix}<br />
-\frac{\partial y_1}{\partial x_1} &amp; \cdots &amp; \frac{\partial y_1}{\partial x_n} \<br />
-\vdots &amp; \ddots &amp; \vdots \<br />
-\frac{\partial y_m}{\partial x_1} &amp; \cdots &amp; \frac{\partial y_m}{\partial x_n}<br />
-\end{bmatrix}<br />
-]</p>
+<p>如果有函数：</p>
+$$
+\mathbf{y} = f(\mathbf{x}) \quad \text{其中 } \mathbf{x} \in \mathbb{R}^n, \mathbf{y} \in \mathbb{R}^m
+$$ 
+<p>则雅可比矩阵为：</p>
+$$
+J = \frac{\partial \mathbf{y}}{\partial \mathbf{x}} =
+\begin{bmatrix}
+\frac{\partial y_1}{\partial x_1} & \cdots & \frac{\partial y_1}{\partial x_n} \\
+$$ 
+<p>\vdots &amp; \ddots &amp; \vdots \</p>
+$$
+\frac{\partial y_m}{\partial x_1} & \cdots & \frac{\partial y_m}{\partial x_n}
+\end{bmatrix}
+$$ 
 <p>在机器人中：</p>
 <ul>
 <li>( \mathbf{x} ) 是关节角度（如 ( \theta_1, \theta_2, \ldots )）</li>
@@ -2371,30 +2308,33 @@ J = \frac{\partial \mathbf{y}}{\partial \mathbf{x}} =<br />
 <h2 id="2-雅可比逆矩阵是啥"><a class="markdownIt-Anchor" href="#2-雅可比逆矩阵是啥"></a> ✅ 2. 雅可比<strong>逆</strong>矩阵是啥？</h2>
 <p>当我们想从输出空间（如末端速度）反推输入空间（如关节速度）时，需要“<strong>反过来</strong>”用雅可比矩阵，这时候我们就需要**“逆”雅可比矩阵**。</p>
 <ul>
-<li>
-<p><strong>如果雅可比是方阵（m = n）</strong> 且满秩，直接求逆：<br />
-[<br />
-\dot{\mathbf{x}} = J^{-1} \dot{\mathbf{y}}<br />
-]</p>
-</li>
-<li>
-<p><strong>如果是非方阵（m ≠ n）或者不可逆</strong>，就用<strong>广义逆（伪逆）</strong>：</p>
+<li><strong>如果雅可比是方阵（m = n）</strong> 且满秩，直接求逆：</li>
+</ul>
+$$
+\dot{\mathbf{x}} = J^{-1} \dot{\mathbf{y}}
+$$ 
 <ul>
-<li>对于 <strong>冗余系统（n &gt; m）</strong>：<br />
-[<br />
-\dot{\mathbf{x}} = J^\top (JJ<sup>\top)</sup>{-1} \dot{\mathbf{y}}<br />
-]</li>
-<li>对于 <strong>欠驱动系统（n &lt; m）</strong>：<br />
-[<br />
-\dot{\mathbf{x}} = (J^\top J)^{-1} J^\top \dot{\mathbf{y}}<br />
-]</li>
-<li>或用 Moore-Penrose 伪逆：<br />
-[<br />
-\dot{\mathbf{x}} = J^+ \dot{\mathbf{y}}<br />
-]</li>
+<li><strong>如果是非方阵（m ≠ n）或者不可逆</strong>，就用<strong>广义逆（伪逆）</strong>：
+<ul>
+<li>对于 <strong>冗余系统（n &gt; m）</strong>：</li>
 </ul>
 </li>
 </ul>
+$$
+\dot{\mathbf{x}} = J^\top (JJ^\top)^{-1} \dot{\mathbf{y}}
+$$ 
+<ul>
+<li>对于 <strong>欠驱动系统（n &lt; m）</strong>：</li>
+</ul>
+$$
+\dot{\mathbf{x}} = (J^\top J)^{-1} J^\top \dot{\mathbf{y}}
+$$ 
+<ul>
+<li>或用 Moore-Penrose 伪逆：</li>
+</ul>
+$$
+\dot{\mathbf{x}} = J^+ \dot{\mathbf{y}}
+$$ 
 <hr />
 <h2 id="3-举个简单例子机器人"><a class="markdownIt-Anchor" href="#3-举个简单例子机器人"></a> ✅ 3. 举个简单例子（机器人）</h2>
 <p>假设一个二维机械臂（2个关节）要控制末端点 ( x, y ) 的速度。</p>
@@ -2439,9 +2379,9 @@ J = \frac{\partial \mathbf{y}}{\partial \mathbf{x}} =<br />
 <li>( \dot{\mathbf{x}} )：末端速度（线速度 + 角速度）</li>
 </ul>
 <p>通过<strong>雅可比矩阵</strong> ( J(\boldsymbol{q}) )，有以下关系：</p>
-<p>[<br />
-\dot{\mathbf{x}} = J(\boldsymbol{q}) \cdot \dot{\boldsymbol{q}}<br />
-]</p>
+$$
+\dot{\mathbf{x}} = J(\boldsymbol{q}) \cdot \dot{\boldsymbol{q}}
+$$ 
 <p>这就是<strong>速度映射关系</strong>：关节空间 → 笛卡尔空间。</p>
 <hr />
 <h2 id="三-雅可比矩阵在运动学中承担什么角色"><a class="markdownIt-Anchor" href="#三-雅可比矩阵在运动学中承担什么角色"></a> ✅ 三、雅可比矩阵在运动学中承担什么角色？</h2>
@@ -2477,32 +2417,36 @@ J = \frac{\partial \mathbf{y}}{\partial \mathbf{x}} =<br />
 </table>
 <hr />
 <h2 id="四-简单举个例子2关节平面机械臂"><a class="markdownIt-Anchor" href="#四-简单举个例子2关节平面机械臂"></a> ✅ 四、简单举个例子（2关节平面机械臂）</h2>
-<p>设两段长度分别为 ( l_1, l_2 )，角度为 ( \theta_1, \theta_2 )</p>
+$$
+设两段长度分别为 \( l_1, l_2 \)，角度为 \( \theta_1, \theta_2 \)
+$$ 
 <p>末端位置为：</p>
-<p>[<br />
-\begin{aligned}<br />
-x &amp;= l_1 \cos \theta_1 + l_2 \cos (\theta_1 + \theta_2) \<br />
-y &amp;= l_1 \sin \theta_1 + l_2 \sin (\theta_1 + \theta_2)<br />
-\end{aligned}<br />
-]</p>
+$$
+\begin{aligned}
+x &= l_1 \cos \theta_1 + l_2 \cos (\theta_1 + \theta_2) \\
+y &= l_1 \sin \theta_1 + l_2 \sin (\theta_1 + \theta_2)
+\end{aligned}
+$$ 
 <p>求导得雅可比矩阵：</p>
-<p>[<br />
-J = \frac{\partial(x, y)}{\partial(\theta_1, \theta_2)} =<br />
-\begin{bmatrix}</p>
+$$
+J = \frac{\partial(x, y)}{\partial(\theta_1, \theta_2)} =
+\begin{bmatrix}
+$$ 
 <ul>
-<li>l_1 \sin \theta_1 - l_2 \sin(\theta_1 + \theta_2) &amp; -l_2 \sin(\theta_1 + \theta_2) \<br />
-l_1 \cos \theta_1 + l_2 \cos(\theta_1 + \theta_2) &amp; l_2 \cos(\theta_1 + \theta_2)<br />
-\end{bmatrix}<br />
-]</li>
+<li>l_1 \sin \theta_1 - l_2 \sin(\theta_1 + \theta_2) &amp; -l_2 \sin(\theta_1 + \theta_2) \</li>
 </ul>
-<p>这样，就可以实现：<br />
-[<br />
-\dot{x}, \dot{y} = J \cdot \dot{\theta}<br />
-]</p>
-<p>也可以反过来：<br />
-[<br />
-\dot{\theta} = J^+ \cdot \dot{x}<br />
-]</p>
+$$
+l_1 \cos \theta_1 + l_2 \cos(\theta_1 + \theta_2) & l_2 \cos(\theta_1 + \theta_2)
+\end{bmatrix}
+$$ 
+<p>这样，就可以实现：</p>
+$$
+\dot{x}, \dot{y} = J \cdot \dot{\theta}
+$$ 
+<p>也可以反过来：</p>
+$$
+\dot{\theta} = J^+ \cdot \dot{x}
+$$ 
 <hr />
 <ul>
 <li>规划方式分为两种，分别是笛卡尔空间的规划（位置规划）和关节空间的规划（角度规划）</li>
@@ -2517,9 +2461,9 @@ l_1 \cos \theta_1 + l_2 \cos(\theta_1 + \theta_2) &amp; l_2 \cos(\theta_1 + \the
 <li><strong>比普通样条更灵活</strong>：通过<strong>节点向量</strong>控制曲线形状和连接方式。</li>
 </ul>
 <p>B-Spline 曲线的数学表达形式是：</p>
-<p>[<br />
-C(t) = \sum_{i=0}^{n} N_{i,k}(t) \cdot P_i<br />
-]</p>
+$$
+C(t) = \sum_{i=0}^{n} N_{i,k}(t) \cdot P_i
+$$ 
 <p>其中：</p>
 <ul>
 <li>( P_i )：控制点</li>
@@ -2527,16 +2471,245 @@ C(t) = \sum_{i=0}^{n} N_{i,k}(t) \cdot P_i<br />
 <li>( t )：参数</li>
 <li>( N_{i,k}(t) ) 是通过递归定义的：</li>
 </ul>
-<p>[<br />
-N_{i,1}(t) =<br />
-\begin{cases}<br />
-1, &amp; t_i \le t &lt; t_{i+1} \<br />
-0, &amp; \text{otherwise}<br />
-\end{cases}<br />
-]</p>
-<p>[<br />
-N_{i,k}(t) = \frac{t - t_i}{t_{i+k-1} - t_i} N_{i,k-1}(t) + \frac{t_{i+k} - t}{t_{i+k} - t_{i+1}} N_{i+1,k-1}(t)<br />
-]</p>
+$$
+N_{i,1}(t) =
+\begin{cases}
+$$ 
+<p>1, &amp; t_i \le t &lt; t_{i+1} \</p>
+$$
+0, & \text{otherwise}
+\end{cases}
+$$ 
+$$
+N_{i,k}(t) = \frac{t - t_i}{t_{i+k-1} - t_i} N_{i,k-1}(t) + \frac{t_{i+k} - t}{t_{i+k} - t_{i+1}} N_{i+1,k-1}(t)
+$$ 
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zhichengkou.github.io/2025/04/11/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-%E7%8E%8B%E6%A0%91%E6%A3%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cheng.gif">
+      <meta itemprop="name" content="Zhicheng">
+      <meta itemprop="description" content="面向机器人、强化学习与控制的研究笔记">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zhicheng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/04/11/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-%E7%8E%8B%E6%A0%91%E6%A3%AE/" class="post-title-link" itemprop="url">深度强化学习-王树森</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-04-11 10:59:24" itemprop="dateCreated datePublished" datetime="2025-04-11T10:59:24+08:00">2025-04-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-10 19:57:45" itemprop="dateModified" datetime="2026-03-10T19:57:45+08:00">2026-03-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">强化学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>此笔记记录学习书本**王树森，张志华，《深度强化学习（初稿》**的学习与总结笔记，其中部分内容由AI生成。</p>
+</blockquote>
+<p>Q学习产生<strong>高估（overestimation）<strong>的原因，主要源于其</strong>最大值操作（max operator）在引入噪声时的偏差</strong>。这种现象通常称为 <strong>最大值偏差（maximization bias）</strong>。</p>
+<h3 id="原理解释"><a class="markdownIt-Anchor" href="#原理解释"></a> 原理解释</h3>
+<p>在 Q-learning 中，我们使用以下目标来更新 Q 值：</p>
+$$
+Q(s, a) \leftarrow Q(s, a) + \alpha \left[ r + \gamma \cdot \max_{a'} Q(s', a') - Q(s, a) \right]
+$$ 
+<p>其中：</p>
+<ul>
+<li>(\max_{a’} Q(s’, a’))：从下一个状态中选择估计值最大的动作作为更新目标。</li>
+</ul>
+<p>⚠️ 问题在于：<br />
+如果 Q 值本身带有估计误差（例如由于采样、函数逼近、探索策略等），<br />
+那么取最大值操作会<strong>偏向选择被高估的值</strong>，从而使得目标值系统性偏高。</p>
+<hr />
+<h3 id="举个例子简化"><a class="markdownIt-Anchor" href="#举个例子简化"></a> 举个例子（简化）</h3>
+<p>假设在状态 (s’) 下，我们有三个动作，真实 Q 值如下：</p>
+<table>
+<thead>
+<tr>
+<th>动作 (a’)</th>
+<th>真正的 Q 值</th>
+<th>网络估计值（含误差）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(a_1)</td>
+<td>1.0</td>
+<td>1.1（+0.1）</td>
+</tr>
+<tr>
+<td>(a_2)</td>
+<td>0.8</td>
+<td>1.0（+0.2）</td>
+</tr>
+<tr>
+<td>(a_3)</td>
+<td>0.6</td>
+<td>0.9（+0.3）</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>虽然 (a_1) 是最优动作（真实 Q 值最大），</li>
+<li>但由于随机估计误差，(\max Q(s’, a’) = 1.1)，这个值偏高了。</li>
+</ul>
+<p>这会导致我们在训练时错误地使用偏高的目标值去更新当前状态的 Q 值，从而 <strong>累计越来越大的高估偏差</strong>。</p>
+<hr />
+<h3 id="高估有什么危害"><a class="markdownIt-Anchor" href="#高估有什么危害"></a> 高估有什么危害？</h3>
+<ul>
+<li><strong>策略不稳定</strong>：错误地偏向那些“看起来收益高”但其实不是的动作；</li>
+<li><strong>训练发散</strong>：目标 Q 值越来越不准确，导致训练无法收敛；</li>
+<li><strong>性能下降</strong>：测试表现可能远低于理论最优策略。</li>
+</ul>
+<hr />
+<h3 id="如何缓解高估"><a class="markdownIt-Anchor" href="#如何缓解高估"></a> 如何缓解高估？</h3>
+<ol>
+<li><strong>Double Q-Learning</strong>：
+<ul>
+<li>采用两个 Q 网络，分别用于选择和评估动作。</li>
+<li>更新目标变为：</li>
+</ul>
+</li>
+</ol>
+$$
+Q(s, a) \leftarrow r + \gamma \cdot Q_2(s', \arg\max_{a'} Q_1(s', a'))
+$$ 
+<ul>
+<li>显著降低高估。</li>
+</ul>
+<ol start="2">
+<li>
+<p><strong>Averaged DQN / Ensemble 方法</strong>：</p>
+<ul>
+<li>使用多个 Q 网络求平均，减少单个网络带来的噪声偏差。</li>
+</ul>
+</li>
+<li>
+<p><strong>Regularization / Uncertainty penalty</strong>：</p>
+<ul>
+<li>对 Q 值添加不确定性惩罚，抑制过高的估计。</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="行为策略和目标策略的区别"><a class="markdownIt-Anchor" href="#行为策略和目标策略的区别"></a> 行为策略和目标策略的区别</h3>
+<h3 id="例1q-learning离策略"><a class="markdownIt-Anchor" href="#例1q-learning离策略"></a> 例1：Q-learning（离策略）</h3>
+<ul>
+<li>行为策略：ε-greedy（偶尔探索）</li>
+<li>目标策略：贪婪策略（永远选最大Q值）</li>
+</ul>
+<blockquote>
+<p>这是典型的 <strong>离策略学习（off-policy）</strong> —— 用一种策略去收集数据，用另一种策略去学习。</p>
+</blockquote>
+<h3 id="例2sarsa在策略"><a class="markdownIt-Anchor" href="#例2sarsa在策略"></a> 例2：SARSA（在策略）</h3>
+<ul>
+<li>行为策略：ε-greedy</li>
+<li>目标策略：同样是ε-greedy</li>
+</ul>
+<blockquote>
+<p>这是 <strong>在策略学习（on-policy）</strong> —— 你用什么策略学习，就用它去探索和更新。</p>
+</blockquote>
+<h3 id="行为策略-目标策略"><a class="markdownIt-Anchor" href="#行为策略-目标策略"></a> 行为策略 ≠ 目标策略：</h3>
+<ul>
+<li>你可以用 <strong>更大胆、更多样的行为策略</strong> 去探索，避免陷入局部最优</li>
+<li>然后用行为数据，训练一个 <strong>更保守、更稳定的目标策略</strong></li>
+</ul>
+<p>这就是 DDPG、TD3、DQN 等算法的本质思路。</p>
+<hr />
+<p>“双延时确定策略梯度”（<strong>Twin Delayed Deep Deterministic Policy Gradient，TD3</strong>）解决强化学习中 <strong>自举 + 最大化引起的 Q 值高估问题</strong></p>
+<hr />
+<p>我们分三步来讲清楚：</p>
+<h2 id="1-问题背景自举-最大化-导致的高估偏差"><a class="markdownIt-Anchor" href="#1-问题背景自举-最大化-导致的高估偏差"></a> 🔥 1. 问题背景：<strong>自举 + 最大化</strong> 导致的高估偏差</h2>
+<p>在像 DDPG、Q-learning 这类算法中，我们更新 Q 值时用的是这个形式：</p>
+$$
+y = r + \gamma \cdot \max_{a'} Q(s', a')
+$$ 
+<p>但注意！</p>
+<ul>
+<li>( Q(s’, a’) ) 是网络的<strong>估计值</strong></li>
+<li>“最大化”这个估计值（选最大 Q）会放大噪声和误差！</li>
+</ul>
+<p>🔍 这就像你考试估分，题做错了但还选“我觉得我做得最好的那题”，会<strong>高估总分</strong><br />
+→ 随着训练进行，Q值越估越高，结果策略学得不靠谱！</p>
+<hr />
+<h2 id="2-td3-怎么解决这个高估问题"><a class="markdownIt-Anchor" href="#2-td3-怎么解决这个高估问题"></a> 🧠 2. TD3 怎么解决这个高估问题？</h2>
+<p>TD3 提出了三个关键改进，其中<strong>双Q网络</strong>是最核心的👇</p>
+<hr />
+<h3 id="方法一双q网络twin-q-networks"><a class="markdownIt-Anchor" href="#方法一双q网络twin-q-networks"></a> ✅ 【方法一】双Q网络（<strong>Twin Q-networks</strong>）</h3>
+<p>用两个独立的 Q 网络： ( Q_1(s, a) )、( Q_2(s, a) )</p>
+<p>更新 TD目标时，不再用 max，而是：</p>
+$$
+y = r + \gamma \cdot \min\left(Q_1(s', a'),\ Q_2(s', a')\right)
+$$ 
+<p>✅ 取<strong>较小值</strong>，就能抵消高估误差（保守估计）<br />
+✅ 这不是自举去最大，而是<strong>自举去最小</strong>，避免因误差叠加而爆炸</p>
+<h3 id="方法二延迟策略更新delayed-policy-update"><a class="markdownIt-Anchor" href="#方法二延迟策略更新delayed-policy-update"></a> ✅ 【方法二】延迟策略更新（<strong>Delayed Policy Update</strong>）</h3>
+<ul>
+<li>策略网络（Actor）更新得更慢，例如每 2～3 次 Critic 更新后才更新一次</li>
+<li>因为 Critic（Q函数）学得更稳定时，再去学策略，效果更稳</li>
+</ul>
+<h3 id="方法三目标动作加噪声target-policy-smoothing"><a class="markdownIt-Anchor" href="#方法三目标动作加噪声target-policy-smoothing"></a> ✅ 【方法三】目标动作加噪声（<strong>Target Policy Smoothing</strong>）</h3>
+<ul>
+<li>为了防止 Q 网络过于依赖某一个精确动作值</li>
+<li>在 TD目标里加入一个小的随机噪声：</li>
+</ul>
+$$
+a' = \pi_{\text{target}}(s') + \epsilon,\quad \epsilon \sim \text{clip}(\mathcal{N}(0, \sigma), -c, c)
+$$ 
+<p>✅ 这样做可以使目标 Q 更平滑，缓解尖峰高估</p>
+<hr />
 
       
     </div>
@@ -2555,7 +2728,7 @@ N_{i,k}(t) = \frac{t - t_i}{t_{i+k-1} - t_i} N_{i,k-1}(t) + \frac{t_{i+k} - t}{t
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2623,7 +2796,7 @@ N_{i,k}(t) = \frac{t - t_i}{t_{i+k-1} - t_i} N_{i,k-1}(t) + \frac{t_{i+k} - t}{t
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

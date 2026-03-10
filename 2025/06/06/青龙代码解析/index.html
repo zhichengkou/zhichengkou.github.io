@@ -28,8 +28,8 @@
 <meta property="og:site_name" content="Zhicheng">
 <meta property="og:description" content="算法模块    文件名 功能简要     Eul_w_filter.cpp &#x2F; Eul_w_filter.h 用于欧拉角速度滤波（姿态估计的角速度平滑）   foot_placement.cpp &#x2F; foot_placement.h 足端位置规划（多用于步态规划、平衡控制）   gait_scheduler.cpp &#x2F; gait_scheduler.h 步态调度器（步态状态机、步态切换、步态周期">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-06-06T11:14:18.000Z">
-<meta property="article:modified_time" content="2025-06-12T15:57:06.984Z">
+<meta property="article:published_time" content="2025-06-06T11:14:18.045Z">
+<meta property="article:modified_time" content="2026-03-10T11:57:45.598Z">
 <meta property="article:author" content="Zhicheng">
 <meta name="twitter:card" content="summary">
 
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-06-12 23:57:06" itemprop="dateModified" datetime="2025-06-12T23:57:06+08:00">2025-06-12</time>
+                <time title="修改时间：2026-03-10 19:57:45" itemprop="dateModified" datetime="2026-03-10T19:57:45+08:00">2026-03-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -371,28 +371,27 @@ sin(theta), cos(theta), 0,<br />
 </ul>
 <p>步骤1：状态预测（时间更新）</p>
 <ol>
-<li>
-<p>先验状态估计：<br />
-[ \hat{\mathbf{x}}_k^- = \mathbf{A}<em>k \hat{\mathbf{x}}</em>{k-1} + \mathbf{B}_k \mathbf{u}_k<br />
-]</p>
+<li>先验状态估计：</li>
+</ol>
+$$
+\hat{\mathbf{x}}_k^- = \mathbf{A}_k \hat{\mathbf{x}}_{k-1} + \mathbf{B}_k \mathbf{u}_k
+$$ 
 <ul>
 <li>基于上一时刻最优估计 ( \hat{\mathbf{x}}_{k-1} ) 和系统模型预测当前状态。</li>
 </ul>
-</li>
-<li>
-<p>先验协方差预测：<br />
-[<br />
-\mathbf{P}_k^- = \mathbf{A}<em>k \mathbf{P}</em>{k-1} \mathbf{A}_k^T + \mathbf{Q}_k<br />
-]</p>
+<ol start="2">
+<li>先验协方差预测：</li>
+</ol>
+$$
+\mathbf{P}_k^- = \mathbf{A}_k \mathbf{P}_{k-1} \mathbf{A}_k^T + \mathbf{Q}_k
+$$ 
 <ul>
 <li>( \mathbf{P}_k^- ) 表示预测状态的不确定性（含过程噪声 ( \mathbf{Q}_k )）。</li>
 </ul>
-</li>
-</ol>
-<p>步骤2：卡尔曼增益计算<br />
-[<br />
-\mathbf{K}_k = \mathbf{P}_k^- \mathbf{H}_k^T (\mathbf{H}_k \mathbf{P}_k^- \mathbf{H}_k^T + \mathbf{R}_k)^{-1}<br />
-]</p>
+<p>步骤2：卡尔曼增益计算</p>
+$$
+\mathbf{K}_k = \mathbf{P}_k^- \mathbf{H}_k^T (\mathbf{H}_k \mathbf{P}_k^- \mathbf{H}_k^T + \mathbf{R}_k)^{-1}
+$$ 
 <ul>
 <li>物理意义：
 <ul>
@@ -402,18 +401,18 @@ sin(theta), cos(theta), 0,<br />
 </li>
 <li>作用：权衡模型预测与观测的信任度。若传感器噪声大（( \mathbf{R}_k ) 大），增益 ( \mathbf{K}_k ) 减小，更依赖模型预测。</li>
 </ul>
-<p>步骤3：状态更新（测量校正）<br />
-[<br />
-\hat{\mathbf{x}}_k = \hat{\mathbf{x}}_k^- + \mathbf{K}_k (\mathbf{z}_k - \mathbf{H}_k \hat{\mathbf{x}}_k^-)<br />
-]</p>
+<p>步骤3：状态更新（测量校正）</p>
+$$
+\hat{\mathbf{x}}_k = \hat{\mathbf{x}}_k^- + \mathbf{K}_k (\mathbf{z}_k - \mathbf{H}_k \hat{\mathbf{x}}_k^-)
+$$ 
 <ul>
 <li>残差项 ( \mathbf{z}_k - \mathbf{H}_k \hat{\mathbf{x}}_k^- )：观测值与预测值的差异（即“新息”）。</li>
 <li>更新逻辑：通过卡尔曼增益将残差加权修正预测值。</li>
 </ul>
-<p>步骤4：协方差更新<br />
-[<br />
-\mathbf{P}_k = (\mathbf{I} - \mathbf{K}_k \mathbf{H}_k) \mathbf{P}_k^-<br />
-]</p>
+<p>步骤4：协方差更新</p>
+$$
+\mathbf{P}_k = (\mathbf{I} - \mathbf{K}_k \mathbf{H}_k) \mathbf{P}_k^-
+$$ 
 <ul>
 <li>意义：修正后的状态不确定性降低（( \mathbf{P}_k \leq \mathbf{P}_k^- )）。</li>
 </ul>
@@ -461,8 +460,8 @@ sin(theta), cos(theta), 0,<br />
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/04/23/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="prev" title="">
-      <i class="fa fa-chevron-left"></i> 
+    <a href="/2025/04/23/%E5%9B%9B%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" rel="prev" title="四足机器人论文学习总结">
+      <i class="fa fa-chevron-left"></i> 四足机器人论文学习总结
     </a></div>
       <div class="post-nav-item">
     <a href="/2025/06/12/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" rel="next" title="具身智能">
@@ -542,7 +541,7 @@ sin(theta), cos(theta), 0,<br />
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -28,8 +28,8 @@
 <meta property="og:site_name" content="Zhicheng">
 <meta property="og:description" content="Safe Reinforcement Learning on the Constraint Manifold: Theory and Applications 在线学习的需求：  机器人自适应控制要求策略在部署中持续（适应环境变化或者硬件老化） CMDP的离线训练：训练后直接部署无法解决真实世界的动态不确定性 需要保证在线学习的每一步都是安全的  同时如果在仿真训练时已经满足鲁棒性约束，迁移到现">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-06-14T03:54:41.000Z">
-<meta property="article:modified_time" content="2026-03-10T11:29:30.479Z">
+<meta property="article:published_time" content="2025-06-14T03:54:41.636Z">
+<meta property="article:modified_time" content="2026-03-10T11:57:45.553Z">
 <meta property="article:author" content="Zhicheng">
 <meta property="article:tag" content="论文总结">
 <meta property="article:tag" content="安全强化学习">
@@ -228,7 +228,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-10 19:29:30" itemprop="dateModified" datetime="2026-03-10T19:29:30+08:00">2026-03-10</time>
+                <time title="修改时间：2026-03-10 19:57:45" itemprop="dateModified" datetime="2026-03-10T19:57:45+08:00">2026-03-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -284,29 +284,31 @@
 状态与动力学</li>
 </ol>
 <ul>
-<li>状态变量：<br />
-( s = [q, \dot{q}] \in \mathbb{R}^{2n} )，其中 ( q ) 为关节角度，( \dot{q} ) 为角速度。</li>
-<li>动力学模型（控制仿射形式）：<br />
-[<br />
-\dot{s} = \underbrace{\begin{bmatrix} \dot{q} \ -M(q)^{-1}(C(q,\dot{q})\dot{q} + g(q)) \end{bmatrix}}<em>{f(s)} + \underbrace{\begin{bmatrix} 0 \ M(q)^{-1} \end{bmatrix}}</em>{G(s)} u_s<br />
-]
+<li>状态变量：</li>
+</ul>
+$$
+\( s = [q, \dot{q}] \in \mathbb{R}^{2n} \)，其中 \( q \) 为关节角度，\( \dot{q} \) 为角速度。
+$$ 
+<ul>
+<li>动力学模型（控制仿射形式）：</li>
+</ul>
+$$
+\dot{s} = \underbrace{\begin{bmatrix} \dot{q} \\ -M(q)^{-1}(C(q,\dot{q})\dot{q} + g(q)) \end{bmatrix}}_{f(s)} + \underbrace{\begin{bmatrix} 0 \\ M(q)^{-1} \end{bmatrix}}_{G(s)} u_s
+$$ 
 <ul>
 <li>( M(q) )：惯性矩阵，( C(q,\dot{q}) )：科氏力矩阵，( g(q) )：重力项。</li>
 <li>控制输入 ( u_s \in \mathbb{R}^n )：关节力矩。</li>
 </ul>
-</li>
-</ul>
 <p>安全约束</p>
 <ul>
-<li>避障约束（距离函数）：<br />
-[<br />
-k(s) = d_{\text{min}} - |p(q) - p_{\text{obs}}| \leq 0<br />
-]
+<li>避障约束（距离函数）：</li>
+</ul>
+$$
+k(s) = d_{\text{min}} - \|p(q) - p_{\text{obs}}\| \leq 0
+$$ 
 <ul>
 <li>( p(q) )：机械臂末端位置，( p_{\text{obs}} )：障碍物位置，( d_{\text{min}} )：最小安全距离。</li>
 <li>约束函数 ( k(s) ) 需满足 ( C^1 ) 光滑性（可通过距离场平滑化实现）。</li>
-</ul>
-</li>
 </ul>
 <hr />
 <ol start="2">
@@ -314,49 +316,46 @@ k(s) = d_{\text{min}} - |p(q) - p_{\text{obs}}| \leq 0<br />
 步骤1：构造约束流形</li>
 </ol>
 <ul>
-<li>引入松弛变量 ( \mu \geq 0 )，定义等式约束：<br />
-[<br />
-c(s, \mu) = k(s) + \mu = 0<br />
-]</li>
-<li>约束流形：<br />
-[<br />
-\mathcal{M} = {(s, \mu) \in \mathbb{R}^{2n} \times [0, +\infty) : c(s, \mu) = 0}<br />
-]
+<li>引入松弛变量 ( \mu \geq 0 )，定义等式约束：</li>
+</ul>
+$$
+c(s, \mu) = k(s) + \mu = 0
+$$ 
+<ul>
+<li>约束流形：</li>
+</ul>
+$$
+\mathcal{M} = \{(s, \mu) \in \mathbb{R}^{2n} \times [0, +\infty) : c(s, \mu) = 0\}
+$$ 
 <ul>
 <li>投影性质：若 ( (s, \mu) \in \mathcal{M} )，则 ( s ) 满足原始约束 ( k(s) \leq 0 )。</li>
 </ul>
-</li>
-</ul>
 <p>步骤2：设计松弛变量动力学</p>
 <ul>
-<li>动态更新规则（类K函数控制）：<br />
-[<br />
-\dot{\mu} = \alpha(\mu) u_\mu, \quad \alpha(\mu) = \mu \quad (\text{例：线性函数})<br />
-]
+<li>动态更新规则（类K函数控制）：</li>
+</ul>
+$$
+\dot{\mu} = \alpha(\mu) u_\mu, \quad \alpha(\mu) = \mu \quad (\text{例：线性函数})
+$$ 
 <ul>
 <li>控制输入 ( u_\mu \in \mathbb{R} )：调节松弛变量的变化速率。</li>
 <li>性质：若初始 ( \mu(0) &gt; 0 )，则 ( \mu(t) &gt; 0 ) 对所有 ( t \geq 0 ) 成立（Lemma 1）。</li>
 </ul>
-</li>
-</ul>
 <p>步骤3：增广系统动力学</p>
 <ul>
-<li>联合系统：<br />
-[<br />
-\begin{bmatrix} \dot{s} \ \dot{\mu} \end{bmatrix} = \begin{bmatrix} f(s) \ 0 \end{bmatrix} + \begin{bmatrix} G(s) &amp; 0 \ 0 &amp; \alpha(\mu) \end{bmatrix} \begin{bmatrix} u_s \ u_\mu \end{bmatrix}<br />
-]
+<li>联合系统：</li>
+</ul>
+$$
+\begin{bmatrix} \dot{s} \\ \dot{\mu} \end{bmatrix} = \begin{bmatrix} f(s) \\ 0 \end{bmatrix} + \begin{bmatrix} G(s) & 0 \\ 0 & \alpha(\mu) \end{bmatrix} \begin{bmatrix} u_s \\ u_\mu \end{bmatrix}
+$$ 
 <ul>
-<li>控制矩阵：<br />
-[<br />
-J_u(s, \mu) = \nabla_s c(s, \mu) G(s) = \nabla_q k(s) \cdot J_{\text{arm}}(q) \cdot M(q)^{-1}<br />
-]
-<ul>
-<li>( J_{\text{arm}}(q) )：机械臂末端雅可比矩阵。</li>
+<li>控制矩阵：</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
+$$
+J_u(s, \mu) = \nabla_s c(s, \mu) G(s) = \nabla_q k(s) \cdot J_{\text{arm}}(q) \cdot M(q)^{-1}
+$$ 
+<pre><code>- \( J_&#123;\text&#123;arm&#125;&#125;(q) \)：机械臂末端雅可比矩阵。
+</code></pre>
 <p>步骤4：切空间投影</p>
 <ul>
 <li>切空间基 ( B_u ) 计算：
@@ -368,18 +367,17 @@ J_u(s, \mu) = \nabla_s c(s, \mu) G(s) = \nabla_q k(s) \cdot J_{\text{arm}}(q) \c
 </ul>
 <p>步骤5：安全控制器</p>
 <ul>
-<li>控制律（公式12）：<br />
-[<br />
-\begin{bmatrix} u_s \ u_\mu \end{bmatrix} = \underbrace{-J_u^\dagger \psi}<em>{\text{漂移补偿}} + \underbrace{B_u u}</em>{\text{任务控制}} - \underbrace{\lambda J_u^\dagger c}_{\text{收缩项}}<br />
-]
+<li>控制律（公式12）：</li>
+</ul>
+$$
+\begin{bmatrix} u_s \\ u_\mu \end{bmatrix} = \underbrace{-J_u^\dagger \psi}_{\text{漂移补偿}} + \underbrace{B_u u}_{\text{任务控制}} - \underbrace{\lambda J_u^\dagger c}_{\text{收缩项}}
+$$ 
 <ul>
 <li>参数说明：
 <ul>
 <li>( \psi = \nabla_s k(s) \cdot f(s) )：约束对自然动态的敏感度。</li>
 <li>( u )：RL策略输出的原始力矩（如跟踪PD控制信号）。</li>
 <li>( \lambda &gt; 0 )：收缩速率。</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -426,10 +424,14 @@ J_u(s, \mu) = \nabla_s c(s, \mu) G(s) = \nabla_q k(s) \cdot J_{\text{arm}}(q) \c
 <p>以下是针对同一个约束函数，不同安全强化学习方法处理方式的对比分析，结合数学形式、实现逻辑和应用场景的详细说明：</p>
 <ol>
 <li>问题设定<br />
-约束函数：<br />
-[ k(s) \leq 0 ]<br />
-（例如：机械臂与障碍物距离 ( D(s) \geq d_{\text{safe}} ) 可表示为 ( k(s) = d_{\text{safe}} - D(s) \leq 0 )）</li>
+约束函数：</li>
 </ol>
+$$
+k(s) \leq 0
+$$ 
+$$
+（例如：机械臂与障碍物距离 \( D(s) \geq d_{\text{safe}} \) 可表示为 \( k(s) = d_{\text{safe}} - D(s) \leq 0 \)）
+$$ 
 <p>目标：在强化学习训练和部署中保证 ( k(s) \leq 0 ) 始终成立。</p>
 <ol>
 <li>不同方法对比</li>
@@ -437,14 +439,13 @@ J_u(s, \mu) = \nabla_s c(s, \mu) G(s) = \nabla_q k(s) \cdot J_{\text{arm}}(q) \c
 <p>(1) 惩罚函数法（Penalty Method）</p>
 <ul>
 <li>处理方式：<br />
-在奖励函数中加入惩罚项：<br />
-[<br />
-R_{\text{penalized}} = R_{\text{task}} - \lambda \max(0, k(s))^2<br />
-]
+在奖励函数中加入惩罚项：</li>
+</ul>
+$$
+R_{\text{penalized}} = R_{\text{task}} - \lambda \max(0, k(s))^2
+$$ 
 <ul>
 <li>(\lambda) 为惩罚系数，需手动调节。</li>
-</ul>
-</li>
 <li>特点：
 <ul>
 <li>数学简单：无需修改策略结构。</li>
@@ -458,17 +459,16 @@ R_{\text{penalized}} = R_{\text{task}} - \lambda \max(0, k(s))^2<br />
 <p>(2) 安全滤波器（QP-Based Safety Filter）</p>
 <ul>
 <li>处理方式：<br />
-在线求解二次规划问题，修正动作 ( u )：<br />
-[<br />
-\begin{aligned}<br />
-\min_{u} \quad &amp; |u - u_{\text{RL}}|^2 \<br />
-\text{s.t.} \quad &amp; \nabla k(s)^T (f(s) + G(s)u) \leq -\alpha k(s)<br />
-\end{aligned}<br />
-]
+在线求解二次规划问题，修正动作 ( u )：</li>
+</ul>
+$$
+\begin{aligned}
+\min_{u} \quad & \|u - u_{\text{RL}}\|^2 \\
+\text{s.t.} \quad & \nabla k(s)^T (f(s) + G(s)u) \leq -\alpha k(s)
+\end{aligned}
+$$ 
 <ul>
 <li>通过CBF（Control Barrier Function）保证约束。</li>
-</ul>
-</li>
 <li>特点：
 <ul>
 <li>即时安全：每一步动作均满足约束。</li>
@@ -481,14 +481,18 @@ R_{\text{penalized}} = R_{\text{task}} - \lambda \max(0, k(s))^2<br />
 </ul>
 <p>(3) 备份策略（Backup Policy）</p>
 <ul>
-<li>处理方式：<br />
-预设安全策略 ( \pi_{\text{safe}} )（如零速度指令），当 ( k(s) &gt; \epsilon ) 时切换：<br />
-[<br />
-u = \begin{cases}<br />
-u_{\text{RL}} &amp; \text{if } k(s) \leq \epsilon, \<br />
-\pi_{\text{safe}}(s) &amp; \text{otherwise}.<br />
-\end{cases}<br />
-]</li>
+<li>处理方式：</li>
+</ul>
+$$
+预设安全策略 \( \pi_{\text{safe}} \)（如零速度指令），当 \( k(s) > \epsilon \) 时切换：
+$$ 
+$$
+u = \begin{cases}
+u_{\text{RL}} & \text{if } k(s) \leq \epsilon, \\
+\pi_{\text{safe}}(s) & \text{otherwise}.
+\end{cases}
+$$ 
+<ul>
 <li>特点：
 <ul>
 <li>简单可靠：硬件易实现。</li>
@@ -504,13 +508,17 @@ u_{\text{RL}} &amp; \text{if } k(s) \leq \epsilon, \<br />
 <li>处理方式：
 <ol>
 <li>构造约束流形 ( \mathcal{M} = {s \mid k(s) = 0} ) 的切空间 ( T_s\mathcal{M} )。</li>
-<li>将RL动作 ( u ) 投影到切空间：<br />
-[<br />
-u_{\text{safe}} = (I - \nabla k(s) (\nabla k(s)^T \nabla k(s))^{-1} \nabla k(s)^T) u<br />
-]</li>
-<li>动态调整松弛变量 ( \mu ) 保证渐近收敛（见原文公式12）。</li>
+<li>将RL动作 ( u ) 投影到切空间：</li>
 </ol>
 </li>
+</ul>
+$$
+u_{\text{safe}} = (I - \nabla k(s) (\nabla k(s)^T \nabla k(s))^{-1} \nabla k(s)^T) u
+$$ 
+<ol start="3">
+<li>动态调整松弛变量 ( \mu ) 保证渐近收敛（见原文公式12）。</li>
+</ol>
+<ul>
 <li>特点：
 <ul>
 <li>严格安全：数学保证 ( k(s) \leq 0 )（即使训练中）。</li>
@@ -699,7 +707,7 @@ u_{\text{safe}} = (I - \nabla k(s) (\nabla k(s)^T \nabla k(s))^{-1} \nabla k(s)^
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
